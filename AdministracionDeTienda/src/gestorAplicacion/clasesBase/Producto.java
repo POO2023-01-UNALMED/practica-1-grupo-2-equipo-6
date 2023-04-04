@@ -1,4 +1,4 @@
-package clasesBase;
+package gestorAplicacion.clasesBase;
 
 public class Producto {
 	String tipo, talla, color;

@@ -1,4 +1,5 @@
-package clasesBase;
+package gestorAplicacion.clasesBase;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
