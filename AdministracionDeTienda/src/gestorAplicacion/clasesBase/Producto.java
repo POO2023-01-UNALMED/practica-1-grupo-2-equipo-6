@@ -1,4 +1,4 @@
-package CompraAbastecimiento;
+package clasesBase;
 
 public class Producto {
 	String tipo, talla, color;

@@ -1,4 +1,4 @@
-package CompraAbastecimiento;
+package clasesBase;
 import java.util.ArrayList;
 import java.util.Collections;
 
