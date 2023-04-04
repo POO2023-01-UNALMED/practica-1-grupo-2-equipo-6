@@ -1,5 +1,5 @@
 package gestorAplicacion.clasesBase;
 
-public class a {
+public class Venta {
 
 }
