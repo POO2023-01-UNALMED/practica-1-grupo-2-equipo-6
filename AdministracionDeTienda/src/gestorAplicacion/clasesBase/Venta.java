@@ -16,6 +16,7 @@ public class Venta {
 		this.empleado = empleado;
 		this.total = total;
 		this.mes=mes;
+		Presupuesto.gananciaBruta+=total;
 		ventas.add(this);
 	}
 	

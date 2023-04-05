@@ -1,10 +1,7 @@
 package gestorAplicacion.clasesBase;
 
 public class Presupuesto {
-	private static double gananciaBruta;
-	static public double disponibleNomina() {
-		return gananciaBruta*0.36;
-	}
+	static double gananciaBruta;
 	public double getGananciaBruta() {
 		return gananciaBruta;
 		
@@ -16,9 +13,10 @@ public class Presupuesto {
 	}
 	
 	public String verificacionPago(double pago) {
-		if(pago<=disponibleNomina()) {
+		double disponible=gananciaBruta*0.36;
+		if(pago<=disponible) {
 			return "Se ha hecho el pago exitosamente";
-		}else if(pago>disponibleNomina()) {
+		}else if(pago>disponible) {
 			return "El dinero disponible para el pago de la nomina no es suficiente para realizar el pago";
 		}else {
 			return "No se ha realizado el pago";
