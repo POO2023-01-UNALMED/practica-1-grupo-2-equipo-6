@@ -19,11 +19,15 @@ public class Interfaz {
 			
 		}
 		long opcion=readLong();
+		Nomina nomina = null;
 		for(meses mes: meses.values()) {
 			if(mes.getNum()==opcion) {
-				Nomina nomina = new Nomina(mes);
+				nomina = new Nomina(mes);
+				System.out.println("//"+mes);
 			}
 		}
+	
+		nomina.empleados();
 		
 		
 		

@@ -4,6 +4,8 @@ public class Producto {
 	String tipo, talla, color;
 	float costo;
 	String codigo = "tipo/talla/color";
+	double precio;
+	private double calificacion=precio*0.1;
 	
 	public Producto(String tipo, String talla, String color, float costo) {
 		this.tipo = tipo.toLowerCase();
@@ -35,4 +37,19 @@ public class Producto {
 	public String toString() {
 		return "tipo = "+ tipo + "\ntalla = " + talla + "\ncolor = " + color + "\ncosto = " + costo + "\ncodigo = " + codigo;
 	}
+
+	public double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(double calificacion) {
+		this.calificacion = calificacion;
+	}
+	
+	public void ganancia(double porcentaje) {
+		precio=costo*porcentaje;
+		
+	}
+	
+	
 }

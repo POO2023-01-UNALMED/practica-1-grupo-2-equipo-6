@@ -2,9 +2,14 @@ package gestorAplicacion.clasesBase;
 
 import java.util.ArrayList;
 
+import gestorAplicacion.clasesHerencia.Empleado;
+
 public class Nomina {
 	meses mes;
 	public static ArrayList<meses> disponibles=new ArrayList<meses>();
+	public static ArrayList<Empleado> empleados=new ArrayList<Empleado>();
+	
+	
 	
 	public Nomina(meses mes) {
 		this.mes=mes;
@@ -27,6 +32,10 @@ public class Nomina {
 				this.num = num;
 			}
 		
+	}
+	public ArrayList<Empleado> empleados() {
+		//recorrer la lista de ventas y sacar los objetos que tengan el mes que se pide y añadir a esa lista, los empleados y las comisiones
+		return empleados;
 	}
 
 }
