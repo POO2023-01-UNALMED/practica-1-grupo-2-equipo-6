@@ -1,9 +1,17 @@
 package gestorAplicacion.clasesBase;
 
 public class Producto {
+<<<<<<< HEAD
 	private String tipo, talla, color;
 	private float costo;
 	private String codigo = "tipo/talla/color";
+=======
+	String tipo, talla, color;
+	float costo;
+	String codigo = "tipo/talla/color";
+	double precio;
+	private double calificacion=precio*0.1;
+>>>>>>> 727ef42c551917b2ff040155fbfb4978889ca4bd
 	
 	public Producto(String tipo, String talla, String color, float costo) {
 		this.tipo = tipo.toLowerCase();
@@ -49,4 +57,19 @@ public class Producto {
 	public String toString() {
 		return  tipo + "  " + talla + " " + color + " " + codigo;
 	}
+
+	public double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(double calificacion) {
+		this.calificacion = calificacion;
+	}
+	
+	public void ganancia(double porcentaje) {
+		precio=costo*porcentaje;
+		
+	}
+	
+	
 }
