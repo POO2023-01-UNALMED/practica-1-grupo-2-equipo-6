@@ -4,7 +4,7 @@ import gestorAplicacion.clasesBase.Persona;
 
 public class Empleado extends Persona {
 	cargos cargo;
-	double sueldo;
+	private double sueldo;
 	public Empleado(String nombre, int cedula,cargos cargo) {
 		super(nombre,cedula);
 		this.cargo = cargo;
@@ -18,19 +18,27 @@ public class Empleado extends Persona {
 	public void asignacionSueldo() {
 		switch(cargo) {
 		case ADMINISTRADOR:
-			sueldo=2000000;
+			setSueldo(2000000);
 			break;
 		case VENDEDOR:
-			sueldo=1200000;
+			setSueldo(1200000);
 			break;
 		case SUPERVISOR:
-			sueldo=1800000;
+			setSueldo(1800000);
 			break;
 		case ASISTENTE:
-			sueldo=1000000;
+			setSueldo(1000000);
 			break;
 		}
 		
+	}
+
+	public double getSueldo() {
+		return sueldo;
+	}
+
+	public void setSueldo(double sueldo) {
+		this.sueldo = sueldo;
 	}
 	
 
