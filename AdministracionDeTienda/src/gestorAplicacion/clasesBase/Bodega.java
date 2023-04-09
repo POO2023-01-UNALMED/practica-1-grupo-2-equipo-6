@@ -105,7 +105,7 @@ public class Bodega {
 	public ArrayList<Producto> disponibilidadProductos(String tipo) {
 		ArrayList<Producto> productosTipo=new ArrayList<Producto>();
 		for(ArrayList<Object> i: productosEnBodega) {
-			if (((Producto)i.get(0)).getTipo()==tipo) {
+			if (((Producto)i.get(0)).getTipo()==tipo && productosTipo.indexOf(tipo)==-1) {
 				 productosTipo.add((Producto) i.get(0));
 			}
 		}
