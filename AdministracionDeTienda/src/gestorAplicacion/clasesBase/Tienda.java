@@ -33,10 +33,14 @@ public class Tienda {
 
 	public boolean generarOferta() {
 		double totalVentas=Nomina.informarVentas().size();
-		if(totalVentas/bodega.getProductosEnBodega().size()>0.5) {
-			return true;
-		}
-		return false;
+			ArrayList<String> tiposDisponibles=new ArrayList<String>();
+			if(totalVentas/bodega.getProductosEnBodega().size()>0.5) {
+
+				for(ArrayList<Object>i: bodega.getProductosEnBodega()) {
+					tiposDisponibles.add(((Producto)i.get(0)).getTipo());
+				}
+			}
+			return tiposDisponibles;
 	}
 
 }
