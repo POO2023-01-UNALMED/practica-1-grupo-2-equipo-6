@@ -7,7 +7,7 @@ public class Bodega {
 	private int numeroDeProductosEnBodega;
 	private final int[] stopCamiseta,stopPantalon,stopPantaloneta,stopAbrigo,stopBuzo;
 	private ArrayList<ArrayList<Object>> productosEnBodega = new ArrayList<ArrayList<Object>>();
-	
+
 	public Bodega(int capacidadMax, ArrayList<Object> productosEnBodega, int[] camiseta,int[] pantalon, int[] pantaloneta, int[] abrigo, int[] buzo) {
 		capacidadMaxima = capacidadMax;
 		stopCamiseta = camiseta;
@@ -15,13 +15,13 @@ public class Bodega {
 		stopPantaloneta = pantaloneta;
 		stopAbrigo = abrigo;
 		stopBuzo = buzo;
-		this.productosEnBodega.add(productosEnBodega);		
+		this.productosEnBodega.add(productosEnBodega);
 	}
-		
+
 	public void agregarProductos(ArrayList<Object> producto) {
 		this.productosEnBodega.add(producto);
 	}
-	
+
 	public int calcularNumeroProductos(ArrayList<ArrayList<Object>> productosEnBodega) {
 		int numeroDeProductos = 0;
 		for (int i = 0; i < productosEnBodega.size(); i++) {
@@ -29,7 +29,7 @@ public class Bodega {
 		}
 		return numeroDeProductos;
 	}
-	
+
 	public int calcularNumeroCamisetas(ArrayList<ArrayList<Object>> productosEnBodega) {
 		int numeroCamisetas = 0;
 		for (int i = 0; i < productosEnBodega.size(); i++) {
@@ -40,7 +40,7 @@ public class Bodega {
 		}
 			return numeroCamisetas;
 	}
-	
+
 	public int calcularNumeroPantalon(ArrayList<ArrayList<Object>> productosEnBodega) {
 		int numeroPantalones = 0;
 		for (int i = 0; i < productosEnBodega.size(); i++) {
@@ -50,7 +50,7 @@ public class Bodega {
 		}
 		return numeroPantalones;
 	}
-	
+
 	public int calcularNumeroAbrigo(ArrayList<ArrayList<Object>> productosEnBodega) {
 		int numeroAbrigo = 0;
 		for (int i = 0; i < productosEnBodega.size(); i++) {
@@ -60,7 +60,7 @@ public class Bodega {
 		}
 		return numeroAbrigo;
 	}
-			
+
 	public int calcularNumeroBuzo(ArrayList<ArrayList<Object>> productosEnBodega) {
 		int numeroBuzo = 0;
 		for (int i = 0; i < productosEnBodega.size(); i++) {
@@ -70,7 +70,7 @@ public class Bodega {
 		}
 		return numeroBuzo;
 	}
-	
+
 	public int calcularNumeroPantalonetas(ArrayList<ArrayList<Object>> productosEnBodega) {
 		int numeroPantaloneta = 0;
 		for (int i = 0; i < productosEnBodega.size(); i++) {
@@ -80,10 +80,10 @@ public class Bodega {
 		}
 		return numeroPantaloneta;
 	}
-	
+
 	public void setNumeroDeProductosEnBodega(int valor) {numeroDeProductosEnBodega = valor;}
 	public void setProductosEnBodega(ArrayList<ArrayList<Object>> valor) {productosEnBodega = valor;}
-	
+
 	public int getCapacidadMaxima() {return capacidadMaxima;}
 	public int getNumeroDeProductosEnBodega() {return numeroDeProductosEnBodega;}
 	public int[] getStopCamiseta() {return stopCamiseta;}
@@ -92,14 +92,23 @@ public class Bodega {
 	public int[] getStopAbrigo() {return stopAbrigo;}
 	public int[] getStopBuzo() {return stopBuzo;}
 	public ArrayList<ArrayList<Object>> getProductosEnBodega() {return productosEnBodega;}
-	
-	
+
+
 	public String toString() {
 		int numeroDeProductos = 0;
 		for (int i = 0; i < productosEnBodega.size(); i++) {
 			numeroDeProductos += productosEnBodega.get(i).get(1).hashCode();
 		}
-		
+
 		return "capacidad maxima = " + capacidadMaxima + "\nproductos en bodega = " + numeroDeProductos;
+	}
+	public ArrayList<Producto> disponibilidadProductos(String tipo) {
+		ArrayList<Producto> productosTipo=new ArrayList<Producto>();
+		for(ArrayList<Object> i: productosEnBodega) {
+			if (((Producto)i.get(0)).getTipo()==tipo) {
+				 productosTipo.add((Producto) i.get(0));
+			}
+		}
+		return productosTipo;
 	}
 }
