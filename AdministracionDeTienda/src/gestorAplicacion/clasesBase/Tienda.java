@@ -37,7 +37,10 @@ public class Tienda {
 			if(totalVentas/bodega.getProductosEnBodega().size()>0.5) {
 
 				for(ArrayList<Object>i: bodega.getProductosEnBodega()) {
-					tiposDisponibles.add(((Producto)i.get(0)).getTipo());
+					if(tiposDisponibles.indexOf(((Producto)i.get(0)).getTipo())!=-1){
+						tiposDisponibles.add(((Producto)i.get(0)).getTipo());
+					}
+
 				}
 			}
 			return tiposDisponibles;

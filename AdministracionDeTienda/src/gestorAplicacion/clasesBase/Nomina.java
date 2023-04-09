@@ -64,33 +64,7 @@ public class Nomina {
 		Nomina.empleados = empleados;
 	}
 
-	public static ArrayList<Venta> informarVentas(Empleado empleado) {
-		ArrayList<Venta> Ventas=new ArrayList<Venta>();
 
-		if(empleado.getVentas().size()!=0) {
-				for (Venta venta: empleado.getVentas()) {
-					Ventas.add(venta);
-				}
-		return Ventas;
-		}
-		else{
-			return null;
-		}
-	}
-
-	public static ArrayList<Venta> informarVentas() {
-
-		ArrayList<Venta> Ventas=new ArrayList<Venta>();
-		for (Empleado empleado: empleados) {
-			if (informarVentas(empleado)!=null) {
-				Ventas.addAll(informarVentas(empleado));
-			}
-		}
-
-
-		return Ventas;
-
-	}
 
 
 }

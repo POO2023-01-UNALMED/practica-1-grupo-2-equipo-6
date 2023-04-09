@@ -71,5 +71,28 @@ public class Venta {
 		setTotal(total);
 	}
 
+	public static ArrayList<Venta> informarVentas(Empleado empleado) {
+		ArrayList<Venta> Ventas=new ArrayList<Venta>();
+
+		if(empleado.getVentas().size()!=0) {
+				for (Venta venta: empleado.getVentas()) {
+					Ventas.add(venta);
+				}
+		}
+			return Ventas;
+	}
+
+	public static ArrayList<Venta> informarVentas() {
+
+		ArrayList<Venta> Ventas=new ArrayList<Venta>();
+		for (Empleado empleado: Nomina.empleados) {
+				Ventas.addAll(informarVentas(empleado));
+		}
+		return Ventas;
+
+	}
+
+	
+
 
 }

@@ -102,12 +102,19 @@ public class Bodega {
 
 		return "capacidad maxima = " + capacidadMaxima + "\nproductos en bodega = " + numeroDeProductos;
 	}
-	public ArrayList<Producto> disponibilidadProductos(String tipo) {
-		ArrayList<Producto> productosTipo=new ArrayList<Producto>();
+	//Regresa los productos de cierto tipo- Omite productos repetidos
+	public ArrayList<Object> disponibilidadProductos(String tipo) {
+		ArrayList<Object> productosTipo=new ArrayList<Object>();
 		for(ArrayList<Object> i: productosEnBodega) {
-			if (((Producto)i.get(0)).getTipo()==tipo && productosTipo.indexOf(tipo)==-1) {
-				 productosTipo.add((Producto) i.get(0));
+			int cantidad=1;
+			if (((Producto)i.get(0)).getTipo()==tipo ) {
+				if (productosTipo.indexOf((Producto)i.get(0))!=-1) {
+					cantidad+=1;
+				}
+				Object[] lista1={(Producto)i.get(0), cantidad};
+				productosTipo.add(lista1);
 			}
+
 		}
 		return productosTipo;
 	}
