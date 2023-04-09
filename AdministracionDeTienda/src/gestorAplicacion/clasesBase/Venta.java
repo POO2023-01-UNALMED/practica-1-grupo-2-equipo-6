@@ -10,7 +10,16 @@ public class Venta {
 	private Empleado empleado;
 	private meses mes;
 	double total;
+	private Tienda tienda;
 	private double calificacion;
+
+	public void setTienda(Tienda tienda) {
+		this.tienda=tienda;
+	}
+
+	public Tienda getTienda(){
+		return tienda;
+	}
 	public Producto[] getProductos() {
 		return productos;
 	}
@@ -35,21 +44,17 @@ public class Venta {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public static ArrayList<Venta> getVentas() {
-		return ventas;
-	}
-	public static void setVentas(ArrayList<Venta> ventas) {
-		Venta.ventas = ventas;
-	}
-	
-	public static ArrayList<Venta> ventas=new ArrayList<Venta>();
+
+	//public static ArrayList<Venta> ventas=new ArrayList<Venta>();
 	public Venta(Producto[] productos, Empleado empleado,meses mes) {
 		this.productos = productos;
 		this.empleado = empleado;
+		this.calcularTotal();
 		//Calcular el total recorriendo el arreglo de productos
 		this.mes=mes;
-		Presupuesto.gananciaBruta+=total;
-		ventas.add(this);
+		tienda.setPresupuestoCompras(tienda.getPresupuestoCompras()+total);
+		//Presupuesto.gananciaBruta+=total;
+		empleado.ventas.add(this);
 	}
 	public double getCalificacion() {
 		return calificacion;
@@ -57,7 +62,14 @@ public class Venta {
 	public void setCalificacion(double calificacion) {
 		this.calificacion = calificacion;
 	}
-	
-	
+
+	public void calcularTotal() {
+		double total=0;
+		for(Producto p:productos) {
+			total+=p.getCosto();
+		}
+		setTotal(total);
+	}
+
 
 }
