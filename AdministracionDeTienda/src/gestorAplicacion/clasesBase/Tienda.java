@@ -20,6 +20,7 @@ public class Tienda {
 	public void setNombre(String nombre){this.nombre=nombre;}
 	public String getNombre(){return this.nombre;}
   public void setBodega(Bodega bodega){this.bodega=bodega;}
+	public Bodega getBodega(){return this.bodega;}
 	public Bodega getPresupuestoCompras() {return this.bodega;}
 
 

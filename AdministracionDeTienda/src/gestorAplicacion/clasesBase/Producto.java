@@ -5,6 +5,7 @@ public class Producto {
 	private String tipo, talla, color;
 	private float costo;
 	private String codigo = "tipo/talla/color";
+	private double precio;
 =======
 	String tipo, talla, color;
 	float costo;
@@ -12,15 +13,29 @@ public class Producto {
 	double precio;
 	private double calificacion=precio*0.1;
 >>>>>>> 727ef42c551917b2ff040155fbfb4978889ca4bd
-	
+
 	public Producto(String tipo, String talla, String color, float costo) {
 		this.tipo = tipo.toLowerCase();
 		this.talla = talla.toUpperCase();
 		this.color = color.toLowerCase();
 		this.costo = costo;
 		generarCodigo();
+		ponerPrecio();
 	}
-	
+
+public void ponerPrecio(){
+
+	this.precio=this.costo*1.3;
+
+}
+
+public void setPrecio(double precio){
+	this.precio=precio;
+}
+public double getPrecio(){
+	return this.precio;
+}
+
 	public void generarCodigo() {
 
 //		para tipo
@@ -41,19 +56,19 @@ public class Producto {
 		else if (color.equals("blanco")) {codigo = codigo.replace("color", "3");}
 		else if (color.equals("verde")) {codigo = codigo.replace("color", "4");}
 	}
-	
+
 	public void setTipo(String valor) {tipo=valor;}
 	public void setTalla(String valor) {talla=valor;}
 	public void secColorTipo(String valor) {color=valor;}
 	public void setCosto(float valor) {costo=valor;}
 	public void setCodigo(String valor) {codigo=valor;}
-	
+
 	public String getTipo() {return tipo;}
 	public String getTalla() {return talla;}
 	public String getColor() {return color;}
 	public float getCosto() {return costo;}
 	public String getCodigo() {return codigo;}
-	
+
 	public String toString() {
 		return  tipo + "  " + talla + " " + color + " " + codigo;
 	}
@@ -65,11 +80,11 @@ public class Producto {
 	public void setCalificacion(double calificacion) {
 		this.calificacion = calificacion;
 	}
-	
+
 	public void ganancia(double porcentaje) {
 		precio=costo*porcentaje;
-		
+
 	}
-	
-	
+
+
 }
