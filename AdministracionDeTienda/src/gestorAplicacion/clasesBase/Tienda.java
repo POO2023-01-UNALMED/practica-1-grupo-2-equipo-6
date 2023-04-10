@@ -3,18 +3,22 @@ package gestorAplicacion.clasesBase;
 import java.util.ArrayList;
 
 public class Tienda {
+	private String nombre;
 	private double presupuestoCompras;
 	private ArrayList<Object> proveedores = new ArrayList<Object>();
 	private Nomina nomina;
 	private Bodega bodega;
 
-	public Tienda(int presupuesto, ArrayList<Object> proveedores, Nomina nomina, Bodega bodega){
+	public Tienda(String nombre, int presupuesto, ArrayList<Object> proveedores, Nomina nomina, Bodega bodega){
+		this.nombre=nombre;
 		this.presupuestoCompras = presupuesto;
 		this.proveedores = proveedores;
 		this.bodega=bodega;
 		this.nomina=nomina;
 	}
 
+	public void setNombre(String nombre){this.nombre=nombre;}
+	public String getNombre(){return this.nombre;}
   public void setBodega(Bodega bodega){this.bodega=bodega;}
 	public Bodega getPresupuestoCompras() {return this.bodega;}
 
@@ -33,17 +37,18 @@ public class Tienda {
 
 	public boolean generarOferta() {
 		double totalVentas=Nomina.informarVentas().size();
-			ArrayList<String> tiposDisponibles=new ArrayList<String>();
-			if(totalVentas/bodega.getProductosEnBodega().size()>0.5) {
+		if(totalVentas/bodega.getProductosEnBodega().size()>0.5) {
 
-				for(ArrayList<Object>i: bodega.getProductosEnBodega()) {
-					if(tiposDisponibles.indexOf(((Producto)i.get(0)).getTipo())!=-1){
-						tiposDisponibles.add(((Producto)i.get(0)).getTipo());
-					}
-
-				}
-			}
-			return tiposDisponibles;
+			return true;
+		}
+		return false;
+	}
+	public ArrayList<String> tiposProductos() {
+		ArrayList<String> tiposDisponibles=new ArrayList<String>();
+		for(ArrayList<Object>i: bodega.getProductosEnBodega()) {
+				tiposDisponibles.add(((Producto)i.get(0)).getTipo());
+		}
+		return tiposDisponibles;
 	}
 
 }
