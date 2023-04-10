@@ -50,7 +50,8 @@ public class Producto {
 
 	this.precio=this.costo*1.3;
 
-}
+	}
+
 
 public void setPrecio(double precio){
 	this.precio=precio;
