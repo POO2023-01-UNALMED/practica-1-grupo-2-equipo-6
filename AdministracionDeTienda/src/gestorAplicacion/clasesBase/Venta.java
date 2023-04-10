@@ -1,17 +1,28 @@
 package gestorAplicacion.clasesBase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import gestorAplicacion.clasesBase.Nomina.meses;
 import gestorAplicacion.clasesHerencia.Empleado;
 
 public class Venta {
-	private Producto[] productos;
+	private ArrayList<Producto> productos;
 	private Empleado empleado;
 	private meses mes;
-	double total;
+	priavte double total;
 	private Tienda tienda;
 	private double calificacion;
+	private static ArrayList<Producto> productosVendidos;
+
+		public static ArrayList<Producto> getProductosVendidos() {
+			return productosVendidos;
+		}
+
+
+		public static void setProductosVendidos(ArrayList<Producto> productosVendidos) {
+			Venta.productosVendidos = productosVendidos;
+		}
 
 	public void setTienda(Tienda tienda) {
 		this.tienda=tienda;
@@ -20,10 +31,10 @@ public class Venta {
 	public Tienda getTienda(){
 		return tienda;
 	}
-	public Producto[] getProductos() {
+	public ArrayList<Producto>  getProductos() {
 		return productos;
 	}
-	public void setProductos(Producto[] productos) {
+	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
 	public Empleado getEmpleado() {
@@ -46,7 +57,7 @@ public class Venta {
 	}
 
 	//public static ArrayList<Venta> ventas=new ArrayList<Venta>();
-	public Venta(Producto[] productos, Empleado empleado,meses mes) {
+	public Venta(ArrayList<Producto> productos, Empleado empleado,meses mes) {
 		this.productos = productos;
 		this.empleado = empleado;
 		this.calcularTotal();
@@ -54,7 +65,8 @@ public class Venta {
 		this.mes=mes;
 		tienda.setPresupuestoCompras(tienda.getPresupuestoCompras()+total);
 		//Presupuesto.gananciaBruta+=total;
-		empleado.ventas.add(this);
+		empleado.getVentas().add(this);
+		productosVendidos.addAll(productos);
 	}
 	public double getCalificacion() {
 		return calificacion;
@@ -91,6 +103,26 @@ public class Venta {
 		return Ventas;
 
 	}
+
+	public ArrayList<Producto> masVendidos() {
+		ArrayList <Producto> productosMasVendidos=new ArrayList<Producto>(productosVendidos);
+		ArrayList<Producto> noProductosMasVendidos=new ArrayList<Producto>();
+		int cantidadMaxima=Collections.frequency(productosVendidos, productosVendidos.get(0));
+		Byte i=1;
+		for(Producto p: productosVendidos) {
+			if(Collections.frequency(productosVendidos, p)>cantidadMaxima) {
+				cantidadMaxima=Collections.frequency(productosVendidos, p);
+				noProductosMasVendidos.add(productosVendidos.get(i-1));
+			}
+			i++;
+		}
+		productosMasVendidos.removeAll(noProductosMasVendidos);
+
+
+
+		return productosMasVendidos;
+	}
+
 
 
 

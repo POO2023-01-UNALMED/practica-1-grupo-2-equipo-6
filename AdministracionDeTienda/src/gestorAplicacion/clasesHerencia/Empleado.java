@@ -1,20 +1,29 @@
 package gestorAplicacion.clasesHerencia;
 
 import gestorAplicacion.clasesBase.Persona;
+import java.util.ArrayList;
 
 public class Empleado extends Persona {
 	cargos cargo;
 	private double sueldo;
+	private ArrayList<Venta> ventas;
+
 	public Empleado(String nombre, int cedula,cargos cargo) {
 		super(nombre,cedula);
 		this.cargo = cargo;
 		asignacionSueldo();
 	}
 
+//Para vendedores
+	public Empleado(String nombre, int cedula,cargos cargo, ArrayList<Venta> ventas) {
+		this(nombre,cedula,cargo);
+		this.ventas=ventas;
+	}
+
 	public enum cargos{
 		ADMINISTRADOR,VENDEDOR,SUPERVISOR,ASISTENTE
 	}
-	
+
 	public void asignacionSueldo() {
 		switch(cargo) {
 		case ADMINISTRADOR:
@@ -30,7 +39,7 @@ public class Empleado extends Persona {
 			setSueldo(1000000);
 			break;
 		}
-		
+
 	}
 
 	public double getSueldo() {
@@ -40,6 +49,6 @@ public class Empleado extends Persona {
 	public void setSueldo(double sueldo) {
 		this.sueldo = sueldo;
 	}
-	
+
 
 }
