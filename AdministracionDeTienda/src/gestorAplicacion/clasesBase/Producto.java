@@ -6,6 +6,7 @@ public class Producto {
 	private float costo;
 	private String codigo = "tipo/talla/color";
 	private double precio;
+	private boolean enPromocion;
 =======
 	String tipo, talla, color;
 	float costo;
@@ -18,6 +19,7 @@ public class Producto {
 		this.tipo = tipo.toLowerCase();
 		this.talla = talla.toUpperCase();
 		this.color = color.toLowerCase();
+		this.enPromocion=false;
 		generarCodigo();
 }
 
@@ -33,7 +35,18 @@ public class Producto {
 		this.precio=precio;
 
 	}
-public void ponerPrecio(){
+
+
+
+	public boolean isEnPromocion() {
+		return enPromocion;
+	}
+
+	public void setEnPromocion(boolean enPromocion) {
+		this.enPromocion = enPromocion;
+	}
+
+	public void ponerPrecio(){
 
 	this.precio=this.costo*1.3;
 
