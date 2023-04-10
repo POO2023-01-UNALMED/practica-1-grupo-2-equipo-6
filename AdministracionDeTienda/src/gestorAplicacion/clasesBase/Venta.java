@@ -104,24 +104,68 @@ public class Venta {
 
 	}
 
-	public ArrayList<Producto> masVendidos() {
-		ArrayList <Producto> productosMasVendidos=new ArrayList<Producto>(productosVendidos);
-		ArrayList<Producto> noProductosMasVendidos=new ArrayList<Producto>();
-		int cantidadMaxima=Collections.frequency(productosVendidos, productosVendidos.get(0));
-		Byte i=1;
-		for(Producto p: productosVendidos) {
-			if(Collections.frequency(productosVendidos, p)>cantidadMaxima) {
-				cantidadMaxima=Collections.frequency(productosVendidos, p);
-				noProductosMasVendidos.add(productosVendidos.get(i-1));
-			}
-			i++;
+		public static Object[] frecuenciaVentas(Producto producto) {
+			int frecuenciaVentas= Collections.frequency(productosVendidos, producto);
+			Object[] productoFrecuencia= {producto,frecuenciaVentas};
+
+			return productoFrecuencia;
+
 		}
-		productosMasVendidos.removeAll(noProductosMasVendidos);
+
+
+		public ArrayList<Producto> masVendidos() {
+			ArrayList <Producto> productosMasVendidos=new ArrayList<Producto>(productosVendidos);
+			ArrayList<Producto> noProductosMasVendidos=new ArrayList<Producto>();
+			int cantidadMaxima=Collections.frequency(productosVendidos, productosVendidos.get(0));
+			Byte i=1;
+			for(Producto p: productosVendidos) {
+				if(Collections.frequency(productosVendidos, p)>cantidadMaxima) {
+					cantidadMaxima=Collections.frequency(productosVendidos, p);
+					noProductosMasVendidos.add(productosVendidos.get(i-1));
+				}
+				i++;
+			}
+			productosMasVendidos.removeAll(noProductosMasVendidos);
 
 
 
-		return productosMasVendidos;
-	}
+			return productosMasVendidos;
+		}
+
+
+
+
+		public ArrayList<Object> masVendidosTipo(String tipo){
+
+			ArrayList<Producto> listaAuxiliar=new ArrayList<Producto>();
+			ArrayList<Object> productosMasVendidosPorTipo=new ArrayList<Object>();
+			int mayorVentasPorTipo=0;
+
+			for(Producto p:productosVendidos) {
+
+				if(p.getTipo()==tipo ){
+					Object[] frecuencia=frecuenciaVentas(p);
+
+					if ((int)frecuencia[1]> mayorVentasPorTipo ) {
+
+						mayorVentasPorTipo=(int)frecuenciaVentas(p)[1];
+						listaAuxiliar.clear();
+						listaAuxiliar.add(p);
+					}
+					else if((int)frecuencia[1]==mayorVentasPorTipo) {
+						listaAuxiliar.add(p);
+					}
+				}
+			}
+			productosMasVendidosPorTipo.addAll(listaAuxiliar);
+			productosMasVendidosPorTipo.add(mayorVentasPorTipo);
+
+			return productosMasVendidosPorTipo;
+
+
+			}
+
+		
 
 
 
