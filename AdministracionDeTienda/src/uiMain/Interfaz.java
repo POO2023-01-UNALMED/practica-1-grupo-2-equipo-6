@@ -5,6 +5,7 @@ import gestorAplicacion.clasesBase.Nomina;
 import gestorAplicacion.clasesBase.Venta;
 import gestorAplicacion.clasesBase.Nomina.meses;
 import gestorAplicacion.clasesHerencia.Empleado;
+import gestorAplicacion.clasesBase.Tienda;
 
 public class Interfaz {
 	static Scanner sc=new Scanner(System.in);
@@ -62,7 +63,7 @@ public class Interfaz {
 
 					}while(opcion2<=0 || opcion2>contador);
 
-					ArrayList<Object>mercanciaDisponibleDeTipo=tiendaOferta.getBodega().disponibilidadProductos(tiposDisponibles.get(opcion2-1));		
+					ArrayList<Object>mercanciaDisponibleDeTipo=tiendaOferta.getBodega().disponibilidadProductos(tiposDisponibles.get(opcion2-1));
 				}
 			}
 		}
