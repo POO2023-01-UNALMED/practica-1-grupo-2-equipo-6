@@ -14,15 +14,25 @@ public class Producto {
 	private double calificacion=precio*0.1;
 >>>>>>> 727ef42c551917b2ff040155fbfb4978889ca4bd
 
-	public Producto(String tipo, String talla, String color, float costo) {
+	public Producto(String tipo, String talla, String color) {
 		this.tipo = tipo.toLowerCase();
 		this.talla = talla.toUpperCase();
 		this.color = color.toLowerCase();
-		this.costo = costo;
 		generarCodigo();
+
+
+	public Producto(String tipo, String talla, String color, float costo) {
+		this(tipo,talla,color);
+		this.costo = costo;
 		ponerPrecio();
+
 	}
 
+	public Producto(String tipo, String talla, String color, double precio) {
+		this(tipo,talla,color);
+		this.precio=precio;
+
+	}
 public void ponerPrecio(){
 
 	this.precio=this.costo*1.3;
