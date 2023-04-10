@@ -85,7 +85,7 @@ public class Venta {
 	public static ArrayList<Venta> informarVentas() {
 
 		ArrayList<Venta> Ventas=new ArrayList<Venta>();
-		for (Empleado empleado: Nomina.empleados) {
+		for (Empleado empleado: Nomina.getEmpleados()) {
 				Ventas.addAll(informarVentas(empleado));
 		}
 		return Ventas;

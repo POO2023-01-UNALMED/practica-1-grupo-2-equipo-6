@@ -6,8 +6,8 @@ import gestorAplicacion.clasesHerencia.Empleado;
 
 public class Nomina {
 	meses mes;
-	public static ArrayList<meses> disponibles=new ArrayList<meses>();
-	public static ArrayList<Empleado> empleados=new ArrayList<Empleado>();
+	private static ArrayList<meses> disponibles=new ArrayList<meses>();
+	private static ArrayList<Empleado> empleados=new ArrayList<Empleado>();
 
 
 
