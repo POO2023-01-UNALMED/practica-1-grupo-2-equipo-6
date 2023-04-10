@@ -19,7 +19,7 @@ public class Producto {
 		this.talla = talla.toUpperCase();
 		this.color = color.toLowerCase();
 		generarCodigo();
-
+}
 
 	public Producto(String tipo, String talla, String color, float costo) {
 		this(tipo,talla,color);
