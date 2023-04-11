@@ -1,11 +1,14 @@
 package gestorAplicacion.clasesHerencia;
 
 import gestorAplicacion.clasesBase.Persona;
+import gestorAplicacion.clasesBase.Venta;
+
 import java.util.ArrayList;
 
 public class Empleado extends Persona {
 	cargos cargo;
 	private double sueldo;
+	private double aumento;
 	private ArrayList<Venta> ventas;
 
 	public Empleado(String nombre, int cedula,cargos cargo) {
@@ -48,6 +51,27 @@ public class Empleado extends Persona {
 
 	public void setSueldo(double sueldo) {
 		this.sueldo = sueldo;
+	}
+	
+	public void determinacionSueldo(Empleado empleado,ArrayList<Venta> ventas) {
+		double sueldo=empleado.getSueldo();
+		double comision=0;
+		for(int e=0;e<ventas.size();e++) {
+			if(ventas.get(e).getEmpleado()==empleado) {
+				comision+=ventas.get(e).getCalificacion();
+			}
+		}
+		//Aqui debe ir la relacion del sueldo con la comisiones
+		empleado.setSueldo(sueldo);
+		
+	}
+
+	public double getAumento() {
+		return aumento;
+	}
+
+	public void setAumento(double aumento) {
+		this.aumento = aumento;
 	}
 
 

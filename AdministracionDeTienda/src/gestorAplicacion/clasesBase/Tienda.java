@@ -2,6 +2,8 @@ package gestorAplicacion.clasesBase;
 
 import java.util.ArrayList;
 
+import gestorAplicacion.clasesBase.Nomina.meses;
+
 public class Tienda {
 	private String nombre;
 	private double presupuestoCompras;
@@ -52,4 +54,10 @@ public class Tienda {
 		return tiposDisponibles;
 	}
 
+	
+	public ArrayList<Nomina> nominas=new ArrayList<Nomina>();
+	public static ArrayList<Tienda> tiendas=new ArrayList<Tienda>();
+	public static ArrayList<meses> disponibles=new ArrayList<meses>();
+	
+	
 }

@@ -164,6 +164,42 @@ public class Venta {
 
 
 			}
+		
+		//
+		public static ArrayList<Venta> ventas=new ArrayList<Venta>();
+		Producto[] elementos;
+		public Venta(Tienda tienda,Producto[] productos, Empleado empleado,meses mes) {
+			this.tienda=tienda;
+			elementos=productos;
+			this.setEmpleado(empleado);
+			//Calcular el total y la calificacion de la venta recorriendo el arreglo de productos
+			this.setMes(mes);
+			Presupuesto.gananciaBruta+=total;
+			ventas.add(this);
+		}
+		
+		public static ArrayList<Venta> resumenVentas(meses mes,Tienda tienda) {
+			ArrayList<Venta> seleccionadas=new ArrayList<Venta>();
+			for(int i=0;i<ventas.size();i++) {
+				if(ventas.get(i).getTienda()==tienda) {
+					if(Venta.ventas.get(i).getMes()==mes) {
+						seleccionadas.add(Venta.ventas.get(i));
+						
+					}
+				}
+			}
+			return seleccionadas;
+			
+		}
+		public static ArrayList<Empleado> resumenEmpleados(ArrayList<Venta> seleccionadas){
+			ArrayList<Empleado> integrantes=new ArrayList<Empleado>();
+			for(int i=0;i<seleccionadas.size();i++) {
+				if(!integrantes.contains(seleccionadas.get(i).getEmpleado())) {
+					integrantes.add(seleccionadas.get(i).getEmpleado());
+				}
+			}
+			return integrantes;
+		}
 
 		
 
