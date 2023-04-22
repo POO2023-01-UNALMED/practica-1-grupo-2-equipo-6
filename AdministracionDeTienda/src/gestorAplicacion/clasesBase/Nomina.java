@@ -2,12 +2,14 @@ package gestorAplicacion.clasesBase;
 
 import java.util.ArrayList;
 
+import gestorAplicacion.clasesBase.Nomina.meses;
 import gestorAplicacion.clasesHerencia.Empleado;
 
 public class Nomina {
 	meses mes;
 	private static ArrayList<meses> disponibles=new ArrayList<meses>();
 	private static ArrayList<Empleado> empleados=new ArrayList<Empleado>();
+	
 
 
 
@@ -64,6 +66,34 @@ public class Nomina {
 		Nomina.empleados = empleados;
 	}
 
+	///
+	Empleado EmpleadoM;
+	Producto ProdutoM;
+	Tienda tienda;
+	public ArrayList<Venta> ventas;
+	public Nomina(Tienda tienda,meses mes, Empleado empleadoM, Producto produtoM, ArrayList<Venta> ventas) {
+		this.mes = mes;
+		EmpleadoM = empleadoM;
+		ProdutoM = produtoM;
+		this.ventas = ventas;
+		this.tienda=tienda;
+	}
+	
+	public String realizacionPago() {
+		return "Verifica que el valor total de los sueldos es menor que el presupuesto disponible";
+		
+	}
+		
+	public double aumento() {
+		//Se le realiza un aumento al empleado del mes basado en cuanto vendio
+		return 0;
+	}
+	
+	public double precio() {
+		//Se aumenta el precio del producto del mes
+		return 0;
+		
+	}
 
 
 
