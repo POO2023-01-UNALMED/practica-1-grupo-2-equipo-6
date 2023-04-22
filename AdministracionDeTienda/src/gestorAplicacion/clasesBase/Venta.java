@@ -6,6 +6,57 @@ import java.util.Collections;
 import gestorAplicacion.clasesBase.Nomina.meses;
 import gestorAplicacion.clasesHerencia.Empleado;
 
+
+public class Venta {
+
+	private ArrayList<Producto> productosVenta;
+
+	public Venta(ArrayList<Producto> valorAgregado,Socio s, ArrayList<Tienda>tiendas,ArrayList<Transportista>transportistasPorDefecto) {
+
+		Bodega bodegaEscogida = null;
+		for (Tienda t: tiendas) {
+			if(t.getBodega().buscarProducto(s.getProductosContrato()).size()!=0) {
+				bodegaEscogida=t.getBodega();
+				break;
+			}
+		}
+
+		if(bodegaEscogida!=null && bodegaEscogida.retirarProductos(s.getProductosContrato())!=null) {
+
+			//Primer método: paso arraylist Productos y son devueltos productos
+			productosVenta=bodegaEscogida.retirarProductos(s.getProductosContrato());
+		}
+		else if (bodegaEscogida!=null && bodegaEscogida.retirarProductos(s.getProductosContrato())==null){
+
+			//comprar en esta bodega
+			//comprar(productos, proveedoresPorDefecto,transportistaPorDefecto);
+
+			//revision
+			//Después se hace productosVenta=bodegaPrimeraTienda.retirarProductos()
+
+		}
+		else if(bodegaEscogida==null) {
+			//comprar en la primera bodega
+			//comprar(productos, proveedoresPorDefecto,transportistaPorDefecto);
+
+			//revision
+			//Después se hace productosVenta=bodegaPrimeraTienda.retirarProductos()
+		}
+
+
+		productosVenta.addAll(valorAgregado);
+		Transportista transportistaElegido=Transportista.mejorTransportista();
+
+		//Segundo método: paso socio y productos
+		transportistaElegido.entregaEspecial(s,productosVenta);
+
+
+
+
+	}
+}
+
+/***
 public class Venta {
 	private ArrayList<Producto> productos;
 	private Empleado empleado;
@@ -164,10 +215,5 @@ public class Venta {
 
 
 			}
-
-		
-
-
-
-
 }
+***/

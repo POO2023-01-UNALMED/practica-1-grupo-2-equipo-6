@@ -5,6 +5,111 @@ import java.io.*;
 
 public class Bodega implements java.io.Serializable{
 
+
+		private ArrayList<Producto> productosEnBodega = new ArrayList<Producto>();
+		private final int minCamisas, minAbrigo, minPantalon;
+
+		public Bodega(ArrayList<Producto>productosEnBodega, int minCamisas,int minPantalon, int minAbrigo) {
+
+			this.productosEnBodega=productosEnBodega;
+			this.minAbrigo=minAbrigo;
+			this.minCamisas=minCamisas;
+			this.minPantalon=minPantalon;
+		}
+
+
+		public int calcularCamisas() {
+			int numCamisas=0;
+			for(Producto p:productosEnBodega) {
+				if(p.getTipo().toString()=="CAMISA") {
+					numCamisas++;
+				}
+			}
+			return numCamisas;
+		}
+
+		public int calcularAbrigos() {
+			int numAbrigos=0;
+			for(Producto p:productosEnBodega) {
+				if(p.getTipo().toString()=="ABRIGO") {
+					numAbrigos++;
+				}
+			}
+			return numAbrigos;
+		}
+
+		public int calcularPantalon() {
+			int numPantalon=0;
+			for(Producto p:productosEnBodega) {
+				if(p.getTipo().toString()=="PANTALON") {
+
+					numPantalon++;
+
+				}
+			}
+			return numPantalon;
+		}
+
+
+
+
+	public ArrayList<Producto> getProductosEnBodega() {
+		return productosEnBodega;
+	}
+
+
+	public void setProductosEnBodega(ArrayList<Producto> productosEnBodega) {
+		this.productosEnBodega = productosEnBodega;
+	}
+
+
+	public int getMinCamisas() {
+		return minCamisas;
+	}
+
+
+	public int getMinAbrigo() {
+		return minAbrigo;
+	}
+
+
+	public int getMinPantalon() {
+		return minPantalon;
+	}
+
+		public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
+
+			ArrayList<Producto>productosBuscados=new ArrayList<Producto>();
+			for(Producto p: productos) {
+				if (productosEnBodega.indexOf(p)!=-1) {
+					productosBuscados.add(p);
+				}
+			}
+			return productosBuscados;
+
+		}
+
+
+
+		public ArrayList<Producto> retirarProductos(ArrayList<Producto> productos) {
+
+			ArrayList<Producto>productosRetirados = null;
+			int contadorAbrigo=0,contadorPantalon=0,contadorCamisas=0;
+			if(contadorCamisas-this.calcularCamisas()>=minCamisas && contadorAbrigo-this.calcularAbrigos()>=minAbrigo && contadorPantalon-this.calcularPantalon()>=minPantalon) {
+				productosRetirados=productos;
+				productosEnBodega.removeIf(p -> productos.indexOf(p)!=-1);
+
+			}
+			return productosRetirados;
+
+
+		}
+
+	}
+
+
+
+/***
 	private final int stopCamiseta, stopPantalon, stopAbrigo;
 	private ArrayList<ArrayList<Object>> productosEnBodega = new ArrayList<ArrayList<Object>>();
 
@@ -103,4 +208,7 @@ public class Bodega implements java.io.Serializable{
 		return productosPromocion;
 
 	}
+	***/
+
+
 }

@@ -1,5 +1,37 @@
 package gestorAplicacion.clasesBase;
 
+
+public class Tienda{
+	private static double presupuesto;
+	private ControlCalidad controlCalidad;
+	private Bodega bodega;
+	public Tienda(double presupuesto,ControlCalidad controlCalidad, Bodega bodega){
+		Tienda.presupuesto=presupuesto;
+		this.controlCalidad=controlCalidad;
+		this.bodega=bodega;
+	}
+	public static double getPresupuesto() {
+		return presupuesto;
+	}
+	public static void setPresupuesto(double presupuesto) {
+		Tienda.presupuesto = presupuesto;
+	}
+	public ControlCalidad getControlCalidad() {
+		return controlCalidad;
+	}
+	public void setControlCalidad(ControlCalidad controlCalidad) {
+		this.controlCalidad = controlCalidad;
+	}
+	public Bodega getBodega() {
+		return bodega;
+	}
+	public void setBodega(Bodega bodega) {
+		this.bodega = bodega;
+	}
+
+}
+
+/***
 import java.util.ArrayList;
 
 public class Tienda {
@@ -53,3 +85,4 @@ public class Tienda {
 	}
 
 }
+***/

@@ -1,6 +1,34 @@
 package gestorAplicacion.clasesBase;
 
 public class Producto {
+		private Tipo tipo;
+
+		public Producto(Tipo tipo) {
+			this.tipo=tipo;
+		}
+
+
+
+
+		public Tipo getTipo() {
+			return tipo;
+		}
+
+
+
+		public void setTipo(Tipo tipo) {
+			this.tipo = tipo;
+		}
+
+
+
+		enum Tipo{
+			CAMISA,ABRIGO,PANTALON
+		}
+}
+
+
+/***
 <<<<<<< HEAD
 	private String tipo, talla, color;
 	private float costo;
@@ -110,5 +138,5 @@ public double getPrecio(){
 
 	}
 
-
+***/
 }
