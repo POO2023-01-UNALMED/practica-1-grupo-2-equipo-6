@@ -12,6 +12,15 @@ public class Tienda{
 		this.controlCalidad=controlCalidad;
 		this.bodega=bodega;
 	}
+
+	public GestionHumana getDepartamentoGestionHumana(){
+		return departamentoGestionHumana;
+	}
+
+	public void setDepartamentoGestionHumana(GestionHumana departamentoGestionHumana){
+		this.departamentoGestionHumana=departamentoGestionHumana;
+	}
+
 	public static double getPresupuesto() {
 		return presupuesto;
 	}
