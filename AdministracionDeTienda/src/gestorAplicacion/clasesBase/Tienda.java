@@ -5,8 +5,10 @@ public class Tienda{
 	private static double presupuesto;
 	private ControlCalidad controlCalidad;
 	private Bodega bodega;
-	public Tienda(double presupuesto,ControlCalidad controlCalidad, Bodega bodega){
+	private GestionHumana departamentoGestionHumana;
+	public Tienda(double presupuesto,ControlCalidad controlCalidad, Bodega bodega, GestionHumana departamentoGestionHumana){
 		Tienda.presupuesto=presupuesto;
+		this.departamentoGestionHumana=departamentoGestionHumana;
 		this.controlCalidad=controlCalidad;
 		this.bodega=bodega;
 	}
@@ -33,8 +35,6 @@ public class Tienda{
 
 /***
 import java.util.ArrayList;
-
-import gestorAplicacion.clasesBase.Nomina.meses;
 
 public class Tienda {
 	private String nombre;
@@ -86,11 +86,5 @@ public class Tienda {
 		return tiposDisponibles;
 	}
 
-	
-	public ArrayList<Nomina> nominas=new ArrayList<Nomina>();
-	public static ArrayList<Tienda> tiendas=new ArrayList<Tienda>();
-	public static ArrayList<meses> disponibles=new ArrayList<meses>();
-	
-	
 }
 ***/

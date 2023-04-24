@@ -18,6 +18,11 @@ public class Interfaz {
 		return sc.nextLine();
 	}
 
+	public void venderSocios(Socio socio){
+
+
+	}
+/***
 	public void crearOferta() {
 			Tienda tiendaOferta;
 			ArrayList<Tienda> tiendasOferta=new ArrayList<Tienda>();
@@ -68,29 +73,29 @@ public class Interfaz {
 				}
 			}
 		}
-
+***/
 	public static void adminNomina() {
 		System.out.println("//Administración de Nómina\n");
 		System.out.println("Seleccione una de las tiendas disponibles\n");
 		for(int i=0;i<Tienda.tiendas.size();i++) {
 			Tienda a = Tienda.tiendas.get(i);
 			System.out.println(i+" "+a.getNombre());
-				
+
 		}
 		String nombre=readLn();
 		Tienda tienda=null;
 		for(int i=0;i<Tienda.tiendas.size();i++) {
 			if(Tienda.tiendas.get(i).getNombre()==nombre) {
 				tienda=Tienda.tiendas.get(i);
-				
+
 			}
-			
+
 		}
 		System.out.println("//"+tienda);
 		System.out.println("Seleccione uno de los meses disponibles\n");
 		for(int mes=0;mes<Tienda.disponibles.size();mes++) {
 			System.out.println(Tienda.disponibles.get(mes).getNum()+". "+Tienda.disponibles.get(mes));
-			
+
 		}
 		long opcion=readLong();
 		System.out.println("Usted escogio el mes "+opcion);
@@ -104,32 +109,32 @@ public class Interfaz {
 		//Aqui se iria a la clase Venta y devolveria un array de los objetos de tipo venta que se realizaron ese mes
 		ArrayList<Venta> seleccionadas = Venta.resumenVentas(mesE,tienda);
 		//Aqui se deberia hacer el llamado al producto del mes
-	
+
 		//Aqui nos dice quienes fueron los empleados que realizaron las ventas seleccionadas
 		ArrayList<Empleado> integrantes= Venta.resumenEmpleados(seleccionadas);
-		
+
 		//Aqui se deberia hacer el llamado al empleado del mes
 		//Aqui se recorre el arreglo de empleados para determinar cual es el suelo con comisiones de cada uno
 		for (int i=0;i<integrantes.size();i++) {
 			integrantes.get(i).determinacionSueldo(integrantes.get(i), seleccionadas);
-				
+
 		}
-		
-		
+
+
 		System.out.println("\nLos elementos de esta nomina son:");
 		System.out.println("\nEmpleado Sueldo");
 		for(int i=0;i<integrantes.size();i++) {
 			Empleado a = integrantes.get(i);
 			System.out.println(a.getNombre()+" "+a.getSueldo());
-			
+
 		}
 		Empleado empleadoM = null;
 		Producto productoM=null;
 		System.out.println("Este mes se realizaron "+seleccionadas.size()+" ventas");
 		System.out.println("El vendedor del mes fue "+empleadoM);
 		System.out.println("El producto más vendido fue "+productoM);
-		
-		
+
+
 		Nomina nomina=new Nomina(tienda,mesE,empleadoM,productoM,seleccionadas);
 		System.out.println(nomina.realizacionPago());
 		double aumento=nomina.aumento();

@@ -10,23 +10,24 @@ import gestorAplicacion.clasesHerencia.Empleado;
 public class Venta {
 
 	private ArrayList<Producto> productosVenta;
+	private double total;
 
-	public Venta(ArrayList<Producto> valorAgregado,Socio s, ArrayList<Tienda>tiendas,ArrayList<Transportista>transportistasPorDefecto) {
+	public Venta(ArrayList<Producto> valorAgregado,Socio socio, ArrayList<Tienda>tiendas,ArrayList<Transportista>transportistasPorDefecto) {
 
 		Bodega bodegaEscogida = null;
 		for (Tienda t: tiendas) {
-			if(t.getBodega().buscarProducto(s.getProductosContrato()).size()!=0) {
+			if(t.getBodega().buscarProducto(socio.getProductosContrato()).size()!=0) {
 				bodegaEscogida=t.getBodega();
 				break;
 			}
 		}
 
-		if(bodegaEscogida!=null && bodegaEscogida.retirarProductos(s.getProductosContrato())!=null) {
+		if(bodegaEscogida!=null && bodegaEscogida.retirarProductos(socio.getProductosContrato())!=null) {
 
 			//Primer método: paso arraylist Productos y son devueltos productos
-			productosVenta=bodegaEscogida.retirarProductos(s.getProductosContrato());
+			productosVenta=bodegaEscogida.retirarProductos(socio.getProductosContrato());
 		}
-		else if (bodegaEscogida!=null && bodegaEscogida.retirarProductos(s.getProductosContrato())==null){
+		else if (bodegaEscogida!=null && bodegaEscogida.retirarProductos(socio.getProductosContrato())==null){
 
 			//comprar en esta bodega
 			//comprar(productos, proveedoresPorDefecto,transportistaPorDefecto);
@@ -44,16 +45,47 @@ public class Venta {
 		}
 
 
+		for(Producto p:valorAgregado) {
+			p.setPrecio(p.getPrecio()*0.2);
+		}
 		productosVenta.addAll(valorAgregado);
+
+
+		//Calculo precio
+		for(Producto p:productosVenta){
+			this.setTotal(getTotal() + p.getPrecio());
+		}
+
+		/***
 		Transportista transportistaElegido=Transportista.mejorTransportista();
-
-		//Segundo método: paso socio y productos
-		transportistaElegido.entregaEspecial(s,productosVenta);
-
+		//Segundo método: paso venta y socio, devuelve compra
+		Compra compraConfirmada=transportistaElegido.entregaEspecial(this,socio);
 
 
+		Informe informeVenta=Informe.generarInformeVentas(this,compraConfirmada,socio);
 
+		// El informe y la compra se accede desde la interfaz y se le muestra al usuario
+		 * ***/
 	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+
+	public ArrayList<Producto> getProductosVenta() {
+		return productosVenta;
+	}
+
+	public void setProductosVenta(ArrayList<Producto> productosVenta) {
+		this.productosVenta = productosVenta;
+	}
+
+
 }
 
 /***
