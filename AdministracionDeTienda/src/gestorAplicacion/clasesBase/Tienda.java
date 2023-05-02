@@ -2,7 +2,7 @@ package gestorAplicacion.clasesBase;
 
 
 public class Tienda{
-	private static double presupuesto;
+	private double presupuesto;
 	private ControlCalidad controlCalidad;
 	private Bodega bodega;
 	private GestionHumana departamentoGestionHumana;
@@ -21,10 +21,10 @@ public class Tienda{
 		this.departamentoGestionHumana=departamentoGestionHumana;
 	}
 
-	public static double getPresupuesto() {
+	public double getPresupuesto() {
 		return presupuesto;
 	}
-	public static void setPresupuesto(double presupuesto) {
+	public void setPresupuesto(double presupuesto) {
 		Tienda.presupuesto = presupuesto;
 	}
 	public ControlCalidad getControlCalidad() {
