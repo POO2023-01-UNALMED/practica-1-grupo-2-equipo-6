@@ -25,7 +25,7 @@ public class Tienda{
 		return presupuesto;
 	}
 	public void setPresupuesto(double presupuesto) {
-		Tienda.presupuesto = presupuesto;
+		this.presupuesto = presupuesto;
 	}
 	public ControlCalidad getControlCalidad() {
 		return controlCalidad;
