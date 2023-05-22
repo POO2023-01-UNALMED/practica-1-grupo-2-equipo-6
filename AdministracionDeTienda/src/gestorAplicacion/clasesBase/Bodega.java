@@ -3,6 +3,13 @@ package gestorAplicacion.clasesBase;
 import java.util.ArrayList;
 import java.io.*;
 
-public class Bodega implements java.io.Serializable{
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Bodega implements Inventariar,Serializable{
+
+	
+	
 
 }
