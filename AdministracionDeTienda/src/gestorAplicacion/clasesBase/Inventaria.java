@@ -1,3 +1,5 @@
 package gestorAplicacion.clasesBase;
-public class Informe {
+
+public interface Inventariar{
+
 }
