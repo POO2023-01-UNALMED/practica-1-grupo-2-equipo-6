@@ -10,11 +10,20 @@ public class Bodega implements Inventariar,java.io.Serializable{
 	/**
 	 * 
 	 */
+	private final int stopBodega;
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Producto> productosEnBodega = new ArrayList<Producto>();
 	
-	public Bodega(ArrayList<Producto>productosEnBodega) {
-		this.productosEnBodega=productosEnBodega;
+	public Bodega( int max) {
+		stopBodega = max;
+	}
+	
+	public int calcularNumeroProductos() {		
+		return productosEnBodega.size();
+	}
+	
+	public void agregarProductos(Producto producto) {
+		this.productosEnBodega.add(producto);
 	}
 	
 	public int calcularCamisas() {
@@ -95,6 +104,14 @@ public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
 		productosEnBodega.removeIf(p -> productos.indexOf(p)!=-1);
 		
 		
+	}
+	
+	public int getStopBodega() {return stopBodega;}
+	
+	
+	public String toString() {
+		
+		return "Camisetas = " + calcularCamisas()+ "\nPantalones = " + calcularPantalon() + "\nAbrigos = " +calcularAbrigos();
 	}
 
 }

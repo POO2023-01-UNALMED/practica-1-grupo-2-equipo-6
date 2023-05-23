@@ -24,10 +24,10 @@ public class Main {
 			System.out.println("---------------------------------");
 			System.out.println("    Sistema de Administracion    ");
 			System.out.println("---------------------------------");
-			System.out.println("1) Venta a socio");
+			System.out.println("1) Gestion de alianzas estrategicas");
 			System.out.println("2) Modulo de compra");
 			System.out.println("3) Control de calidad");
-			System.out.println("4) Realizar envio");
+			System.out.println("4) Logistica de envio");
 			System.out.println("5) Gestion de credito");
 			System.out.println("0) Salir");
 			System.out.println("---------------------------------");

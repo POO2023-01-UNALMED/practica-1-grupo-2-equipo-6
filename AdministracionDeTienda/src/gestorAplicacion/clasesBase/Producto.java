@@ -84,7 +84,7 @@ public class Producto implements Serializable{
 	public double getCosto() {return costo;}
 
 
-	enum Tipo{
+	public enum Tipo{
 		
 		CAMISA(25000),PANTALON(30000),ABRIGO(27000);
 		

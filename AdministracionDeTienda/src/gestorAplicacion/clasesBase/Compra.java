@@ -41,9 +41,9 @@ public class Compra implements java.io.Serializable{
 		
 		public String hacerPedido(Tienda tienda) {
 			
-			int numCamisetas = tienda.getBodega().calcularNumeroCamisetas();
-			int numPantalones = tienda.getBodega().calcularNumeroPantalon();
-			int numAbrigo = tienda.getBodega().calcularNumeroAbrigo();
+			int numCamisetas = tienda.getBodega().calcularCamisas();
+			int numPantalones = tienda.getBodega().calcularPantalon();
+			int numAbrigo = tienda.getBodega().calcularAbrigos();
 			int numeroDeProductos = numCamisetas + numPantalones + numAbrigo + 1;
 			double presupuesto = tienda.getPresupuestoCompra();
 			ArrayList<Producto> pedidoFinal = new ArrayList<Producto>();
