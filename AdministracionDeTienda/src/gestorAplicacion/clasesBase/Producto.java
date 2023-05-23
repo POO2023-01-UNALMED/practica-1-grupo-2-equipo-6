@@ -10,6 +10,7 @@ public class Producto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private double precio;
+	private double costo;
 	
 	
 	//private double costo;
@@ -23,10 +24,11 @@ public class Producto implements Serializable{
 		//Constructor para socio
 	}
 	
-	public Producto(Tipo tipo, double precio) {
+	public Producto(Tipo tipo, double precio, double costo) {
 		
 		this(tipo);
 		this.precio=precio;
+		this.costo = costo;
 		
 		
 	}
@@ -76,7 +78,10 @@ public class Producto implements Serializable{
 		this.nombre=nombre;
 		
 	}
-
+	
+	public void setCosto(double valor) {costo=valor;}
+	
+	public double getCosto() {return costo;}
 
 
 	enum Tipo{
