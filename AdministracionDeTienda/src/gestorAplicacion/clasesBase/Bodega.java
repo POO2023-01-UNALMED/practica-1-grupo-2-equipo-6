@@ -1,11 +1,11 @@
 package gestorAplicacion.clasesBase;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Bodega implements Inventariar,Serializable{
 
-	
+
+public class Bodega implements Inventariar,java.io.Serializable{
+
 	
 	/**
 	 * 
