@@ -1,12 +1,13 @@
 package gestorAplicacion.clasesBase;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Credito implements Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private double cantidadCredito;
@@ -15,10 +16,11 @@ public class Credito implements Serializable{
 	private final double cuotaBaseMensual;
 	private double cantidadAbonada=0.0;
 	private final int cantidadCuotas;
+	private Estado estadoCredito;
 	private ArrayList<Transferencia> cuotasPagadas=new ArrayList<Transferencia>();
-	
 
-	
+
+
 
 
 	public Credito(CuentaBancaria cuenta, double cantidad, Cuota cuotas) {
@@ -29,15 +31,17 @@ public class Credito implements Serializable{
 		deudor=cuenta;
 		cuenta.setDinero(cuenta.getDinero()+cantidad);
 		cuotaBaseMensual=cantidad/cantidadCuotas;
+		estadoCredito=Estado.PENDIENTE;
+
 		//cuenta.getEntidad().generarCredito(this);
-		
+
 	}
 
 
 	public void setCantidadAbonada(double cantidadAbonada) {
 		this.cantidadAbonada = cantidadAbonada;
 	}
-	
+
 	public double getCantidadCredito() {
 		return cantidadCredito;
 	}
@@ -48,7 +52,7 @@ public class Credito implements Serializable{
 		this.cantidadCredito = cantidadCredito;
 	}
 
-	
+
 
 	public Object getAcreedor() {
 		return acreedor;
@@ -69,8 +73,8 @@ public class Credito implements Serializable{
 	}
 
 
-	
-	
+
+
 	public int getCantidadCuotas() {
 		return cantidadCuotas;
 	}
@@ -102,17 +106,33 @@ public class Credito implements Serializable{
 		public void setCantidadMeses(int cantidadMeses) {
 			this.cantidadMeses = cantidadMeses;
 		}
-		
-		
+
+
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Credito a: "+ this.getDeudor().getPropietario() +" por un valor de "+cantidadCredito;
 	}
 
 
+	public Estado getEstadoCredito() {
+		return estadoCredito;
+	}
 
-	
+
+	public void setEstadoCredito(Estado estadoCredito) {
+		this.estadoCredito = estadoCredito;
+	}
+
+
+
+
+	enum Estado{
+
+		CANCELADO,PENDIENTE;
+
+	}
+
+
 }
-
