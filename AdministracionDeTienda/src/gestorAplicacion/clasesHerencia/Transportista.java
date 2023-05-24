@@ -10,30 +10,6 @@ import gestorAplicacion.clasesBase.*;
 
 public class Transportista extends Persona{
 	private float precioBase, precioDistancia, precioCarga, precioTotal;
-	
-	public float getPrecioBase() {
-		return precioBase;
-	}
-
-	public void setPrecioBase(float precioBase) {
-		this.precioBase = precioBase;
-	}
-
-	public float getPrecioDistancia() {
-		return precioDistancia;
-	}
-
-	public void setPrecioDistancia(float precioDistancia) {
-		this.precioDistancia = precioDistancia;
-	}
-
-	public float getPrecioCarga() {
-		return precioCarga;
-	}
-
-	public void setPrecioCarga(float precioCarga) {
-		this.precioCarga = precioCarga;
-	}
 
 	public Transportista(String nombre, float precioB, float precioD, float precioC,int calificacion, CuentaBancaria cuenta ) {
 		super(nombre, calificacion,cuenta);
@@ -41,28 +17,59 @@ public class Transportista extends Persona{
 		precioDistancia = precioD;
 		precioCarga = precioC;
 	}
-	
-	public Transportista(String string, int i) {
-		super(string,i);
-	}
 
+
+
+
+
+
+
+
+		public static Transportista mejorTransportista(ArrayList<Transportista> transportistasPorDefecto) {
+			Collections.sort(transportistasPorDefecto);
+			 return transportistasPorDefecto.get(0);
+		}
+
+		public Venta entregaEspecial(OfertaPorDefecto ofertaSugerida, Socio s, ArrayList<Tienda>tiendas) {
+
+			Venta ventaConfirmada=s.registrarVenta(ofertaSugerida);
+
+			Bodega bodegaEscogida = null;
+
+
+			for (Tienda t: tiendas) {
+				if(t.getBodega().evaluarDisponibilidad(ventaConfirmada.getProductosVenta())) {
+
+					bodegaEscogida=t.getBodega();
+					break;
+				}
+			}
+
+			if(bodegaEscogida==null) {
+				return null;
+			}
+
+			ventaConfirmada.setRepartidor(this);
+			return ventaConfirmada;
+
+		}
 	public float calcularPrecioTotal(Proveedor provedor, Tienda tienda) {
 		int costo = 0;
 		costo += precioBase + Math.abs(provedor.getCalle() - tienda.getCalle())*precioDistancia + provedor.getBodega().calcularNumeroProductos()*precioCarga;
-		
+
 		return costo;
 	}
-	
+
 	public float getPrecioTotal() {return precioTotal;}
 	public void setPrecioTotal(float p) {precioTotal = p;}
 	public  int calificar() {
 		return 0;
 	}
-	
+
 	public String toString() {
 		return " nombre :"+ super.getNombre() + "\nprecio del domicilio : " + precioTotal;
 	}
-	
+
 	//Metodo envio
 	public  Transferencia envioNacional(Cliente cliente, ArrayList<Intervenido> intervenidos, TipoEnvio tipo) {
 			Ciudades ciudad=cliente.getCiudad();
@@ -86,7 +93,7 @@ public class Transportista extends Persona{
 				break;
 			default: precio=2000;
 				break;
-			
+
 			}
 			int tamañoPaquete=intervenidos.size();
 			precio+=tamañoPaquete*1000;
@@ -96,7 +103,7 @@ public class Transportista extends Persona{
 			case NORMAL:;
 			break;
 			case LIBRE: precio-=15000;
-			break;	
+			break;
 			}
 			precio-=precio*cliente.getDescuento();
 			if(precio<0) {
@@ -104,8 +111,8 @@ public class Transportista extends Persona{
 			}
 			Transferencia transferencia=new Transferencia(this.getCuenta(),precio);
 			return transferencia;
-			
-			
+
+
 		}
 
 		public void calificar(ControlCalidad ct) {
@@ -116,29 +123,29 @@ public class Transportista extends Persona{
 				if (productosAReponerT == null) {
 					productosAReponerT = new ArrayList<>();
 				}
-	
+
 				if ((productosExtraviados.isEmpty() || productosExtraviados == null) && productosAReponerT.isEmpty()) {
 					this.setCalificacion(calificacion);
 					return;
 				}
-	
+
 				int totalProductos = 0;
 				int productosReemplazados = 0;
-	
+
 				for (Producto p: productosExtraviados) {
 					totalProductos++;
 					if (productosAReponerT.contains(p)) {
 						productosReemplazados++;
 					}
 				}
-	
+
 				if (productosReemplazados == totalProductos) {
 					this.setCalificacion(calificacion);
 					return;
 				}
-	
+
 				double porcentajeReemplazo = ((double) productosReemplazados) / totalProductos;
-	
+
 				if (porcentajeReemplazo >= 0.8) {
 					this.setCalificacion(calificacion - 1);
 				} else if (porcentajeReemplazo >= 0.6) {
@@ -148,7 +155,7 @@ public class Transportista extends Persona{
 				} else {
 					this.setCalificacion(calificacion - 4);
 				}
-	
+
 			}
 		}
 
