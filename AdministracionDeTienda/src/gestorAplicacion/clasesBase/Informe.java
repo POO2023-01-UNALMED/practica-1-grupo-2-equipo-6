@@ -4,7 +4,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
+import gestorAplicacion.clasesBase.Banco.SolucionesProblemaFinanciero;
 import gestorAplicacion.clasesHerencia.Empleado;
 
 public class Informe implements Comparable<Informe>{
@@ -62,8 +65,16 @@ public class Informe implements Comparable<Informe>{
 			ventaEfectuada=v;
 		}
 
-		public Informe(Compra c,Empleado contable, Transferencia...acreditacionesPagos) {
-			this(TipoInforme.INFORME_CONTROL_CALIDAD, contable,acreditacionesPagos);
+		public Informe(TipoInforme tipoInforme, ControlCalidad controlCalidad) {
+			
+			this.tipoInforme=tipoInforme;
+			this.controlC=controlCalidad;
+			
+			String timestamp = ZonedDateTime.now(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ofPattern("MMddyyyhhmmss"));
+			
+			codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes);
+			
+				
 		}
 
 
@@ -84,10 +95,6 @@ public class Informe implements Comparable<Informe>{
 		public void setIdentificador(String identificador) {
 			this.identificador = identificador;
 		}
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	public TipoInforme getTipoInforme() {
