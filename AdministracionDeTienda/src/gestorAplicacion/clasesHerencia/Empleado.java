@@ -12,6 +12,7 @@ import gestorAplicacion.clasesBase.Socio;
 import gestorAplicacion.clasesBase.Tienda;
 import gestorAplicacion.clasesBase.Transferencia;
 import gestorAplicacion.clasesBase.Venta;
+import gestorAplicacion.clasesBase.Credito;
 import gestorAplicacion.clasesBase.CuentaBancaria;
 import gestorAplicacion.clasesBase.Informe;
 import gestorAplicacion.clasesBase.Persona;
