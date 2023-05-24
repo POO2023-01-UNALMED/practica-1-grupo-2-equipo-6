@@ -2,6 +2,7 @@ package gestorAplicacion.clasesHerencia;
 
 import java.util.ArrayList;
 import gestorAplicacion.clasesBase.OfertaPorDefecto;
+import gestorAplicacion.clasesBase.Producto;
 import gestorAplicacion.clasesBase.Producto.Tipo;
 import gestorAplicacion.clasesBase.Inventariar;
 

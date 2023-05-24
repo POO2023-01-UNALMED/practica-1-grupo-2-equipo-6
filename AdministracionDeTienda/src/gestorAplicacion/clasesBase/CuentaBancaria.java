@@ -62,6 +62,36 @@ public class CuentaBancaria implements Serializable{
 
 	}
 
+
+	public Transferencia pagarDependientes(Persona t, double...pagosAdicionales) {
+
+		double pagoExtra;
+		double pago = 0;
+		try {
+			pagoExtra=0;
+			for(double d:pagosAdicionales) {
+					pagoExtra+=d;
+		}
+			}
+
+		catch(NullPointerException e){
+			pagoExtra=0;
+		}
+			if(t instanceof Transportista) {
+				pago=pagoExtra+((Transportista)t).getPrecioBase();
+			}
+			else if(t instanceof Empleado){
+				pago=pagoExtra+((Empleado)t).getSueldo();
+			}
+			else {
+				pago=0;
+			}
+
+		dinero-=pago;
+		return new Transferencia(this, t.getCuenta(),pago);
+
+	}
+
 	public void pagar(Compra compra){
 
 

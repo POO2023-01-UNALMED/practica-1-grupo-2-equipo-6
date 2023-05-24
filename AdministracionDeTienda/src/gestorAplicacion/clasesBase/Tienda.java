@@ -6,9 +6,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
+import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
+import gestorAplicacion.clasesBase.Credito.Estado;
 import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
+import gestorAplicacion.clasesBase.Transferencia.EstadoPago;
 import gestorAplicacion.clasesHerencia.Empleado;
 import gestorAplicacion.clasesHerencia.Empleado.Cargo;
+import gestorAplicacion.clasesHerencia.OfertaPreferencial;
 
 public class Tienda implements java.io.Serializable {
 	private double presupuestoCompras;
