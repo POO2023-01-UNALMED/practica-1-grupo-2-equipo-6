@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
+import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
+import gestorAplicacion.clasesHerencia.Empleado;
+import gestorAplicacion.clasesHerencia.Empleado.Cargo;
+
 public class Tienda implements java.io.Serializable {
 	private double presupuestoCompras;
 	private Bodega bodega;
