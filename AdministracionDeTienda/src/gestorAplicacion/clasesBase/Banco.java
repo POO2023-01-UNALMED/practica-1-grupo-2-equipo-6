@@ -404,7 +404,7 @@ Se puede ofrecer la opción de generar un nuevo crédito return Crédito si el u
 */
 
 
-enum PuntajeCredito{
+public enum PuntajeCredito{
 
 
 BAJO(16.347f),MEDIO(10.53f),ALTO(4.216f);
@@ -432,8 +432,7 @@ this.tasaDeInteres = tasaDeInteres;
 
 
 }
-
-enum SolucionesProblemaFinanciero{
+public enum SolucionesProblemaFinanciero{
 
 
 PAGAR_DEUDAS(") Saldar las deudas pendientes: Hay "
