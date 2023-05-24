@@ -70,8 +70,6 @@ public class Empleado extends Persona implements Serializable{
 
 	}
 
-	CuentaBancaria cuentaTienda=Tienda.getCuentaTienda();
-
 
 	public Informe reportarSituacion(Banco b, CuentaBancaria cuenta){
 		if(cargo.equals(Cargo.CONTADOR)){
