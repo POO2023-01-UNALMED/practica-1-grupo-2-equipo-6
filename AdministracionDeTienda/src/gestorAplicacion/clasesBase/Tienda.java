@@ -4,6 +4,7 @@ public class Tienda implements java.io.Serializable {
 	private double presupuestoCompras;
 	private Bodega bodega;
 	private int calle;
+	private int id;
 	
 	public Tienda(int presupuesto, Bodega bodega){
 		presupuestoCompras = presupuesto;
@@ -21,6 +22,14 @@ public class Tienda implements java.io.Serializable {
 	public int getCalle() {return calle;}
 	
 	public void setCalle(int c) {calle = c;}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 
 }
