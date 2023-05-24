@@ -36,6 +36,10 @@ public class Informe implements Comparable<Informe>{
 
 
 	}
+	public Informe(Venta v,Empleado contable, Transferencia...acreditacionesPagos) {
+		this(TipoInforme.INFORME_VENTAS,contable,acreditacionesPagos);
+		ventaEfectuada=v;
+	}
 
 	enum TipoInforme {
 		INFORME_VENTAS("IVE"), INFORME_CONTROL_CALIDAD("CAL");
