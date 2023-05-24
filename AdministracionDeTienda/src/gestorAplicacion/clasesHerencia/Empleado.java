@@ -44,6 +44,19 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 		this.cargo=cargo;
 	}
 
+	
+
+	public Empleado(String nombre, int calificacion, int horasD, int horasT, Cargo operario, int sueldo) {
+		super(nombre,calificacion);
+		horasDisponibles=horasD;
+		horasTrabajadas=horasT;
+		this.cargo=operario;
+		this.sueldo=sueldo;
+		
+	}
+
+
+
 	public double getSueldo() {
 		return sueldo;
 	}
