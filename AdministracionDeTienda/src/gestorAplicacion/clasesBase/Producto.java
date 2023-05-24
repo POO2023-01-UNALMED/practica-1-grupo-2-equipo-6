@@ -92,7 +92,7 @@ public class Producto implements Serializable{
 
 	public enum Tipo{
 
-		CAMISA(25000),PANTALON(30000),ABRIGO(27000);
+		CAMISA(40000),PANTALON(50000),ABRIGO(60000);
 
 		private double precioEstandar;
 

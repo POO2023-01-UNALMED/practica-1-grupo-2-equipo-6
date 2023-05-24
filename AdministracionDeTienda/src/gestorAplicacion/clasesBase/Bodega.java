@@ -145,7 +145,7 @@ public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
 	
 	public String toString() {
 		
-		return "Camisetas = " + calcularCamisas()+ "\nPantalones = " + calcularPantalon() + "\nAbrigos = " +calcularAbrigos();
+		return "Camisetas = " + calcularCamisas(getProductosEnBodega())+ "\nPantalones = " + calcularPantalon(getProductosEnBodega()) + "\nAbrigos = " +calcularAbrigos(getProductosEnBodega());
 	}
 	//Relacionado con ENVIO
 	public enum SETS{

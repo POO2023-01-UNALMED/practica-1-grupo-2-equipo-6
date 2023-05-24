@@ -29,10 +29,9 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//valoresIniciales();
+		valoresIniciales();
 		//serializarEnvio();
-		Producto p=new Producto(Tipo.ABRIGO);
-		Serializador p1 = new Serializador(p,"producto");
+
 		int opcion = -1;
 
 		do {
@@ -452,13 +451,7 @@ public class Main {
 		System.out.println("Ahorraste: "+proveedor.getDescuento()+" pesos");
 		System.out.println("Total: "+ total+" pesos");
 		System.out.println("---------------------------------");
-<<<<<<< HEAD
-		
-		
-		
-=======
 
->>>>>>> d3e741c052c2f3216bded7435e639449822432f8
 		double presupuesto = tienda.getPresupuestoCompra();
 		tienda.setPresupuestoCompra(presupuesto - total);
 		Tienda.getCuentaTienda().setDinero(Tienda.getCuentaTienda().getDinero() - total);
@@ -545,7 +538,7 @@ public class Main {
 		static int readOpcion() {
 			return sc.nextInt();
 		}
-		static int verificar(int n,int o) {
+	static int verificar(int n,int o) {
 			do {
 
 	            o = readOpcion();
@@ -558,7 +551,7 @@ public class Main {
 		}
 
 
-		public static void logisticaEnvio() {
+	public static void logisticaEnvio() {
 			int o=2;
 			do {
 			System.out.println("---------------------------------");
@@ -727,9 +720,9 @@ public class Main {
 		Bodega bodegaTienda2 = new Bodega(60);
 		Bodega bodegaTienda3 = new Bodega(40);
 
-		Producto camisa = new Producto(Tipo.CAMISA,2,1);
-		Producto pantalon = new Producto(Tipo.PANTALON,4,2);
-		Producto abrigo = new Producto(Tipo.ABRIGO,6,3);
+		Producto camisa = new Producto(Tipo.CAMISA,40000,20000);
+		Producto pantalon = new Producto(Tipo.PANTALON,50000,25000);
+		Producto abrigo = new Producto(Tipo.ABRIGO,60000,30000);
 
 
 
@@ -816,19 +809,18 @@ public class Main {
 		Empleado operario=new Empleado("Patricia Dagorn", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.OPERARIO);
 		Empleado archivista=new Empleado("Jose Antonio Rodriguez Vega",4,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 45621,Cargo.ARCHIVISTA);
 
-
-
-		Tienda tiendaLaureles = new Tienda(10234,bodegaTienda1, contador1, operario );
-		Tienda tiendaPoblado = new Tienda (14326780,bodegaTienda2, contador2);
-		Tienda tiendaEnvigado = new Tienda(47385,bodegaTienda3, contador3);
+		
+		Tienda tiendaLaureles = new Tienda(1800000,bodegaTienda1, contador1, operario );
+		Tienda tiendaPoblado = new Tienda (1200000,bodegaTienda2, contador2);
+		Tienda tiendaEnvigado = new Tienda(1000000,bodegaTienda3, contador3);
 
 		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
 
-		Transportista transportista1 = new Transportista("Maria",123,123,123, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
-		Transportista transportista2 = new Transportista("Carlos",123,123,12,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
-		Transportista transportista3 = new Transportista("Rosa",123,11,123,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista1 = new Transportista("Maria",1000,500,20, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista2 = new Transportista("Carlos",2000,200,10,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista3 = new Transportista("Rosa",3000,100,5,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
 
 		Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
 		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
@@ -837,14 +829,20 @@ public class Main {
 		Bodega bodegaP1 = new Bodega(100);
 		Bodega bodegaP2 = new Bodega(100);
 		Bodega bodegaP3 = new Bodega(100);
+		
+		Banco BancoElectronico=new Banco("BancoElectronico");
+		
+		CuentaBancaria cuenta1 = new CuentaBancaria(1000000, Pais.COLOMBIA, BancoElectronico);
+		CuentaBancaria cuenta2 = new CuentaBancaria(2000000, Pais.BRASIL, BancoElectronico);
+		CuentaBancaria cuenta3 = new CuentaBancaria(3000000, Pais.DINAMARCA, BancoElectronico);
 
-		//Proveedor proveedor1 = new Proveedor("Gabriel", 30988333, bodegaP1,1,2,3);
-		//Proveedor proveedor2 = new Proveedor("Aleja", 30988333, bodegaP2,3,2,1);
-		//Proveedor proveedor3 = new Proveedor("Juan", 30988333, bodegaP3,1,1,1);
+		Proveedor proveedor1 = new Proveedor("Gabriel", 3,cuenta1, bodegaP1,20000,25000,30000);
+		Proveedor proveedor2 = new Proveedor("Aleja", 4,cuenta2, bodegaP2,20000,25000,30000);
+		Proveedor proveedor3 = new Proveedor("Juan", 2,cuenta3, bodegaP3,20000,25000,30000);
 
-		//Serializador proveedor1Serializado = new Serializador(proveedor1, "proveedor1");
-		//Serializador proveedor2Serializado = new Serializador(proveedor2, "proveedor2");
-		//Serializador proveedor3Serializado = new Serializador(proveedor3, "proveedor3");
+		Serializador proveedor1Serializado = new Serializador(proveedor1, "proveedor1");
+		Serializador proveedor2Serializado = new Serializador(proveedor2, "proveedor2");
+		Serializador proveedor3Serializado = new Serializador(proveedor3, "proveedor3");
 
 		int contadorCompra = 0;
 

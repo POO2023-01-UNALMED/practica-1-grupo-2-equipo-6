@@ -52,9 +52,9 @@ public class Compra implements java.io.Serializable{
 	
 	public ArrayList<Producto> hacerPedido(Tienda tienda) {
 		
-		int numCamisetas = tienda.getBodega().calcularCamisas();
-		int numPantalones = tienda.getBodega().calcularPantalon();
-		int numAbrigo = tienda.getBodega().calcularAbrigos();
+		int numCamisetas = tienda.getBodega().calcularCamisas(tienda.getBodega().getProductosEnBodega());
+		int numPantalones = tienda.getBodega().calcularPantalon(tienda.getBodega().getProductosEnBodega());
+		int numAbrigo = tienda.getBodega().calcularAbrigos(tienda.getBodega().getProductosEnBodega());
 		int numeroDeProductos = numCamisetas + numPantalones + numAbrigo + 1;
 		double presupuesto = tienda.getPresupuestoCompra();
 		ArrayList<Producto> pedidoFinal = new ArrayList<Producto>();
@@ -63,7 +63,7 @@ public class Compra implements java.io.Serializable{
 			
 			if (numCamisetas <= numPantalones && numCamisetas <= numAbrigo) {
 		
-				Producto producto = new Producto(Tipo.CAMISA,2,1);
+				Producto producto = new Producto(Tipo.CAMISA,40000,20000);
 				numeroDeProductos += 1;
 				numCamisetas += 1;
 				this.pedido.add(producto);
@@ -71,7 +71,7 @@ public class Compra implements java.io.Serializable{
 			
 			else if (numPantalones <= numCamisetas && numPantalones <= numAbrigo) {
 				
-				Producto producto = new Producto(Tipo.PANTALON,4,2);
+				Producto producto = new Producto(Tipo.PANTALON,50000,25000);
 				numeroDeProductos += 1;
 				numPantalones += 1;
 				this.pedido.add(producto);
@@ -79,7 +79,7 @@ public class Compra implements java.io.Serializable{
 			
 			else {
 				
-				Producto producto = new Producto(Tipo.ABRIGO,6,3);
+				Producto producto = new Producto(Tipo.ABRIGO,60000,30000);
 				numeroDeProductos += 1;
 				numAbrigo += 1;
 				this.pedido.add(producto);	
@@ -118,9 +118,9 @@ public class Compra implements java.io.Serializable{
 			}
 			else {abrigos++;}
 		}
-		pedido = pedidoFinal;
+		setPedido(pedidoFinal); 
 //		return"Se necesita:\nCamisetas: "+camisetas+"\nPantalones: "+pantalones+"\nAbrigos: "+abrigos;
-		return pedido;
+		return pedidoFinal;
 	}
 	
 	public Proveedor hacerOrdenDeCompra(ArrayList<Producto> pedido) {
@@ -259,6 +259,8 @@ public class Compra implements java.io.Serializable{
 				+"\nTotal: "+ calcularCostoProductos(proveedorSeleccionado)+" pesos";
 		
 	}
+	
+	public void setPedido(ArrayList<Producto> pedido) {this.pedido = pedido;}
 	
 	public Tienda getTienda() {return tienda;}
 }

@@ -12,7 +12,7 @@ public interface Inventariar{
 	public static int calcularCamisas(ArrayList<Producto> productos) {
 		int numCamisas=0;
 		for(Producto p:productos) {
-			if(p.getNombre()=="Camisa") {
+			if(p.getNombre()=="CAMISA") {
 				numCamisas++;
 			}
 		}
@@ -22,7 +22,7 @@ public interface Inventariar{
 	public static int calcularAbrigos(ArrayList<Producto> productos) {
 		int numAbrigos=0;
 		for(Producto p:productos) {
-			if(p.getNombre()=="Abrigo") {
+			if(p.getNombre()=="ABRIGO") {
 				numAbrigos++;
 			}
 		}
@@ -32,7 +32,7 @@ public interface Inventariar{
 	public static int calcularPantalon(ArrayList<Producto> productos) {
 		int numPantalon=0;
 		for(Producto p:productos) {
-			if(p.getNombre()=="Pantalon") {
+			if(p.getNombre()=="PANTALON") {
 				
 				numPantalon++;
 				

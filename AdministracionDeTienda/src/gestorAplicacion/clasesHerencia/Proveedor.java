@@ -40,18 +40,18 @@ public class Proveedor extends Persona{
 				if (pedido.get(i).getNombre().equals("CAMISA")) {
 					nCamisetas++;
 //					pedido.get(i).setCosto(costoCamiseta);
-					if (aleatorio == 4) {descuentoCamiseta = 0.1f;}
+					if (aleatorio == 4) {descuentoCamiseta =+ 2000f;}
 					
 				}
 				else if(pedido.get(i).getNombre().equals("PANTALON")) {
 					nPantalones++;
 //					pedido.get(i).setCosto(costoPantalon);
-					if (aleatorio == 4) {descuentoPantalon = 0.2f;}
+					if (aleatorio == 4) {descuentoPantalon =+ 2.500f;}
 				}
 				else {
 //					pedido.get(i).setCosto(costoAbrigo);
 					nAbrigos++;
-					if (aleatorio == 4) {descuentoCamiseta = 0.3f;}
+					if (aleatorio == 4) {descuentoCamiseta =+ 3000f;}
 				}
 				
 				productosDisponibles.add(pedido.get(i));
