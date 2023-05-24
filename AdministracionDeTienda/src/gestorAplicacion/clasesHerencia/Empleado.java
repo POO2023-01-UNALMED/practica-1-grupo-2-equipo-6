@@ -15,6 +15,7 @@ import gestorAplicacion.clasesBase.Venta;
 import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
 import gestorAplicacion.clasesBase.Banco.SolucionesProblemaFinanciero;
 import gestorAplicacion.clasesBase.Banco;
+import gestorAplicacion.clasesBase.ControlCalidad;
 import gestorAplicacion.clasesBase.Credito;
 import gestorAplicacion.clasesBase.CuentaBancaria;
 import gestorAplicacion.clasesBase.Informe;
@@ -43,6 +44,19 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 		this.sueldo=sueldo;
 		this.cargo=cargo;
 	}
+
+	
+
+	public Empleado(String nombre, int calificacion, int horasD, int horasT, Cargo operario, int sueldo) {
+		super(nombre,calificacion);
+		horasDisponibles=horasD;
+		horasTrabajadas=horasT;
+		this.cargo=operario;
+		this.sueldo=sueldo;
+		
+	}
+
+
 
 	public double getSueldo() {
 		return sueldo;
@@ -264,6 +278,31 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 			return operarios;
 				
 			}
+
+			public Informe generarInformeControlCalidad(ControlCalidad c, Proveedor p, Transportista t) {
+		
+				if(cargo==Cargo.ARCHIVISTA){		
+					if (c.getProveedor() == p && c.getTransportista() == t) {
+						if (c.getContactarP() && !c.getContactarT()) {
+							p.calificar(c);
+							return new Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c);
+						} else if (!c.getContactarP() && c.getContactarT()) {
+							t.calificar(c);
+							return new Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c);
+						} else if (c.getContactarP() && c.getContactarT()) {
+							p.calificar(c);
+							t.calificar(c);
+							return new Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c);
+						} else {
+							return new Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c);
+						}
+					} return null;
+				
+				}
+				return null;
+				
+			}
+		
 		//Sobreescritura del compareTo para comparar empleados segun su calificacion
 		@Override
 		public int compareTo(Empleado o) {

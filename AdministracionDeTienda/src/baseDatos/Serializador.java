@@ -11,7 +11,7 @@ public class Serializador {
 	
 	public Serializador(Object obj, String nombre) {
 		
-        String archivo = "src\\baseDatos\\temp"+nombre+".txt";
+        String archivo = "src\\baseDatos\\temp\\"+nombre+".txt";
       
         try
         {  

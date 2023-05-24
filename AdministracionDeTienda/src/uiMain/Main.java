@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import gestorAplicacion.clasesHerencia.Cliente;
+import gestorAplicacion.clasesHerencia.Cliente.Ciudades;
 import gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
+import gestorAplicacion.clasesHerencia.Empleado.Cargo;
 import gestorAplicacion.clasesHerencia.Intervenido;
 import baseDatos.Deserializador;
 import baseDatos.Serializador;
 import gestorAplicacion.clasesBase.Bodega;
 import gestorAplicacion.clasesBase.Compra;
+import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
 import gestorAplicacion.clasesBase.Producto;
 import gestorAplicacion.clasesBase.Tienda;
 import gestorAplicacion.clasesBase.Producto.Tipo;
@@ -17,17 +20,21 @@ import gestorAplicacion.clasesHerencia.Proveedor;
 import gestorAplicacion.clasesHerencia.Transportista;
 import gestorAplicacion.clasesBase.Bodega.SETS;
 import gestorAplicacion.clasesHerencia.Intervenido.Colecciones;
+import gestorAplicacion.clasesBase.*;
+import gestorAplicacion.clasesHerencia.*;
+
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		valoresIniciales();
+
+		//valoresIniciales();
+		//serializarEnvio();
 		Producto p=new Producto(Tipo.ABRIGO);
 		Serializador p1 = new Serializador(p,"producto");
 		int opcion = -1;
-		
+
 		do {
 			System.out.println("---------------------------------");
 			System.out.println("    Sistema de Administracion    ");
@@ -40,22 +47,22 @@ public class Main {
 			System.out.println("0) Salir");
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
+
 			try {
 				Scanner stdIn = new Scanner(System.in);
 				opcion = stdIn.nextInt();
-				
+
 			}catch(Exception e) {
 				System.out.println("Error de excepcion, ingresar variable entre 0 y 5");
 			}
-			
+
 			switch (opcion) {
 			case 0: {
 				System.out.println("Saliendo del sistema...");
 				break;
 			}
 			case 1: {
-				System.out.println("Venta a socio");
+				System.out.println("Gestion alianzas estrategicas");
 				break;
 			}
 			case 2: {
@@ -80,13 +87,13 @@ public class Main {
 		}while(opcion!=0);
 
 	}
-	
+
 	static void menuCompra() {
-		
+
 		int opcionMenuCompra = -1;
-		
+
 		do {
-		
+
 			System.out.println("---------------------------------");
 			System.out.println("        Modulo de Compra         ");
 			System.out.println("---------------------------------");
@@ -96,17 +103,17 @@ public class Main {
 			System.out.println("0) Regresar");
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
-			
-			
+
+
+
 			try {
 				Scanner stdIn = new Scanner(System.in);
 				opcionMenuCompra = stdIn.nextInt();
-				
+
 			}catch(Exception e) {
 				System.out.println("Error de excepcion, ingresar variable entre 0 y 3");
 			}
-			
+
 			switch (opcionMenuCompra) {
 				case 0: {
 					System.out.println("Regresando...");
@@ -117,7 +124,7 @@ public class Main {
 					break;
 				}
 				case 2: {
-					
+
 					menuPedidoInteligente();
 					break;
 				}
@@ -128,17 +135,17 @@ public class Main {
 				default:
 					System.out.println("Opcion fuera de rango");
 			}
-			
-		}while(opcionMenuCompra!=0);	
-		
+
+		}while(opcionMenuCompra!=0);
+
 	}
-	
+
 	static void menuConsultarBodega() {
-		
+
 		int opcionConsultarBodega = -1;
-		
+
 		do {
-		
+
 			System.out.println("---------------------------------");
 			System.out.println("        Consultar Bodega         ");
 			System.out.println("---------------------------------");
@@ -148,25 +155,25 @@ public class Main {
 			System.out.println("0) Regresar");
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
-			
+
+
 			Tienda tienda;
 			try {
 				Scanner stdIn = new Scanner(System.in);
 				opcionConsultarBodega = stdIn.nextInt();
-				
+
 			}catch(Exception e) {
 				System.out.println("Error de excepcion, ingresar variable entre 0 y 3");
 			}
-			
-			
+
+
 			switch (opcionConsultarBodega) {
 				case 0: {
 					System.out.println("Regresando...");
 					break;
 				}
 				case 1: {
-					
+
 					tienda = (Tienda) new Deserializador("tiendaLaureles").getObj();
 					System.out.println("---------------------------------");
 					System.out.println("        Tienda Laureles          ");
@@ -177,16 +184,16 @@ public class Main {
 							+ "disponible:");
 					System.out.println(tienda.getBodega().toString());
 					System.out.println("Total de productos:" +tienda.getBodega().calcularNumeroProductos());
-					
-					
+
+
 					break;
 				}
 				case 2: {
-					
+
 					tienda = (Tienda) new Deserializador("tiendaPoblado").getObj();
 					System.out.println("---------------------------------");
 					System.out.println("        Tienda Poblado           ");
-					
+
 					System.out.println("---------------------------------");
 					System.out.println("Presupuesto:" +tienda.getPresupuestoCompra());
 					System.out.println("Capacidad de la bodega: " +tienda.getBodega().getStopBodega()+" productos");
@@ -197,11 +204,11 @@ public class Main {
 					break;
 				}
 				case 3: {
-					
+
 					tienda = (Tienda) new Deserializador("tiendaEnvigado").getObj();
 					System.out.println("---------------------------------");
 					System.out.println("        Tienda Envigado          ");
-				
+
 					System.out.println("---------------------------------");
 					System.out.println("Presupuesto:" +tienda.getPresupuestoCompra());
 					System.out.println("Capacidad de la bodega: " +tienda.getBodega().getStopBodega()+" productos");
@@ -214,21 +221,21 @@ public class Main {
 				default:
 					System.out.println("Opcion fuera de rango");
 			}
-			
-		}while(opcionConsultarBodega!=0);	
-	}	
-	
+
+		}while(opcionConsultarBodega!=0);
+	}
+
 	static void menuPedidoInteligente() {
-		
+
 		int opcionPedido = -1;
 		String tecla = null;
 		Tienda tienda = null;
 		String nombreTienda = "";
 		String comprasPorRevisar = (String) new Deserializador("comprasPorRevisar").getObj();
-		
+
 
 		do {
-			
+
 			System.out.println("---------------------------------");
 			System.out.println("Seleccione tienda para crear pedido");
 			System.out.println("---------------------------------");
@@ -237,29 +244,29 @@ public class Main {
 			System.out.println("3) Tienda-Envigado");
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
-			
-			
+
+
+
 			try {
 				Scanner stdIn = new Scanner(System.in);
 				opcionPedido = stdIn.nextInt();
-			
-				
+
+
 			}catch(Exception e) {
 				System.out.println("Error de excepcion, ingresar variable entre 1 y 3");
 			}
-			
-			
+
+
 			if(opcionPedido<1 || opcionPedido>3)
 				System.out.println("Opcion fuera de rango");
-			
-			else 
+
+			else
 				break;
-	
+
 		}while(true);
-		
+
 		switch (opcionPedido) {
-		
+
 			case 1: {
 				tienda = (Tienda) new Deserializador("tiendaLaureles").getObj();
 				nombreTienda = "Laureles";
@@ -276,23 +283,23 @@ public class Main {
 				break;
 			}
 		}
-		
+
 		Compra compra = new Compra(tienda);
 		ArrayList<Producto> pedido = compra.hacerPedido(tienda);
-		
+
 		if(comprasPorRevisar.contains(nombreTienda))
 				System.out.println("Tienes una compra por revisar en esta tienda,\nutiliza la funcionalidad de \ncontrol de calidad");
-		
-		else if(pedido==null) {		
+
+		else if(pedido==null) {
 			System.out.println("No tienes espacio en bodega Para realizar un pedido de al menos 6 productos");
 		}
-		else if(pedido.size()<6) {		
+		else if(pedido.size()<6) {
 			System.out.println("No tienes suficiente presupuesto para realizar un pedido de al menos 6 productos");
 		}
-		
+
 		else {
-			
-			
+
+
 			System.out.println("---------------------------------");
 			System.out.println("        Pedido Inteligente       ");
 			System.out.println("---------------------------------");
@@ -307,27 +314,27 @@ public class Main {
 //			System.out.println(compra.hacerPedido(tienda));
 			System.out.println("\nPresione una tecla para continuar");
 			System.out.println("---------------------------------");
-			
+
 			Scanner stdIn2 = new Scanner(System.in);
 			tecla = stdIn2.next();
-			
+
 			procesoDeCompra(compra, nombreTienda);
 		}
 	}
-				
+
 	static void procesoDeCompra(Compra compra, String nombreTienda) {
 		int opcionProveedores = -1;
 		int opcionTransportista = -1;
 		int contadorCompras = 0;
 		String comprasPorRevisar = "";
-		
+
 		String recomendacion = compra.hacerOrdenDeCompra(compra.getPedido()).getNombre();
 		Tienda tienda =  compra.getTienda();
 		Proveedor proveedor = null;
 		Transportista transportista = null;
-		
+
 		do {
-		
+
 			System.out.println("---------------------------------");
 			System.out.println("    Seleccion de Proveedor       ");
 			System.out.println("---------------------------------");
@@ -343,26 +350,26 @@ public class Main {
 			System.out.println("\n3) "+compra.getProveedores().get(2).getNombre()+"\nDescuento: "+compra.getProveedores().get(2).getDescuento()+" pesos"+"\nProductos disponibles:\n2"+compra.getProveedores().get(2).getBodega());
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
-			
+
+
 			try {
-			
+
 				Scanner stdIn1 = new Scanner(System.in);
 				opcionProveedores = stdIn1.nextInt();
-				
+
 			}catch(Exception e) {
 				System.out.println("Error de excepcion, ingresar variable entre 1 y 3");
 			}
-			
-			if(opcionProveedores<1 || opcionProveedores>3) 
+
+			if(opcionProveedores<1 || opcionProveedores>3)
 				System.out.println("Fuera de rango");
-			else 
+			else
 				break;
-			
+
 		}while(true);
-			
+
 		switch (opcionProveedores) {
-			
+
 			case 1: {
 				proveedor = compra.getProveedores().get(0);
 				break;
@@ -377,14 +384,14 @@ public class Main {
 			}
 		}
 		compra.setProveedorSeleccionado(proveedor);
-			
+
 		String transportistaR = compra.ordenarEnvio(tienda, proveedor).getNombre();
-		
+
 		System.out.println("---------------------------------");
 		System.out.println("      proveedor seleccionado     ");
 		System.out.println("---------------------------------");
 		System.out.println(proveedor.getNombre());
-		
+
 		do {
 			System.out.println("---------------------------------");
 			System.out.println("   Seleccione de Transportista   ");
@@ -398,25 +405,25 @@ public class Main {
 			System.out.println("\n3) Trasnportista "+compra.getTransportistas().get(2).getNombre()+"\nprecio por el servicio: "+compra.getTransportistas().get(2).calcularPrecioTotal(proveedor, tienda));
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
+
 			try {
 				Scanner stdIn2 = new Scanner(System.in);
 				opcionTransportista = stdIn2.nextInt();
-				
+
 			}catch(Exception e) {
 				System.out.println("Error de excepcion, ingresar variable entre 1 y 3");
 			}
-			
-			if(opcionTransportista<1 || opcionTransportista>3) 
+
+			if(opcionTransportista<1 || opcionTransportista>3)
 				System.out.println("Opcion fuera de rango");
 			else
 				break;
-			
+
 		}while(true);
-		
-	
+
+
 		switch (opcionTransportista) {
-			
+
 			case 1: {
 				transportista = compra.getTransportistas().get(0);
 				break;
@@ -425,7 +432,7 @@ public class Main {
 				transportista = compra.getTransportistas().get(1);
 				break;
 			}
-			case 3: {	
+			case 3: {
 				transportista = compra.getTransportistas().get(2);
 				break;
 			}
@@ -445,28 +452,32 @@ public class Main {
 		System.out.println("Ahorraste: "+proveedor.getDescuento()+" pesos");
 		System.out.println("Total: "+ total+" pesos");
 		System.out.println("---------------------------------");
+<<<<<<< HEAD
 		
 		
 		
+=======
+
+>>>>>>> d3e741c052c2f3216bded7435e639449822432f8
 		double presupuesto = tienda.getPresupuestoCompra();
 		tienda.setPresupuestoCompra(presupuesto - total);
 		Tienda.getCuentaTienda().setDinero(Tienda.getCuentaTienda().getDinero() - total);
 		
 		
 		Serializador tiendaSerializada = new Serializador(tienda, "tienda"+nombreTienda);
-		
+
 		contadorCompras = (int) new Deserializador("contadorCompras").getObj();
 		contadorCompras++;
 		Serializador contadorComprasSerializado = new Serializador(contadorCompras, "contadorCompras");
-		
+
 		comprasPorRevisar = (String) new Deserializador("comprasPorRevisar").getObj();
 		comprasPorRevisar += nombreTienda ;
 		Serializador comprasPorRevisarSerializado = new Serializador(comprasPorRevisar, "comprasPorRevisar");
-		
-		
-		
+
+
+
 		Serializador compra1 = new Serializador(compra,"compra"+contadorCompras);
-		
+
 	}
 
 	static void historialDeCompra() {
@@ -474,9 +485,9 @@ public class Main {
 		String tecla = null;
 		Tienda tienda = null;
 		String nombreTienda = "";
-		
+
 		do {
-			
+
 			System.out.println("---------------------------------");
 			System.out.println("      Historial de Compras       ");
 			System.out.println("---------------------------------");
@@ -484,41 +495,41 @@ public class Main {
 			System.out.println("0) Regresar");
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
-		
-			
+
+
+
 			try {
 				Scanner stdIn = new Scanner(System.in);
 				opcionHistorial = stdIn.nextInt();
-				
+
 			}catch(Exception e) {
 				System.out.println("Error de excepcion, ingresar variable entre 1 y 3");
 			}
-			
-			
-			
+
+
+
 			if(opcionHistorial==1 || opcionHistorial==0)
 				break;
-				
-			else 
+
+			else
 				System.out.println("Opcion fuera de rango");
-				
-	
+
+
 		}while(true);
-		
+
 		switch (opcionHistorial) {
-		
+
 		case 0: {
 			System.out.println("Regresando...");
 			break;
 		}
 		case 1: {
-		
+
 			int contadorCompras = (int) new Deserializador("contadorCompras").getObj();
-			
+
 			if(contadorCompras<1)
 				System.out.println("No se han realizado compras");
-			else 
+			else
 				for (int i = 1; i<contadorCompras+1;i++) {
 					Compra compra = (Compra) new Deserializador("compra"+i).getObj();
 					System.out.println(compra);
@@ -527,7 +538,7 @@ public class Main {
 				}
 			break;
 			}
-		}	
+		}
 	}
 	//Scanner
 		static Scanner sc=new Scanner(System.in);
@@ -536,7 +547,7 @@ public class Main {
 		}
 		static int verificar(int n,int o) {
 			do {
-	            
+
 	            o = readOpcion();
 
 	            if (o <= 0 || o> n) {
@@ -545,8 +556,8 @@ public class Main {
 	        } while (o <= 0 || o >n);
 			return o;
 		}
-			
-		
+
+
 		public static void logisticaEnvio() {
 			int o=2;
 			do {
@@ -567,7 +578,7 @@ public class Main {
 			case 3: set=SETS.COMPLETO;
 					break;
 			}
-			
+
 			System.out.println();
 			System.out.println("---------------------------------");
 			System.out.println("          //"+set);
@@ -584,7 +595,7 @@ public class Main {
 			tiendas.add(tienda2);
 			Tienda tienda3=(Tienda) new Deserializador("tiendaLaureles").getObj();
 			tiendas.add(tienda3);
-			
+
 			//Primera interaccion
 			ArrayList<Producto> productos=Bodega.realizarPedido(tiendas,set,cantidad);
 			System.out.println(Bodega.getResumenPedido());
@@ -599,7 +610,7 @@ public class Main {
 				}
 			}
 			System.out.println("");
-			
+
 			System.out.println("---------------------------------");
 			System.out.println("          //COLECCION       ");
 			System.out.println("---------------------------------");
@@ -607,15 +618,15 @@ public class Main {
 			int i=1;
 			for(Colecciones coleccion:Colecciones.values()) {
 				System.out.println(coleccion.getId()+". "+coleccion);
-				i++;	
+				i++;
 			}
 			int Ocoleccion= verificar(i-1,0);
 			Colecciones coleccion=null;
-			
+
 			for(Colecciones colec:Colecciones.values()) {
 				if(colec.getId()==Ocoleccion) {
 					coleccion=colec;
-					break;	
+					break;
 				}
 			}
 			System.out.println();
@@ -628,7 +639,7 @@ public class Main {
 			for(int i1=0;i1<intervenidos.size();i1++) {
 				System.out.println(intervenidos.get(i1));
 			}
-			
+
 			System.out.println();
 			System.out.println("---------------------------------");
 			System.out.println("  //Informacion del cliente      ");
@@ -643,7 +654,7 @@ public class Main {
 			for(int i1=0;i1<clientes.size();i1++) {
 				System.out.println(i1+1+". "+clientes.get(i1));
 			}
-			
+
 			int Ocliente=verificar(clientes.size(),0);
 			Cliente cliente=clientes.get(Ocliente-1);
 			System.out.println();
@@ -666,50 +677,62 @@ public class Main {
 			break;
 			default: tipo=TipoEnvio.NORMAL;
 			}
-			
+
 			//Tercera interaccion
 			cliente.enviar(intervenidos,tipo);
 			Serializador cliente1=new Serializador(cliente,"cliente"+(Ocliente-1));
-		
-			
-			
+
+
+
 			System.out.println();
 			System.out.println("---------------------------------");
 			System.out.println("          //Resumen de Pago");
 			System.out.println("---------------------------------");
 			System.out.println(cliente.getResumenDePago());
-			
+
 			System.out.println("\nRealizando Transferencias...");
 			System.out.println(cliente.getConfirmacion());
-			
+
 			//Serializar las tiendas para que los productos en bodega y la cuenta bancaria queden actualizadas
 			Serializador t1=new Serializador(tiendas.get(0),"tiendaEnvigado");
 			Serializador t2=new Serializador(tiendas.get(1),"tiendaLaureles");
 			Serializador t3=new Serializador(tiendas.get(2),"tiendaPoblado");
-			
+
 			System.out.println("\nSeleccione una opcion:");
 			System.out.println("1. Volver al menu principal");
 			System.out.println("2. Realizar nuevo proceso de Envio");
-			
-			
+
+
 			o=verificar(2,0);
-		
-			
-			
+
+
+
 			}while(o==2);
-			
-			
+
+
 		}
-	
+
 	static public void valoresIniciales() {
+
+		Banco bbva=new Banco("BBVA");
+		Banco bancoAgrario=new Banco("Banco Agrario");
+		Banco bbbank=new Banco("BBBank");
+		
+		ArrayList<Producto> productosSocio=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));  add(new Producto(Tipo.PANTALON));}};
+		ArrayList<Producto> productosSocio2=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));}};
+		ArrayList<Producto> productosSocio3=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO));  add(new Producto(Tipo.PANTALON));}};
+
+
 		Bodega bodegaTienda1 = new Bodega(50);
 		Bodega bodegaTienda2 = new Bodega(60);
 		Bodega bodegaTienda3 = new Bodega(40);
-		
+
 		Producto camisa = new Producto(Tipo.CAMISA,2,1);
 		Producto pantalon = new Producto(Tipo.PANTALON,4,2);
 		Producto abrigo = new Producto(Tipo.ABRIGO,6,3);
-		
+
+
+
 		bodegaTienda1.agregarProductos(camisa);
 		bodegaTienda1.agregarProductos(camisa);
 		bodegaTienda1.agregarProductos(camisa);
@@ -733,7 +756,7 @@ public class Main {
 		bodegaTienda1.agregarProductos(abrigo);
 		bodegaTienda1.agregarProductos(abrigo);
 		bodegaTienda1.agregarProductos(abrigo);
-		
+
 		bodegaTienda2.agregarProductos(camisa);
 		bodegaTienda2.agregarProductos(camisa);
 		bodegaTienda2.agregarProductos(camisa);
@@ -760,7 +783,7 @@ public class Main {
 		bodegaTienda2.agregarProductos(abrigo);
 		bodegaTienda2.agregarProductos(abrigo);
 		bodegaTienda2.agregarProductos(abrigo);
-		
+
 		bodegaTienda3.agregarProductos(camisa);
 		bodegaTienda3.agregarProductos(camisa);
 		bodegaTienda3.agregarProductos(camisa);
@@ -786,45 +809,128 @@ public class Main {
 		bodegaTienda3.agregarProductos(abrigo);
 		bodegaTienda3.agregarProductos(abrigo);
 		bodegaTienda3.agregarProductos(abrigo);
-		
-		Tienda tiendaLureles = new Tienda(100, bodegaTienda1);
-		Tienda tiendaPoblado = new Tienda(10, bodegaTienda2);
-		Tienda tiendaEnvigado = new Tienda(60, bodegaTienda3);
-		
-		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLureles, "tiendaLaureles");
+
+		Empleado contador1=new Empleado("Manuel Delgado Villegas", 5,  new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
+		Empleado contador2=new Empleado("Juan Diaz de Garayo", 5 ,  new CuentaBancaria(50000,Pais.COLOMBIA, bbbank), 8000, Cargo.CONTADOR);
+		Empleado contador3=new Empleado("Margarita Sanchez Gutierrez", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
+		Empleado operario=new Empleado("Patricia Dagorn", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.OPERARIO);
+		Empleado archivista=new Empleado("Jose Antonio Rodriguez Vega",4,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 45621,Cargo.ARCHIVISTA);
+
+
+
+		Tienda tiendaLaureles = new Tienda(10234,bodegaTienda1, contador1, operario );
+		Tienda tiendaPoblado = new Tienda (14326780,bodegaTienda2, contador2);
+		Tienda tiendaEnvigado = new Tienda(47385,bodegaTienda3, contador3);
+
+		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
-		
-		//Transportista transportista1 = new Transportista("Maria", 1034556723, 2, 0.3f, 0.2f);
-		//Transportista transportista2 = new Transportista("Carlos", 1244432214, 3, 0.2f, 0.1f);
-		//Transportista transportista3 = new Transportista("Rosa", 1044458922, 4, 0.1f, 0.2f);
-		
-		//Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
-		//Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
-		//Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
-		
+
+		Transportista transportista1 = new Transportista("Maria",123,123,123, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista2 = new Transportista("Carlos",123,123,12,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista3 = new Transportista("Rosa",123,11,123,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+
+		Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
+		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
+		Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
+
 		Bodega bodegaP1 = new Bodega(100);
 		Bodega bodegaP2 = new Bodega(100);
 		Bodega bodegaP3 = new Bodega(100);
-		
+
 		//Proveedor proveedor1 = new Proveedor("Gabriel", 30988333, bodegaP1,1,2,3);
 		//Proveedor proveedor2 = new Proveedor("Aleja", 30988333, bodegaP2,3,2,1);
 		//Proveedor proveedor3 = new Proveedor("Juan", 30988333, bodegaP3,1,1,1);
-		
+
 		//Serializador proveedor1Serializado = new Serializador(proveedor1, "proveedor1");
 		//Serializador proveedor2Serializado = new Serializador(proveedor2, "proveedor2");
 		//Serializador proveedor3Serializado = new Serializador(proveedor3, "proveedor3");
-		
+
 		int contadorCompra = 0;
-		
+
+
+		Socio exito = new Socio("EXITO",productosSocio, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.COLOMBIA, bbva));
+			Socio falabella =  new Socio("Falabella",productosSocio2, new ArrayList<Venta>() {{}}, new CuentaBancaria(1500000,Pais.VENEZUELA, bbbank));
+			Socio primark = new Socio("PRIMARK",productosSocio3, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.BRASIL, bancoAgrario));;
+
+			Serializador socio1 = new Serializador(exito, "exito");
+			Serializador socio2 = new Serializador(falabella, "falabella");
+			Serializador socio3 = new Serializador(primark, "primark");
+
 		Serializador contadorComprasSerializado = new Serializador(contadorCompra, "contadorCompras");
-		
+
 		String comprasPorRevisar = "";
-		
+
 		Serializador comprasPorRevisarSerializado = new Serializador(comprasPorRevisar, "comprasPorRevisar");
-		
+
+
+	}
+	public static void serializarEnvio() {
+		Banco BancoElectronico=new Banco("BancoElectronico");
+		CuentaBancaria cuenta1 = new CuentaBancaria(1000000, Pais.COLOMBIA, BancoElectronico);
+		CuentaBancaria cuenta2 = new CuentaBancaria(2000000, Pais.BRASIL, BancoElectronico);
+		CuentaBancaria cuenta3 = new CuentaBancaria(3000000, Pais.DINAMARCA, BancoElectronico);
+		CuentaBancaria cuenta4 = new CuentaBancaria(4000000, Pais.ALEMANIA, BancoElectronico);
+		CuentaBancaria cuenta5 = new CuentaBancaria(5000000, Pais.MONACO, BancoElectronico);
+		CuentaBancaria cuenta6 = new CuentaBancaria(6000000, Pais.CHIPRE, BancoElectronico);
+		CuentaBancaria cuenta7 = new CuentaBancaria(7000000, Pais.VENEZUELA, BancoElectronico);
+		CuentaBancaria cuenta8 = new CuentaBancaria(8000000, Pais.COLOMBIA, BancoElectronico);
+		CuentaBancaria cuenta9 = new CuentaBancaria(9000000, Pais.BRASIL, BancoElectronico);
+		CuentaBancaria cuenta10 = new CuentaBancaria(10000000, Pais.DINAMARCA, BancoElectronico);
+
+		Cliente cliente1 = new Cliente("Juan Perez", 2, Ciudades.BOGOTA, cuenta1);
+        Cliente cliente2 = new Cliente("Maria Rodriguez", 4, Ciudades.MEDELLIN, cuenta2);
+        Cliente cliente3 = new Cliente("Carlos Gomez", 1, Ciudades.CALI, cuenta3);
+        Cliente cliente4 = new Cliente("Ana Lopez", 3, Ciudades.BARRANQUILLA, cuenta4);
+        Cliente cliente5 = new Cliente("Pedro Garcia", 5, Ciudades.CARTAGENA, cuenta5);
+        Cliente cliente6 = new Cliente("Laura Martinez", 2, Ciudades.BUCARAMANGA, cuenta6);
+        Cliente cliente7 = new Cliente("Andres Herrera", 3, Ciudades.PEREIRA, cuenta7);
+        Cliente cliente8 = new Cliente("Carolina Vargas", 1, Ciudades.CUCUTA, cuenta8);
+        Cliente cliente9 = new Cliente("Luisa Fernandez", 4, Ciudades.BOGOTA, cuenta9);
+        Cliente cliente10 = new Cliente("Mario Ramirez", 2, Ciudades.MEDELLIN, cuenta10);
+
+
+
+		ArrayList<Cliente> listaClientes = new ArrayList<>();
+
+
+		listaClientes.add(cliente1);
+		listaClientes.add(cliente2);
+		listaClientes.add(cliente3);
+		listaClientes.add(cliente4);
+		listaClientes.add(cliente5);
+		listaClientes.add(cliente6);
+		listaClientes.add(cliente7);
+		listaClientes.add(cliente8);
+		listaClientes.add(cliente9);
+		listaClientes.add(cliente10);
+
+		for(int i=0;i<listaClientes.size();i++) {
+			Serializador cliente=new Serializador(listaClientes.get(i),"cliente"+i);
+		}
+		Empleado operario1 = new Empleado("Nombre completo", 1, 234, 0, Cargo.OPERARIO, 1200000);
+		Empleado operario2 = new Empleado("Nombre completo", 3, 189, 0, Cargo.OPERARIO, 1200000);
+	     Empleado operario3 = new Empleado("Nombre completo", 5, 276, 0, Cargo.OPERARIO, 1200000);
+
+
+		ArrayList<Empleado> listaEmpleados=new ArrayList<Empleado>();
+		listaEmpleados.add(operario1);
+        listaEmpleados.add(operario2);
+        listaEmpleados.add(operario3);
+
+        for(int i=0;i<listaEmpleados.size();i++) {
+        	Serializador empleado=new Serializador(listaEmpleados.get(i),"operario"+i);
+        }
+
+		Transportista transportista=new Transportista("Jimena Salgado",3);
+		CuentaBancaria cuenta = new CuentaBancaria(1044450000, Pais.COLOMBIA, BancoElectronico);
+		cuenta.setPropietario(transportista);
+		transportista.setCuenta(cuenta);
+		Serializador t= new Serializador(transportista,"TransportistaNacional");
 	}
 	
-	
+
+
+
 
 }
