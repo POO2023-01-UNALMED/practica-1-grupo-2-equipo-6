@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import gestorAplicacion.clasesHerencia.Cliente;
+import gestorAplicacion.clasesHerencia.Cliente.Ciudades;
 import gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
+import gestorAplicacion.clasesHerencia.Empleado.Cargo;
 import gestorAplicacion.clasesHerencia.Intervenido;
 import baseDatos.Deserializador;
 import baseDatos.Serializador;
 import gestorAplicacion.clasesBase.Bodega;
 import gestorAplicacion.clasesBase.Compra;
+import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
 import gestorAplicacion.clasesBase.Producto;
 import gestorAplicacion.clasesBase.Tienda;
 import gestorAplicacion.clasesBase.Producto.Tipo;
@@ -17,6 +20,9 @@ import gestorAplicacion.clasesHerencia.Proveedor;
 import gestorAplicacion.clasesHerencia.Transportista;
 import gestorAplicacion.clasesBase.Bodega.SETS;
 import gestorAplicacion.clasesHerencia.Intervenido.Colecciones;
+import gestorAplicacion.clasesBase.*;
+import gestorAplicacion.clasesHerencia.*;
+
 
 public class Main {
 
@@ -818,6 +824,70 @@ public class Main {
 		
 		Serializador comprasPorRevisarSerializado = new Serializador(comprasPorRevisar, "comprasPorRevisar");
 		
+		
+	}
+	public static void serializarEnvio() {
+		Banco BancoElectronico=new Banco("BancoElectronico");
+		CuentaBancaria cuenta1 = new CuentaBancaria(1000000, Pais.COLOMBIA, BancoElectronico);
+		CuentaBancaria cuenta2 = new CuentaBancaria(2000000, Pais.BRASIL, BancoElectronico);
+		CuentaBancaria cuenta3 = new CuentaBancaria(3000000, Pais.DINAMARCA, BancoElectronico);
+		CuentaBancaria cuenta4 = new CuentaBancaria(4000000, Pais.ALEMANIA, BancoElectronico);
+		CuentaBancaria cuenta5 = new CuentaBancaria(5000000, Pais.MONACO, BancoElectronico);
+		CuentaBancaria cuenta6 = new CuentaBancaria(6000000, Pais.CHIPRE, BancoElectronico);
+		CuentaBancaria cuenta7 = new CuentaBancaria(7000000, Pais.VENEZUELA, BancoElectronico);
+		CuentaBancaria cuenta8 = new CuentaBancaria(8000000, Pais.COLOMBIA, BancoElectronico);
+		CuentaBancaria cuenta9 = new CuentaBancaria(9000000, Pais.BRASIL, BancoElectronico);
+		CuentaBancaria cuenta10 = new CuentaBancaria(10000000, Pais.DINAMARCA, BancoElectronico);
+		
+		Cliente cliente1 = new Cliente("Juan Perez", 2, Ciudades.BOGOTA, cuenta1);
+        Cliente cliente2 = new Cliente("Maria Rodriguez", 4, Ciudades.MEDELLIN, cuenta2);
+        Cliente cliente3 = new Cliente("Carlos Gomez", 1, Ciudades.CALI, cuenta3);
+        Cliente cliente4 = new Cliente("Ana Lopez", 3, Ciudades.BARRANQUILLA, cuenta4);
+        Cliente cliente5 = new Cliente("Pedro Garcia", 5, Ciudades.CARTAGENA, cuenta5);
+        Cliente cliente6 = new Cliente("Laura Martinez", 2, Ciudades.BUCARAMANGA, cuenta6);
+        Cliente cliente7 = new Cliente("Andres Herrera", 3, Ciudades.PEREIRA, cuenta7);
+        Cliente cliente8 = new Cliente("Carolina Vargas", 1, Ciudades.CUCUTA, cuenta8);
+        Cliente cliente9 = new Cliente("Luisa Fernandez", 4, Ciudades.BOGOTA, cuenta9);
+        Cliente cliente10 = new Cliente("Mario Ramirez", 2, Ciudades.MEDELLIN, cuenta10);
+		
+
+		
+		ArrayList<Cliente> listaClientes = new ArrayList<>();
+
+		
+		listaClientes.add(cliente1);
+		listaClientes.add(cliente2);
+		listaClientes.add(cliente3);
+		listaClientes.add(cliente4);
+		listaClientes.add(cliente5);
+		listaClientes.add(cliente6);
+		listaClientes.add(cliente7);
+		listaClientes.add(cliente8);
+		listaClientes.add(cliente9);
+		listaClientes.add(cliente10);
+		
+		for(int i=0;i<listaClientes.size();i++) {
+			Serializador cliente=new Serializador(listaClientes.get(i),"cliente"+i);
+		}
+		Empleado operario1 = new Empleado("Nombre completo", 1, 234, 0, Cargo.OPERARIO, 1200000);
+		Empleado operario2 = new Empleado("Nombre completo", 3, 189, 0, Cargo.OPERARIO, 1200000);
+	     Empleado operario3 = new Empleado("Nombre completo", 5, 276, 0, Cargo.OPERARIO, 1200000);
+		
+		
+		ArrayList<Empleado> listaEmpleados=new ArrayList<Empleado>();
+		listaEmpleados.add(operario1);
+        listaEmpleados.add(operario2);
+        listaEmpleados.add(operario3);
+        
+        for(int i=0;i<listaEmpleados.size();i++) {
+        	Serializador empleado=new Serializador(listaEmpleados.get(i),"operario"+i);
+        }
+        
+		Transportista transportista=new Transportista("Jimena Salgado",3);
+		CuentaBancaria cuenta = new CuentaBancaria(1044450000, Pais.COLOMBIA, BancoElectronico);
+		cuenta.setPropietario(transportista);
+		transportista.setCuenta(cuenta);
+		Serializador t= new Serializador(transportista,"TransportistaNacional");
 	}
 	
 	

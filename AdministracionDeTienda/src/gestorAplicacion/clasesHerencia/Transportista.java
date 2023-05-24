@@ -42,6 +42,10 @@ public class Transportista extends Persona{
 		precioCarga = precioC;
 	}
 	
+	public Transportista(String string, int i) {
+		super(string,i);
+	}
+
 	public float calcularPrecioTotal(Proveedor provedor, Tienda tienda) {
 		int costo = 0;
 		costo += precioBase + Math.abs(provedor.getCalle() - tienda.getCalle())*precioDistancia + provedor.getBodega().calcularNumeroProductos()*precioCarga;

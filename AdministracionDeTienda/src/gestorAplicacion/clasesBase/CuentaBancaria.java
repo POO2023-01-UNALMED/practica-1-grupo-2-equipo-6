@@ -151,7 +151,7 @@ public class CuentaBancaria implements Serializable{
 		this.digitoDeControl = digitoDeControl;
 	}
 
-	enum Pais{
+	public enum Pais{
 	COLOMBIA("AL"),BRASIL("BR"),DINAMARCA("DK"), ALEMANIA("DE"), MONACO("MC"),CHIPRE("CY"), VENEZUELA("VZ");
 
 	private String codigoDePais;
