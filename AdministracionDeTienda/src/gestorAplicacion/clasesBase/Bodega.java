@@ -212,6 +212,22 @@ public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
 		productos.removeAll(completado);
 		return pedido;
 	}
+
+	public static String getResumenPedido() {
+		return resumenPedido;
+	}
+
+	public static void setResumenPedido(String resumenPedido) {
+		Bodega.resumenPedido = resumenPedido;
+	}
+
+	public static ArrayList<Transferencia> getPagos() {
+		return pagos;
+	}
+
+	public static void setPagos(ArrayList<Transferencia> pagos) {
+		Bodega.pagos = pagos;
+	}
 	
 
 }
