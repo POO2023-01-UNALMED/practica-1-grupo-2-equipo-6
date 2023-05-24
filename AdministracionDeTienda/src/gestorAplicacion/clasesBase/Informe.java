@@ -26,6 +26,15 @@ public class Informe implements Comparable<Informe>{
 	private ControlCalidad controlC;
 
 
+	public Informe(Empleado contador, ArrayList<SolucionesProblemaFinanciero>soluciones, PuntajeCredito puntajeCredito, double cantidadActualDeuda) {
+		this(TipoInforme.FINANCIERO,contador);
+		this.cantidadActualDeuda=cantidadActualDeuda;
+		this.soluciones=soluciones;
+		puntajeCrediticioActual=puntajeCredito;
+
+
+	}
+
 	public Informe(TipoInforme tipoInforme, ControlCalidad controlCalidad) {
 		;
 		this.tipoInforme=tipoInforme;
