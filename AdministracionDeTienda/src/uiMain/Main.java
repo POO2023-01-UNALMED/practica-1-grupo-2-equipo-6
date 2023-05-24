@@ -29,8 +29,8 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		valoresIniciales();
-		serializarEnvio();
+		//valoresIniciales();
+		//serializarEnvio();
 	
 		Producto p=new Producto(Tipo.ABRIGO);
 		Serializador p1=new Serializador(p,"producto");
@@ -79,7 +79,7 @@ public class Main {
 				break;
 			}
 			case 5: {
-				System.out.println("Gestion de credito");
+			//tionFinanciera();
 				break;
 			}
 			default:

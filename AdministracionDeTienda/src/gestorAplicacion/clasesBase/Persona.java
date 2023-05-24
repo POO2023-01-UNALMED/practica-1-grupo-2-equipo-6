@@ -9,6 +9,10 @@ public abstract class Persona implements Comparable<Persona>{
     private int calificacion;
     private String nombre;
     private CuentaBancaria cuenta;
+    
+    public Persona() {
+    	
+    }
 
     public Persona(String nombre, int calificacion) {
 		this.calificacion=calificacion;
