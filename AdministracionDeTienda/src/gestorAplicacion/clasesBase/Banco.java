@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ClasesProyecto.CuentaBancaria.Pais;
-import ClasesProyecto.Transferencia.EstadoPago;
+import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
+import gestorAplicacion.clasesBase.Transferencia.EstadoPago;
 
 public class Banco implements Serializable{
 	
