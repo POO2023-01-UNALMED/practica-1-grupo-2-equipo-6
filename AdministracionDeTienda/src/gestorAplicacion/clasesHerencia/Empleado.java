@@ -28,7 +28,7 @@ import baseDatos.Serializador;
 
 
 
-public class Empleado extends Persona implements Serializable,Comparable<Empleado>{
+public class Empleado extends Persona implements Serializable{
 
 	/**
 	 *
@@ -39,6 +39,9 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 	private int horasDisponibles;
 	private int horasTrabajadas;
 
+	public Empleado() {
+		
+	}
 	public Empleado(String nombre, int calificacion, CuentaBancaria cuenta, double sueldo, Cargo cargo) {
 		super(nombre, calificacion,cuenta);
 		this.sueldo=sueldo;
@@ -47,14 +50,14 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 
 	
 
-	public Empleado(String nombre, int calificacion, int horasD, int horasT, Cargo operario, int sueldo) {
+	public Empleado(String nombre, int calificacion, int horasD, int horasT, Cargo operario, double sueldo) {
 		super(nombre,calificacion);
 		horasDisponibles=horasD;
 		horasTrabajadas=horasT;
 		this.cargo=operario;
 		this.sueldo=sueldo;
 		
-	}
+}
 
 
 
@@ -304,11 +307,7 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 			}
 		
 		//Sobreescritura del compareTo para comparar empleados segun su calificacion
-		@Override
-		public int compareTo(Empleado o) {
-			
-			return Integer.compare(this.getCalificacion(), o.getCalificacion());
-		}
+		
 		
 
 

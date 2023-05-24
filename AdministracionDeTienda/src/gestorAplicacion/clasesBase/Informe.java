@@ -66,15 +66,15 @@ public class Informe implements Comparable<Informe>{
 		}
 
 		public Informe(TipoInforme tipoInforme, ControlCalidad controlCalidad) {
-			
+
 			this.tipoInforme=tipoInforme;
 			this.controlC=controlCalidad;
-			
+
 			String timestamp = ZonedDateTime.now(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ofPattern("MMddyyyhhmmss"));
-			
+
 			codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes);
-			
-				
+
+
 		}
 
 
@@ -226,6 +226,29 @@ public class Informe implements Comparable<Informe>{
 		}
 
 		return null;//Por si es necesario añadir otro tipo de informes
+	}
+
+	public void setPuntajeCrediticioActual(PuntajeCredito puntajeCrediticioActual) {
+		this.puntajeCrediticioActual = puntajeCrediticioActual;
+	}
+
+	public double getCantidadActualDeuda() {
+		return cantidadActualDeuda;
+	}
+
+	public void setCantidadActualDeuda(double cantidadActualDeuda) {
+		this.cantidadActualDeuda = cantidadActualDeuda;
+	}
+	public ArrayList<SolucionesProblemaFinanciero> getSoluciones() {
+		return soluciones;
+	}
+
+	public void setSoluciones(ArrayList<SolucionesProblemaFinanciero> soluciones) {
+		this.soluciones = soluciones;
+	}
+
+	public PuntajeCredito getPuntajeCrediticioActual() {
+		return puntajeCrediticioActual;
 	}
 
 }
