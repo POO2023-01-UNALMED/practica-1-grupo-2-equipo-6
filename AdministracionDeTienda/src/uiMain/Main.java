@@ -3,9 +3,9 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Cliente;
-import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
-import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Intervenido;
+import gestorAplicacion.clasesHerencia.Cliente;
+import gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
+import gestorAplicacion.clasesHerencia.Intervenido;
 import baseDatos.Deserializador;
 import baseDatos.Serializador;
 import gestorAplicacion.clasesBase.Bodega;

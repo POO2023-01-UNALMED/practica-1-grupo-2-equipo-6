@@ -1,4 +1,4 @@
-package AdministracionDeTienda.src.gestorAplicacion.clasesHerencia;
+package gestorAplicacion.clasesHerencia;
 
 import java.util.ArrayList;
 import java.util.Arrays;
