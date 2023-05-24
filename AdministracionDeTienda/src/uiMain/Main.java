@@ -29,9 +29,8 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		valoresIniciales();
-		Producto p=new Producto(Tipo.ABRIGO);
-		Serializador p1=new Serializador(p,"producto");
+		//valoresIniciales();
+		
 		int opcion = -1;
 
 		do {
