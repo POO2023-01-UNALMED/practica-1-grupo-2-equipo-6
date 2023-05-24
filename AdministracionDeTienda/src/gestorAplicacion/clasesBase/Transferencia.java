@@ -2,8 +2,11 @@ package gestorAplicacion.clasesBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
 import gestorAplicacion.clasesBase.CuentaBancaria;
 import gestorAplicacion.clasesHerencia.Cliente;
+import gestorAplicacion.clasesBase.Credito.Estado;
 
 
 
