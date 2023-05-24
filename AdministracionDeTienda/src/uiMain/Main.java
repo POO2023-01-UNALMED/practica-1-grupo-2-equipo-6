@@ -1056,18 +1056,18 @@ public class Main {
 		for(int i=0;i<listaClientes.size();i++) {
 			Serializador cliente=new Serializador(listaClientes.get(i),"cliente"+i);
 		}
-		//Empleado operario1 = new Empleado("Nombre completo", 1, 234, 0, Cargo.OPERARIO, 1200000);
-		//Empleado operario2 = new Empleado("Nombre completo", 3, 189, 0, Cargo.OPERARIO, 1200000);
-	    //Empleado operario3 = new Empleado("Nombre completo", 5, 276, 0, Cargo.OPERARIO, 1200000);
+		Empleado operario1 = new Empleado("Nombre completo", 1, 234, 0, Cargo.OPERARIO, 1200000);
+		Empleado operario2 = new Empleado("Nombre completo", 3, 189, 0, Cargo.OPERARIO, 1200000);
+	    Empleado operario3 = new Empleado("Nombre completo", 5, 276, 0, Cargo.OPERARIO, 1200000);
 
 
 		ArrayList<Empleado> listaEmpleados=new ArrayList<Empleado>();
-		//listaEmpleados.add(operario1);
-        //listaEmpleados.add(operario2);
-        //listaEmpleados.add(operario3);
+		listaEmpleados.add(operario1);
+        listaEmpleados.add(operario2);
+        listaEmpleados.add(operario3);
 
         for(int i=0;i<listaEmpleados.size();i++) {
-        	//Serializador empleado=new Serializador(listaEmpleados.get(i),"operario"+i);
+        	Serializador empleado=new Serializador(listaEmpleados.get(i),"operario"+i);
         }
 
 		Transportista transportista=new Transportista("Jimena Salgado",3);
