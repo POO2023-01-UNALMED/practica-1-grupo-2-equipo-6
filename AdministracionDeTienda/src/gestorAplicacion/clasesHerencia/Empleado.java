@@ -21,13 +21,6 @@ public class Empleado extends Persona implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Cargo cargo;
-	public Cargo getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
 
 	private double sueldo;
 
@@ -45,6 +38,13 @@ public class Empleado extends Persona implements Serializable{
 		this.sueldo = sueldo;
 	}
 
+  public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
 
 	public Transferencia pagarContratistasPorVenta(Venta v) {
 
