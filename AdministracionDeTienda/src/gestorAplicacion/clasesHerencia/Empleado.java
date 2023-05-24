@@ -12,6 +12,7 @@ import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Informe;
 import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Banco.SolucionesProblemaFinanciero;
 import baseDatos.Deserializador;
 import gestorAplicacion.clasesBase.Producto;
+import gestorAplicacion.clasesBase.Producto.Tipo;
 import gestorAplicacion.clasesBase.Persona;
 import baseDatos.Serializador;
 
@@ -175,7 +176,10 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 			}return getCalificacion();
 		}
 		//Metodo llamado desde la segunda interaccion
-		public static ArrayList<Empleado> seleccionarEmpleados(Cargo cargo,ArrayList<Producto> camisas,ArrayList<Producto> pantalones,ArrayList<Producto> abrigos){
+		public static ArrayList<Empleado> seleccionarEmpleados(Cargo cargo,ArrayList<Producto> productos){
+			ArrayList<Producto> camisas=Producto.clasificar(productos,Tipo.CAMISA);
+			ArrayList<Producto> pantalones=Producto.clasificar(productos,Tipo.PANTALON);
+			ArrayList<Producto> abrigos=Producto.clasificar(productos, Tipo.ABRIGO);
 			ArrayList<Empleado> Disponibles=new ArrayList<Empleado>();
 			for(int i=0;i<3;i++) {
 				Empleado operario=(Empleado)new Deserializador("operario"+i).getObj();
