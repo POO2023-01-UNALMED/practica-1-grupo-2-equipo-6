@@ -23,7 +23,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		//valoresIniciales();
+		valoresIniciales();
 		int opcion = -1;
 		
 		do {
@@ -788,25 +788,25 @@ public class Main {
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
 		
-		Transportista transportista1 = new Transportista("Maria", 1034556723, 2, 0.3f, 0.2f);
-		Transportista transportista2 = new Transportista("Carlos", 1244432214, 3, 0.2f, 0.1f);
-		Transportista transportista3 = new Transportista("Rosa", 1044458922, 4, 0.1f, 0.2f);
+		//Transportista transportista1 = new Transportista("Maria", 1034556723, 2, 0.3f, 0.2f);
+		//Transportista transportista2 = new Transportista("Carlos", 1244432214, 3, 0.2f, 0.1f);
+		//Transportista transportista3 = new Transportista("Rosa", 1044458922, 4, 0.1f, 0.2f);
 		
-		Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
-		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
-		Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
+		//Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
+		//Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
+		//Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
 		
 		Bodega bodegaP1 = new Bodega(100);
 		Bodega bodegaP2 = new Bodega(100);
 		Bodega bodegaP3 = new Bodega(100);
 		
-		Proveedor proveedor1 = new Proveedor("Gabriel", 30988333, bodegaP1,1,2,3);
-		Proveedor proveedor2 = new Proveedor("Aleja", 30988333, bodegaP2,3,2,1);
-		Proveedor proveedor3 = new Proveedor("Juan", 30988333, bodegaP3,1,1,1);
+		//Proveedor proveedor1 = new Proveedor("Gabriel", 30988333, bodegaP1,1,2,3);
+		//Proveedor proveedor2 = new Proveedor("Aleja", 30988333, bodegaP2,3,2,1);
+		//Proveedor proveedor3 = new Proveedor("Juan", 30988333, bodegaP3,1,1,1);
 		
-		Serializador proveedor1Serializado = new Serializador(proveedor1, "proveedor1");
-		Serializador proveedor2Serializado = new Serializador(proveedor2, "proveedor2");
-		Serializador proveedor3Serializado = new Serializador(proveedor3, "proveedor3");
+		//Serializador proveedor1Serializado = new Serializador(proveedor1, "proveedor1");
+		//Serializador proveedor2Serializado = new Serializador(proveedor2, "proveedor2");
+		//Serializador proveedor3Serializado = new Serializador(proveedor3, "proveedor3");
 		
 		int contadorCompra = 0;
 		
