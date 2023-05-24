@@ -548,7 +548,280 @@ public class Main {
 			return o;
 		}
 
-
+		static void gestionFinanciera() {
+		
+		
+			CuentaBancaria fondoDeEmpleados = null;
+			
+			Empleado contadorSeleccionado = null;
+			
+			
+			int opcion=0;
+			Tienda tienda1 =(Tienda) new Deserializador("tiendaPoblado").getObj();
+			Tienda tienda2=(Tienda) new Deserializador("tiendaLaureles").getObj();
+			Tienda tienda3=(Tienda) new Deserializador("tiendaEnvigado").getObj();
+			ArrayList<Empleado> empleados=new ArrayList<Empleado>();
+			
+			empleados.addAll(tienda1.getEmpleados());
+			empleados.addAll(tienda2.getEmpleados());
+			empleados.addAll(tienda3.getEmpleados());
+			
+			double cantidadSueldos=0.0;
+			for(Empleado e: empleados) {
+				cantidadSueldos+=e.getSueldo();
+			}
+			
+			do {
+				
+				
+				System.out.println("-------------------------------------------");
+				System.out.println("           Seleccione un contador          ");
+				System.out.println("-------------------------------------------");
+				System.out.println("1) "+tienda1.gestionarPago().mostrarInformacion());
+				System.out.println("2) "+tienda2.gestionarPago().mostrarInformacion());
+				System.out.println("3) "+tienda3.gestionarPago().mostrarInformacion());
+				Scanner stdIn = new Scanner(System.in);
+				opcion = stdIn.nextInt();
+				
+		}while(opcion<=0 || opcion>3);	
+			
+			switch(opcion) {
+				case 1:
+					contadorSeleccionado=tienda1.gestionarPago();
+					break;
+				case 2:
+					contadorSeleccionado=tienda2.gestionarPago();
+					break;
+				case 3:
+					contadorSeleccionado=tienda3.gestionarPago();
+					break;
+					
+			}
+			
+				Informe reporteFinanciero=contadorSeleccionado.reportarSituacion(Tienda.getCuentaTienda().getEntidad(),Tienda.getCuentaTienda());
+				System.out.println(reporteFinanciero+"\n\n***El siguiente valor no ha sido descontado\ndel presupuesto total de la tienda:\n\n-Cantidad a pagar a los empleados:\n\n$"+cantidadSueldos);
+				System.out.println("-------------------------------------------");
+				System.out.println("   Soluciones sugeridas por la entidad     ");
+				System.out.println("                  bancaria                 ");
+				System.out.println("-------------------------------------------");
+				System.out.println("\nEn base a la situacion financiera actual ");
+				System.out.println("       la/s soluciones sugeridas son:    \n");
+				
+				int i=1;
+				
+				if(reporteFinanciero.getSoluciones().contains(SolucionesProblemaFinanciero.PAGAR_DEUDAS) && reporteFinanciero.getCantidadActualDeuda()>=Tienda.getCuentaTienda().getDinero()) {
+					reporteFinanciero.getSoluciones().remove(SolucionesProblemaFinanciero.PAGAR_DEUDAS);
+				}
+				
+				for(SolucionesProblemaFinanciero s: reporteFinanciero.getSoluciones()) {
+					
+					System.out.println((i++)+s.getDescripcion());
+					
+				}
+	
+			
+			int opcionSolucion=0;
+			do {
+	
+				System.out.print("Seleccione una solucion: ");
+				
+				Scanner stdIn = new Scanner(System.in);
+				opcionSolucion = stdIn.nextInt();
+				
+			}while(opcionSolucion<=0 || opcionSolucion>reporteFinanciero.getSoluciones().size());
+			
+			Banco banco=Tienda.getCuentaTienda().getEntidad();
+			
+			if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.PAGAR_DEUDAS)) {
+				
+				ArrayList<Credito>deudas=new ArrayList<Credito>();
+				
+				for(Credito c:Tienda.getCuentaTienda().getEntidad().getHistorialesCrediticios().get(Tienda.getCuentaTienda())) {
+					if(c.getEstadoCredito()==Estado.PENDIENTE)
+					{
+						deudas.add(c);
+					}	
+				}
+				
+				ArrayList<Transferencia>confirmacionesPagos=banco.solucionarProblema(deudas,reporteFinanciero.getPuntajeCrediticioActual());
+				double cantidadPagada=0.0;
+				
+				for(Transferencia t: confirmacionesPagos) {
+					cantidadPagada+=t.getCantidad();
+					
+				}
+				System.out.println("\nSe ha hecho una transferencia por un va-\nlor de: $"+cantidadPagada+"\n\n");
+				System.out.println(String.format("Presupuesto actual de la tienda:\n$ %f\n\n",Tienda.getCuentaTienda().getDinero()));
+			}
+			
+			else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.NONE)) {
+				
+				boolean crearFondo=true;
+				try {
+				for(CuentaBancaria c: Tienda.getCuentaTienda().getFondosLigados()){
+					if(c.getPropietario().equals(Tienda.getCuentaTienda())) {
+						crearFondo=false;
+						fondoDeEmpleados=c;
+						break;
+					}
+				}
+				if(crearFondo) {
+					fondoDeEmpleados=banco.solucionarProblema();
+					System.out.println("Se ha creado un fondo de empleados con\nla siguiente informacion: "+fondoDeEmpleados+"\n\nRecuerde que el 10% del salario de\ncada empleado sera destinado a di-\ncho fondo.\n");
+				}
+				else {
+					System.out.println("\nSe ha destinado un 5% del presupuesto\nactual para el fondo de empleados");
+					System.out.println(banco.solucionarProblema(fondoDeEmpleados)); 
+				}
+				
+				
+			}catch(NullPointerException e){
+				fondoDeEmpleados=banco.solucionarProblema();
+				System.out.println("Se ha creado un fondo de empleados con\nla siguiente informacion: "+fondoDeEmpleados+"\n\nRecuerde que el 10% del salario de\ncada empleado sera destinado a di-\ncho fondo.\n");
+			}
+				
+			}
+			else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.PORCENTAJE_VENTAS)) {
+				
+				
+				CuentaBancaria fondoAuxiliar=null;
+				
+				boolean crearFondo=true;
+				//try {
+				for(CuentaBancaria c: Tienda.getCuentaTienda().getFondosLigados()){
+					if(c.getPropietario().equals(banco)) {
+						crearFondo=false;
+						fondoAuxiliar=c;
+						break;
+					}
+				}
+				if(crearFondo) {
+					fondoAuxiliar=banco.solucionarProblema(reporteFinanciero.getCantidadActualDeuda());
+					System.out.println("\n\nSe ha creado un fondo auxiliar al\ncual estaran destinadas las ganan-\ncias acordadas con el banco.\n\nInformacion del fondo: "+fondoAuxiliar+"\nSegun las directrices del banco,\nsu deuda se saldara una vez que\nla cantidad de dinero almacenada\nen dicho fondo supere o iguale\nla deuda actual.\n");
+				}
+				else {
+					double abonoCuentaAuxiliar;
+					do {
+					System.out.println(String.format("\nUsted ya tiene un fondo auxiliar. Des-\ntine una cantidad inferior a $ %f",Math.min(fondoAuxiliar.getCantidadLimite()-fondoAuxiliar.getDinero(), Tienda.getCuentaTienda().getDinero())));
+	
+					Scanner stdIn = new Scanner(System.in);
+					abonoCuentaAuxiliar= stdIn.nextDouble();
+					}while(abonoCuentaAuxiliar<=0 || abonoCuentaAuxiliar>Math.min(fondoAuxiliar.getCantidadLimite()-fondoAuxiliar.getDinero(), Tienda.getCuentaTienda().getDinero()));
+					System.out.println(banco.abonarCuentaAuxiliar(abonoCuentaAuxiliar)); 
+				}
+					
+			/*	
+			}catch(NullPointerException e){
+				fondoAuxiliar=banco.solucionarProblema(reporteFinanciero.getCantidadActualDeuda());
+				System.out.println("\n\nSe ha creado un fondo auxiliar al\ncual estaran destinadas las ganan-\ncias acordadas con el banco.\n\nInformacion del fondo: "+fondoAuxiliar+"\nSegun las directrices del banco,\nsu deuda se saldara una vez que\nla cantidad de dinero almacenada\nen dicho fondo supere o iguale\nla deuda actual.\n");
+			}
+				*/
+				
+				
+			}
+			else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.SOLICITAR_CREDITO)){
+				
+				double opcion1;
+				int opcion2;
+				Cuota cuotaSeleccionada=null;
+				do {
+					
+					
+					
+					System.out.println("Cantidad a solicitar(menor a 50000): ");
+					Scanner stdIn = new Scanner(System.in);
+					opcion1 = stdIn.nextDouble();
+					System.out.println("Ingrese el numero de cuotas: \n");
+					System.out.println("1) Tres\n2)Cinco\n3)Doce\n4)Dieciocho");
+					opcion2=stdIn.nextInt();
+				}
+				while(opcion2<0 || opcion2>4 || opcion1<0 || opcion>50000);
+				
+				switch(opcion2) {
+				
+					case 1:
+						cuotaSeleccionada=Cuota.TRES;
+						break;
+					case 2:
+						cuotaSeleccionada=Cuota.CINCO;
+						break;
+					case 3:
+						cuotaSeleccionada=Cuota.DOCE;
+						break;
+					case 4:
+						cuotaSeleccionada=Cuota.DIECIOCHO;
+						break;
+				}
+				banco.generarCredito(new Credito(Tienda.getCuentaTienda(),opcion1,cuotaSeleccionada));
+				
+			}
+	
+			
+			System.out.println("-------------------------------------------");
+			System.out.println("     MODULO DE PAGO A LOS EMPLEADOS        ");
+			System.out.println("-------------------------------------------");
+			System.out.println("\n                                         ");
+	
+			
+			ArrayList<Persona> despedidos=new ArrayList<Persona>();
+			
+			while(cantidadSueldos>=Tienda.getCuentaTienda().getDinero()) {
+				System.out.println("\nEs necesario despedir a algunos empleados.   ");
+				System.out.println("\n\nSeleccione a aquellos que desea despedir:");
+				Persona p;
+				
+			for(Empleado emp: empleados){
+				int despido=0;
+				Scanner stdIn = new Scanner(System.in);
+				do {
+					System.out.println("\n\n"+emp.mostrarInformacion()+"\n\n");
+					System.out.println("1. Despedir\n2. No despedir");
+					despido = stdIn.nextInt();
+				}while(despido<=0 || despido>2);
+				
+				if(despido==1) {
+					p=emp;
+					despedidos.add(p);
+					if(Tienda.despedir(emp, fondoDeEmpleados)==null) {
+						System.out.println(p.demandar());
+					}
+					else {
+						System.out.println(((Empleado)p).demandar(Tienda.despedir(emp, fondoDeEmpleados)));
+					}
+					
+					
+				}
+				
+			}
+			empleados.removeAll(despedidos);
+			cantidadSueldos=0;
+			for(Empleado empleado: empleados) {
+				cantidadSueldos+=empleado.getSueldo();
+			}
+			
+			//System.out.println("Dinero de la Tienda: "+ Tienda.getCuentaTienda().getDinero());
+			//System.out.println("PAGO: "+cantidadSueldos);
+			
+			
+			}	
+			
+			if(empleados.size()!=0) {
+				ArrayList<Transferencia>pagosEmpleados=new ArrayList<Transferencia>();
+					System.out.println("\nAhora es posible pagar los sueldos correspon-\ndientes.");
+					pagosEmpleados=Tienda.pagarSueldo(empleados,fondoDeEmpleados);
+	
+				for(Transferencia t:pagosEmpleados) {
+					System.out.println("\n"+t+"\n");
+				}
+			}
+			else {
+				System.out.println("\n\nUSTED HA QUEBRADO!");
+				tienda1.finalize();
+				tienda2.finalize();
+				tienda3.finalize();
+			}
+			
+		}
 
 	static void gestionAlianzasEstrategicas() {
 
@@ -825,6 +1098,432 @@ public class Main {
 
 
 		}
+
+		static void menuControlCalidad() {
+		
+			int opcionMenuCompra = 0;
+			
+			do {
+			
+				System.out.println("----------------------------------------");
+				System.out.println("      Modulo de Control de Calidad      ");
+				System.out.println("----------------------------------------");
+				System.out.println("1) Realizar una revision");
+				System.out.println("2) Contactar al proveedor/transportista");
+				System.out.println("3) Consultar bodega");
+				System.out.println("4) Informe de calidad");
+				System.out.println("0) Regresar");
+				System.out.println("----------------------------------------");
+				System.out.print("Seleccione una opcion: ");
+				
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuCompra = stdIn.nextInt();
+				
+				switch (opcionMenuCompra) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					}
+					case 1: {
+						   ArrayList<Compra> productos = new ArrayList<Compra>();  
+						Compra compra1 = (Compra) new Deserializador("compra1").getObj();
+						 Compra compra2 = (Compra) new Deserializador("compra2").getObj();
+						Compra compra3 = (Compra) new Deserializador("compra3").getObj();
+						productos.add(compra1); 
+						 productos.add(compra2);
+						productos.add(compra3); 
+			
+						 int cont = 1;
+						for (Compra compra : productos) {
+							System.out.println("---------------------------------");
+							System.out.println("compra " + cont);
+							System.out.println("---------------------------------");
+							cont++;
+							for (int i=0; i<compra.getProveedorSeleccionado().getBodega().getProductosEnBodega().size(); i++) {
+								System.out.println(compra.getProveedorSeleccionado().getBodega().getProductosEnBodega().get(i));
+							}
+							System.out.println();
+						}
+						menuRevision();  
+	
+	
+						break;
+					}
+					case 2: {
+						
+						menuContactar();
+						break;
+					}
+					case 3: {
+						menuConsultarBodegaC();
+						break;
+					}
+					case 4: {
+						menuInforme();
+						break;
+					}
+					default:
+						System.out.println("Opcion fuera de rango");
+				}
+				
+			}while(opcionMenuCompra!=0);	
+			
+	
+		}
+		static void menuRevision() {
+			
+			int opcionMenuCompra = 0;
+			
+			do {
+				ControlCalidad control1 = (ControlCalidad) new Deserializador("control1").getObj();
+				ControlCalidad control2 = (ControlCalidad) new Deserializador("control2").getObj();
+				ControlCalidad control3 = (ControlCalidad) new Deserializador("control3").getObj();
+			
+				System.out.println("---------------------------------");
+				System.out.println("   Cuál compra desea revisar?    ");
+				System.out.println("---------------------------------");
+				System.out.println("1) Compra 1");
+				System.out.println("2) Compra 2");
+				System.out.println("3) Compra 3");
+				System.out.println("0) Regresar");
+				System.out.println("---------------------------------");
+				System.out.println("Seleccione una opcion: ");
+				System.out.println("---------------------------------\n");
+				
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuCompra = stdIn.nextInt();
+				
+				switch (opcionMenuCompra) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					}
+					case 1: {
+						System.out.println("---------------------------------");
+						ArrayList<Producto> revision = control1.getRevision();
+						if (revision == null && (control1.getProductosDefectuosos() != null || control1.getProductosExtraviados() != null)) {
+							System.out.println("Esta revision no es la asociada a la compra original");
+							System.out.println("---------------------------------");
+							break;
+						} else {
+							System.out.println("---------------------------------");
+							System.out.println("Revisión: ");
+							System.out.println("---------------------------------");
+							System.out.println("Productos defectuosos y extraviados:");
+							if (control1.getProductosDefectuosos().isEmpty() || control1.getProductosDefectuosos() == null) {
+								System.out.println("\nNo hay productos defectuosos");
+							} 
+							if (control1.getCompra().getProductosExtraviados().isEmpty() || control1.getCompra().getProductosExtraviados() == null) {
+								System.out.println("\nNo hay productos extraviados\n");
+							}
+							for (Producto p : revision) {
+								
+								System.out.println(p);
+							}
+							System.out.println("---------------------------------");
+						}
+						break;
+					}
+					case 2: {
+						System.out.println("---------------------------------");
+						ArrayList<Producto> revision2 = control2.getRevision();
+						if (revision2 == null) {
+							System.out.println("Esta revision no es la asociada a la compra original");
+						System.out.println("---------------------------------");
+							break;
+						} else {
+							System.out.println("---------------------------------");
+							System.out.println("Revisión: ");
+							System.out.println("---------------------------------");
+							System.out.println("Productos defectuosos y extraviados:");
+							if (control2.getProductosDefectuosos().isEmpty() || control2.getProductosDefectuosos() == null) {
+								System.out.println("\nNo hay productos defectuosos");
+							} 
+							if (control2.getCompra().getProductosExtraviados().isEmpty() || control2.getCompra().getProductosExtraviados() == null) {
+								System.out.println("\nNo hay productos extraviados\n");
+							}
+							for (Producto p : revision2) {
+								
+								System.out.println(p);
+							}
+							System.out.println("---------------------------------");
+						}
+						break;
+					}
+					case 3: {
+						System.out.println("---------------------------------");
+						ArrayList<Producto> revision3 = control3.getRevision();
+						if (revision3 == null) {
+							System.out.println("Esta revision no es la asociada a la compra original");
+						System.out.println("---------------------------------");
+							break;
+						} else {
+							System.out.println("---------------------------------");
+							System.out.println("Revisión: ");
+							System.out.println("---------------------------------");
+							System.out.println("Productos defectuosos y extraviados:");
+							if (control3.getProductosDefectuosos().isEmpty() || control3.getProductosDefectuosos() == null) {
+								System.out.println("\nNo hay productos defectuosos");
+							}
+							if (control3.getCompra().getProductosExtraviados().isEmpty() || control3.getCompra().getProductosExtraviados() == null) {
+								System.out.println("\nNo hay productos extraviados\n");
+							}
+							for (Producto p : revision3) {
+								
+								System.out.println(p);
+							}
+							System.out.println("---------------------------------");
+						}
+						break;
+					}
+					default:
+						System.out.println("Opcion fuera de rango");
+				}
+				
+			}while(opcionMenuCompra!=0);	
+			
+		}
+	
+		static void menuContactar() {
+			int opcionMenuContactar = 0;
+		
+			do {
+				ArrayList<ControlCalidad> controles = new ArrayList<ControlCalidad>();
+				controles.add((ControlCalidad) new Deserializador("control1").getObj());
+				controles.add((ControlCalidad) new Deserializador("control2").getObj());
+				controles.add((ControlCalidad) new Deserializador("control3").getObj());
+	
+				int cont = 1;
+				for (ControlCalidad control : controles) {
+					System.out.println("---------------------------------");
+					System.out.println("Revisión " + cont);
+					System.out.println("---------------------------------");
+		
+					if ((control.getRevision() == null || control.getRevision().isEmpty()) && (control.getProductosDefectuosos() == null || control.getProductosDefectuosos().isEmpty()) && (control.getProductosExtraviados() == null || control.getProductosExtraviados().isEmpty())) {
+						System.out.println("No hay productos en esta revisión");
+					} else {
+						for (Producto p : control.getRevision()) {
+							System.out.println(p);
+						}
+					}
+		
+					cont++;
+					System.out.println();
+				}
+		
+				System.out.println("-------------------------------------");
+				System.out.println("¿Sobre cuál revisión desea contactar?");
+				System.out.println("-------------------------------------");
+				System.out.println("1) Revisión 1");
+				System.out.println("2) Revisión 2");
+				System.out.println("3) Revisión 3");
+				System.out.println("0) Regresar");
+				System.out.println("---------------------------------");
+				System.out.println("Seleccione una opción: ");
+		
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuContactar = stdIn.nextInt();
+		
+				switch (opcionMenuContactar) {
+					case 0:
+						System.out.println("Regresando...");
+						break;
+					case 1:
+					case 2:
+					case 3:
+						int opcionProveedorTransportista;
+		
+						do {
+							System.out.println("---------------------------------");
+							System.out.println("   ¿A quién desea contactar?     ");
+							System.out.println("---------------------------------");
+							System.out.println("1) Proveedor ");
+							System.out.println("2) Transportista");
+							System.out.println("0) Regresar");
+							System.out.println("---------------------------------");
+							System.out.println("Seleccione una opción: ");
+		
+							Scanner stdIn2 = new Scanner(System.in);
+							opcionProveedorTransportista = stdIn2.nextInt();
+		
+							if (opcionProveedorTransportista == 0) {
+								System.out.println("Regresando...");
+								break;
+							}
+		
+							int revisionIndex = opcionMenuContactar - 1;
+							ControlCalidad control = controles.get(revisionIndex);
+		
+							switch (opcionProveedorTransportista) {
+								case 1:
+									System.out.println("---------------------------------");
+									System.out.println("   Contactando al proveedor      ");
+									System.out.println("---------------------------------");
+		
+									if (control.getProductosAReponerP() == null || control.getProductosAReponerP().isEmpty()) {
+										if (control.getProductosDefectuosos() != null) {
+											System.out.println("\nEl proveedor no repuso ningún producto");
+										} else {
+											System.out.println("\nNo hay productos defectuosos");
+										}
+									} else {
+										System.out.println("\nProductos a reponer: ");
+		
+										for (Producto p : control.getProductosAReponerP()) {
+											System.out.println(p);
+										}
+									}
+		
+									break;
+								case 2:
+									System.out.println("---------------------------------");
+									System.out.println("   Contactando al transportista  ");
+									System.out.println("---------------------------------");
+		
+									if (control.getProductosAReponerT() == null || control.getProductosAReponerT().isEmpty()) {
+										if (control.getProductosExtraviados() != null) {
+											System.out.println("\nEl transportista no repuso ningún producto");
+										} else {
+											System.out.println("\nNo hay productos extraviados");
+										}
+									} else {
+										System.out.println("\nProductos a reponer: ");
+		
+										for (Producto p : control.getProductosAReponerT()) {
+											System.out.println(p);
+										}
+									}
+		
+									System.out.println("---------------------------------");
+									break;
+								default:
+									System.out.println("Opción fuera de rango");
+							}
+						} while (opcionProveedorTransportista != 0);
+						break;
+					default:
+						System.out.println("Opción fuera de rango");
+				}
+			} while (opcionMenuContactar != 0);
+		}
+	
+		static void menuConsultarBodegaC() {
+			int opcionConsultarBodega = 0;
+			do {
+				ControlCalidad control1 = (ControlCalidad) new Deserializador("control1").getObj();
+				ControlCalidad control2 = (ControlCalidad) new Deserializador("control2").getObj();
+				ControlCalidad control3 = (ControlCalidad) new Deserializador("control3").getObj();
+	
+				System.out.println("----------------------------------------");
+				System.out.println("        Consultar bodega de :           ");
+				System.out.println("----------------------------------------");
+				System.out.println("1) Tienda Laureles");
+				System.out.println("2) Tienda 2");
+				System.out.println("3) Tienda 3");
+				System.out.println("0) Regresar");
+				System.out.println("----------------------------------------");
+				System.out.print("Seleccione una opción: ");
+	
+				Scanner stdIn = new Scanner(System.in);
+				opcionConsultarBodega = stdIn.nextInt();
+	
+				switch(opcionConsultarBodega) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					} case 1: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Bodega de la tienda 1           ");
+						System.out.println("----------------------------------------");
+						for (Producto p: control1.getCompra().getTienda().getBodega().getProductosEnBodega()) {
+							System.out.println(p);
+						}
+						System.out.println("----------------------------------------");
+						break;
+					} case 2: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Bodega de la tienda 2           ");
+						System.out.println("----------------------------------------");
+						for (Producto p: control2.getCompra().getTienda().getBodega().getProductosEnBodega()) {
+							System.out.println(p);
+						}
+						System.out.println("----------------------------------------");
+						break;
+					} case 3: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Bodega de la tienda 3           ");
+						System.out.println("----------------------------------------");
+						for (Producto p: control3.getCompra().getTienda().getBodega().getProductosEnBodega()) {
+							System.out.println(p);
+						}
+						System.out.println("----------------------------------------");
+						break;
+					}
+				}
+	
+			} while (opcionConsultarBodega != 0);
+		}
+		
+		static void menuInforme() {
+			
+			int opcionMenuCompra = 0;
+			
+			do {
+			
+				ControlCalidad control1 = (ControlCalidad) new Deserializador("control1").getObj();
+				ControlCalidad control2 = (ControlCalidad) new Deserializador("control2").getObj();
+				ControlCalidad control3 = (ControlCalidad) new Deserializador("control3").getObj();
+				Empleado archivista = (Empleado) new Deserializador("archivista").getObj();
+	
+				System.out.println("----------------------------------------");
+				System.out.println("        Generar informe de :            ");
+				System.out.println("----------------------------------------");
+				System.out.println("1) Compra 1 ");
+				System.out.println("2) Compra 2 ");
+				System.out.println("3) Compra 3 ");
+				System.out.println("0) Regresar");
+				System.out.println("----------------------------------------");
+				System.out.print("Seleccione una opcion: ");
+				
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuCompra = stdIn.nextInt();
+				
+	
+				switch (opcionMenuCompra) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					}
+					case 1: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Informe de la compra 1          ");
+						System.out.println("----------------------------------------");
+						System.out.println(archivista.generarInformeControlCalidad(control1, control1.getProveedor(), control1.getTransportista()));
+	
+						break;
+					}
+					case 2: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Informe de la compra 2         ");
+						System.out.println("----------------------------------------");
+						System.out.println(archivista.generarInformeControlCalidad(control2, control2.getProveedor(), control2.getTransportista()));
+	
+						break;
+					}
+					case 3: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Informe de la compra 3          ");
+						System.out.println("----------------------------------------");
+						System.out.println(archivista.generarInformeControlCalidad(control3, control3.getProveedor(), control3.getTransportista()));
+	
+						break;
+					}
+					default:
+						System.out.println("Opcion fuera de rango");
+				}
+				
+			}while(opcionMenuCompra!=0);
+		}	
 
 	static public void valoresIniciales() {
 
