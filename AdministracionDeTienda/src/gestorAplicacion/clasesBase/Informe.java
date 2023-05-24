@@ -25,18 +25,8 @@ public class Informe implements Comparable<Informe>{
 	private PuntajeCredito puntajeCrediticioActual;
 	private ControlCalidad controlC;
 
-
-	public Informe(Empleado contador, ArrayList<SolucionesProblemaFinanciero>soluciones, PuntajeCredito puntajeCredito, double cantidadActualDeuda) {
-		this(TipoInforme.FINANCIERO,contador);
-		this.cantidadActualDeuda=cantidadActualDeuda;
-		this.soluciones=soluciones;
-		puntajeCrediticioActual=puntajeCredito;
-
-
-	}
-
 	public Informe(TipoInforme tipoInforme, ControlCalidad controlCalidad) {
-		;
+
 		this.tipoInforme=tipoInforme;
 		this.controlC=controlCalidad;
 
@@ -51,6 +41,18 @@ public class Informe implements Comparable<Informe>{
 		this(TipoInforme.INFORME_VENTAS,contable,acreditacionesPagos);
 		ventaEfectuada=v;
 	}
+
+	public Informe(Empleado contador, ArrayList<SolucionesProblemaFinanciero>soluciones, PuntajeCredito puntajeCredito, double cantidadActualDeuda) {
+		this(TipoInforme.FINANCIERO,contador);
+		this.cantidadActualDeuda=cantidadActualDeuda;
+		this.soluciones=soluciones;
+		puntajeCrediticioActual=puntajeCredito;
+
+
+	}
+
+
+
 
 	enum TipoInforme {
 		INFORME_VENTAS("IVE"), INFORME_CONTROL_CALIDAD("CAL"), FINANCIERO("FIN");
