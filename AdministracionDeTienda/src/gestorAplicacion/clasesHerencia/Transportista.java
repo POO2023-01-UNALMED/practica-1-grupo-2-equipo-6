@@ -11,8 +11,8 @@ import gestorAplicacion.clasesBase.*;
 public class Transportista extends Persona{
 	private float precioBase, precioDistancia, precioCarga, precioTotal;
 	
-	public Transportista(String nombre, int cedula, float precioB, float precioD, float precioC ) {
-		super(nombre, cedula);
+	public Transportista(String nombre, float precioB, float precioD, float precioC,int calificacion, CuentaBancaria cuenta ) {
+		super(nombre, calificacion,cuenta);
 		precioBase = precioB;
 		precioDistancia = precioD;
 		precioCarga = precioC;
@@ -27,6 +27,9 @@ public class Transportista extends Persona{
 	
 	public float getPrecioTotal() {return precioTotal;}
 	public void setPrecioTotal(float p) {precioTotal = p;}
+	public  int calificar() {
+		return 0;
+	}
 	
 	public String toString() {
 		return " nombre :"+ super.getNombre() + "\nprecio del domicilio : " + precioTotal;

@@ -2,8 +2,7 @@ package gestorAplicacion.clasesHerencia;
 
 import java.util.ArrayList;
 
-import gestorAplicacion.clasesBase.Bodega;
-import gestorAplicacion.clasesBase.Producto;
+import gestorAplicacion.clasesBase.*;
 
 public class Proveedor extends Persona{
 	
@@ -13,8 +12,8 @@ public class Proveedor extends Persona{
 	private float costoCamiseta, costoPantalon, costoAbrigo;
 	private float calificacion;
 	
-	public Proveedor(String nombre, int cedula, Bodega bodega, float camiseta, float pantalon, float abrigo) {
-		super(nombre,cedula);
+	public Proveedor(String nombre, int calificar, CuentaBancaria cuenta, Bodega bodega, float camiseta, float pantalon, float abrigo) {
+		super(nombre,calificar,cuenta);
 		this.bodega = bodega;
 		costoCamiseta = camiseta;
 		costoPantalon = pantalon;
@@ -73,6 +72,10 @@ public class Proveedor extends Persona{
 		}
 		
 		bodega.setProductosEnBodega(productosDisponibles);
+	}
+	
+	public  int calificar() {
+		return 0;
 	}
 	
 	public void setCostoCamiseta(float costo) { costoCamiseta = costo;}
