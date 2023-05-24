@@ -824,6 +824,432 @@ public class Main {
 
 		}
 
+		static void menuControlCalidad() {
+		
+			int opcionMenuCompra = 0;
+			
+			do {
+			
+				System.out.println("----------------------------------------");
+				System.out.println("      Modulo de Control de Calidad      ");
+				System.out.println("----------------------------------------");
+				System.out.println("1) Realizar una revision");
+				System.out.println("2) Contactar al proveedor/transportista");
+				System.out.println("3) Consultar bodega");
+				System.out.println("4) Informe de calidad");
+				System.out.println("0) Regresar");
+				System.out.println("----------------------------------------");
+				System.out.print("Seleccione una opcion: ");
+				
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuCompra = stdIn.nextInt();
+				
+				switch (opcionMenuCompra) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					}
+					case 1: {
+						   ArrayList<Compra> productos = new ArrayList<Compra>();  
+						Compra compra1 = (Compra) new Deserializador("compra1").getObj();
+						 Compra compra2 = (Compra) new Deserializador("compra2").getObj();
+						Compra compra3 = (Compra) new Deserializador("compra3").getObj();
+						productos.add(compra1); 
+						 productos.add(compra2);
+						productos.add(compra3); 
+			
+						 int cont = 1;
+						for (Compra compra : productos) {
+							System.out.println("---------------------------------");
+							System.out.println("compra " + cont);
+							System.out.println("---------------------------------");
+							cont++;
+							for (int i=0; i<compra.getProveedorSeleccionado().getBodega().getProductosEnBodega().size(); i++) {
+								System.out.println(compra.getProveedorSeleccionado().getBodega().getProductosEnBodega().get(i));
+							}
+							System.out.println();
+						}
+						menuRevision();  
+	
+	
+						break;
+					}
+					case 2: {
+						
+						menuContactar();
+						break;
+					}
+					case 3: {
+						menuConsultarBodegaC();
+						break;
+					}
+					case 4: {
+						menuInforme();
+						break;
+					}
+					default:
+						System.out.println("Opcion fuera de rango");
+				}
+				
+			}while(opcionMenuCompra!=0);	
+			
+	
+		}
+		static void menuRevision() {
+			
+			int opcionMenuCompra = 0;
+			
+			do {
+				ControlCalidad control1 = (ControlCalidad) new Deserializador("control1").getObj();
+				ControlCalidad control2 = (ControlCalidad) new Deserializador("control2").getObj();
+				ControlCalidad control3 = (ControlCalidad) new Deserializador("control3").getObj();
+			
+				System.out.println("---------------------------------");
+				System.out.println("   Cuál compra desea revisar?    ");
+				System.out.println("---------------------------------");
+				System.out.println("1) Compra 1");
+				System.out.println("2) Compra 2");
+				System.out.println("3) Compra 3");
+				System.out.println("0) Regresar");
+				System.out.println("---------------------------------");
+				System.out.println("Seleccione una opcion: ");
+				System.out.println("---------------------------------\n");
+				
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuCompra = stdIn.nextInt();
+				
+				switch (opcionMenuCompra) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					}
+					case 1: {
+						System.out.println("---------------------------------");
+						ArrayList<Producto> revision = control1.getRevision();
+						if (revision == null && (control1.getProductosDefectuosos() != null || control1.getProductosExtraviados() != null)) {
+							System.out.println("Esta revision no es la asociada a la compra original");
+							System.out.println("---------------------------------");
+							break;
+						} else {
+							System.out.println("---------------------------------");
+							System.out.println("Revisión: ");
+							System.out.println("---------------------------------");
+							System.out.println("Productos defectuosos y extraviados:");
+							if (control1.getProductosDefectuosos().isEmpty() || control1.getProductosDefectuosos() == null) {
+								System.out.println("\nNo hay productos defectuosos");
+							} 
+							if (control1.getCompra().getProductosExtraviados().isEmpty() || control1.getCompra().getProductosExtraviados() == null) {
+								System.out.println("\nNo hay productos extraviados\n");
+							}
+							for (Producto p : revision) {
+								
+								System.out.println(p);
+							}
+							System.out.println("---------------------------------");
+						}
+						break;
+					}
+					case 2: {
+						System.out.println("---------------------------------");
+						ArrayList<Producto> revision2 = control2.getRevision();
+						if (revision2 == null) {
+							System.out.println("Esta revision no es la asociada a la compra original");
+						System.out.println("---------------------------------");
+							break;
+						} else {
+							System.out.println("---------------------------------");
+							System.out.println("Revisión: ");
+							System.out.println("---------------------------------");
+							System.out.println("Productos defectuosos y extraviados:");
+							if (control2.getProductosDefectuosos().isEmpty() || control2.getProductosDefectuosos() == null) {
+								System.out.println("\nNo hay productos defectuosos");
+							} 
+							if (control2.getCompra().getProductosExtraviados().isEmpty() || control2.getCompra().getProductosExtraviados() == null) {
+								System.out.println("\nNo hay productos extraviados\n");
+							}
+							for (Producto p : revision2) {
+								
+								System.out.println(p);
+							}
+							System.out.println("---------------------------------");
+						}
+						break;
+					}
+					case 3: {
+						System.out.println("---------------------------------");
+						ArrayList<Producto> revision3 = control3.getRevision();
+						if (revision3 == null) {
+							System.out.println("Esta revision no es la asociada a la compra original");
+						System.out.println("---------------------------------");
+							break;
+						} else {
+							System.out.println("---------------------------------");
+							System.out.println("Revisión: ");
+							System.out.println("---------------------------------");
+							System.out.println("Productos defectuosos y extraviados:");
+							if (control3.getProductosDefectuosos().isEmpty() || control3.getProductosDefectuosos() == null) {
+								System.out.println("\nNo hay productos defectuosos");
+							}
+							if (control3.getCompra().getProductosExtraviados().isEmpty() || control3.getCompra().getProductosExtraviados() == null) {
+								System.out.println("\nNo hay productos extraviados\n");
+							}
+							for (Producto p : revision3) {
+								
+								System.out.println(p);
+							}
+							System.out.println("---------------------------------");
+						}
+						break;
+					}
+					default:
+						System.out.println("Opcion fuera de rango");
+				}
+				
+			}while(opcionMenuCompra!=0);	
+			
+		}
+	
+		static void menuContactar() {
+			int opcionMenuContactar = 0;
+		
+			do {
+				ArrayList<ControlCalidad> controles = new ArrayList<ControlCalidad>();
+				controles.add((ControlCalidad) new Deserializador("control1").getObj());
+				controles.add((ControlCalidad) new Deserializador("control2").getObj());
+				controles.add((ControlCalidad) new Deserializador("control3").getObj());
+	
+				int cont = 1;
+				for (ControlCalidad control : controles) {
+					System.out.println("---------------------------------");
+					System.out.println("Revisión " + cont);
+					System.out.println("---------------------------------");
+		
+					if ((control.getRevision() == null || control.getRevision().isEmpty()) && (control.getProductosDefectuosos() == null || control.getProductosDefectuosos().isEmpty()) && (control.getProductosExtraviados() == null || control.getProductosExtraviados().isEmpty())) {
+						System.out.println("No hay productos en esta revisión");
+					} else {
+						for (Producto p : control.getRevision()) {
+							System.out.println(p);
+						}
+					}
+		
+					cont++;
+					System.out.println();
+				}
+		
+				System.out.println("-------------------------------------");
+				System.out.println("¿Sobre cuál revisión desea contactar?");
+				System.out.println("-------------------------------------");
+				System.out.println("1) Revisión 1");
+				System.out.println("2) Revisión 2");
+				System.out.println("3) Revisión 3");
+				System.out.println("0) Regresar");
+				System.out.println("---------------------------------");
+				System.out.println("Seleccione una opción: ");
+		
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuContactar = stdIn.nextInt();
+		
+				switch (opcionMenuContactar) {
+					case 0:
+						System.out.println("Regresando...");
+						break;
+					case 1:
+					case 2:
+					case 3:
+						int opcionProveedorTransportista;
+		
+						do {
+							System.out.println("---------------------------------");
+							System.out.println("   ¿A quién desea contactar?     ");
+							System.out.println("---------------------------------");
+							System.out.println("1) Proveedor ");
+							System.out.println("2) Transportista");
+							System.out.println("0) Regresar");
+							System.out.println("---------------------------------");
+							System.out.println("Seleccione una opción: ");
+		
+							Scanner stdIn2 = new Scanner(System.in);
+							opcionProveedorTransportista = stdIn2.nextInt();
+		
+							if (opcionProveedorTransportista == 0) {
+								System.out.println("Regresando...");
+								break;
+							}
+		
+							int revisionIndex = opcionMenuContactar - 1;
+							ControlCalidad control = controles.get(revisionIndex);
+		
+							switch (opcionProveedorTransportista) {
+								case 1:
+									System.out.println("---------------------------------");
+									System.out.println("   Contactando al proveedor      ");
+									System.out.println("---------------------------------");
+		
+									if (control.getProductosAReponerP() == null || control.getProductosAReponerP().isEmpty()) {
+										if (control.getProductosDefectuosos() != null) {
+											System.out.println("\nEl proveedor no repuso ningún producto");
+										} else {
+											System.out.println("\nNo hay productos defectuosos");
+										}
+									} else {
+										System.out.println("\nProductos a reponer: ");
+		
+										for (Producto p : control.getProductosAReponerP()) {
+											System.out.println(p);
+										}
+									}
+		
+									break;
+								case 2:
+									System.out.println("---------------------------------");
+									System.out.println("   Contactando al transportista  ");
+									System.out.println("---------------------------------");
+		
+									if (control.getProductosAReponerT() == null || control.getProductosAReponerT().isEmpty()) {
+										if (control.getProductosExtraviados() != null) {
+											System.out.println("\nEl transportista no repuso ningún producto");
+										} else {
+											System.out.println("\nNo hay productos extraviados");
+										}
+									} else {
+										System.out.println("\nProductos a reponer: ");
+		
+										for (Producto p : control.getProductosAReponerT()) {
+											System.out.println(p);
+										}
+									}
+		
+									System.out.println("---------------------------------");
+									break;
+								default:
+									System.out.println("Opción fuera de rango");
+							}
+						} while (opcionProveedorTransportista != 0);
+						break;
+					default:
+						System.out.println("Opción fuera de rango");
+				}
+			} while (opcionMenuContactar != 0);
+		}
+	
+		static void menuConsultarBodegaC() {
+			int opcionConsultarBodega = 0;
+			do {
+				ControlCalidad control1 = (ControlCalidad) new Deserializador("control1").getObj();
+				ControlCalidad control2 = (ControlCalidad) new Deserializador("control2").getObj();
+				ControlCalidad control3 = (ControlCalidad) new Deserializador("control3").getObj();
+	
+				System.out.println("----------------------------------------");
+				System.out.println("        Consultar bodega de :           ");
+				System.out.println("----------------------------------------");
+				System.out.println("1) Tienda Laureles");
+				System.out.println("2) Tienda 2");
+				System.out.println("3) Tienda 3");
+				System.out.println("0) Regresar");
+				System.out.println("----------------------------------------");
+				System.out.print("Seleccione una opción: ");
+	
+				Scanner stdIn = new Scanner(System.in);
+				opcionConsultarBodega = stdIn.nextInt();
+	
+				switch(opcionConsultarBodega) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					} case 1: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Bodega de la tienda 1           ");
+						System.out.println("----------------------------------------");
+						for (Producto p: control1.getCompra().getTienda().getBodega().getProductosEnBodega()) {
+							System.out.println(p);
+						}
+						System.out.println("----------------------------------------");
+						break;
+					} case 2: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Bodega de la tienda 2           ");
+						System.out.println("----------------------------------------");
+						for (Producto p: control2.getCompra().getTienda().getBodega().getProductosEnBodega()) {
+							System.out.println(p);
+						}
+						System.out.println("----------------------------------------");
+						break;
+					} case 3: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Bodega de la tienda 3           ");
+						System.out.println("----------------------------------------");
+						for (Producto p: control3.getCompra().getTienda().getBodega().getProductosEnBodega()) {
+							System.out.println(p);
+						}
+						System.out.println("----------------------------------------");
+						break;
+					}
+				}
+	
+			} while (opcionConsultarBodega != 0);
+		}
+		
+		static void menuInforme() {
+			
+			int opcionMenuCompra = 0;
+			
+			do {
+			
+				ControlCalidad control1 = (ControlCalidad) new Deserializador("control1").getObj();
+				ControlCalidad control2 = (ControlCalidad) new Deserializador("control2").getObj();
+				ControlCalidad control3 = (ControlCalidad) new Deserializador("control3").getObj();
+				Empleado archivista = (Empleado) new Deserializador("archivista").getObj();
+	
+				System.out.println("----------------------------------------");
+				System.out.println("        Generar informe de :            ");
+				System.out.println("----------------------------------------");
+				System.out.println("1) Compra 1 ");
+				System.out.println("2) Compra 2 ");
+				System.out.println("3) Compra 3 ");
+				System.out.println("0) Regresar");
+				System.out.println("----------------------------------------");
+				System.out.print("Seleccione una opcion: ");
+				
+				Scanner stdIn = new Scanner(System.in);
+				opcionMenuCompra = stdIn.nextInt();
+				
+	
+				switch (opcionMenuCompra) {
+					case 0: {
+						System.out.println("Regresando...");
+						break;
+					}
+					case 1: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Informe de la compra 1          ");
+						System.out.println("----------------------------------------");
+						System.out.println(archivista.generarInformeControlCalidad(control1, control1.getProveedor(), control1.getTransportista()));
+	
+						break;
+					}
+					case 2: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Informe de la compra 2         ");
+						System.out.println("----------------------------------------");
+						System.out.println(archivista.generarInformeControlCalidad(control2, control2.getProveedor(), control2.getTransportista()));
+	
+						break;
+					}
+					case 3: {
+						System.out.println("----------------------------------------");
+						System.out.println("        Informe de la compra 3          ");
+						System.out.println("----------------------------------------");
+						System.out.println(archivista.generarInformeControlCalidad(control3, control3.getProveedor(), control3.getTransportista()));
+	
+						break;
+					}
+					default:
+						System.out.println("Opcion fuera de rango");
+				}
+				
+			}while(opcionMenuCompra!=0);
+		}	
+
 	static public void valoresIniciales() {
 
 		Banco bbva=new Banco("BBVA");
