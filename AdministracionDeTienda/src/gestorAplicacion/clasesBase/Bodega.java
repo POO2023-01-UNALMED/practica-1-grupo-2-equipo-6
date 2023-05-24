@@ -1,6 +1,7 @@
 package gestorAplicacion.clasesBase;
 
 import java.util.ArrayList;
+import gestorAplicacion.clasesBase.Tienda;
 
 
 public class Bodega implements Inventariar,java.io.Serializable{
@@ -187,7 +188,7 @@ public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
 			cantidad+=productos.get(i).getCosto();
 			
 		}
-		Transferencia pago=new Transferencia(Tienda.getCuentatienda(),cantidad);
+		Transferencia pago=new Transferencia(Tienda.getCuentaTienda(),cantidad);
 		pago.setDetalle("Id Tienda:"+tienda.getId()+" VALOR: $"+cantidad);
 		getPagos().add(pago);
 		

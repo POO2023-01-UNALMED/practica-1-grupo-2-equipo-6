@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class Tienda implements java.io.Serializable {
 	private double presupuestoCompras;
@@ -11,6 +12,15 @@ public class Tienda implements java.io.Serializable {
 	private int calle;
 	private ArrayList<Empleado> empleados = new ArrayList<Empleado>();
 	private static final CuentaBancaria cuentaTienda=new CuentaBancaria(3,Pais.COLOMBIA,new Banco("BANCOLOMBIA"));
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Tienda(double presupuesto, Bodega bodega, Empleado...empleados){
 		this.bodega=bodega;
@@ -166,6 +176,11 @@ public class Tienda implements java.io.Serializable {
 
 
 		}
+		public void generarID() {
+	        Random random = new Random();
+	        int numero = random.nextInt(900) + 100; // Genera un número aleatorio entre 100 y 999
+	        setId(numero);
+	    }
 
 
 }
