@@ -23,7 +23,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		valoresIniciales();
+		//valoresIniciales();
 		int opcion = -1;
 		
 		do {
