@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import
 
 public abstract class Persona implements Comparable<Persona>, Comparable{
     private int calificacion;

@@ -128,7 +128,7 @@ public class Credito implements Serializable{
 
 
 
-	enum Estado{
+	public enum Estado{
 
 		CANCELADO,PENDIENTE;
 
