@@ -11,7 +11,7 @@ public class Deserializador {
 	    
         try
         {  
-            FileInputStream archivo = new FileInputStream("AdministracionDeTienda\\src\\baseDatos\\temp\\"+nombre+".txt");
+            FileInputStream archivo = new FileInputStream("src\\baseDatos\\temp\\"+nombre+".txt");
             ObjectInputStream in = new ObjectInputStream(archivo);
 
             obj = in.readObject();

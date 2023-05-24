@@ -28,6 +28,7 @@ public class Cliente extends Persona implements Serializable {
 	private String confirmacion="El envio no ha sido confirmado.";
 	private String resumenDePago;
 	
+	
 	//constructor principal
 	public Cliente(String nombre, int calificacion, Ciudades ciudad,CuentaBancaria cuenta) {
 		super(nombre, calificacion);

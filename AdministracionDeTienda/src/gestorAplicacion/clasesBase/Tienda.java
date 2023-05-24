@@ -14,7 +14,7 @@ import gestorAplicacion.clasesHerencia.Empleado;
 import gestorAplicacion.clasesHerencia.Empleado.Cargo;
 import gestorAplicacion.clasesHerencia.OfertaPreferencial;
 
-public class Tienda implements java.io.Serializable {
+public class Tienda implements Serializable {
 	private double presupuestoCompras;
 	private Bodega bodega;
 	private int calle;
