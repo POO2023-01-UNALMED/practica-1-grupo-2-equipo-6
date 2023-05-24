@@ -5,6 +5,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import gestorAplicacion.clasesHerencia.Empleado;
+
 public class Informe implements Comparable<Informe>{
 	private Venta ventaEfectuada;
 	private ArrayList<Transferencia> acreditacionesPagos;
@@ -24,6 +26,15 @@ public class Informe implements Comparable<Informe>{
 	private ControlCalidad controlC;
 
 
+	public Informe(Empleado contador, ArrayList<SolucionesProblemaFinanciero>soluciones, PuntajeCredito puntajeCredito, double cantidadActualDeuda) {
+		this(TipoInforme.FINANCIERO,contador);
+		this.cantidadActualDeuda=cantidadActualDeuda;
+		this.soluciones=soluciones;
+		puntajeCrediticioActual=puntajeCredito;
+
+
+	}
+
 	public Informe(TipoInforme tipoInforme, ControlCalidad controlCalidad) {
 		;
 		this.tipoInforme=tipoInforme;
@@ -31,14 +42,18 @@ public class Informe implements Comparable<Informe>{
 
 		String timestamp = ZonedDateTime.now(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ofPattern("MMddyyyhhmmss"));
 
-		codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes.size());
+		codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes);
 
 
 
 	}
+	public Informe(Venta v,Empleado contable, Transferencia...acreditacionesPagos) {
+		this(TipoInforme.INFORME_VENTAS,contable,acreditacionesPagos);
+		ventaEfectuada=v;
+	}
 
 	enum TipoInforme {
-		INFORME_VENTAS("IVE"), INFORME_CONTROL_CALIDAD("CAL");
+		INFORME_VENTAS("IVE"), INFORME_CONTROL_CALIDAD("CAL"), FINANCIERO("FIN");
 
 		private String identificador;
 
@@ -67,13 +82,6 @@ public class Informe implements Comparable<Informe>{
 		this.tipoInforme = tipoInforme;
 	}
 
-	public static ArrayList<Informe> getInformes() {
-		return informes;
-	}
-
-	public static void setInformes(ArrayList<Informe> informes) {
-		Informe.informes = informes;
-	}
 
 	public String getCodigo() {
 		return codigo;

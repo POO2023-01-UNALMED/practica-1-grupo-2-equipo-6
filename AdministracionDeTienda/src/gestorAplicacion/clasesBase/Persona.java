@@ -67,11 +67,11 @@ public abstract class Persona implements Serializable {
             this.calificacion = calificacion;
         }
 
-        public String toString {
+        public String toString (){
           return nombre;
         }
         public String demandar(){
-          return nombre+" ha decidido no demandarlo."
+          return nombre+" ha decidido no demandarlo.";
         }
 
 }
