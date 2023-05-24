@@ -2,13 +2,14 @@ package gestorAplicacion.clasesHerencia;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import gestorAplicacion.clasesHerencia.Cliente.Ciudades;
 import gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
 import gestorAplicacion.clasesBase.*;
 
 
-public class Transportista extends Persona{
+public class Transportista extends Persona {
 	private float precioBase, precioDistancia, precioCarga, precioTotal;
 
 	public Transportista(String nombre, float precioB, float precioD, float precioC,int calificacion, CuentaBancaria cuenta ) {
@@ -16,6 +17,17 @@ public class Transportista extends Persona{
 		precioBase = precioB;
 		precioDistancia = precioD;
 		precioCarga = precioC;
+	}
+
+
+
+
+
+
+
+
+		public Transportista(String string, int i) {
+		super(string,i);
 	}
 
 

@@ -29,9 +29,8 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		valoresIniciales();
-		Producto p=new Producto(Tipo.ABRIGO);
-		Serializador p1=new Serializador(p,"producto");
+		//valoresIniciales();
+		
 		int opcion = -1;
 
 		do {
@@ -932,8 +931,23 @@ public class Main {
 
 
 		Tienda tiendaLaureles = new Tienda(10234,bodegaTienda1, contador1, operario );
-		Tienda tiendaPoblado = new Tienda (14326780,bodegaTienda2, contador2);
+		Tienda tiendaPoblado = new Tienda (146780,bodegaTienda2, contador2);
 		Tienda tiendaEnvigado = new Tienda(47385,bodegaTienda3, contador3);
+
+		Credito credito=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),70, Cuota.DOCE));//Necesarios para gestion financiera 
+		Credito credito1=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),100, Cuota.CINCO));
+
+		Tienda.pagarCuotaMensual(PuntajeCredito.MEDIO,credito1);
+	
+		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO, credito1);
+		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO,credito1);
+		Tienda.pagarCuotaMensual(PuntajeCredito.MEDIO, credito1);
+		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO,credito1);
+		
+		
+		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO, credito1);
+		Tienda.pagarTodo(PuntajeCredito.MEDIO, credito1);
+		Tienda.pagarTodo(PuntajeCredito.ALTO, credito1);
 
 		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
