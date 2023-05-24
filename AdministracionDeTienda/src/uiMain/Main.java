@@ -802,7 +802,7 @@ public class Main {
 		Tienda tiendaPoblado = new Tienda (14326780,bodegaTienda2, contador2);
 		Tienda tiendaEnvigado = new Tienda(47385,bodegaTienda3, contador3);
 
-		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLureles, "tiendaLaureles");
+		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
 
