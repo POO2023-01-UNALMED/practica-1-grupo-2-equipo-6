@@ -98,7 +98,7 @@ public class Cliente extends Persona implements Serializable {
 	}
 	@Override
 	//En base a la calificacion del cliente fijar un descuento para el envio
-	public void calificar() {
+	public int calificar() {
 		
 		if(getCalificacion()==5) {
 			setDescuento(getDescuento() + 0.05);
