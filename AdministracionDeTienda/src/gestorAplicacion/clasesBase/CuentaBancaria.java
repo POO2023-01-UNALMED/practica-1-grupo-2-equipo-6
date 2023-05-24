@@ -164,7 +164,7 @@ public class CuentaBancaria implements Serializable{
 		}
 			}
 		finally {
-			pagoTransportista=pagoExtra+t.getTarifa();
+			pagoTransportista=pagoExtra+t.getPrecioBase();
 		}
 
 		dinero-=pagoTransportista;
