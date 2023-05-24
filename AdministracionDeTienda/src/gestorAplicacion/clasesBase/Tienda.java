@@ -31,6 +31,7 @@ public class Tienda implements Serializable {
 	}
 
 	public Tienda(double presupuesto, Bodega bodega, Empleado...empleados){
+		this.presupuestoCompras = presupuesto;
 		this.bodega=bodega;
 		Tienda.cuentaTienda.setDinero(cuentaTienda.getDinero()+presupuesto);
 		this.empleados.addAll(Arrays.asList(empleados));

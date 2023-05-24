@@ -25,7 +25,7 @@ public class Main {
 		
 		valoresIniciales();
 		Producto p=new Producto(Tipo.ABRIGO);
-		Serializador p1=new Serializador(p,"producto");
+		Serializador p1 = new Serializador(p,"producto");
 		int opcion = -1;
 		
 		do {
@@ -446,8 +446,13 @@ public class Main {
 		System.out.println("Total: "+ total+" pesos");
 		System.out.println("---------------------------------");
 		
+		
+		
 		double presupuesto = tienda.getPresupuestoCompra();
 		tienda.setPresupuestoCompra(presupuesto - total);
+		Tienda.getCuentaTienda().setDinero(Tienda.getCuentaTienda().getDinero() - total);
+		
+		
 		Serializador tiendaSerializada = new Serializador(tienda, "tienda"+nombreTienda);
 		
 		contadorCompras = (int) new Deserializador("contadorCompras").getObj();
