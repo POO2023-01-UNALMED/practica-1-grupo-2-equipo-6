@@ -275,10 +275,21 @@ public class Main {
 			}
 		}
 		
+		Compra compra = new Compra(tienda);
+		ArrayList<Producto> pedido = compra.hacerPedido(tienda);
+		
 		if(comprasPorRevisar.contains(nombreTienda))
 				System.out.println("Tienes una compra por revisar en esta tienda,\nutiliza la funcionalidad de \ncontrol de calidad");
+		
+		else if(pedido==null) {		
+			System.out.println("No tienes espacio en bodega Para realizar un pedido de al menos 6 productos");
+		}
+		else if(pedido.size()<6) {		
+			System.out.println("No tienes suficiente presupuesto para realizar un pedido de al menos 6 productos");
+		}
+		
 		else {
-			Compra compra = new Compra(tienda);
+			
 			
 			System.out.println("---------------------------------");
 			System.out.println("        Pedido Inteligente       ");
@@ -287,7 +298,11 @@ public class Main {
 					+ "en bodega para determinar los\nproductos que mas se necesitan \n"
 					+ "y tomando en cuenta la capaci-\ndad maxima de la bodega y el\n"
 					+ "presupuesto de la tienda se \nha creado un pedido inteligente\n");
-			System.out.println(compra.hacerPedido(tienda));
+			System.out.println("Se necesita:");
+			System.out.println("Camisas: "+compra.getTienda().getBodega().calcularCamisas(pedido));
+			System.out.println("Pantalones: "+compra.getTienda().getBodega().calcularPantalon(pedido));
+			System.out.println("Abrigos: "+compra.getTienda().getBodega().calcularAbrigos(pedido));
+//			System.out.println(compra.hacerPedido(tienda));
 			System.out.println("\nPresione una tecla para continuar");
 			System.out.println("---------------------------------");
 			
@@ -304,7 +319,7 @@ public class Main {
 		int contadorCompras = 0;
 		String comprasPorRevisar = "";
 		
-		String recomendacion = compra.hacerOrdenDeCompra(compra.getPedido());
+		String recomendacion = compra.hacerOrdenDeCompra(compra.getPedido()).getNombre();
 		Tienda tienda =  compra.getTienda();
 		Proveedor proveedor = null;
 		Transportista transportista = null;
@@ -321,9 +336,9 @@ public class Main {
 					+ "mayor descuento por la compra\n"
 					+ "igualmente puede seleccionar al\n"
 					+ "proveedor de su preferencia");
-			System.out.println("\n1) "+compra.getProveedores().get(0).getNombre()+"\nDescuento: "+compra.getProveedores().get(0).getDescuento()+" pesos"+"\nProductos disponibles:"+compra.getProveedores().get(0).getBodega());
-			System.out.println("\n2) "+compra.getProveedores().get(1).getNombre()+"\nDescuento: "+compra.getProveedores().get(1).getDescuento()+" pesos"+"\nProductos disponibles:"+compra.getProveedores().get(1).getBodega());
-			System.out.println("\n3) "+compra.getProveedores().get(2).getNombre()+"\nDescuento: "+compra.getProveedores().get(2).getDescuento()+" pesos"+"\nProductos disponibles:"+compra.getProveedores().get(2).getBodega());
+			System.out.println("\n1) "+compra.getProveedores().get(0).getNombre()+"\nDescuento: "+compra.getProveedores().get(0).getDescuento()+" pesos"+"\nProductos disponibles:\n"+compra.getProveedores().get(0).getBodega());
+			System.out.println("\n2) "+compra.getProveedores().get(1).getNombre()+"\nDescuento: "+compra.getProveedores().get(1).getDescuento()+" pesos"+"\nProductos disponibles:\n"+compra.getProveedores().get(1).getBodega());
+			System.out.println("\n3) "+compra.getProveedores().get(2).getNombre()+"\nDescuento: "+compra.getProveedores().get(2).getDescuento()+" pesos"+"\nProductos disponibles:\n2"+compra.getProveedores().get(2).getBodega());
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
 			
@@ -361,7 +376,7 @@ public class Main {
 		}
 		compra.setProveedorSeleccionado(proveedor);
 			
-		String transportistaR = compra.ordenarEnvio(tienda, proveedor);
+		String transportistaR = compra.ordenarEnvio(tienda, proveedor).getNombre();
 		
 		System.out.println("---------------------------------");
 		System.out.println("      proveedor seleccionado     ");
@@ -425,7 +440,8 @@ public class Main {
 		System.out.println("Productos comprados:");
 		System.out.println(proveedor.toString());
 		System.out.println("Costo del envio: " + transportista.calcularPrecioTotal(proveedor, tienda));
-		System.out.println("Total: "+ total);
+		System.out.println("Ahorraste: "+proveedor.getDescuento()+" pesos");
+		System.out.println("Total: "+ total+" pesos");
 		System.out.println("---------------------------------");
 		
 		double presupuesto = tienda.getPresupuestoCompra();

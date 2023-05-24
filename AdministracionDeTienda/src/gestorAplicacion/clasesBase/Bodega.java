@@ -40,6 +40,38 @@ public class Bodega implements Inventariar,java.io.Serializable{
 		
 	}
 	
+	public int calcularCamisas(ArrayList<Producto> pedido) {
+		int numeroCamisetas = 0;
+		for (int i = 0; i < pedido.size(); i++) {
+			if( pedido.get(i).getNombre().equals("CAMISA")) {
+				numeroCamisetas ++;
+			}
+		}
+		return numeroCamisetas;
+	}
+	
+	
+	public int calcularPantalon(ArrayList<Producto> pedido) {
+		int numeroPantalones = 0;
+		for (int i = 0; i < pedido.size(); i++) {
+			if(pedido.get(i).getNombre().equals("PANTALON")) {
+				numeroPantalones ++;
+			}
+		}
+		return numeroPantalones;
+	}
+	
+	
+	public int calcularAbrigos(ArrayList<Producto> pedido) {
+		int numeroAbrigo = 0;
+		for (int i = 0; i < pedido.size(); i++) {
+			if(pedido.get(i).getNombre().equals("ABRIGO")) {
+				numeroAbrigo ++;
+			}
+		}
+		return numeroAbrigo;
+	}
+	
 	
 	
 	
