@@ -29,7 +29,8 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		valoresIniciales();
+		//valoresIniciales();
+		//serializarEnvio();
 		Producto p=new Producto(Tipo.ABRIGO);
 		Serializador p1=new Serializador(p,"producto");
 		int opcion = -1;
@@ -908,6 +909,8 @@ public class Main {
 		transportista.setCuenta(cuenta);
 		Serializador t= new Serializador(transportista,"TransportistaNacional");
 	}
+	
+
 
 
 
