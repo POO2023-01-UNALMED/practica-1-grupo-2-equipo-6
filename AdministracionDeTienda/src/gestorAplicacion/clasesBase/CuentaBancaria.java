@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import gestorAplicacion.clasesBase.Credito.Cuota;
+import gestorAplicacion.clasesHerencia.Empleado;
 import gestorAplicacion.clasesHerencia.Transportista;
 
 public class CuentaBancaria implements Serializable{
