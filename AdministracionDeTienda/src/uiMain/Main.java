@@ -847,7 +847,7 @@ public class Main {
 			productos3.add(new Producto(Tipo.ABRIGO));
 			productos3.add(new Producto(Tipo.ABRIGO));
 		}
-		
+
 		Banco bbva=new Banco("BBVA");
 		Banco bancoAgrario=new Banco("Banco Agrario");
 		Banco bbbank=new Banco("BBBank");
@@ -876,7 +876,7 @@ public class Main {
 				ventasPorDefecto.add(venta3);
 				ventasPorDefecto.add(venta1);
 				ventasPorDefecto.add(venta2);
-
+				Serializador ventas=new Serializador(ventasPorDefecto,"ventasPorDefecto");
 
 		bodegaTienda1.agregarProductos(camisa);
 		bodegaTienda1.agregarProductos(camisa);
