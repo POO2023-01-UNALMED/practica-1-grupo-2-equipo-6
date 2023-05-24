@@ -5,15 +5,16 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public abstract class Persona implements Serializable {
+public abstract class Persona implements Comparable<Persona>, Comparable{
     private int calificacion;
     private String nombre;
     private CuentaBancaria cuenta;
 
     public Persona(String nombre, int calificacion, CuentaBancaria cuenta){
-        this.calificacion = calificacion;
-        this.nombre = nombre;
-        this.cuenta = cuenta;
+      super(nombre,calificacion);
+      this.cuenta=cuenta;
+      cuenta.getEntidad().getHistorialesCrediticios().put(cuenta,new ArrayList<Credito>());
+      cuenta.setPropietario(this);
     }
 
     public Persona(String nombre, int calificacion) {
@@ -70,8 +71,36 @@ public abstract class Persona implements Serializable {
         public String toString (){
           return nombre;
         }
-        public String demandar(){
-          return nombre+" ha decidido no demandarlo.";
-        }
 
+
+        public String demandar() {
+      		return toString()+" ha decidido no demandarlo.\n";
+      	}
+
+      	@Override
+      	public String toString() {
+      		return nombre;
+      	}
+
+
+
+
+      	@Override
+      	public int compareTo(Persona otra) {
+      	//La mejor oferta es aquella con menor total
+      	//vengo antes que la otra si es NEGATIVO---ORDENA DE MAYOR A MENOR
+      		return (int)(otra.getCalificacion()-this.calificacion);
+      	}
+
+
+
+      	public CuentaBancaria getCuenta() {
+      		return cuenta;
+      	}
+
+
+
+      	public void setCuenta(CuentaBancaria cuenta) {
+      		this.cuenta = cuenta;
+      	}
 }
