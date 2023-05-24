@@ -6,9 +6,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Informe implements Comparable<Informe>{
-	private static ArrayList<Informe> informes = new ArrayList<Informe>();
-	private String codigo;
+	private Venta ventaEfectuada;
+	private ArrayList<Transferencia> acreditacionesPagos;
+	private ArrayList<SolucionesProblemaFinanciero> soluciones;
+	/*Una vez convertido, al intentar añadir un elemento más con el
+	 * método add, se genera la excepción UnsupportedOperationException.
+	 * Esto se debe a que el método Arrays.asList devuelve un objeto
+	 * ArrayList de una clase estática privada dentro de Arrays
+	 * (java.util.Arrays.ArrayList), no de la clase java.util.ArrayList.
+	 */
+	private double cantidadActualDeuda;
+	private Empleado contable;
+	private static int informes=0;
+	private final String codigo;
 	private TipoInforme tipoInforme;
+	private PuntajeCredito puntajeCrediticioActual;
 	private ControlCalidad controlC;
 
 
@@ -181,7 +193,7 @@ public class Informe implements Comparable<Informe>{
 			puntajeCrediticioActual.toString(),puntajeCrediticioActual.getTasaDeInteres()
 			, cantidadActualDeuda, Tienda.getCuentaTienda().getDinero());
 		}
-		
+
 		return null;//Por si es necesario añadir otro tipo de informes
 	}
 
