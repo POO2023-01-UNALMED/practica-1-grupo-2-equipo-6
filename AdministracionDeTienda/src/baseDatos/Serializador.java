@@ -21,8 +21,8 @@ public class Serializador {
             out.close();
             archivoStream.close();
              
-           System.out.println("Exito");
-           System.out.println(nombre);
+           //System.out.println("Exito");
+           //System.out.println(nombre);
  
         }
          
