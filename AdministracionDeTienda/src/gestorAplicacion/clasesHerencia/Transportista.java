@@ -1,6 +1,7 @@
 package gestorAplicacion.clasesHerencia;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,7 +10,7 @@ import gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
 import gestorAplicacion.clasesBase.*;
 
 
-public class Transportista extends Persona {
+public class Transportista extends Persona implements Serializable {
 	private float precioBase, precioDistancia, precioCarga, precioTotal;
 
 	public Transportista(String nombre, float precioB, float precioD, float precioC,int calificacion, CuentaBancaria cuenta ) {

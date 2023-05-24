@@ -30,6 +30,8 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		valoresIniciales();
+		serializarEnvio();
+	
 		Producto p=new Producto(Tipo.ABRIGO);
 		Serializador p1=new Serializador(p,"producto");
 		int opcion = -1;
@@ -855,125 +857,130 @@ public class Main {
 		ArrayList<Producto> productosSocio=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));  add(new Producto(Tipo.PANTALON));}};
 		ArrayList<Producto> productosSocio2=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));}};
 		ArrayList<Producto> productosSocio3=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO));  add(new Producto(Tipo.PANTALON));}};
-
-
-		Bodega bodegaTienda1 = new Bodega(50);
-		Bodega bodegaTienda2 = new Bodega(60);
-		Bodega bodegaTienda3 = new Bodega(40);
-
-		Producto camisa = new Producto(Tipo.CAMISA,2,1);
-		Producto pantalon = new Producto(Tipo.PANTALON,4,2);
-		Producto abrigo = new Producto(Tipo.ABRIGO,6,3);
-
-
-
-				Venta venta1=new Venta(primark,115000, productos1, null, transportista1);
-				Venta venta2=new Venta(falabella,170000, productos2, null, transportista1);
-				Venta venta3=new Venta(exito,1234567, productos1, null, transportista1);
-
-				ArrayList<Venta> ventasPorDefecto=new ArrayList<Venta>();
-
-				ventasPorDefecto.add(venta3);
-				ventasPorDefecto.add(venta1);
-				ventasPorDefecto.add(venta2);
-				Serializador ventas=new Serializador(ventasPorDefecto,"ventasPorDefecto");
-
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(camisa);
-		bodegaTienda1.agregarProductos(pantalon);
-		bodegaTienda1.agregarProductos(pantalon);
-		bodegaTienda1.agregarProductos(pantalon);
-		bodegaTienda1.agregarProductos(pantalon);
-		bodegaTienda1.agregarProductos(pantalon);
-		bodegaTienda1.agregarProductos(abrigo);
-		bodegaTienda1.agregarProductos(abrigo);
-		bodegaTienda1.agregarProductos(abrigo);
-		bodegaTienda1.agregarProductos(abrigo);
-		bodegaTienda1.agregarProductos(abrigo);
-		bodegaTienda1.agregarProductos(abrigo);
-		bodegaTienda1.agregarProductos(abrigo);
-
-		bodegaTienda2.agregarProductos(camisa);
-		bodegaTienda2.agregarProductos(camisa);
-		bodegaTienda2.agregarProductos(camisa);
-		bodegaTienda2.agregarProductos(camisa);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(pantalon);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-		bodegaTienda2.agregarProductos(abrigo);
-
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(camisa);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(pantalon);
-		bodegaTienda3.agregarProductos(abrigo);
-		bodegaTienda3.agregarProductos(abrigo);
-		bodegaTienda3.agregarProductos(abrigo);
-		bodegaTienda3.agregarProductos(abrigo);
-
 		Empleado contador1=new Empleado("Manuel Delgado Villegas", 5,  new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
 		Empleado contador2=new Empleado("Juan Diaz de Garayo", 5 ,  new CuentaBancaria(50000,Pais.COLOMBIA, bbbank), 8000, Cargo.CONTADOR);
 		Empleado contador3=new Empleado("Margarita Sanchez Gutierrez", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
 		Empleado operario=new Empleado("Patricia Dagorn", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.OPERARIO);
 		Empleado archivista=new Empleado("Jose Antonio Rodriguez Vega",4,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 45621,Cargo.ARCHIVISTA);
 
-
+		Bodega bodegaTienda1 = new Bodega(50);
+		Bodega bodegaTienda2 = new Bodega(60);
+		Bodega bodegaTienda3 = new Bodega(40);
 
 		Tienda tiendaLaureles = new Tienda(10234,bodegaTienda1, contador1, operario );
 		Tienda tiendaPoblado = new Tienda (14326780,bodegaTienda2, contador2);
 		Tienda tiendaEnvigado = new Tienda(47385,bodegaTienda3, contador3);
 
+		
+
+		Producto camisa = new Producto(Tipo.CAMISA,2,1);
+		Producto pantalon = new Producto(Tipo.PANTALON,4,2);
+		Producto abrigo = new Producto(Tipo.ABRIGO,6,3);
+		Transportista transportista1 = new Transportista("Maria",123,123,123, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista2 = new Transportista("Carlos",123,123,12,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista3 = new Transportista("Rosa",123,11,123,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Socio exito = new Socio("EXITO",productosSocio, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.COLOMBIA, bbva));
+		Socio falabella =  new Socio("Falabella",productosSocio2, new ArrayList<Venta>() {{}}, new CuentaBancaria(1500000,Pais.VENEZUELA, bbbank));
+		Socio primark = new Socio("PRIMARK",productosSocio3, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.BRASIL, bancoAgrario));;
+		Serializador socio1 = new Serializador(exito,"exito");
+		Serializador socio2 = new Serializador(falabella,"falabella");
+		Serializador socio3 = new Serializador(primark, "primark");
+
+		Venta venta1=new Venta(primark,115000, productos1, null, transportista1);
+		Venta venta2=new Venta(falabella,170000, productos2, null, transportista1);
+		Venta venta3=new Venta(exito,1234567, productos1, null, transportista1);
+
+		ArrayList<Venta> ventasPorDefecto=new ArrayList<Venta>();
+
+		ventasPorDefecto.add(venta3);
+		ventasPorDefecto.add(venta1);
+		ventasPorDefecto.add(venta2);
+		Serializador ventas=new Serializador(ventasPorDefecto,"ventasPorDefecto");
+
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(camisa);
+		bodegaTienda1.agregarProductos(pantalon);
+		bodegaTienda1.agregarProductos(pantalon);
+		bodegaTienda1.agregarProductos(pantalon);
+		bodegaTienda1.agregarProductos(pantalon);
+		bodegaTienda1.agregarProductos(pantalon);
+		bodegaTienda1.agregarProductos(abrigo);
+		bodegaTienda1.agregarProductos(abrigo);
+		bodegaTienda1.agregarProductos(abrigo);
+		bodegaTienda1.agregarProductos(abrigo);
+		bodegaTienda1.agregarProductos(abrigo);
+		bodegaTienda1.agregarProductos(abrigo);
+		bodegaTienda1.agregarProductos(abrigo);
+
+		bodegaTienda2.agregarProductos(camisa);
+		bodegaTienda2.agregarProductos(camisa);
+		bodegaTienda2.agregarProductos(camisa);
+		bodegaTienda2.agregarProductos(camisa);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(pantalon);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+		bodegaTienda2.agregarProductos(abrigo);
+
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(camisa);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(pantalon);
+		bodegaTienda3.agregarProductos(abrigo);
+		bodegaTienda3.agregarProductos(abrigo);
+		bodegaTienda3.agregarProductos(abrigo);
+		bodegaTienda3.agregarProductos(abrigo);
+
+		
+
 		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
 
-		Transportista transportista1 = new Transportista("Maria",123,123,123, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
-		Transportista transportista2 = new Transportista("Carlos",123,123,12,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
-		Transportista transportista3 = new Transportista("Rosa",123,11,123,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		
 
 		Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
 		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
@@ -994,13 +1001,8 @@ public class Main {
 		int contadorCompra = 0;
 
 
-		Socio exito = new Socio("EXITO",productosSocio, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.COLOMBIA, bbva));
-			Socio falabella =  new Socio("Falabella",productosSocio2, new ArrayList<Venta>() {{}}, new CuentaBancaria(1500000,Pais.VENEZUELA, bbbank));
-			Socio primark = new Socio("PRIMARK",productosSocio3, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.BRASIL, bancoAgrario));;
-
-			Serializador socio1 = new Serializador(exito, "exito");
-			Serializador socio2 = new Serializador(falabella, "falabella");
-			Serializador socio3 = new Serializador(primark, "primark");
+		
+			
 
 		Serializador contadorComprasSerializado = new Serializador(contadorCompra, "contadorCompras");
 
@@ -1053,18 +1055,18 @@ public class Main {
 		for(int i=0;i<listaClientes.size();i++) {
 			Serializador cliente=new Serializador(listaClientes.get(i),"cliente"+i);
 		}
-		Empleado operario1 = new Empleado("Nombre completo", 1, 234, 0, Cargo.OPERARIO, 1200000);
-		Empleado operario2 = new Empleado("Nombre completo", 3, 189, 0, Cargo.OPERARIO, 1200000);
-	     Empleado operario3 = new Empleado("Nombre completo", 5, 276, 0, Cargo.OPERARIO, 1200000);
+		//Empleado operario1 = new Empleado("Nombre completo", 1, 234, 0, Cargo.OPERARIO, 1200000);
+		//Empleado operario2 = new Empleado("Nombre completo", 3, 189, 0, Cargo.OPERARIO, 1200000);
+	    //Empleado operario3 = new Empleado("Nombre completo", 5, 276, 0, Cargo.OPERARIO, 1200000);
 
 
 		ArrayList<Empleado> listaEmpleados=new ArrayList<Empleado>();
-		listaEmpleados.add(operario1);
-        listaEmpleados.add(operario2);
-        listaEmpleados.add(operario3);
+		//listaEmpleados.add(operario1);
+        //listaEmpleados.add(operario2);
+        //listaEmpleados.add(operario3);
 
         for(int i=0;i<listaEmpleados.size();i++) {
-        	Serializador empleado=new Serializador(listaEmpleados.get(i),"operario"+i);
+        	//Serializador empleado=new Serializador(listaEmpleados.get(i),"operario"+i);
         }
 
 		Transportista transportista=new Transportista("Jimena Salgado",3);
