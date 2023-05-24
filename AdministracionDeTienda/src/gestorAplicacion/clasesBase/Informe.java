@@ -247,4 +247,8 @@ public class Informe implements Comparable<Informe>{
 		this.soluciones = soluciones;
 	}
 
+	public PuntajeCredito getPuntajeCrediticioActual() {
+		return puntajeCrediticioActual;
+	}
+
 }
