@@ -94,7 +94,7 @@ public class Credito implements Serializable{
 
 
 
-	enum Cuota{
+	public enum Cuota{
 		DOCE(12), DIECIOCHO(18),CINCO(5), TRES(3);
 		private int cantidadMeses;
 		private Cuota(int cantidadMeses) {
@@ -128,7 +128,7 @@ public class Credito implements Serializable{
 
 
 
-	enum Estado{
+	public enum Estado{
 
 		CANCELADO,PENDIENTE;
 
