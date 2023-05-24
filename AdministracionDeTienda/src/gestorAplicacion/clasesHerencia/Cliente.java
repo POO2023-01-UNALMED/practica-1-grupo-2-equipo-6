@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+import gestorAplicacion.clasesBase.CuentaBancaria;
 import gestorAplicacion.clasesBase.Persona;
+import gestorAplicacion.clasesBase.Producto.Tipo;
+import gestorAplicacion.clasesBase.Transferencia;
 import baseDatos.Deserializador;
+import baseDatos.Serializador;
 
 
 //Contribuidores
@@ -112,7 +116,7 @@ public class Cliente extends Persona implements Serializable {
 	}
 	
 	//Definir todo lo que el cliente debe pagar en un resumen de pago.
-	public void resumenDePago(Transferencia pagoTransporte,double costo,Tipo tipo) {
+	public void resumenDePago(Transferencia pagoTransporte,double costo,TipoEnvio tipo) {
 	setResumenDePago("El precio de los productos intervenidos es de $"+costo+" pesos.\n"
 	+ "El valor de este envio de tipo "+tipo+" a la ciudad "+getCiudad()+" es de $"+pagoTransporte.getCantidad()+" pesos.\n"
 	+ "El descuento por cliente preferencial para "+getNombre()+" es del "+getDescuento()*100+"%\n*el cual ya fue aplicado en el valor de envio.\n"
