@@ -59,6 +59,14 @@ public class CuentaBancaria implements Serializable{
 
 	}
 
+	public void pagar(Compra compra){
+
+
+		setDinero(dinero-compra.getProveedorSeleccionado().costoProductos());
+		setDinero(dinero-compra.getTransportistaSeleccionado().calcularPrecioTotal(compra.getProveedorSeleccionado(), compra.getTienda()));
+
+	}
+
 	public void ligarFondo(CuentaBancaria cuentaLigar) {
 
 		fondosLigados.add(cuentaLigar);
