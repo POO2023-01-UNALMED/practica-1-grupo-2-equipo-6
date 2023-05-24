@@ -28,7 +28,7 @@ import baseDatos.Serializador;
 
 
 
-public class Empleado extends Persona implements Serializable,Comparable<Empleado>{
+public class Empleado extends Persona implements Serializable{
 
 	/**
 	 *
@@ -304,11 +304,7 @@ public class Empleado extends Persona implements Serializable,Comparable<Emplead
 			}
 		
 		//Sobreescritura del compareTo para comparar empleados segun su calificacion
-		@Override
-		public int compareTo(Empleado o) {
-			
-			return Integer.compare(this.getCalificacion(), o.getCalificacion());
-		}
+		
 		
 
 

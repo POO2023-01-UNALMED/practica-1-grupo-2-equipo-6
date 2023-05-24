@@ -5,22 +5,23 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public abstract class Persona implements Comparable<Persona>, Comparable{
+public abstract class Persona implements Comparable<Persona>{
     private int calificacion;
     private String nombre;
     private CuentaBancaria cuenta;
-
-    public Persona(String nombre, int calificacion, CuentaBancaria cuenta){
-      super(nombre,calificacion);
-      this.cuenta=cuenta;
-      cuenta.getEntidad().getHistorialesCrediticios().put(cuenta,new ArrayList<Credito>());
-      cuenta.setPropietario(this);
-    }
 
     public Persona(String nombre, int calificacion) {
 		this.calificacion=calificacion;
 		this.nombre=nombre;
 	}
+    public Persona(String nombre, int calificacion, CuentaBancaria cuenta){
+      this(nombre,calificacion);
+      this.cuenta=cuenta;
+      cuenta.getEntidad().getHistorialesCrediticios().put(cuenta,new ArrayList<Credito>());
+      cuenta.setPropietario(this);
+    }
+
+   
 
 	public abstract int calificar();
 
@@ -77,10 +78,7 @@ public abstract class Persona implements Comparable<Persona>, Comparable{
       		return toString()+" ha decidido no demandarlo.\n";
       	}
 
-      	@Override
-      	public String toString() {
-      		return nombre;
-      	}
+      
 
 
 
@@ -94,13 +92,5 @@ public abstract class Persona implements Comparable<Persona>, Comparable{
 
 
 
-      	public CuentaBancaria getCuenta() {
-      		return cuenta;
-      	}
-
-
-
-      	public void setCuenta(CuentaBancaria cuenta) {
-      		this.cuenta = cuenta;
-      	}
+      
 }
