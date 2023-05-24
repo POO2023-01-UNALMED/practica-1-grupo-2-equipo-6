@@ -4,11 +4,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+
 public class Serializador {
 	
 	public Serializador(Object obj, String nombre) {
 		
-        String archivo = "C:AdministracionDeTienda\\src\\baseDatos\\temp\\"+nombre+".txt";
+        String archivo = "src\\baseDatos\\temp"+nombre+".txt";
       
         try
         {  
@@ -20,7 +21,8 @@ public class Serializador {
             out.close();
             archivoStream.close();
              
-//            System.out.println("Exito");
+           System.out.println("Exito");
+           System.out.println(nombre);
  
         }
          
