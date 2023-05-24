@@ -1,8 +1,9 @@
 package gestorAplicacion.clasesHerencia;
 
 import java.util.ArrayList;
-
-import Producto.Tipo;
+import gestorAplicacion.clasesBase.OfertaPorDefecto;
+import gestorAplicacion.clasesBase.Producto.Tipo;
+import gestorAplicacion.clasesBase.Inventariar;
 
 public class OfertaPreferencial extends OfertaPorDefecto{
 
