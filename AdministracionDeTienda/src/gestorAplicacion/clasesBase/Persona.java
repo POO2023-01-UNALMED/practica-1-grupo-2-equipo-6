@@ -16,7 +16,12 @@ public abstract class Persona implements Serializable {
         this.cuenta = cuenta;
     }
 
-    public abstract int calificar();
+    public Persona(String nombre, int calificacion) {
+		this.calificacion=calificacion;
+		this.nombre=nombre;
+	}
+
+	public abstract int calificar();
 
     public static ArrayList<Producto> generarProductos(ArrayList<Producto> listaProductos) {
         ArrayList<Producto> productosSeleccionados = new ArrayList<>();
