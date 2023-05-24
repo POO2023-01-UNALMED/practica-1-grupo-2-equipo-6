@@ -111,6 +111,8 @@ public class Credito implements Serializable{
 		return "Credito a: "+ this.getDeudor().getPropietario() +" por un valor de "+cantidadCredito;
 	}
 
+
+
 	
 }
 
