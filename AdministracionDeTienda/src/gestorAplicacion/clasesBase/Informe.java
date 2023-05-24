@@ -24,33 +24,47 @@ public class Informe implements Comparable<Informe>{
 	private TipoInforme tipoInforme;
 	private PuntajeCredito puntajeCrediticioActual;
 	private ControlCalidad controlC;
+	public Informe(TipoInforme tipoInforme, Empleado contable) {
+			informes++;
+			this.contable=contable;
+			this.tipoInforme=tipoInforme;
+			String timestamp = ZonedDateTime.now(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ofPattern("ddMMyyyhhmmss"));
+			codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes);
+			//informes.add(this);
+		}
 
-	public Informe(TipoInforme tipoInforme, ControlCalidad controlCalidad) {
+		public Informe(TipoInforme tipoInforme,Empleado contable, Transferencia...acreditacionesPagos) {
 
-		this.tipoInforme=tipoInforme;
-		this.controlC=controlCalidad;
-
-		String timestamp = ZonedDateTime.now(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ofPattern("MMddyyyhhmmss"));
-
-		codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes);
-
-
-
-	}
-	public Informe(Venta v,Empleado contable, Transferencia...acreditacionesPagos) {
-		this(TipoInforme.INFORME_VENTAS,contable,acreditacionesPagos);
-		ventaEfectuada=v;
-	}
-
-	public Informe(Empleado contador, ArrayList<SolucionesProblemaFinanciero>soluciones, PuntajeCredito puntajeCredito, double cantidadActualDeuda) {
-		this(TipoInforme.FINANCIERO,contador);
-		this.cantidadActualDeuda=cantidadActualDeuda;
-		this.soluciones=soluciones;
-		puntajeCrediticioActual=puntajeCredito;
+			this(tipoInforme, contable);
+			ArrayList<Transferencia> t=new ArrayList<Transferencia>(Arrays.asList(acreditacionesPagos));
+			try {
+			this.acreditacionesPagos.addAll(t);
+			}
+			catch(NullPointerException e) {
+				this.acreditacionesPagos=t;
+			}
 
 
-	}
+		}
 
+		public Informe(Empleado contador, ArrayList<SolucionesProblemaFinanciero>soluciones, PuntajeCredito puntajeCredito, double cantidadActualDeuda) {
+			this(TipoInforme.FINANCIERO,contador);
+			this.cantidadActualDeuda=cantidadActualDeuda;
+			this.soluciones=soluciones;
+			puntajeCrediticioActual=puntajeCredito;
+
+
+		}
+
+
+		public Informe(Venta v,Empleado contable, Transferencia...acreditacionesPagos) {
+			this(TipoInforme.INFORME_VENTAS,contable,acreditacionesPagos);
+			ventaEfectuada=v;
+		}
+
+		public Informe(Compra c,Empleado contable, Transferencia...acreditacionesPagos) {
+			this(TipoInforme.INFORME_CONTROL_CALIDAD, contable,acreditacionesPagos);
+		}
 
 
 
