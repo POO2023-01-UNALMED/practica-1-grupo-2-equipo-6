@@ -79,7 +79,7 @@ public class Informe implements Comparable<Informe>{
 
 
 
-	enum TipoInforme {
+	public enum TipoInforme {
 		INFORME_VENTAS("IVE"), INFORME_CONTROL_CALIDAD("CAL"), FINANCIERO("FIN");
 
 		private String identificador;
