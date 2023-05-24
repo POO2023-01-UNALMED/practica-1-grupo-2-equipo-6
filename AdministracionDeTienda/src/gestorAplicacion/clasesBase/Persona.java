@@ -1,0 +1,65 @@
+package gestorAplicacion.clasesBase;
+import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
+public abstract class Persona implements Serializable {
+    private int calificacion;
+    private String nombre;
+    private CuentaBancaria cuenta;
+
+    public Persona(String nombre, int calificacion, CuentaBancaria cuenta){
+        this.calificacion = calificacion;
+        this.nombre = nombre;
+        this.cuenta = cuenta;
+    }
+
+    public abstract int calificar();
+
+    public static ArrayList<Producto> generarProductos(ArrayList<Producto> listaProductos) {
+        ArrayList<Producto> productosSeleccionados = new ArrayList<>();
+        Random random = new Random();
+        Set<Integer> indicesSeleccionados = new HashSet<>();
+
+        int cantidadProductos = listaProductos.size();
+        int cantidadSeleccionada = random.nextInt(cantidadProductos + 1);
+
+        while (cantidadSeleccionada > 0) {
+            int indiceAleatorio = random.nextInt(cantidadProductos);
+            if (!indicesSeleccionados.contains(indiceAleatorio)) {
+                Producto productoSeleccionado = listaProductos.get(indiceAleatorio);
+                productosSeleccionados.add(productoSeleccionado);
+                indicesSeleccionados.add(indiceAleatorio);
+                cantidadSeleccionada--;
+            }
+        }
+        return productosSeleccionados;
+    }
+
+        public CuentaBancaria getCuenta(){
+            return cuenta;
+        }
+    
+        public void setCuenta(CuentaBancaria cuenta){
+            this.cuenta = cuenta;
+        }
+    
+        public String  getNombre(){
+            return nombre;
+        }
+    
+        public void setNombre(String nombre){
+            this.nombre = nombre;
+        }
+    
+        public int getCalificacion(){
+            return calificacion;
+        }
+    
+        public void setCalificacion(int calificacion){
+            this.calificacion = calificacion;
+        }
+    
+}
