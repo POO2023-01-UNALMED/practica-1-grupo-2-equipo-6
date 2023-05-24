@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
+import gestorAplicacion.clasesBase.Producto;
+import gestorAplicacion.clasesHerencia.Empleado.Cargo;
 import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Producto;
 
 
@@ -47,10 +48,7 @@ public class Intervenido extends Producto  {
 	//Se encarga de crear los objetos de tipo intervenido a partir de los una lista de prodcutos, mediante una seleccion de operarios.
 	public static ArrayList<Intervenido> intervenir(ArrayList<Producto> productos,Colecciones coleccion){
 		ArrayList<Intervenido> intervenidos=new ArrayList<Intervenido> ();
-		ArrayList<Producto> camisas=Producto.clasificar(productos,Tipo.CAMISA);
-		ArrayList<Producto> pantalones=Producto.clasificar(productos,Tipo.PANTALON);
-		ArrayList<Producto> abrigos=Producto.clasificar(productos, Tipo.ABRIGO);
-		ArrayList<Empleado> operarios=Empleado.seleccionarEmpleados(CARGOS.OPERARIO, camisas,pantalones,abrigos);
+		ArrayList<Empleado> operarios=Empleado.seleccionarEmpleados(Cargo.OPERARIO,productos);
 		ArrayList<String> paletaDeColores=Intervenido.paletaDeColores(coleccion);
 		//Verificar que se tienen operarios disponibles para realizar la intervencion
 		if(!operarios.isEmpty()) {

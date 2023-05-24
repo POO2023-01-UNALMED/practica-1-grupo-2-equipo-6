@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Persona;
+import gestorAplicacion.clasesBase.Persona;
+import baseDatos.Deserializador;
 
 
 //Contribuidores
@@ -107,6 +108,7 @@ public class Cliente extends Persona implements Serializable {
 			setDescuento(getCalificacion()*0.01);
 			
 		}
+		return getCalificacion();
 	}
 	
 	//Definir todo lo que el cliente debe pagar en un resumen de pago.

@@ -3,8 +3,8 @@ package gestorAplicacion.clasesHerencia;
 
 import java.util.ArrayList;
 
-import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Cliente.Ciudades;
-import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
+import gestorAplicacion.clasesHerencia.Cliente.Ciudades;
+import gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
 import gestorAplicacion.clasesBase.*;
 
 

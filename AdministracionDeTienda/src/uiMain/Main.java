@@ -685,7 +685,7 @@ public class Main {
 			System.out.println("2. Realizar nuevo proceso de Envio");
 			
 			
-			o=verificar(3,0);
+			o=verificar(2,0);
 		
 			
 			
