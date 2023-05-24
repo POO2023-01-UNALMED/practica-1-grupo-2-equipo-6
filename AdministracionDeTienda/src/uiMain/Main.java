@@ -704,6 +704,16 @@ public class Main {
 		}
 
 	static public void valoresIniciales() {
+
+		Banco bbva=new Banco("BBVA");
+		Banco bancoAgrario=new Banco("Banco Agrario");
+		Banco bbbank=new Banco("BBBank");
+		
+		ArrayList<Producto> productosSocio=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));  add(new Producto(Tipo.PANTALON));}};
+		ArrayList<Producto> productosSocio2=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));}};
+		ArrayList<Producto> productosSocio3=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO));  add(new Producto(Tipo.PANTALON));}};
+
+
 		Bodega bodegaTienda1 = new Bodega(50);
 		Bodega bodegaTienda2 = new Bodega(60);
 		Bodega bodegaTienda3 = new Bodega(40);
