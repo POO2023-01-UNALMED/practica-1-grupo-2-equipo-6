@@ -1,7 +1,11 @@
 package uiMain;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Cliente;
+import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
+import AdministracionDeTienda.src.gestorAplicacion.clasesHerencia.Intervenido;
 import baseDatos.Deserializador;
 import baseDatos.Serializador;
 import gestorAplicacion.clasesBase.Bodega;
@@ -11,6 +15,8 @@ import gestorAplicacion.clasesBase.Tienda;
 import gestorAplicacion.clasesBase.Producto.Tipo;
 import gestorAplicacion.clasesHerencia.Proveedor;
 import gestorAplicacion.clasesHerencia.Transportista;
+import gestorAplicacion.clasesBase.Bodega.SETS;
+import gestorAplicacion.clasesHerencia.Intervenido.Colecciones;
 
 public class Main {
 
@@ -500,6 +506,177 @@ public class Main {
 			}
 		}	
 	}
+	//Scanner
+		static Scanner sc=new Scanner(System.in);
+		static int readOpcion() {
+			return sc.nextInt();
+		}
+		static int verificar(int n,int o) {
+			do {
+	            
+	            o = readOpcion();
+
+	            if (o <= 0 || o> n) {
+	                System.out.println("El numero ingresado no esta en las opciones. Intenta nuevamente:");
+	            }
+	        } while (o <= 0 || o >n);
+			return o;
+		}
+			
+		
+		public static void logisticaEnvio() {
+			int o=2;
+			do {
+			System.out.println("---------------------------------");
+			System.out.println("          //Logistica de Envio       ");
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione uno de los sets disponibles");
+			System.out.println("1. SET ONLY:CAMISA");
+			System.out.println("2. SET TU:CAMISA Y PANTALON");
+			System.out.println("3. SET COMPLETO:ABRIGO,CAMISA Y PANTALON");
+			int Oset=verificar(3,0);
+			SETS set=null;
+			switch(Oset) {
+			case 1: set=SETS.ONLY;
+					break;
+			case 2: set=SETS.TU;
+					break;
+			case 3: set=SETS.COMPLETO;
+					break;
+			}
+			
+			System.out.println();
+			System.out.println("---------------------------------");
+			System.out.println("          //"+set);
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione el numero de sets que necesita:");
+			System.out.println("Puede pedir minimo 1 set y maximo 5 sets");
+			int cantidad=verificar(5,0);
+
+			//Desrializar las tiendas para sacar los productos de las bodegas
+			ArrayList<Tienda> tiendas=new ArrayList<Tienda>();
+			Tienda tienda1=(Tienda) new Deserializador("tiendaEnvigado").getObj();
+			tiendas.add(tienda1);
+			Tienda tienda2=(Tienda) new Deserializador("tiendaPoblado").getObj();
+			tiendas.add(tienda2);
+			Tienda tienda3=(Tienda) new Deserializador("tiendaLaureles").getObj();
+			tiendas.add(tienda3);
+			
+			//Primera interaccion
+			ArrayList<Producto> productos=Bodega.realizarPedido(tiendas,set,cantidad);
+			System.out.println(Bodega.getResumenPedido());
+			if(Bodega.getResumenPedido()!="El pedido se ha completado exitosamente") {
+				System.out.println("Seleccione una opcion:");
+				System.out.println("1. Seguir con el proceso de Logistica de Envio con los productos disponibles");
+				System.out.println("2. Volver al menu principal para ejecutar los procesos de Compra y Control de calidad\n para tener el stock necesario de productos");
+				int decision=verificar(2,0);
+				if(decision==2) {
+					o=1;
+					break;
+				}
+			}
+			System.out.println("");
+			
+			System.out.println("---------------------------------");
+			System.out.println("          //COLECCION       ");
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione una de las colecciones disponibles:");
+			int i=1;
+			for(Colecciones coleccion:Colecciones.values()) {
+				System.out.println(coleccion.getId()+". "+coleccion);
+				i++;	
+			}
+			int Ocoleccion= verificar(i-1,0);
+			Colecciones coleccion=null;
+			
+			for(Colecciones colec:Colecciones.values()) {
+				if(colec.getId()==Ocoleccion) {
+					coleccion=colec;
+					break;	
+				}
+			}
+			System.out.println();
+			System.out.println("---------------------------------");
+			System.out.println("          //"+coleccion);
+			System.out.println("---------------------------------");
+			//Segunda interaccion
+			ArrayList<Intervenido> intervenidos=Intervenido.intervenir(productos, coleccion);
+			System.out.println("Las caracterisiticas de los productos intervenidos son:");
+			for(int i1=0;i1<intervenidos.size();i1++) {
+				System.out.println(intervenidos.get(i1));
+			}
+			
+			System.out.println();
+			System.out.println("---------------------------------");
+			System.out.println("  //Informacion del cliente      ");
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione uno de los clientes registrados:");
+			//Deserializar clientes
+			ArrayList<Cliente> clientes=new ArrayList<Cliente>();
+			for(int i1=0;i1<10;i1++) {
+				Cliente cliente= (Cliente)new Deserializador("cliente"+i1).getObj();
+				clientes.add(cliente);
+		     }
+			for(int i1=0;i1<clientes.size();i1++) {
+				System.out.println(i1+1+". "+clientes.get(i1));
+			}
+			
+			int Ocliente=verificar(clientes.size(),0);
+			Cliente cliente=clientes.get(Ocliente-1);
+			System.out.println();
+			System.out.println("---------------------------------");
+			System.out.println("          //"+cliente.getNombre());
+			System.out.println("---------------------------------");
+			System.out.println("CIUDAD DE ENVIO:"+cliente.getCiudad());
+			System.out.println("Seleccione el tipo de envio:");
+			System.out.println("1. Envio prioritario 5 dias habiles sobrecargo de $15.000");
+			System.out.println("2. Envio normal "+cliente.getCiudad().getDias()+" dias habiles");
+			System.out.println("3. Envio libre 30 dias habiles descuento de $15.000");
+			int Oenvio=verificar(3,0);
+			TipoEnvio tipo;
+			switch(Oenvio) {
+			case 1: tipo=TipoEnvio.PRIORITARIO;
+			break;
+			case 2: tipo=TipoEnvio.NORMAL;
+			break;
+			case 3: tipo=TipoEnvio.LIBRE;
+			break;
+			default: tipo=TipoEnvio.NORMAL;
+			}
+			
+			//Tercera interaccion
+			cliente.enviar(intervenidos,tipo);
+			Serializador cliente1=new Serializador(cliente,"cliente"+(Ocliente-1));
+		
+			
+			
+			System.out.println();
+			System.out.println("---------------------------------");
+			System.out.println("          //Resumen de Pago");
+			System.out.println("---------------------------------");
+			System.out.println(cliente.getResumenDePago());
+			
+			System.out.println("\nRealizando Transferencias...");
+			System.out.println(cliente.getConfirmacion());
+			
+			//Serializar las tiendas para que los productos en bodega y la cuenta bancaria queden actualizadas
+			Serializador t1=new Serializador(tiendas.get(0),"tiendaEnvigado");
+			Serializador t2=new Serializador(tiendas.get(1),"tiendaLaureles");
+			Serializador t3=new Serializador(tiendas.get(2),"tiendaPoblado");
+			
+			System.out.println("\nSeleccione una opcion:");
+			System.out.println("1. Volver al menu principal");
+			System.out.println("2. Realizar nuevo proceso de Envio");
+			
+			
+			o=verificar(3,0);
+		
+			
+			
+			}while(o==2);
+			
+			
+		}
 	
 	static public void valoresIniciales() {
 		Bodega bodegaTienda1 = new Bodega(50);
@@ -624,5 +801,7 @@ public class Main {
 		Serializador comprasPorRevisarSerializado = new Serializador(comprasPorRevisar, "comprasPorRevisar");
 		
 	}
+	
+	
 
 }
