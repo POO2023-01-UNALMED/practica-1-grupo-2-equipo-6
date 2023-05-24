@@ -171,4 +171,71 @@ public class Transportista extends Persona {
 			}
 		}
 
+
+
+
+
+
+
+
+		public float getPrecioBase() {
+			return precioBase;
+		}
+
+
+
+
+
+
+
+
+		public void setPrecioBase(float precioBase) {
+			this.precioBase = precioBase;
+		}
+
+
+
+
+
+
+
+
+		public float getPrecioDistancia() {
+			return precioDistancia;
+		}
+
+
+
+
+
+
+
+
+		public void setPrecioDistancia(float precioDistancia) {
+			this.precioDistancia = precioDistancia;
+		}
+
+
+
+
+
+
+
+
+		public float getPrecioCarga() {
+			return precioCarga;
+		}
+
+
+
+
+
+
+
+
+		public void setPrecioCarga(float precioCarga) {
+			this.precioCarga = precioCarga;
+		}
+		
+
 }
