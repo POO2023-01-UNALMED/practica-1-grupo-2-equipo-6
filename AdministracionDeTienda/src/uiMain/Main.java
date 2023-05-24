@@ -13,6 +13,7 @@ import baseDatos.Serializador;
 import gestorAplicacion.clasesBase.Bodega;
 import gestorAplicacion.clasesBase.Compra;
 import gestorAplicacion.clasesBase.Credito.Cuota;
+import gestorAplicacion.clasesBase.Credito.Estado;
 import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
 import gestorAplicacion.clasesBase.Producto;
 import gestorAplicacion.clasesBase.Tienda;
@@ -23,6 +24,7 @@ import gestorAplicacion.clasesBase.Bodega.SETS;
 import gestorAplicacion.clasesHerencia.Intervenido.Colecciones;
 import gestorAplicacion.clasesBase.*;
 import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
+import gestorAplicacion.clasesBase.Banco.SolucionesProblemaFinanciero;
 import gestorAplicacion.clasesHerencia.*;
 
 
