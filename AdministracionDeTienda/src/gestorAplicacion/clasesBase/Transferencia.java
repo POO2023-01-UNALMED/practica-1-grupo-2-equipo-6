@@ -2,6 +2,10 @@ package gestorAplicacion.clasesBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import gestorAplicacion.clasesBase.CuentaBancaria;
+import gestorAplicacion.clasesHerencia.Cliente;
+
+
 
 
 public class Transferencia implements Serializable{
@@ -13,7 +17,29 @@ public class Transferencia implements Serializable{
 	private CuentaBancaria remitente;
 	private Object destinatario;
 	private EstadoPago puntualidadPago;
+	private boolean comprobante;
+	private String detalle;
 
+
+
+	public boolean isComprobante() {
+		return comprobante;
+	}
+
+
+	public void setComprobante(boolean comprobante) {
+		this.comprobante = comprobante;
+	}
+
+
+	public String getDetalle() {
+		return detalle;
+	}
+
+
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
+	}
 
 
 	public Transferencia(CuentaBancaria cuenta, Banco b, double cantidad){
@@ -161,6 +187,52 @@ public class Transferencia implements Serializable{
 	public void setDestinatario(Object destinatario) {
 		this.destinatario = destinatario;
 	}
+	//Metodos para envio
+		public static ArrayList<Transferencia> pagar(double costo, Cliente cliente, Transferencia pagoTransporte) {
+			
+			double total=0;
+			
+			ArrayList<Transferencia> pagosPedido=Bodega.getPagos();
+			for(int i=0;i<pagosPedido.size();i++) {
+				total+=pagosPedido.get(i).getCantidad();
+				
+			}
+			
+			double ganancia=(costo-total)/pagosPedido.size();
+			CuentaBancaria cuenta=cliente.getCuenta();
+			ArrayList<Transferencia> transferencias=new ArrayList<Transferencia>();
+			for(int i=0;i<pagosPedido.size();i++) {
+				pagosPedido.get(i).setRemitente(cuenta);
+				pagosPedido.get(i).setCantidad(pagosPedido.get(i).getCantidad()+ganancia);
+				pagosPedido.get(i).realizarTransferencia();
+				transferencias.add(pagosPedido.get(i));
+					
+			}
+			ArrayList<Transferencia> pagos=new ArrayList<Transferencia>();
+			Bodega.setPagos(pagos);
+			
+			
+			
+			pagoTransporte.setRemitente(cuenta);
+			pagoTransporte.realizarTransferencia();
+			transferencias.add(pagoTransporte);
+
+			return transferencias;
+			
+			
+		}
+		
+		public void realizarTransferencia() {
+			getRemitente().setDinero(getRemitente().getDinero()-cantidad);
+			((CuentaBancaria) getDestinatario()).setDinero(((CuentaBancaria) getDestinatario()).getDinero()+cantidad);
+			setComprobante(true);
+		}
+		
+		public Transferencia(CuentaBancaria cuenta, double cantidad) {
+			destinatario=cuenta;
+			this.cantidad=cantidad;
+		}
+
 
 
 }

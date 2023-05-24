@@ -213,6 +213,34 @@ public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
 		return pedido;
 	}
 
+	public void abastecerBodega(ControlCalidad c, ArrayList<Producto> lista) {
+        if ((productosEnBodega.isEmpty() || productosEnBodega == null ) && ControlCalidad.listaSinLista(c.getCompra().getCompraLlego(), c.getProductosDefectuosos()) != null) {
+            this.setProductos(ControlCalidad.listaSinLista(c.getCompra().getCompraLlego(), c.getProductosDefectuosos()));
+            if (lista != null) {
+                this.abastecerBodega(lista);
+            }
+        }  else if (lista != null){
+            this.abastecerBodega(lista);
+        }
+
+    }  
+
+    public void abastecerBodega(ArrayList<Producto> lista) {
+        for (Producto producto : lista) {
+            this.addProducto(producto);
+        }
+
+    }
+
+	
+    public void addProducto(Producto producto){
+        productosEnBodega.add(producto);
+    }
+
+	public void setProductos(ArrayList<Producto> productos){
+        this.productosEnBodega = productos;
+    }
+
 	public static String getResumenPedido() {
 		return resumenPedido;
 	}
