@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Persona;
-import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Transferencia;
-import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Tienda;
-import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Venta;
-import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Informe;
-import AdministracionDeTienda.src.gestorAplicacion.clasesBase.Banco.SolucionesProblemaFinanciero;
+
 import baseDatos.Deserializador;
 import gestorAplicacion.clasesBase.Producto;
 import gestorAplicacion.clasesBase.Producto.Tipo;
+import gestorAplicacion.clasesBase.Socio;
+import gestorAplicacion.clasesBase.Tienda;
+import gestorAplicacion.clasesBase.Transferencia;
+import gestorAplicacion.clasesBase.Venta;
+import gestorAplicacion.clasesBase.CuentaBancaria;
+import gestorAplicacion.clasesBase.Informe;
 import gestorAplicacion.clasesBase.Persona;
 import baseDatos.Serializador;
 
