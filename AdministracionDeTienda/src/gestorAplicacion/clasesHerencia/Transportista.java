@@ -11,6 +11,30 @@ import gestorAplicacion.clasesBase.*;
 public class Transportista extends Persona{
 	private float precioBase, precioDistancia, precioCarga, precioTotal;
 	
+	public float getPrecioBase() {
+		return precioBase;
+	}
+
+	public void setPrecioBase(float precioBase) {
+		this.precioBase = precioBase;
+	}
+
+	public float getPrecioDistancia() {
+		return precioDistancia;
+	}
+
+	public void setPrecioDistancia(float precioDistancia) {
+		this.precioDistancia = precioDistancia;
+	}
+
+	public float getPrecioCarga() {
+		return precioCarga;
+	}
+
+	public void setPrecioCarga(float precioCarga) {
+		this.precioCarga = precioCarga;
+	}
+
 	public Transportista(String nombre, float precioB, float precioD, float precioC,int calificacion, CuentaBancaria cuenta ) {
 		super(nombre, calificacion,cuenta);
 		precioBase = precioB;
