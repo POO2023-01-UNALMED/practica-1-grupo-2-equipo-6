@@ -80,4 +80,48 @@ public class Transportista extends Persona{
 			
 		}
 
+		public void calificar(ControlCalidad ct) {
+			int calificacion = this.calificar();
+			if (this == ct.getTransportista()) {
+				ArrayList<Producto> productosExtraviados = ct.getProductosExtraviados();
+				ArrayList<Producto> productosAReponerT = ct.getProductosAReponerT();
+				if (productosAReponerT == null) {
+					productosAReponerT = new ArrayList<>();
+				}
+	
+				if ((productosExtraviados.isEmpty() || productosExtraviados == null) && productosAReponerT.isEmpty()) {
+					this.setCalificacion(calificacion);
+					return;
+				}
+	
+				int totalProductos = 0;
+				int productosReemplazados = 0;
+	
+				for (Producto p: productosExtraviados) {
+					totalProductos++;
+					if (productosAReponerT.contains(p)) {
+						productosReemplazados++;
+					}
+				}
+	
+				if (productosReemplazados == totalProductos) {
+					this.setCalificacion(calificacion);
+					return;
+				}
+	
+				double porcentajeReemplazo = ((double) productosReemplazados) / totalProductos;
+	
+				if (porcentajeReemplazo >= 0.8) {
+					this.setCalificacion(calificacion - 1);
+				} else if (porcentajeReemplazo >= 0.6) {
+					this.setCalificacion(calificacion - 2);
+				} else if (porcentajeReemplazo> 0) {
+					this.setCalificacion(calificacion - 3);
+				} else {
+					this.setCalificacion(calificacion - 4);
+				}
+	
+			}
+		}
+
 }

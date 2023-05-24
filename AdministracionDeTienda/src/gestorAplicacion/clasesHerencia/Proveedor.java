@@ -1,6 +1,9 @@
 package gestorAplicacion.clasesHerencia;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 import gestorAplicacion.clasesBase.*;
 
@@ -77,7 +80,110 @@ public class Proveedor extends Persona{
 	public  int calificar() {
 		return 0;
 	}
+
+	public ArrayList<Producto> pDefectuososAReponer(ControlCalidad control) {
+        ArrayList<Producto> productosAReponer = new ArrayList<>();
+        ArrayList<Producto> listaProductos = control.getProductosDefectuosos();
+        Random random = new Random();
+        Set<Integer> indicesSeleccionados = new HashSet<>();
+
+        int cantidadProductos = listaProductos.size();
+        int cantidadSeleccionada = random.nextInt(cantidadProductos + 1);
+
+        while (cantidadSeleccionada > 0) {
+            int indiceAleatorio = random.nextInt(cantidadProductos);
+            if (!indicesSeleccionados.contains(indiceAleatorio)) {
+                Producto productoSeleccionado = listaProductos.get(indiceAleatorio);
+                productosAReponer.add(productoSeleccionado);
+                indicesSeleccionados.add(indiceAleatorio);
+                cantidadSeleccionada--;
+            }
+        }
+
+        return productosAReponer;
+    }
 	
+	public void calificar(ControlCalidad c) {
+        if (this != c.getProveedor()) {
+            return;
+        }
+    
+        ArrayList<Producto> productosAReponer = c.getProductosAReponerP();
+        ArrayList<Producto> productosDefectuosos = c.getProductosDefectuosos();
+        if (productosAReponer == null) {
+            productosAReponer = new ArrayList<>();
+        }
+    
+        int totalProductos = productosDefectuosos.size();
+        int productosReemplazados = 0;
+    
+        for (Producto producto : productosDefectuosos) {
+            if (productosAReponer.contains(producto)) {
+                productosReemplazados++;
+            }
+        }
+    
+        int productosFaltantes = c.getProdsFaltantesCompra().size();
+        int pedido = c.getCompra().getPedido().size();
+    
+        double porcentajeDeFaltanntes = ((double) productosFaltantes) / pedido;
+        double porcentajeReemplazo = ((double) productosReemplazados) / totalProductos;
+    
+        int calificacion = this.calificar();
+    
+        if (productosDefectuosos.isEmpty() && productosAReponer.isEmpty() && porcentajeDeFaltanntes == 0) {
+            this.setCalificacion(calificacion);
+            return;
+        } else if (productosDefectuosos.isEmpty() && productosAReponer.isEmpty() && porcentajeDeFaltanntes < 0.5) {
+            this.setCalificacion(calificacion - 1);
+            return;
+        } else if (productosDefectuosos.isEmpty() && productosAReponer.isEmpty() && porcentajeDeFaltanntes >= 0.5) {
+            this.setCalificacion(calificacion - 2);
+            return;
+        }
+    
+        if (productosReemplazados == totalProductos && porcentajeDeFaltanntes == 0) {
+            this.setCalificacion(calificacion);
+            return;
+        } else if (productosReemplazados == totalProductos && porcentajeDeFaltanntes < 0.5) {
+            this.setCalificacion(calificacion - 1);
+            return;
+        } else if (productosReemplazados == totalProductos && porcentajeDeFaltanntes >= 0.5) {
+            this.setCalificacion(calificacion - 2);
+            return;
+        }
+    
+        if (porcentajeDeFaltanntes == 0) {
+            if (porcentajeReemplazo >= 0.8) {
+                this.setCalificacion(calificacion - 1);
+            } else if (porcentajeReemplazo >= 0.6) {
+                this.setCalificacion(calificacion - 2);
+            } else if (porcentajeReemplazo > 0) {
+                this.setCalificacion(calificacion - 3);
+            } else {
+                this.setCalificacion(calificacion - 4);
+            }
+            return;
+        } else if (porcentajeDeFaltanntes < 0.5) {
+            if (porcentajeReemplazo >= 0.8) {
+                this.setCalificacion(calificacion - 2);
+            } else if (porcentajeReemplazo >= 0.6) {
+                this.setCalificacion(calificacion - 3);
+            } else if (porcentajeReemplazo >= 0) {
+                this.setCalificacion(calificacion - 4);
+            }
+            return;
+        } else {
+            if (porcentajeReemplazo >= 0.8) {
+                this.setCalificacion(calificacion - 3);
+            } else {
+                this.setCalificacion(calificacion - 4);
+            }
+            return;
+        }
+    }
+	
+
 	public void setCostoCamiseta(float costo) { costoCamiseta = costo;}
 	
 	public void setCostoPantalon(float costo) { costoPantalon = costo;}
