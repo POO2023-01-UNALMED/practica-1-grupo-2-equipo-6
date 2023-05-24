@@ -8,7 +8,11 @@ import gestorAplicacion.clasesHerencia.Proveedor;
 import gestorAplicacion.clasesHerencia.Transportista;
 import baseDatos.*;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Random;
+import java.util.Set;
 
 import baseDatos.Deserializador;
 
@@ -22,6 +26,8 @@ public class Compra implements java.io.Serializable{
 	private Transportista transportistaSeleccionado;
 	private ArrayList<Producto> pedido = new ArrayList<Producto>();
 	private ArrayList<Transportista> transportistas = new ArrayList<Transportista>();
+	private ArrayList<Producto> productosExtraviados;
+	private ArrayList<Producto> compraLlego;
 	
 	public Compra( Tienda tienda) {
 		
@@ -156,6 +162,74 @@ public class Compra implements java.io.Serializable{
 		return costo;
 		
 	}
+
+	public ArrayList<Producto> generarProductosExtraviados() {
+        ArrayList<Producto> productosSeleccionados = new ArrayList<>();
+        ArrayList<Producto> listaProductos = this.proveedorSeleccionado.getBodega().getProductosEnBodega();
+        Random random = new Random();
+        Set<Integer> indicesSeleccionados = new HashSet<>();
+    
+        int cantidadProductos = listaProductos.size();
+        int maxCantidadSeleccionada = (int) Math.ceil(cantidadProductos * 0.4); 
+    
+        int cantidadSeleccionada = random.nextInt(maxCantidadSeleccionada + 1);
+    
+        while (cantidadSeleccionada > 0) {
+            int indiceAleatorio = random.nextInt(cantidadProductos);
+            if (!indicesSeleccionados.contains(indiceAleatorio)) {
+                Producto productoSeleccionado = listaProductos.get(indiceAleatorio);
+                productosSeleccionados.add(productoSeleccionado);
+                indicesSeleccionados.add(indiceAleatorio);
+                cantidadSeleccionada--;
+            }
+        }
+        this.productosExtraviados = productosSeleccionados;
+        return productosSeleccionados;
+    }
+
+	public ArrayList<Producto> generarCompraLlego(){
+        ArrayList<Producto> lista1 = this.proveedorSeleccionado.getBodega().getProductosEnBodega();
+        ArrayList<Producto> lista2 = this.productosExtraviados;
+    
+        if (lista1.size() == lista2.size() && lista1.containsAll(lista2)) {
+            return new ArrayList<>();
+        }
+    
+        ArrayList<Producto> compraLlego = new ArrayList<>();
+
+        HashMap<String, Integer> contadores1 = new HashMap<>();
+        HashMap<String, Integer> contadores2 = new HashMap<>();
+        for (Producto producto1 : lista1) {
+            String clave = producto1.getNombre() + "-" + producto1.getPrecio();
+            contadores1.put(clave, contadores1.getOrDefault(clave, 0) + 1);
+        }
+        for (Producto producto2 : lista2) {
+            String clave = producto2.getNombre() + "-" + producto2.getPrecio();
+            contadores2.put(clave, contadores2.getOrDefault(clave, 0) + 1);
+        }
+        for (Producto producto1 : lista1) {
+            String clave = producto1.getNombre() + "-" + producto1.getPrecio();
+            if (!contadores2.containsKey(clave) || contadores2.get(clave) <= 0) {
+                compraLlego.add(producto1);
+           } else {
+                contadores2.put(clave, contadores2.get(clave) - 1);
+            }
+        }
+            this.compraLlego = compraLlego;
+            return compraLlego;
+    } 
+
+	public void setProductosExtraviados(ArrayList<Producto> productosExtraviados){
+        this.productosExtraviados = productosExtraviados;
+    }
+
+    public ArrayList<Producto> getProductosExtraviados(){
+        return productosExtraviados;
+    }
+
+	public ArrayList<Producto> getCompraLlego(){
+        return compraLlego;
+    }
 	
 	public ArrayList<Proveedor> getProveedores() {return proveedores;}
 	
@@ -170,6 +244,7 @@ public class Compra implements java.io.Serializable{
 	public Transportista getTransportistaSeleccionado() {return transportistaSeleccionado;}
 	
 	public void setTransportistaSeleccionado(Transportista t) {transportistaSeleccionado = t;}
+    
 	
 	public String toString() {
 		return "---------------------------------\n"
