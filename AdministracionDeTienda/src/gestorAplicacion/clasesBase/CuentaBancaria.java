@@ -3,13 +3,11 @@ package gestorAplicacion.clasesBase;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import ClasesProyecto.Credito.Cuota;
-
 public class CuentaBancaria implements Serializable{
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private Object propietario;
@@ -22,7 +20,7 @@ public class CuentaBancaria implements Serializable{
 	private String numeroCuenta;
 	private double cantidadLimite=-1;
 	private ArrayList<CuentaBancaria> fondosLigados=new ArrayList<CuentaBancaria>();
-	
+
 	public CuentaBancaria(double dinero, Pais pais, Banco banco , CuentaBancaria cuentaLigada) {
 		//Para crear fondos de empleados
 		this(dinero, pais,banco);
@@ -30,15 +28,15 @@ public class CuentaBancaria implements Serializable{
 		cuentaLigada.ligarFondo(this);
 	}
 	public CuentaBancaria(double dinero, Pais pais, Banco banco, double cantidadLimite, CuentaBancaria cuentaLigada) {
-		
+
 		//Para crear fondo auxiliar
 		this(dinero, pais, banco, cuentaLigada);
 		this.cantidadLimite=cantidadLimite;
 		propietario=banco;
-		
+
 	}
-	
-	
+
+
 	public CuentaBancaria(double dinero, Pais pais, Banco banco) {
 		this.dinero=dinero;
 		this.pais=pais;
@@ -51,22 +49,22 @@ public class CuentaBancaria implements Serializable{
 				this.numeroCuenta+=String.valueOf(digito);
 			}
 			valorPosibleIBAN=pais.getCodigoDePais()+String.valueOf(digitoDeControl)+numeroCuenta;
-			
+
 		}while(banco.autorizarCuenta(valorPosibleIBAN)==null);
-		
+
 		this.IBAN=valorPosibleIBAN;
-		
-		
+
+
 		banco.getCuentas().add(this);
-		
+
 	}
-	
+
 	public void ligarFondo(CuentaBancaria cuentaLigar) {
-	
+
 		fondosLigados.add(cuentaLigar);
 	}
 
-	
+
 	public String getNumeroCuenta() {
 		return numeroCuenta;
 	}
@@ -113,9 +111,9 @@ public class CuentaBancaria implements Serializable{
 
 	enum Pais{
 	COLOMBIA("AL"),BRASIL("BR"),DINAMARCA("DK"), ALEMANIA("DE"), MONACO("MC"),CHIPRE("CY"), VENEZUELA("VZ");
-	
+
 	private String codigoDePais;
-	
+
 	private Pais(String codigoDePais) {
 		this.setCodigoDePais(codigoDePais);
 	}
@@ -127,12 +125,12 @@ public class CuentaBancaria implements Serializable{
 	public void setCodigoDePais(String codigoDePais) {
 		this.codigoDePais = codigoDePais;
 	}
-	
-	
+
+
 	}
-	
+
 	public void pagar(Venta v) {
-		
+
 		if (this.dinero-v.getTotal()<0) {
 			entidad.generarCredito(new Credito(this, v.getTotal(), Cuota.DOCE));
 		}
@@ -142,61 +140,61 @@ public class CuentaBancaria implements Serializable{
 		}
 		Transferencia t= new Transferencia(this,Tienda.getCuentaTienda(),v.getTotal());
 		transferencias.add(t);
-		
+
 	}
-	
+
 	public Transferencia pagar(Transportista t, double...pagosAdicionales) {
-		
+
 		double pagoExtra = 0;
 		double pagoTransportista;
 		try {
 			for(double d:pagosAdicionales) {
-					pagoExtra+=d;	
+					pagoExtra+=d;
 		}
 			}
 		finally {
 			pagoTransportista=pagoExtra+t.getTarifa();
 		}
-			
+
 		dinero-=pagoTransportista;
 		return new Transferencia(this, t.getCuenta(),pagoTransportista);
-			
-			
-		
-		
-			
+
+
+
+
+
 	}
 	@Override
 	public String toString() {
-		
+
 		String s=String.format("\n\nCodigo de la cuenta:\n%s\nCantidad de dinero:\n%f\n",IBAN, dinero);
 		if(cantidadLimite!=-1) {
 			return s+"\nCantidad que debera contener:\n\n"+String.valueOf(cantidadLimite)+"\n\n";
 		}
 		return s;
 	}
-	
+
 	/***
 
 	public static void main(String[] args) {
 		Banco bbva=new Banco("BBVA");
 		Empleado s=new Empleado("Carmen0",5, new CuentaBancaria(100000,Pais.COLOMBIA,new Banco("BANCOLOMBIA")),17536167, Cargo.ARCHIVISTA);
 		Empleado s2=new Empleado("sdaj",11, new CuentaBancaria(121,Pais.ALEMANIA,bbva),123,Cargo.CONTADOR);
-		
+
 		Transportista t=new Transportista("Carmen1",5, new CuentaBancaria(12312,Pais.CHIPRE, bbva),12345);
 		Transportista t1=new Transportista("Carmen2",11, new CuentaBancaria(12312,Pais.VENEZUELA, bbva),12345);
 		Transportista t2=new Transportista("Carmen3",10, new CuentaBancaria(12312,Pais.ALEMANIA, bbva),12345);
 		ControlCalidad c=new ControlCalidad();
-		
+
 		Bodega b=new Bodega(new ArrayList<Producto>(){{ add(new Producto(Tipo.ABRIGO,34567)); }});
-		
+
 		Tienda tienda=new Tienda(123,c,b,s,s2);
-		
+
 		ArrayList<Producto> pB=new ArrayList<Producto>(){{  add(new Producto(Tipo.ABRIGO,12739)); add(new Producto(Tipo.ABRIGO,126365)); add(new Producto(Tipo.CAMISA,127389)) ; add(new Producto(Tipo.PANTALON,123789)); }};
 		Producto p3=pB.get(0);
 		ArrayList<Producto> productos=new ArrayList<Producto>(){{add(new Producto(Tipo.ABRIGO,1));add(new Producto(Tipo.ABRIGO,0));add(new Producto(Tipo.ABRIGO,125));add(new Producto(Tipo.CAMISA,127389));add(new Producto(Tipo.PANTALON,123));add(p3);}};
 		ArrayList<Producto> productosBuscados=new ArrayList<Producto>();
-		
+
 		for(Producto p: pB) {
 			for (Producto p1:productos) {
 				if(p.equals(p1)){//Modifiqué el equals para producto
@@ -206,18 +204,18 @@ public class CuentaBancaria implements Serializable{
 				}
 			}
 		}
-		
+
 		System.out.println("ESTE: "+productosBuscados);
 		System.out.println(p3.equals(new Producto(Tipo.ABRIGO,-123)));
-	
+
 		ArrayList<Transportista> trs=new ArrayList<Transportista>() {{add(t);add(t2);add(t1);}};
-		
+
 		System.out.println(Transportista.mejorTransportista(trs));
 		bbva.generarCredito(new Credito(s.getCuenta(),12345, Cuota.CINCO));
-		bbva.generarCredito(new Credito(s.getCuenta(),12367,Cuota.CINCO));	
+		bbva.generarCredito(new Credito(s.getCuenta(),12367,Cuota.CINCO));
 		System.out.println(bbva.getHistorialesCrediticios().toString());
 		System.out.println(bbva.getHistorialesCrediticios().get(s.getCuenta()).size());
-		
+
 		System.out.println(s2.getClass().getSimpleName());
 		   ArrayList<String> list1 = new ArrayList<String>();
 		      list1.add("JavaFx");
@@ -225,16 +223,16 @@ public class CuentaBancaria implements Serializable{
 		      list1.add("WebGL");
 		      list1.add("OpenCV");
 		      ArrayList<String> list2 = new ArrayList<String>();
-		   
+
 		      list2.add("Java");
 		      list2.add("JavaFx");
 		      list2.add("WebGL");
 		      list2.add("OpenCV");
 		      System.out.println(list2);
 		      System.out.println(pB.equals(pB));
-		
-		      
-		      
+
+
+
 		      int m=21;
 		      int u=0;
 		      int w=0;
@@ -248,31 +246,31 @@ public class CuentaBancaria implements Serializable{
 		      catch(ArithmeticException e) {
 		    	  System.out.println("Imprime ESTO --> "+ w);
 		      }
-		      
-		      
-		      
+
+
+
 		      ControlCalidad control=new ControlCalidad();
-		      
+
 		      Informe i=new Informe(TipoInforme.INFORME_VENTAS, Tienda.gestionarPago(),new Transferencia(t.getCuenta(),t1.getCuenta(),12345));
 		      Informe i1=new Informe(TipoInforme.INFORME_VENTAS, Tienda.gestionarPago(),new Transferencia(t.getCuenta(),t1.getCuenta(),12345));
 		      Collections.sort(Informe.getInformes());
 		      System.out.println(Informe.getInformes());
 		      Tienda tienda1=new Tienda(123,control,b,s);
-		      
+
 		      ArrayList<Transferencia> lista1 = new ArrayList<Transferencia>();
 		      lista1.add(new Transferencia(s.getCuenta(),s.getCuenta().getEntidad(),123));
 		      lista1.add(new Transferencia(s.getCuenta(),s.getCuenta().getEntidad(),123));
-		      
+
 		      s.getCuenta().getEntidad().getHistorialDePagos().put(s.getCuenta(), lista1);
 		      int cantidadDePagos=s.getCuenta().getEntidad().getHistorialDePagos().get(s.getCuenta()).size();
 		      System.out.println(s.getCuenta().getEntidad().getHistorialDePagos().get(s.getCuenta()));
 		      ArrayList<Integer> entero=new ArrayList<Integer>();
 		      System.out.println("Tamaño del arraylist "+entero.size());
-		      
+
 		      for(int integer:entero) {
 		    	  System.out.println(integer);
 		      }
-		      
+
 	}
 ***/
 
@@ -314,8 +312,8 @@ public class CuentaBancaria implements Serializable{
 	public void setFondosLigados(ArrayList<CuentaBancaria> fondosLigados) {
 		this.fondosLigados = fondosLigados;
 	}
-	
-	
-	
-	
+
+
+
+
 }
