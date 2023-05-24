@@ -3,6 +3,8 @@ package gestorAplicacion.clasesBase;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import gestorAplicacion.clasesHerencia.Transportista;
+
 public class Venta implements Serializable{
 
 	/**
