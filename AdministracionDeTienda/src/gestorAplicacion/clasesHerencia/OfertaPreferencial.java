@@ -8,10 +8,7 @@ import gestorAplicacion.clasesBase.Inventariar;
 public class OfertaPreferencial extends OfertaPorDefecto{
 
 	public OfertaPreferencial(ArrayList<Producto> productosOferta) {
-		this.setProdutosOferta(this.establecerOferta(productosOferta));
-		for(Producto p:productosOferta) {
-			this.setTotal(this.getTotal()+p.getPrecio());
-		}
+		super(productosOferta);
 
 	}
 
