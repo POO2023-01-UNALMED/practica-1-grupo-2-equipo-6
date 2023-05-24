@@ -6,9 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
 import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
-import gestorAplicacion.clasesBase.Transferencia.EstadoPago;
 import gestorAplicacion.clasesHerencia.Empleado;
 import gestorAplicacion.clasesHerencia.Empleado.Cargo;
 
@@ -17,7 +15,7 @@ public class Tienda implements java.io.Serializable {
 	private Bodega bodega;
 	private int calle;
 	private ArrayList<Empleado> empleados = new ArrayList<Empleado>();
-	private static final CuentaBancaria cuentaTienda=new CuentaBancaria(3,Pais.COLOMBIA,new Banco("BANCOLOMBIA"));
+	private static final CuentaBancaria cuentaTienda=new CuentaBancaria(145000,Pais.COLOMBIA,new Banco("BANCOLOMBIA"));
 	private int id;
 
 	public int getId() {
