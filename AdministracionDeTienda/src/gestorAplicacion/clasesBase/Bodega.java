@@ -3,7 +3,6 @@ package gestorAplicacion.clasesBase;
 import java.util.ArrayList;
 
 
-
 public class Bodega implements Inventariar,java.io.Serializable{
 
 	
@@ -13,6 +12,8 @@ public class Bodega implements Inventariar,java.io.Serializable{
 	private final int stopBodega;
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Producto> productosEnBodega = new ArrayList<Producto>();
+	private static String resumenPedido;
+	private static ArrayList<Transferencia> pagos=new ArrayList<Transferencia>();
 	
 	public Bodega( int max) {
 		stopBodega = max;
@@ -113,5 +114,72 @@ public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
 		
 		return "Camisetas = " + calcularCamisas()+ "\nPantalones = " + calcularPantalon() + "\nAbrigos = " +calcularAbrigos();
 	}
+	//Relacionado con ENVIO
+	public enum SETS{
+		ONLY,TU,COMPLETO;	
+	}
+	//PRIMERA INTERACCION-ENVIO
+	public static ArrayList<Producto> realizarPedido(ArrayList<Tienda> tiendas,SETS set,int cantidad){
+		ArrayList<Producto>necesarios=Producto.seleccionarProductos(set,cantidad);
+		ArrayList<Producto> pedido=new ArrayList<Producto>(); 
+		for(int i=0;i<tiendas.size();i++) {
+			if(necesarios.isEmpty()) {
+				break;
+				
+			}else {
+				Bodega bodega=tiendas.get(i).getBodega();
+				ArrayList<Producto> productos=bodega.pedirProductos(necesarios);
+				pedido.addAll(productos);
+				gestionarPago(tiendas.get(i),productos);
+				
+			}	
+			
+		}
+		crearResumen(necesarios,pedido);
+		
+		
+		return pedido;
+	}
+	
+	private static void crearResumen(ArrayList<Producto> necesarios, ArrayList<Producto> pedido) {
+		if(necesarios.size()==0) {
+			setResumenPedido("El pedido se ha completado exitosamente");
+		}else {
+			setResumenPedido("Por falta de disponibilidad de productos en las tiendas el pedido solo ha podido completar "+pedido.size()+" de los "+(((int)pedido.size())+((int)necesarios.size()))+" necesarios.");
+		}
+		
+	}
+	public static void gestionarPago(Tienda tienda, ArrayList<Producto> productos) {
+		double cantidad=0;
+		for(int i=0;i<productos.size();i++) {
+			cantidad+=productos.get(i).getCosto();
+			
+		}
+		Transferencia pago=new Transferencia(Tienda.getCuentatienda(),cantidad);
+		pago.setDetalle("Id Tienda:"+tienda.getId()+" VALOR: $"+cantidad);
+		getPagos().add(pago);
+		
+		
+	}
+
+//Metodo que se llama desde la primera interaccion
+	public ArrayList<Producto> pedirProductos(ArrayList<Producto> productos){
+		ArrayList<Producto> pedido=new ArrayList<Producto>();
+		ArrayList<Producto> completado=new ArrayList<Producto>();
+		for(int i=0;i<productos.size();i++) {
+			for(int e=0;e<productosEnBodega.size();e++) {
+				if(productos.get(i).getTipo()==productosEnBodega.get(e).getTipo()) {
+					pedido.add(productosEnBodega.get(e));
+					completado.add(productos.get(i));
+					productosEnBodega.remove(e);
+					break;
+				}
+			}
+			
+		}
+		productos.removeAll(completado);
+		return pedido;
+	}
+	
 
 }

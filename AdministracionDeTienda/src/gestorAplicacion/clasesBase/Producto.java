@@ -1,6 +1,10 @@
 package gestorAplicacion.clasesBase;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import gestorAplicacion.clasesBase.Bodega.SETS;
+
 
 public class Producto implements Serializable{
 
@@ -11,6 +15,8 @@ public class Producto implements Serializable{
 	private String nombre;
 	private double precio;
 	private double costo;
+	private Tipo tipo;
+
 	
 	
 	//private double costo;
@@ -29,8 +35,17 @@ public class Producto implements Serializable{
 		this(tipo);
 		this.precio=precio;
 		this.costo = costo;
+		this.tipo=tipo;
 		
 		
+	}
+
+	
+
+	public Producto(Tipo tipo, double costo) {
+		this.tipo=tipo;
+		this.costo=costo;
+		//Constructor para intervenido
 	}
 
 	public boolean equals(Producto p) {
@@ -110,6 +125,56 @@ public class Producto implements Serializable{
 	public String toString() {
 		return "\nTipo: "+nombre+"\nPrecio: "+precio;
 	}
+	
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+	
+	//Metodos ENVIO
+		public static ArrayList<Producto> seleccionarProductos(SETS set,int cantidad) {
+			ArrayList<Producto> productos=new ArrayList<Producto>();
+			switch(set) {
+			case ONLY: 
+				for(int i=0;i<cantidad;i++) {
+					productos.add(new Producto(Tipo.CAMISA));
+				
+			}
+			break;
+			case TU: 
+				for(int i=0;i<cantidad;i++) {
+					productos.add(new Producto(Tipo.CAMISA));
+					productos.add(new Producto(Tipo.PANTALON));
+				
+			}
+			break;
+			case COMPLETO: 
+				for(int i=0;i<cantidad;i++) {
+					productos.add(new Producto(Tipo.CAMISA));
+					productos.add(new Producto(Tipo.PANTALON));
+					productos.add(new Producto(Tipo.ABRIGO));
+					
+				
+			}
+			break;
+			
+			}
+			return productos;
+		}
+	    
+		public static ArrayList<Producto> clasificar(ArrayList<Producto> productos, Tipo tipo){
+			ArrayList<Producto> clasificados=new ArrayList<Producto>();
+			for(int i=0;i<productos.size();i++) {
+				Tipo tipado=productos.get(i).getTipo();
+				if(tipado==tipo) {
+					clasificados.add(productos.get(i));
+				}
+			}
+			return clasificados;
+		}
 
 
 		
