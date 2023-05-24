@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Informe implements Comparable<Informe>{
 	private static ArrayList<Informe> informes = new ArrayList<Informe>();
-	private String codigo; 
+	private String codigo;
 	private TipoInforme tipoInforme;
 	private ControlCalidad controlC;
 
@@ -16,13 +16,13 @@ public class Informe implements Comparable<Informe>{
 		;
 		this.tipoInforme=tipoInforme;
 		this.controlC=controlCalidad;
-		
-		String timestamp = ZonedDateTime.now(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ofPattern("MMddyyyhhmmss"));
-		
-		codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes.size());
-		
 
-			
+		String timestamp = ZonedDateTime.now(ZoneId.of("America/Bogota")).format(DateTimeFormatter.ofPattern("MMddyyyhhmmss"));
+
+		codigo=tipoInforme.getIdentificador()+timestamp+String.valueOf(informes.size());
+
+
+
 	}
 
 	enum TipoInforme {
@@ -69,14 +69,29 @@ public class Informe implements Comparable<Informe>{
 
 	@Override
 	public int compareTo(Informe i) {
-		
+
 		return this.getCodigo().compareTo(i.getCodigo());
 	}
-	
+
 	@Override
 	public String toString() {
-		if(tipoInforme==TipoInforme.INFORME_VENTAS) {
-			return String.format("Codigo: %s \nVenta: \nAcreditaciones de Pagos: ", codigo/* , ventaEfectuada, acreditacionesPagos  */);
+		if(tipoInforme==TipoInforme.INFORME_VENTAS){
+
+			String nota="Notas:";
+			if(Venta.getPorcentajeBanco()!=0) {
+	  nota+="\nLa tienda tiene una deuda no saldada\n"
+	  		+ "con el banco, por lo cual se ha lle-\n"
+	  		+ "gado al acuerdo de destinar el 20% de\n"
+	  		+ "cada venta a la entidad bancaria.";
+			}
+			return String.format("------------------------------------------------\n"
+			+"                Informe venta                   \n"
+			+"------------------------------------------------\n"
+			+"\n\nCodigo del Informe: %s \nContador:%s\n"
+			+"Comprador:%s\n"
+			+ "%s\n"
+			+"Ganancias netas:$%g\n"
+			+"%s",codigo,contable,ventaEfectuada.getComprador(),ventaEfectuada,ventaEfectuada.getGanancias(),nota);
 		}
 		else if(tipoInforme==TipoInforme.INFORME_CONTROL_CALIDAD) {
 			StringBuilder report = new StringBuilder();
@@ -126,7 +141,7 @@ public class Informe implements Comparable<Informe>{
 					report.append(producto.getNombre()).append(" ").append(producto.getPrecio()).append("\n");
 				}
 			}
-	
+
 			if (controlC.getProductosAReponerT() == null || controlC.getProductosAReponerT().isEmpty()) {
 				report.append("\nNo hay productos para reponer por el transportista\n");
 			} else {
@@ -152,6 +167,21 @@ public class Informe implements Comparable<Informe>{
 
 			return report.toString();
 		}
+		else if(tipoInforme==TipoInforme.FINANCIERO){
+			return String.format("------------------------------------------------\n"
+			+"             Informe Estado Financiero          \n"
+			+"------------------------------------------------\n"
+			+"\n\nCodigo del Informe: %s \nContador: %s\n"
+			+"Puntaje crediticio actual: %s\n"
+			+"\nSe le ha asignado una tasa de interes\n"
+			+ "del %% %g."
+			+"\nIncluyendo intereses, la tienda tiene\n"
+			+ "una deuda de $%f \n\nPresupuesto actual:\n"
+			+ "%f",codigo,contable.getNombre(),
+			puntajeCrediticioActual.toString(),puntajeCrediticioActual.getTasaDeInteres()
+			, cantidadActualDeuda, Tienda.getCuentaTienda().getDinero());
+		}
+		
 		return null;//Por si es necesario añadir otro tipo de informes
 	}
 

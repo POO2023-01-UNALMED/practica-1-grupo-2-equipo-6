@@ -46,25 +46,32 @@ public abstract class Persona implements Serializable {
         public CuentaBancaria getCuenta(){
             return cuenta;
         }
-    
+
         public void setCuenta(CuentaBancaria cuenta){
             this.cuenta = cuenta;
         }
-    
+
         public String  getNombre(){
             return nombre;
         }
-    
+
         public void setNombre(String nombre){
             this.nombre = nombre;
         }
-    
+
         public int getCalificacion(){
             return calificacion;
         }
-    
+
         public void setCalificacion(int calificacion){
             this.calificacion = calificacion;
         }
-    
+
+        public String toString {
+          return nombre;
+        }
+        public String demandar(){
+          return nombre+" ha decidido no demandarlo."
+        }
+
 }
