@@ -29,7 +29,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//valoresIniciales();
+		valoresIniciales();
 		//serializarEnvio();
 	
 		Producto p=new Producto(Tipo.ABRIGO);
@@ -828,6 +828,9 @@ public class Main {
 		}
 
 	static public void valoresIniciales() {
+		Banco bbva=new Banco("BBVA");
+		Banco bancoAgrario=new Banco("Banco Agrario");
+		Banco bbbank=new Banco("BBBank");
 
 		ArrayList<Producto> productos1=new ArrayList<Producto>();
 		ArrayList<Producto> productos2=new ArrayList<Producto>();
@@ -850,9 +853,7 @@ public class Main {
 			productos3.add(new Producto(Tipo.ABRIGO));
 		}
 
-		Banco bbva=new Banco("BBVA");
-		Banco bancoAgrario=new Banco("Banco Agrario");
-		Banco bbbank=new Banco("BBBank");
+		
 
 		ArrayList<Producto> productosSocio=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));  add(new Producto(Tipo.PANTALON));}};
 		ArrayList<Producto> productosSocio2=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));}};
@@ -885,7 +886,7 @@ public class Main {
 		Serializador socio1 = new Serializador(exito,"exito");
 		Serializador socio2 = new Serializador(falabella,"falabella");
 		Serializador socio3 = new Serializador(primark, "primark");
-
+		Serializador archivistaTienda = new Serializador(archivista, "archivistaTienda");
 		Venta venta1=new Venta(primark,115000, productos1, null, transportista1);
 		Venta venta2=new Venta(falabella,170000, productos2, null, transportista1);
 		Venta venta3=new Venta(exito,1234567, productos1, null, transportista1);
