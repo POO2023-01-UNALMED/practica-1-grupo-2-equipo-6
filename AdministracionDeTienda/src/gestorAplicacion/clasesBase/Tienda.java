@@ -159,10 +159,10 @@ public class Tienda implements Serializable {
 			return null;
 		}
 	}
-//	@Override
-//	public void finalize() {
-//		System.out.println("Estado de la tienda: Bancarrota");
-//	}
+	
+	public static String declararBancarrota() {
+	    return "Bancarrota";
+	}
 
 
 
