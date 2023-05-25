@@ -34,7 +34,6 @@ public class Cliente extends Persona implements Serializable {
 		super(nombre, calificacion);
 		this.ciudad = ciudad;
 		this.cuenta=cuenta;
-		setNombre(nombre);
 		asignarIdAleatorio();
 		
 	}
