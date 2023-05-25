@@ -26,7 +26,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//valoresIniciales();
+		valoresIniciales();
 		serializarEnvio();
 
 		int opcion = -1;
@@ -653,136 +653,86 @@ public class Main {
 
 
 	static public void valoresIniciales() {
-
 		Banco bbva=new Banco("BBVA");
 		Banco bancoAgrario=new Banco("Banco Agrario");
 		Banco bbbank=new Banco("BBBank");
-
-		ArrayList<Producto> productos1=new ArrayList<Producto>();
-		ArrayList<Producto> productos2=new ArrayList<Producto>();
-		ArrayList<Producto> productos3=new ArrayList<Producto>();
-		for(int i=0;i<=5;i++) {
-
-
-
-			productos1.add(new Producto(Tipo.PANTALON));
-			productos1.add(new Producto(Tipo.CAMISA));
-			productos1.add(new Producto(Tipo.ABRIGO));
-			productos1.add(new Producto(Tipo.ABRIGO));
-			productos2.add(new Producto(Tipo.PANTALON));
-			productos2.add(new Producto(Tipo.CAMISA));
-			productos2.add(new Producto(Tipo.ABRIGO));
-			productos2.add(new Producto(Tipo.ABRIGO));
-			productos3.add(new Producto(Tipo.PANTALON));
-			productos3.add(new Producto(Tipo.CAMISA));
-			productos3.add(new Producto(Tipo.ABRIGO));
-			productos3.add(new Producto(Tipo.ABRIGO));
-		}
-
-
-
-
-		ArrayList<Producto> productosSocio=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));  add(new Producto(Tipo.PANTALON));}};
-		ArrayList<Producto> productosSocio2=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));}};
-		ArrayList<Producto> productosSocio3=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO));  add(new Producto(Tipo.PANTALON));}};
-
-		/*
-		OfertaPorDefecto o1=new OfertaPorDefecto(productosSocio);
-		OfertaPorDefecto o=new OfertaPreferencial(productosSocio);
-		System.out.println(o.getProductosOferta()+" ESTE ES EL PRECIO POR PREFERENCIAS"+o.getTotal());
-		System.out.println(o1.getProductosOferta()+ " ESTE ES EL PRECIO POR VENTAS: "+ o1.getTotal());
-		ArrayList<OfertaPorDefecto> ofertasPropuestas=new ArrayList<OfertaPorDefecto>();
-		ofertasPropuestas.add(o);
-		ofertasPropuestas.add(o1);
-		Collections.sort(ofertasPropuestas);
-		System.out.println(" ESTA ES LA OFERTA CON MENOR CANTIDAD---> "+ ofertasPropuestas.get(0).getProductosOferta());
-		*/
-
-		Bodega bodegaTienda1 = new Bodega(productos1);
-		Bodega bodegaTienda2 = new Bodega(productos2);
-		Bodega bodegaTienda3 = new Bodega(productos3);
-
-		
 		Empleado contador1=new Empleado("Manuel Delgado Villegas", 5,  new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
 		Empleado contador2=new Empleado("Juan Diaz de Garayo", 5 ,  new CuentaBancaria(50000,Pais.COLOMBIA, bbbank), 8000, Cargo.CONTADOR);
 		Empleado contador3=new Empleado("Margarita Sanchez Gutierrez", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
 		Empleado operario=new Empleado("Patricia Dagorn", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.OPERARIO);
-		Empleado archivista=new Empleado("Jose Antonio Rodriguez Vega",4,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 45621,Cargo.ARCHIVISTA);
+		Bodega bodegaTienda1 = new Bodega(50);
+		Bodega bodegaTienda2 = new Bodega(70);
+		Bodega bodegaTienda3 = new Bodega(90);
+		
+		Producto camisa = new Producto(Tipo.CAMISA, 40000, 20000);
+		Producto pantalon = new Producto(Tipo.PANTALON, 50000, 25000);
+		Producto abrigo = new Producto(Tipo.ABRIGO, 60000, 30000);
+		//Tienda1
+		for(int i=0;i<10;i++) {
+			bodegaTienda1.agregarProductos(camisa);
+		}
+		for(int i=0;i<5;i++) {
+			bodegaTienda1.agregarProductos(pantalon);
+		}
+		for(int i=0;i<10;i++) {
+			bodegaTienda1.agregarProductos(abrigo);
+		}
+		//Tienda2
+		for(int i=0;i<9;i++) {
+			bodegaTienda2.agregarProductos(camisa);
+		}
+		for(int i=0;i<8;i++) {
+			bodegaTienda2.agregarProductos(pantalon);
+		}
+		for(int i=0;i<17;i++) {
+			bodegaTienda2.agregarProductos(abrigo);
+		}
+		//Tienda3
+		for(int i=0;i<10;i++) {
+			bodegaTienda3.agregarProductos(camisa);
+		}
+		for(int i=0;i<6;i++) {
+			bodegaTienda3.agregarProductos(pantalon);
+		}
+		for(int i=0;i<10;i++) {
+			bodegaTienda3.agregarProductos(abrigo);
+		}
 
+		Tienda tiendaLaureles = new Tienda(1000000,bodegaTienda1, contador1, operario );
+		Tienda tiendaPoblado = new Tienda (1200000,bodegaTienda2, contador2);
+		Tienda tiendaEnvigado = new Tienda(1100000,bodegaTienda3, contador3);
 
+		Bodega bodegap1 = new Bodega(100);
+		Bodega bodegap2 = new Bodega(100);
+		Bodega bodegap3 = new Bodega(100);
+		
+		CuentaBancaria cu = new CuentaBancaria(25000,Pais.COLOMBIA,bbbank);
 
-		Tienda tiendaLaureles = new Tienda(10234,bodegaTienda1, contador1, operario );
-		Tienda tiendaPoblado = new Tienda (14326780,bodegaTienda2, contador2);
-		Tienda tiendaEnvigado = new Tienda(47385,bodegaTienda3, contador3);
+		Proveedor proveedor1 = new Proveedor("Maria", 0, cu, bodegap1, 20000, 25000, 30000);
+		Proveedor proveedor2 = new Proveedor("Carlo", 0, cu , bodegap2, 20000, 25000, 30000);
+		Proveedor proveedor3 = new Proveedor("Julio", 0, cu, bodegap3, 20000, 25000, 30000);
+		
+		Serializador p1 = new Serializador(proveedor1, "proveedor1");
+		Serializador p2 = new Serializador(proveedor2, "proveedor2");
+		Serializador p3 = new Serializador(proveedor3, "proveedor3");
 
-		Credito credito=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),70, Cuota.DOCE));//Necesarios para gestion financiera
-		Credito credito1=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),100, Cuota.CINCO));
-
-		//Transferencia transferencia=new Transferencia(Tienda.getCuentaTienda(),PuntajeCredito.ALTO,credito,false);
-		//Tienda.pagarCuotaMensual(PuntajeCredito.ALTO,credito);
-
-
-		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO,credito1);
-
-		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO, credito1);
-		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO,credito1);
-		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO, credito1);
-		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO,credito1);
-
-
-		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO, credito1);
-		Tienda.pagarTodo(PuntajeCredito.ALTO, credito1);
-		Tienda.pagarTodo(PuntajeCredito.ALTO, credito1);
-
-
-
-
-
-
-		Transportista transportista1 = new Transportista("Maria",123,123,123, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
-		Transportista transportista2 = new Transportista("Carlos",123,123,12,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
-		Transportista transportista3 = new Transportista("Rosa",123,11,123,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista1 = new Transportista("Maria",1000,500,16, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista2 = new Transportista("Carlos",2000,400,15,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		Transportista transportista3 = new Transportista("Rosa",3000,300,10,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
 
 		Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
 		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
 		Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
-
-		Socio exito = new Socio("EXITO",productosSocio, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.COLOMBIA, bbva));
-		Socio falabella =  new Socio("Falabella",productosSocio2, new ArrayList<Venta>() {{}}, new CuentaBancaria(1500000,Pais.VENEZUELA, bbbank));
-		Socio primark = new Socio("PRIMARK",productosSocio3, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.BRASIL, bancoAgrario));;
-
-		Serializador socio1 = new Serializador(exito, "exito");
-		Serializador socio2 = new Serializador(falabella, "falabella");
-		Serializador socio3 = new Serializador(primark, "primark");
-
-
-
-		Venta venta1=new Venta(primark,115000, productos1, null, transportista1);
-		Venta venta2=new Venta(falabella,170000, productos2, null, transportista1);
-		Venta venta3=new Venta(exito,1234567, productos1, null, transportista1);
-
-		ArrayList<Venta> ventasPorDefecto=new ArrayList<Venta>();
-
-		ventasPorDefecto.add(venta3);
-		ventasPorDefecto.add(venta1);
-		ventasPorDefecto.add(venta2);
-
-		ArrayList<Transportista> transportistasPorDefecto=new ArrayList<Transportista>();
-		transportistasPorDefecto.add(transportista3);
-		transportistasPorDefecto.add(transportista2);
-		transportistasPorDefecto.add(transportista1);
-
-		Serializador transportistas=new Serializador(transportistasPorDefecto,"transportistas");
-		Serializador ventas=new Serializador(ventasPorDefecto,"ventasPorDefecto");
-		Serializador proveedor1Serializado = new Serializador(exito, "proveedor1");
-		Serializador proveedor2Serializado = new Serializador(falabella, "proveedor2");
-		Serializador proveedor3Serializado = new Serializador(primark, "proveedor3");
-
-
+		
 		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
-		Serializador archivistaTienda=new Serializador(archivista, "archivistaTienda");
+
+		String comprasPorRevisar = "";
+		Serializador c1 = new Serializador(comprasPorRevisar, "comprasPorRevisar");
+		
+		int contadorCompras = 0;
+		Serializador contador = new Serializador(contadorCompras, "contadorCompras");
 	}
 	//Scanner
 			static Scanner sc=new Scanner(System.in);
