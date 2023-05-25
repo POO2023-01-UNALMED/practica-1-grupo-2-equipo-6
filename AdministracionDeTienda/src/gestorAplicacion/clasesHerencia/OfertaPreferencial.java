@@ -27,7 +27,8 @@ public class OfertaPreferencial extends OfertaPorDefecto{
 
 			do {
 
-				productosOferta.add(new Producto(Tipo.CAMISA,0.8f));
+				productosOferta.add(new Producto(Tipo.CAMISA,0.8f*Tipo.CAMISA.getPrecioEstandar()));
+				i++;
 
 			}while(i<3);
 
@@ -37,7 +38,8 @@ public class OfertaPreferencial extends OfertaPorDefecto{
 
 			do {
 
-				productosOferta.add(new Producto(Tipo.ABRIGO,0.8f));
+				productosOferta.add(new Producto(Tipo.ABRIGO,0.8f*Tipo.ABRIGO.getPrecioEstandar()));
+				i++;
 
 			}while(i<3);
 			return productosOferta;
@@ -47,7 +49,8 @@ public class OfertaPreferencial extends OfertaPorDefecto{
 
 			do {
 
-				productosOferta.add(new Producto(Tipo.PANTALON,0.8f));
+				productosOferta.add(new Producto(Tipo.PANTALON,0.8*Tipo.PANTALON.getPrecioEstandar()));
+				i++;
 
 			}while(i<3);
 			return productosOferta;

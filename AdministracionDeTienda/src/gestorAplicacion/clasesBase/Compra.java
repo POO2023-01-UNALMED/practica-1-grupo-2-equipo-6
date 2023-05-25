@@ -13,10 +13,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+import java.io.Serializable;
 
 import baseDatos.Deserializador;
 
-public class Compra implements java.io.Serializable{
+public class Compra implements Serializable{
 	
 	static int codigo;	
 	private double costo = 0;
