@@ -34,8 +34,8 @@ public class Intervenido extends Producto  {
 	public enum Colecciones{
 		INDUSTRIAL(1),GEOMETRIA(2),NATURALEZA(3);
 
-		public int id;
-		Colecciones(int i) {
+		 int id;
+		 Colecciones(int i) {
 			id=i;
 		}
 		

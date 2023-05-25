@@ -16,6 +16,10 @@ public class Bodega implements Inventariar,java.io.Serializable{
 	private static String resumenPedido;
 	private static ArrayList<Transferencia> pagos=new ArrayList<Transferencia>();
 	
+	public Bodega(ArrayList<Producto> productos) {
+		this.stopBodega = productos.size();
+		productosEnBodega=productos;
+	}
 	public Bodega( int max) {
 		stopBodega = max;
 	}

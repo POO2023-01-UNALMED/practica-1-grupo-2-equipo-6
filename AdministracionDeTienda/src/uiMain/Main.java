@@ -3,6 +3,22 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import baseDatos.Deserializador;
+import gestorAplicacion.clasesBase.*;
+import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
+import gestorAplicacion.clasesBase.Banco.SolucionesProblemaFinanciero;
+import gestorAplicacion.clasesBase.Bodega.SETS;
+import gestorAplicacion.clasesBase.Credito.Cuota;
+import gestorAplicacion.clasesBase.Credito.Estado;
+import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
+import gestorAplicacion.clasesBase.Producto.Tipo;
+import gestorAplicacion.clasesHerencia.*;
+import gestorAplicacion.clasesHerencia.Cliente.Ciudades;
+import gestorAplicacion.clasesHerencia.Cliente.TipoEnvio;
+import gestorAplicacion.clasesHerencia.Empleado.Cargo;
+import gestorAplicacion.clasesHerencia.Intervenido.Colecciones;
+import baseDatos.Serializador;
+
 
 
 public class Main {
@@ -686,7 +702,7 @@ public class Main {
 		Bodega bodegaTienda2 = new Bodega(productos2);
 		Bodega bodegaTienda3 = new Bodega(productos3);
 
-		ControlCalidad cc=new ControlCalidad();
+		
 		Empleado contador1=new Empleado("Manuel Delgado Villegas", 5,  new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
 		Empleado contador2=new Empleado("Juan Diaz de Garayo", 5 ,  new CuentaBancaria(50000,Pais.COLOMBIA, bbbank), 8000, Cargo.CONTADOR);
 		Empleado contador3=new Empleado("Margarita Sanchez Gutierrez", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
@@ -785,7 +801,7 @@ public class Main {
 				return o;
 			}
 
-		public static void logisticaEnvio() {
+	public static void logisticaEnvio() {
 
 			int o=2;
 			do {
@@ -936,6 +952,7 @@ public class Main {
 
 
 			}while(o==2);
+	}
 			
 			public static void serializarEnvio() {
 				Banco BancoElectronico=new Banco("BancoElectronico");
