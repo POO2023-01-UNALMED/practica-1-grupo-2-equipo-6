@@ -716,6 +716,21 @@ public class Main {
 		Tienda tiendaPoblado = new Tienda (1200000,bodegaTienda2, contador2);
 		Tienda tiendaEnvigado = new Tienda(1100000,bodegaTienda3, contador3);
 
+		Credito credito=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),70, Cuota.DOCE));//Necesarios para gestion financiera 
+		Credito credito1=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),100, Cuota.CINCO));
+
+		Tienda.pagarCuotaMensual(PuntajeCredito.MEDIO,credito1);
+	
+		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO, credito1);
+		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO,credito1);
+		Tienda.pagarCuotaMensual(PuntajeCredito.MEDIO, credito1);
+		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO,credito1);
+		
+		
+		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO, credito1);
+		Tienda.pagarTodo(PuntajeCredito.MEDIO, credito1);
+		Tienda.pagarTodo(PuntajeCredito.ALTO, credito1);
+
 		Socio exito = new Socio("EXITO",productosSocio, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.COLOMBIA, bbva));
 		Socio falabella =  new Socio("Falabella",productosSocio2, new ArrayList<Venta>() {{}}, new CuentaBancaria(1500000,Pais.VENEZUELA, bbbank));
 		Socio primark = new Socio("PRIMARK",productosSocio3, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.BRASIL, bancoAgrario));;
