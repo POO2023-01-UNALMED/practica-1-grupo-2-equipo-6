@@ -1013,6 +1013,10 @@ public class Main {
 		
 		Venta venta1= new Venta(proveedor1, 23456, productos1, null, transportista1);
 		Venta venta2=new Venta(falabella,213198,productos2,null,transportista2);
+		ArrayList<Venta> ventasPorDefecto=new ArrayList<Venta>();
+		ventasPorDefecto.add(venta1);
+		ventasPorDefecto.add(venta2);
+		Serializador ventas=new Serializador(ventasPorDefecto,"ventasPorDefecto");
 		
 
 		Serializador socio1 = new Serializador(exito, "exito");
@@ -1023,7 +1027,7 @@ public class Main {
 		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
 		Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
 		
-		Serializador transportistas= new Serializador(transportistasPorDefecto,"transportistasPorDefecto");
+		Serializador transportistas= new Serializador(transportistasPorDefecto,"transportistas");
 		
 		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
