@@ -1545,9 +1545,7 @@ public class Main {
 				}
 				else {
 					System.out.println("\n\nUSTED HA QUEBRADO!");
-					tienda1.declararBancarrota();
-					tienda2.declararBancarrota();
-					tienda3.declararBancarrota();
+					Tienda.declararBancarrota();
 				}
 				
 			}
