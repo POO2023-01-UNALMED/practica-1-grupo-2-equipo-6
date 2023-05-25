@@ -208,7 +208,7 @@ public class Proveedor extends Persona{
 	
 	
 	public String toString() {
-		return "camisetas: "+bodega.calcularCamisas()+ " X " +getCostoCamiseta() + "\nPantaloes: " + bodega.calcularPantalon() + " X " + getCostoPantalon() + "\nAbrigos: " + bodega.calcularAbrigos() + " X " + getCostoAbrigo();
+	  return "camisetas: "+bodega.calcularCamisas(getBodega().getProductosEnBodega())+ " X " +getCostoCamiseta() + "\nPantaloes: " + bodega.calcularPantalon(getBodega().getProductosEnBodega()) + " X " + getCostoPantalon() + "\nAbrigos: " + bodega.calcularAbrigos(getBodega().getProductosEnBodega()) + " X " + getCostoAbrigo();
 		
 	}
 
