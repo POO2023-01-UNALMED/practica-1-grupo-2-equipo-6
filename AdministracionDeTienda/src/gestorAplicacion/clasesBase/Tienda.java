@@ -91,9 +91,11 @@ public class Tienda implements Serializable {
 			ofertasPropuestas.add(ofertaPorPreferencias);
 			Collections.sort(ofertasPropuestas);
 			if(ofertasPropuestas.get(0).equals(ofertaPorFrecuenciaVentas)) {
+				
 				return ofertaPorFrecuenciaVentas;
 			}
 			else {
+				
 				return ofertaPorPreferencias;
 			}
 		}

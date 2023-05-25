@@ -26,7 +26,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		valoresIniciales();
+		//valoresIniciales();
 		serializarEnvio();
 
 		int opcion = -1;
@@ -74,7 +74,7 @@ public class Main {
 				break;
 			}
 			case 5: {
-			//tionFinanciera();
+			gestionFinanciera();
 				break;
 			}
 			default:
@@ -582,14 +582,14 @@ public class Main {
 		@SuppressWarnings("unchecked")
 
 		ArrayList<Transportista>transportistasPorDefecto=(ArrayList<Transportista>) new Deserializador("transportistas").getObj();
-		Tienda tienda1 =(Tienda) new Deserializador("tiendaPoblado").getObj();
+		//Tienda tienda1 =(Tienda) new Deserializador("tiendaPoblado").getObj();
 		Tienda tienda2=(Tienda) new Deserializador("tiendaLaureles").getObj();
 		Tienda tienda3=(Tienda) new Deserializador("tiendaEnvigado").getObj();
 
 		ArrayList<Tienda> tiendasPorDefecto=new ArrayList<Tienda>();
 		tiendasPorDefecto.add(tienda3);
 		tiendasPorDefecto.add(tienda2);
-		tiendasPorDefecto.add(tienda1);
+		//tiendasPorDefecto.add(tienda1);
 
 		Transportista transportistaElegido=Transportista.mejorTransportista(transportistasPorDefecto);
 
@@ -609,7 +609,7 @@ public class Main {
 
 		ArrayList<Empleado> empleados=new ArrayList<Empleado>();
 
-		empleados.addAll(tienda1.getEmpleados());
+		//empleados.addAll(tienda1.getEmpleados());
 		empleados.addAll(tienda2.getEmpleados());
 		empleados.addAll(tienda3.getEmpleados());
 
@@ -621,7 +621,7 @@ public class Main {
 			System.out.println(" Para realizar el registro contable de la  ");
 			System.out.println("       venta, seleccione un contador       ");
 			System.out.println("-------------------------------------------");
-			System.out.println("1) "+tienda1.gestionarPago());
+		//	System.out.println("1) "+tienda1.gestionarPago());
 			System.out.println("2) "+tienda2.gestionarPago());
 			System.out.println("3) "+tienda3.gestionarPago());
 			Scanner stdIn = new Scanner(System.in);
@@ -631,7 +631,7 @@ public class Main {
 
 		switch(opcion1) {
 			case 1:
-				contadorSeleccionado=tienda1.gestionarPago();
+				//contadorSeleccionado=tienda1.gestionarPago();
 				break;
 			case 2:
 				contadorSeleccionado=tienda2.gestionarPago();
