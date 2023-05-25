@@ -1429,7 +1429,7 @@ public class Main {
 						System.out.println("\n\nSe ha creado un fondo auxiliar al\ncual estaran destinadas las ganan-\ncias acordadas con el banco.\n\nInformacion del fondo: "+fondoAuxiliar+"\nSegun las directrices del banco,\nsu deuda se saldara una vez que\nla cantidad de dinero almacenada\nen dicho fondo supere o iguale\nla deuda actual.\n");
 					}
 					else {
-						double abonoCuentaAuxiliar;
+						double abonoCuentaAuxiliar; 
 						do {
 						System.out.println(String.format("\nUsted ya tiene un fondo auxiliar. Des-\ntine una cantidad inferior a $ %f",Math.min(fondoAuxiliar.getCantidadLimite()-fondoAuxiliar.getDinero(), Tienda.getCuentaTienda().getDinero())));
 		
@@ -1545,9 +1545,9 @@ public class Main {
 				}
 				else {
 					System.out.println("\n\nUSTED HA QUEBRADO!");
-					tienda1.finalize();
-					tienda2.finalize();
-					tienda3.finalize();
+//					tienda1.finalize();
+//					tienda2.finalize();
+//					tienda3.finalize();
 				}
 				
 			}
