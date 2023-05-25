@@ -1003,6 +1003,279 @@ public class Main {
 
 
 		
-	}
+			static void gestionFinanciera() {
+		
+		
+				CuentaBancaria fondoDeEmpleados = null;
+				
+				Empleado contadorSeleccionado = null;
+				
+				
+				int opcion=0;
+				Tienda tienda1 =(Tienda) new Deserializador("tiendaPoblado").getObj();
+				Tienda tienda2=(Tienda) new Deserializador("tiendaLaureles").getObj();
+				Tienda tienda3=(Tienda) new Deserializador("tiendaEnvigado").getObj();
+				ArrayList<Empleado> empleados=new ArrayList<Empleado>();
+				
+				empleados.addAll(tienda1.getEmpleados());
+				empleados.addAll(tienda2.getEmpleados());
+				empleados.addAll(tienda3.getEmpleados());
+				
+				double cantidadSueldos=0.0;
+				for(Empleado e: empleados) {
+					cantidadSueldos+=e.getSueldo();
+				}
+				
+				do {
+					
+					
+					System.out.println("-------------------------------------------");
+					System.out.println("           Seleccione un contador          ");
+					System.out.println("-------------------------------------------");
+					System.out.println("1) "+tienda1.gestionarPago().mostrarInformacion());
+					System.out.println("2) "+tienda2.gestionarPago().mostrarInformacion());
+					System.out.println("3) "+tienda3.gestionarPago().mostrarInformacion());
+					Scanner stdIn = new Scanner(System.in);
+					opcion = stdIn.nextInt();
+					
+			}while(opcion<=0 || opcion>3);	
+				
+				switch(opcion) {
+					case 1:
+						contadorSeleccionado=tienda1.gestionarPago();
+						break;
+					case 2:
+						contadorSeleccionado=tienda2.gestionarPago();
+						break;
+					case 3:
+						contadorSeleccionado=tienda3.gestionarPago();
+						break;
+						
+				}
+				
+					Informe reporteFinanciero=contadorSeleccionado.reportarSituacion(Tienda.getCuentaTienda().getEntidad(),Tienda.getCuentaTienda());
+					System.out.println(reporteFinanciero+"\n\n***El siguiente valor no ha sido descontado\ndel presupuesto total de la tienda:\n\n-Cantidad a pagar a los empleados:\n\n$"+cantidadSueldos);
+					System.out.println("-------------------------------------------");
+					System.out.println("   Soluciones sugeridas por la entidad     ");
+					System.out.println("                  bancaria                 ");
+					System.out.println("-------------------------------------------");
+					System.out.println("\nEn base a la situacion financiera actual ");
+					System.out.println("       la/s soluciones sugeridas son:    \n");
+					
+					int i=1;
+					
+					if(reporteFinanciero.getSoluciones().contains(SolucionesProblemaFinanciero.PAGAR_DEUDAS) && reporteFinanciero.getCantidadActualDeuda()>=Tienda.getCuentaTienda().getDinero()) {
+						reporteFinanciero.getSoluciones().remove(SolucionesProblemaFinanciero.PAGAR_DEUDAS);
+					}
+					
+					for(SolucionesProblemaFinanciero s: reporteFinanciero.getSoluciones()) {
+						
+						System.out.println((i++)+s.getDescripcion());
+						
+					}
+		
+				
+				int opcionSolucion=0;
+				do {
+		
+					System.out.print("Seleccione una solucion: ");
+					
+					Scanner stdIn = new Scanner(System.in);
+					opcionSolucion = stdIn.nextInt();
+					
+				}while(opcionSolucion<=0 || opcionSolucion>reporteFinanciero.getSoluciones().size());
+				
+				Banco banco=Tienda.getCuentaTienda().getEntidad();
+				
+				if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.PAGAR_DEUDAS)) {
+					
+					ArrayList<Credito>deudas=new ArrayList<Credito>();
+					
+					for(Credito c:Tienda.getCuentaTienda().getEntidad().getHistorialesCrediticios().get(Tienda.getCuentaTienda())) {
+						if(c.getEstadoCredito()==Estado.PENDIENTE)
+						{
+							deudas.add(c);
+						}	
+					}
+					
+					ArrayList<Transferencia>confirmacionesPagos=banco.solucionarProblema(deudas,reporteFinanciero.getPuntajeCrediticioActual());
+					double cantidadPagada=0.0;
+					
+					for(Transferencia t: confirmacionesPagos) {
+						cantidadPagada+=t.getCantidad();
+						
+					}
+					System.out.println("\nSe ha hecho una transferencia por un va-\nlor de: $"+cantidadPagada+"\n\n");
+					System.out.println(String.format("Presupuesto actual de la tienda:\n$ %f\n\n",Tienda.getCuentaTienda().getDinero()));
+				}
+				
+				else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.NONE)) {
+					
+					boolean crearFondo=true;
+					try {
+					for(CuentaBancaria c: Tienda.getCuentaTienda().getFondosLigados()){
+						if(c.getPropietario().equals(Tienda.getCuentaTienda())) {
+							crearFondo=false;
+							fondoDeEmpleados=c;
+							break;
+						}
+					}
+					if(crearFondo) {
+						fondoDeEmpleados=banco.solucionarProblema();
+						System.out.println("Se ha creado un fondo de empleados con\nla siguiente informacion: "+fondoDeEmpleados+"\n\nRecuerde que el 10% del salario de\ncada empleado sera destinado a di-\ncho fondo.\n");
+					}
+					else {
+						System.out.println("\nSe ha destinado un 5% del presupuesto\nactual para el fondo de empleados");
+						System.out.println(banco.solucionarProblema(fondoDeEmpleados)); 
+					}
+					
+					
+				}catch(NullPointerException e){
+					fondoDeEmpleados=banco.solucionarProblema();
+					System.out.println("Se ha creado un fondo de empleados con\nla siguiente informacion: "+fondoDeEmpleados+"\n\nRecuerde que el 10% del salario de\ncada empleado sera destinado a di-\ncho fondo.\n");
+				}
+					
+				}
+				else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.PORCENTAJE_VENTAS)) {
+					
+					
+					CuentaBancaria fondoAuxiliar=null;
+					
+					boolean crearFondo=true;
+					//try {
+					for(CuentaBancaria c: Tienda.getCuentaTienda().getFondosLigados()){
+						if(c.getPropietario().equals(banco)) {
+							crearFondo=false;
+							fondoAuxiliar=c;
+							break;
+						}
+					}
+					if(crearFondo) {
+						fondoAuxiliar=banco.solucionarProblema(reporteFinanciero.getCantidadActualDeuda());
+						System.out.println("\n\nSe ha creado un fondo auxiliar al\ncual estaran destinadas las ganan-\ncias acordadas con el banco.\n\nInformacion del fondo: "+fondoAuxiliar+"\nSegun las directrices del banco,\nsu deuda se saldara una vez que\nla cantidad de dinero almacenada\nen dicho fondo supere o iguale\nla deuda actual.\n");
+					}
+					else {
+						double abonoCuentaAuxiliar;
+						do {
+						System.out.println(String.format("\nUsted ya tiene un fondo auxiliar. Des-\ntine una cantidad inferior a $ %f",Math.min(fondoAuxiliar.getCantidadLimite()-fondoAuxiliar.getDinero(), Tienda.getCuentaTienda().getDinero())));
+		
+						Scanner stdIn = new Scanner(System.in);
+						abonoCuentaAuxiliar= stdIn.nextDouble();
+						}while(abonoCuentaAuxiliar<=0 || abonoCuentaAuxiliar>Math.min(fondoAuxiliar.getCantidadLimite()-fondoAuxiliar.getDinero(), Tienda.getCuentaTienda().getDinero()));
+						System.out.println(banco.abonarCuentaAuxiliar(abonoCuentaAuxiliar)); 
+					}
+						
+				/*	
+				}catch(NullPointerException e){
+					fondoAuxiliar=banco.solucionarProblema(reporteFinanciero.getCantidadActualDeuda());
+					System.out.println("\n\nSe ha creado un fondo auxiliar al\ncual estaran destinadas las ganan-\ncias acordadas con el banco.\n\nInformacion del fondo: "+fondoAuxiliar+"\nSegun las directrices del banco,\nsu deuda se saldara una vez que\nla cantidad de dinero almacenada\nen dicho fondo supere o iguale\nla deuda actual.\n");
+				}
+					*/
+					
+					
+				}
+				else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.SOLICITAR_CREDITO)){
+					
+					double opcion1;
+					int opcion2;
+					Cuota cuotaSeleccionada=null;
+					do {
+						
+						
+						
+						System.out.println("Cantidad a solicitar(menor a 50000): ");
+						Scanner stdIn = new Scanner(System.in);
+						opcion1 = stdIn.nextDouble();
+						System.out.println("Ingrese el numero de cuotas: \n");
+						System.out.println("1) Tres\n2)Cinco\n3)Doce\n4)Dieciocho");
+						opcion2=stdIn.nextInt();
+					}
+					while(opcion2<0 || opcion2>4 || opcion1<0 || opcion>50000);
+					
+					switch(opcion2) {
+					
+						case 1:
+							cuotaSeleccionada=Cuota.TRES;
+							break;
+						case 2:
+							cuotaSeleccionada=Cuota.CINCO;
+							break;
+						case 3:
+							cuotaSeleccionada=Cuota.DOCE;
+							break;
+						case 4:
+							cuotaSeleccionada=Cuota.DIECIOCHO;
+							break;
+					}
+					banco.generarCredito(new Credito(Tienda.getCuentaTienda(),opcion1,cuotaSeleccionada));
+					
+				}
+		
+				
+				System.out.println("-------------------------------------------");
+				System.out.println("     MODULO DE PAGO A LOS EMPLEADOS        ");
+				System.out.println("-------------------------------------------");
+				System.out.println("\n                                         ");
+		
+				
+				ArrayList<Persona> despedidos=new ArrayList<Persona>();
+				
+				while(cantidadSueldos>=Tienda.getCuentaTienda().getDinero()) {
+					System.out.println("\nEs necesario despedir a algunos empleados.   ");
+					System.out.println("\n\nSeleccione a aquellos que desea despedir:");
+					Persona p;
+					
+				for(Empleado emp: empleados){
+					int despido=0;
+					Scanner stdIn = new Scanner(System.in);
+					do {
+						System.out.println("\n\n"+emp.mostrarInformacion()+"\n\n");
+						System.out.println("1. Despedir\n2. No despedir");
+						despido = stdIn.nextInt();
+					}while(despido<=0 || despido>2);
+					
+					if(despido==1) {
+						p=emp;
+						despedidos.add(p);
+						if(Tienda.despedir(emp, fondoDeEmpleados)==null) {
+							System.out.println(p.demandar());
+						}
+						else {
+							System.out.println(((Empleado)p).demandar(Tienda.despedir(emp, fondoDeEmpleados)));
+						}
+						
+						
+					}
+					
+				}
+				empleados.removeAll(despedidos);
+				cantidadSueldos=0;
+				for(Empleado empleado: empleados) {
+					cantidadSueldos+=empleado.getSueldo();
+				}
+				
+				//System.out.println("Dinero de la Tienda: "+ Tienda.getCuentaTienda().getDinero());
+				//System.out.println("PAGO: "+cantidadSueldos);
+				
+				
+				}	
+				
+				if(empleados.size()!=0) {
+					ArrayList<Transferencia>pagosEmpleados=new ArrayList<Transferencia>();
+						System.out.println("\nAhora es posible pagar los sueldos correspon-\ndientes.");
+						pagosEmpleados=Tienda.pagarSueldo(empleados,fondoDeEmpleados);
+		
+					for(Transferencia t:pagosEmpleados) {
+						System.out.println("\n"+t+"\n");
+					}
+				}
+				else {
+					System.out.println("\n\nUSTED HA QUEBRADO!");
+					tienda1.finalize();
+					tienda2.finalize();
+					tienda3.finalize();
+				}
+				
+			}
 
 }
