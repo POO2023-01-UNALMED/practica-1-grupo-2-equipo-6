@@ -14,6 +14,7 @@ import gestorAplicacion.clasesBase.Transferencia;
 import gestorAplicacion.clasesBase.Venta;
 import gestorAplicacion.clasesBase.Banco.PuntajeCredito;
 import gestorAplicacion.clasesBase.Banco.SolucionesProblemaFinanciero;
+import gestorAplicacion.clasesBase.CuentaBancaria.Pais;
 import gestorAplicacion.clasesBase.Banco;
 import gestorAplicacion.clasesBase.ControlCalidad;
 import gestorAplicacion.clasesBase.Credito;
@@ -39,9 +40,7 @@ public class Empleado extends Persona implements Serializable{
 	private int horasDisponibles;
 	private int horasTrabajadas;
 
-	public Empleado() {
-		
-	}
+	
 	public Empleado(String nombre, int calificacion, CuentaBancaria cuenta, double sueldo, Cargo cargo) {
 		super(nombre, calificacion,cuenta);
 		this.sueldo=sueldo;
@@ -56,6 +55,9 @@ public class Empleado extends Persona implements Serializable{
 		horasTrabajadas=horasT;
 		this.cargo=operario;
 		this.sueldo=sueldo;
+		Banco BancoElectronico=new Banco("BancoElectronico");
+		CuentaBancaria cuenta1 = new CuentaBancaria(1000000, Pais.COLOMBIA, BancoElectronico);
+		setCuenta(cuenta1);
 		
 }
 
