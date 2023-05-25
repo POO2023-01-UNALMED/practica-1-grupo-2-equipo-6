@@ -1,14 +1,19 @@
 package gestorAplicacion.clasesBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import gestorAplicacion.clasesBase.Producto.Tipo;
 
-public class OfertaPorDefecto implements Comparable<OfertaPorDefecto>{
+public class OfertaPorDefecto implements Comparable<OfertaPorDefecto>,Serializable{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Producto> productosOferta;
 	private double total=0;
 
@@ -55,7 +60,7 @@ public class OfertaPorDefecto implements Comparable<OfertaPorDefecto>{
 			tipoMenosVendido=Tipo.PANTALON;
 		}
 
-		Producto productoParaAgregar=new Producto(tipoMenosVendido,0.9f*tipoMenosVendido.getPrecioEstandar());
+		Producto productoParaAgregar=new Producto(tipoMenosVendido,0.9f*tipoMenosVendido.getPrecioEstandar(),15000);
 
 
 		for(int i=0; i<9;i++) {
@@ -63,15 +68,15 @@ public class OfertaPorDefecto implements Comparable<OfertaPorDefecto>{
 
 			if(!(tipoMenosVendido.equals(Tipo.ABRIGO)) && Inventariar.calcularAbrigos(listaAuxiliar)<2 ) {
 
-				listaAuxiliar.add(new Producto(Tipo.ABRIGO,0.9f*Tipo.ABRIGO.getPrecioEstandar()));
+				listaAuxiliar.add(new Producto(Tipo.ABRIGO,0.9f*Tipo.ABRIGO.getPrecioEstandar(),15000));
 
 			}
 			else if(!(tipoMenosVendido.equals(Tipo.CAMISA)) && Inventariar.calcularCamisas(listaAuxiliar)<2) {
-				listaAuxiliar.add(new Producto(Tipo.CAMISA,0.9f*Tipo.CAMISA.getPrecioEstandar()));
+				listaAuxiliar.add(new Producto(Tipo.CAMISA,0.9f*Tipo.CAMISA.getPrecioEstandar(),15000));
 
 			}
 			else if(!(tipoMenosVendido.equals(Tipo.PANTALON)) && Inventariar.calcularPantalon(listaAuxiliar)<2) {
-				listaAuxiliar.add(new Producto(Tipo.PANTALON,0.9f*Tipo.PANTALON.getPrecioEstandar()));
+				listaAuxiliar.add(new Producto(Tipo.PANTALON,0.9f*Tipo.PANTALON.getPrecioEstandar(),15000));
 
 			}
 			else if(Collections.frequency(listaAuxiliar, productoParaAgregar)<5) {

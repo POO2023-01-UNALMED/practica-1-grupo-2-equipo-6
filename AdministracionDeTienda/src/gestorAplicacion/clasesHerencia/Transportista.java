@@ -44,28 +44,28 @@ public class Transportista extends Persona implements Serializable {
 		}
 
 		public Venta entregaEspecial(OfertaPorDefecto ofertaSugerida, Socio s, ArrayList<Tienda>tiendas) {
-
+			
 			Venta ventaConfirmada=s.registrarVenta(ofertaSugerida);
-
 			Bodega bodegaEscogida = null;
-
-
+			
+			
 			for (Tienda t: tiendas) {
 				if(t.getBodega().evaluarDisponibilidad(ventaConfirmada.getProductosVenta())) {
-
+					
 					bodegaEscogida=t.getBodega();
 					break;
-				}
+				}	
 			}
-
+			
 			if(bodegaEscogida==null) {
 				return null;
 			}
-
+			
 			ventaConfirmada.setRepartidor(this);
 			return ventaConfirmada;
-
+			
 		}
+
 	public float calcularPrecioTotal(Proveedor provedor, Tienda tienda) {
 		int costo = 0;
 		costo += precioBase + Math.abs(provedor.getCalle() - tienda.getCalle())*precioDistancia + provedor.getBodega().calcularNumeroProductos()*precioCarga;

@@ -1,12 +1,13 @@
 package gestorAplicacion.clasesHerencia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import gestorAplicacion.clasesBase.OfertaPorDefecto;
 import gestorAplicacion.clasesBase.Producto;
 import gestorAplicacion.clasesBase.Producto.Tipo;
 import gestorAplicacion.clasesBase.Inventariar;
 
-public class OfertaPreferencial extends OfertaPorDefecto{
+public class OfertaPreferencial extends OfertaPorDefecto implements Serializable{
 
 	public OfertaPreferencial(ArrayList<Producto> productosOferta) {
 		super(productosOferta);
@@ -27,7 +28,7 @@ public class OfertaPreferencial extends OfertaPorDefecto{
 
 			do {
 
-				productosOferta.add(new Producto(Tipo.CAMISA,0.8f*Tipo.CAMISA.getPrecioEstandar()));
+				productosOferta.add(new Producto(Tipo.CAMISA,0.8f*Tipo.CAMISA.getPrecioEstandar(),15000));
 				i++;
 
 			}while(i<3);
@@ -38,7 +39,7 @@ public class OfertaPreferencial extends OfertaPorDefecto{
 
 			do {
 
-				productosOferta.add(new Producto(Tipo.ABRIGO,0.8f*Tipo.ABRIGO.getPrecioEstandar()));
+				productosOferta.add(new Producto(Tipo.ABRIGO,0.8f*Tipo.ABRIGO.getPrecioEstandar(),15000));
 				i++;
 
 			}while(i<3);
@@ -49,7 +50,7 @@ public class OfertaPreferencial extends OfertaPorDefecto{
 
 			do {
 
-				productosOferta.add(new Producto(Tipo.PANTALON,0.8*Tipo.PANTALON.getPrecioEstandar()));
+				productosOferta.add(new Producto(Tipo.PANTALON,0.8*Tipo.PANTALON.getPrecioEstandar(),15000));
 				i++;
 
 			}while(i<3);

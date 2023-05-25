@@ -4,6 +4,7 @@ package gestorAplicacion.clasesBase;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Socio implements Serializable {
 	
 	/**
@@ -26,31 +27,27 @@ public class Socio implements Serializable {
 
 	public Venta registrarVenta(OfertaPorDefecto oferta) {
 		
-		//Agregar un random ----- 
-		
 		Venta v=new Venta(this);
 		
-		 int valorEntero = (int) (Math.floor(Math.random()*(-9)+10));//Valor entre 0 y 10 ambos incluidos
-		
+		 int valorEntero = (int) (Math.floor(Math.random()*(-9)+10));
 		 v.setProductosVenta(productosContrato);
 		 
 		 if (valorEntero<=5) {
 			
-			 //El socio acepta la oferta
+			 //El socio acepta la oferta esta vez
 			 v.setProductosOfertados(oferta);
 			 v.setTotal(oferta.getTotal());
 			 if(valorEntero==5) {
 				 productosContrato.addAll(oferta.getProductosOferta());
+				 //Los liga a su contrato definitivamente
 			 }
 		 }
-		 
 		for(Producto p:v.getProductosVenta()){
 			v.setTotal(v.getTotal() + p.getPrecio());
 		}
 		 
 		cuentaSocio.pagar(v);
 		renovacionesContratos.add(v);
-	
 			return v;
 		
 	}

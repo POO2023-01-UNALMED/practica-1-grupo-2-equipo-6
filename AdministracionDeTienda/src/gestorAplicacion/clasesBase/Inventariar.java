@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public interface Inventariar{
 
-	int minCamisas=33;
-	int minAbrigo=34;
-	int minPantalon=33;
+	int minCamisas=1;
+	int minAbrigo=1;
+	int minPantalon=1;
 
 	
 	public static int calcularCamisas(ArrayList<Producto> productos) {
 		int numCamisas=0;
 		for(Producto p:productos) {
-			if(p.getNombre()=="CAMISA") {
+			if(p.getNombre().equals("CAMISA") ){
 				numCamisas++;
 			}
 		}
@@ -22,7 +22,7 @@ public interface Inventariar{
 	public static int calcularAbrigos(ArrayList<Producto> productos) {
 		int numAbrigos=0;
 		for(Producto p:productos) {
-			if(p.getNombre()=="ABRIGO") {
+			if(p.getNombre().equals("ABRIGO") ){
 				numAbrigos++;
 			}
 		}
@@ -32,7 +32,7 @@ public interface Inventariar{
 	public static int calcularPantalon(ArrayList<Producto> productos) {
 		int numPantalon=0;
 		for(Producto p:productos) {
-			if(p.getNombre()=="PANTALON") {
+			if(p.getNombre().equals("PANTALON")) {
 				
 				numPantalon++;
 				

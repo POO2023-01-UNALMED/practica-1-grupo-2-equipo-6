@@ -1,6 +1,7 @@
 package gestorAplicacion.clasesBase;
 
 import java.util.ArrayList;
+
 import gestorAplicacion.clasesBase.Tienda;
 
 
@@ -121,28 +122,48 @@ public ArrayList<Producto> buscarProducto(ArrayList<Producto>productos) {
 	}
 
 
-	public boolean evaluarDisponibilidad(ArrayList<Producto>productosRetirar) {
-		int contadorAbrigo=Inventariar.calcularAbrigos(productosRetirar),contadorPantalon=Inventariar.calcularPantalon(productosRetirar),contadorCamisas=Inventariar.calcularCamisas(productosRetirar);
-		if(contadorCamisas-this.calcularCamisas()>=minCamisas && contadorAbrigo-this.calcularAbrigos()>=minAbrigo && contadorPantalon-this.calcularPantalon()>=minPantalon) {
+
+public boolean evaluarDisponibilidad(ArrayList<Producto>productosRetirar) {
+	int contadorAbrigo=Inventariar.calcularAbrigos(productosRetirar);
+	int contadorPantalon=Inventariar.calcularPantalon(productosRetirar);
+	int contadorCamisas=Inventariar.calcularCamisas(productosRetirar);
+	
+
+	
+	if(this.calcularCamisas()-contadorCamisas>=minCamisas && 
+	this.calcularAbrigos()-contadorAbrigo>=minAbrigo && 
+	this.calcularPantalon()-contadorPantalon>=minPantalon) {
+		
+		this.retirarProductos(productosRetirar);
+		return true;
+		
+	}else {
+		return false;
+	}
+	}
+		
+	
+
+	private void retirarProductos(ArrayList<Producto> productos) {	
+
+			ArrayList<String>borrarProducto=new ArrayList<String>();
+			ArrayList<Producto>productosBorrar=new ArrayList<Producto>();
+			for(Producto p1:productos) {
+				borrarProducto.add(p1.getNombre());
+			}
+			for(Producto p: productosEnBodega) {
+				
+				if(borrarProducto.indexOf(p.getNombre())!=-1){
+					productosBorrar.add(p);
+					borrarProducto.remove(p.getNombre());
+				}
+			}
 			
-			this.retirarProductos(productosRetirar);
-			return true;
-			
-		}
-		else {
-			return false;
+			productosEnBodega.removeAll(productosBorrar);
+		
 		}
 		
 	
-		
-	}
-
-	private void retirarProductos(ArrayList<Producto> productos) {	
-		
-		productosEnBodega.removeIf(p -> productos.indexOf(p)!=-1);
-		
-		
-	}
 	
 	public int getStopBodega() {return stopBodega;}
 	

@@ -44,6 +44,7 @@ public class Producto implements Serializable{
 
 
 	public Producto(Tipo tipo, double costo) {
+		
 		this.tipo=tipo;
 		this.costo=costo;
 		//Constructor para intervenido

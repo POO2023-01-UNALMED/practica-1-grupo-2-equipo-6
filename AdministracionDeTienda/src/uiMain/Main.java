@@ -582,18 +582,16 @@ public class Main {
 		@SuppressWarnings("unchecked")
 
 		ArrayList<Transportista>transportistasPorDefecto=(ArrayList<Transportista>) new Deserializador("transportistas").getObj();
-		//Tienda tienda1 =(Tienda) new Deserializador("tiendaPoblado").getObj();
+		Tienda tienda1 =(Tienda) new Deserializador("tiendaPoblado").getObj();
 		Tienda tienda2=(Tienda) new Deserializador("tiendaLaureles").getObj();
 		Tienda tienda3=(Tienda) new Deserializador("tiendaEnvigado").getObj();
 
 		ArrayList<Tienda> tiendasPorDefecto=new ArrayList<Tienda>();
 		tiendasPorDefecto.add(tienda3);
 		tiendasPorDefecto.add(tienda2);
-		//tiendasPorDefecto.add(tienda1);
+		tiendasPorDefecto.add(tienda1);
 
 		Transportista transportistaElegido=Transportista.mejorTransportista(transportistasPorDefecto);
-
-
 
 
 
@@ -609,7 +607,7 @@ public class Main {
 
 		ArrayList<Empleado> empleados=new ArrayList<Empleado>();
 
-		//empleados.addAll(tienda1.getEmpleados());
+		empleados.addAll(tienda1.getEmpleados());
 		empleados.addAll(tienda2.getEmpleados());
 		empleados.addAll(tienda3.getEmpleados());
 
@@ -621,7 +619,7 @@ public class Main {
 			System.out.println(" Para realizar el registro contable de la  ");
 			System.out.println("       venta, seleccione un contador       ");
 			System.out.println("-------------------------------------------");
-		//	System.out.println("1) "+tienda1.gestionarPago());
+		    System.out.println("1) "+tienda1.gestionarPago());
 			System.out.println("2) "+tienda2.gestionarPago());
 			System.out.println("3) "+tienda3.gestionarPago());
 			Scanner stdIn = new Scanner(System.in);
@@ -631,7 +629,7 @@ public class Main {
 
 		switch(opcion1) {
 			case 1:
-				//contadorSeleccionado=tienda1.gestionarPago();
+				contadorSeleccionado=tienda1.gestionarPago();
 				break;
 			case 2:
 				contadorSeleccionado=tienda2.gestionarPago();
@@ -653,6 +651,15 @@ public class Main {
 
 
 	static public void valoresIniciales() {
+
+		ArrayList<Producto> productosSocio=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));  add(new Producto(Tipo.PANTALON));}};
+		ArrayList<Producto> productosSocio2=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));}};
+		ArrayList<Producto> productosSocio3=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.PANTALON));}};
+		
+		
+		ArrayList<Producto> productos1= new ArrayList<Producto>();
+		ArrayList<Producto> productos2= new ArrayList<Producto>();
+		
 		Banco bbva=new Banco("BBVA");
 		Banco bancoAgrario=new Banco("Banco Agrario");
 		Banco bbbank=new Banco("BBBank");
@@ -660,6 +667,8 @@ public class Main {
 		Empleado contador2=new Empleado("Juan Diaz de Garayo", 5 ,  new CuentaBancaria(50000,Pais.COLOMBIA, bbbank), 8000, Cargo.CONTADOR);
 		Empleado contador3=new Empleado("Margarita Sanchez Gutierrez", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
 		Empleado operario=new Empleado("Patricia Dagorn", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.OPERARIO);
+		Empleado archivista=new Empleado("Jose Antonio Rodriguez Vega",4,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 45621,Cargo.ARCHIVISTA);
+		
 		Bodega bodegaTienda1 = new Bodega(50);
 		Bodega bodegaTienda2 = new Bodega(70);
 		Bodega bodegaTienda3 = new Bodega(90);
@@ -670,6 +679,7 @@ public class Main {
 		//Tienda1
 		for(int i=0;i<10;i++) {
 			bodegaTienda1.agregarProductos(camisa);
+			productos2.add(camisa);
 		}
 		for(int i=0;i<5;i++) {
 			bodegaTienda1.agregarProductos(pantalon);
@@ -683,9 +693,11 @@ public class Main {
 		}
 		for(int i=0;i<8;i++) {
 			bodegaTienda2.agregarProductos(pantalon);
+			productos1.add(camisa);
 		}
 		for(int i=0;i<17;i++) {
 			bodegaTienda2.agregarProductos(abrigo);
+			productos1.add(abrigo);
 		}
 		//Tienda3
 		for(int i=0;i<10;i++) {
@@ -693,15 +705,21 @@ public class Main {
 		}
 		for(int i=0;i<6;i++) {
 			bodegaTienda3.agregarProductos(pantalon);
+			productos1.add(pantalon);
 		}
 		for(int i=0;i<10;i++) {
 			bodegaTienda3.agregarProductos(abrigo);
+			productos2.add(pantalon);
 		}
 
 		Tienda tiendaLaureles = new Tienda(1000000,bodegaTienda1, contador1, operario );
 		Tienda tiendaPoblado = new Tienda (1200000,bodegaTienda2, contador2);
 		Tienda tiendaEnvigado = new Tienda(1100000,bodegaTienda3, contador3);
 
+		Socio exito = new Socio("EXITO",productosSocio, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.COLOMBIA, bbva));
+		Socio falabella =  new Socio("Falabella",productosSocio2, new ArrayList<Venta>() {{}}, new CuentaBancaria(1500000,Pais.VENEZUELA, bbbank));
+		Socio primark = new Socio("PRIMARK",productosSocio3, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.BRASIL, bancoAgrario));;
+		
 		Bodega bodegap1 = new Bodega(100);
 		Bodega bodegap2 = new Bodega(100);
 		Bodega bodegap3 = new Bodega(100);
@@ -719,15 +737,32 @@ public class Main {
 		Transportista transportista1 = new Transportista("Maria",1000,500,16, 2, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
 		Transportista transportista2 = new Transportista("Carlos",2000,400,15,5, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
 		Transportista transportista3 = new Transportista("Rosa",3000,300,10,3, new CuentaBancaria(25000,Pais.COLOMBIA,bbbank));
+		ArrayList<Transportista> transportistasPorDefecto=new ArrayList<Transportista>();
+		transportistasPorDefecto.add(transportista3);
+		transportistasPorDefecto.add(transportista2);
+		transportistasPorDefecto.add(transportista1);
+		
+		
+		Venta venta1= new Venta(proveedor1, 23456, productos1, null, transportista1);
+		Venta venta2=new Venta(falabella,213198,productos2,null,transportista2);
+		
 
+		Serializador socio1 = new Serializador(exito, "exito");
+		Serializador socio2 = new Serializador(falabella, "falabella");
+		Serializador socio3 = new Serializador(primark, "primark");
+		
 		Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
 		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
 		Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
+		
+		Serializador transportistas= new Serializador(transportistasPorDefecto,"transportistasPorDefecto");
 		
 		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
 
+		Serializador archivistaTienda=new Serializador(archivista, "archivistaTienda");
+		
 		String comprasPorRevisar = "";
 		Serializador c1 = new Serializador(comprasPorRevisar, "comprasPorRevisar");
 		
