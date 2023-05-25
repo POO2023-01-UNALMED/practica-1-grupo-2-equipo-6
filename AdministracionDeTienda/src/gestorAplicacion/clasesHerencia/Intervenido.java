@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import gestorAplicacion.clasesBase.Producto;
 import gestorAplicacion.clasesHerencia.Empleado.Cargo;
+import gestorAplicacion.clasesBase.Producto.Tipo;
 
 
 

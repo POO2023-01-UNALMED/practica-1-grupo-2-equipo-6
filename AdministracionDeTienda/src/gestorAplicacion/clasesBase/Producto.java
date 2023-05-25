@@ -27,6 +27,7 @@ public class Producto implements Serializable{
 	public Producto(Tipo tipo) {
 		this.nombre=tipo.toString();
 		this.precio=tipo.getPrecioEstandar();
+		this.tipo=tipo;
 		//Constructor para socio
 	}
 

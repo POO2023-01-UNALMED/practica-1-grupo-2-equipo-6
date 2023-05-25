@@ -27,7 +27,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		valoresIniciales();
-		//serializarEnvio();
+		serializarEnvio();
 
 		int opcion = -1;
 
