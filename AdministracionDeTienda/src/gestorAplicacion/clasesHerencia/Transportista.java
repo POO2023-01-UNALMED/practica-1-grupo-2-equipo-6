@@ -76,7 +76,7 @@ public class Transportista extends Persona implements Serializable {
 	public float getPrecioTotal() {return precioTotal;}
 	public void setPrecioTotal(float p) {precioTotal = p;}
 	public  int calificar() {
-		return 0;
+		return 5;
 	}
 
 	public String toString() {

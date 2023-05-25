@@ -18,6 +18,7 @@ public class Tienda implements Serializable {
 	private double presupuestoCompras;
 	private Bodega bodega;
 	private int calle;
+	private String nomnbre;
 	private ArrayList<Empleado> empleados = new ArrayList<Empleado>();
 	private static final CuentaBancaria cuentaTienda=new CuentaBancaria(145000,Pais.COLOMBIA,new Banco("BANCOLOMBIA"));
 	private int id;
@@ -48,6 +49,10 @@ public class Tienda implements Serializable {
 	public int getCalle() {return calle;}
 
 	public void setCalle(int c) {calle = c;}
+
+	public void setNombre(String nombre) {nomnbre = nombre;}
+
+	public String getNombre() {return nomnbre;}
 
 
 	public Empleado gestionarPago() {

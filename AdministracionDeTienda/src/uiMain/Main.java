@@ -32,6 +32,7 @@ public class Main {
 		int opcion = -1;
 
 		do {
+
 			System.out.println("---------------------------------");
 			System.out.println("    Sistema de Administracion    ");
 			System.out.println("---------------------------------");
@@ -66,7 +67,7 @@ public class Main {
 				break;
 			}
 			case 3: {
-				System.out.println("Control de calidad");
+				menuControlCalidad();
 				break;
 			}
 			case 4: {
@@ -534,11 +535,6 @@ public class Main {
 
 
 	static void gestionAlianzasEstrategicas() {
-
-
-
-
-
 		Socio socioSeleccionado = null;
 		int opcion=0;
 		Socio socio1 = (Socio) new Deserializador("exito").getObj();
@@ -649,6 +645,258 @@ public class Main {
 
 	}
 
+	static void menuControlCalidad() {
+		
+		int opcionMenuCompra = 0;
+		
+		do {
+
+/* 			Deserializador */
+			System.out.println("----------------------------------------");
+			System.out.println("      Modulo de Control de Calidad      ");
+			System.out.println("----------------------------------------");
+			System.out.println("1) Realizar una revision");
+			System.out.println("2) Contactar al proveedor/transportista");
+			System.out.println("3) Consultar bodega");
+			System.out.println("4) Informe de calidad");
+			System.out.println("0) Regresar");
+			System.out.println("----------------------------------------");
+			System.out.print("Seleccione una opcion: ");
+			
+			Scanner stdIn = new Scanner(System.in);
+			opcionMenuCompra = stdIn.nextInt();
+			
+			switch (opcionMenuCompra) {
+				case 0: {
+					System.out.println("Regresando...");
+					break;
+				}
+				case 1: {
+					// Aquí se aplica lo del contador
+					int contadorCompras = (int) new Deserializador("contadorCompras").getObj();
+					ArrayList<Compra> productos = new ArrayList<Compra>();
+					for (int i=1; i<contadorCompras+1;i++) {
+						Compra compra = (Compra) new Deserializador("compra"+i).getObj();
+						productos.add(compra);
+					}
+					 int cont = 1;
+					for (Compra compra : productos) {
+						System.out.println("---------------------------------");
+						System.out.println("compra " + cont);
+						System.out.println("---------------------------------");
+						cont++;
+						for (int i=0; i<compra.getProveedorSeleccionado().getBodega().getProductosEnBodega().size(); i++) {
+							System.out.println(compra.getProveedorSeleccionado().getBodega().getProductosEnBodega().get(i));
+						}
+						System.out.println();
+					}
+					menuRevision(); 
+					break;
+				}
+				case 2: {
+					
+					menuContactar();
+					break;
+				}
+				case 3: {
+					menuBodegaCl();
+					break;
+				}
+				case 4: {
+					menuInforme();
+					break;
+				}
+				default:
+					System.out.println("Opcion fuera de rango");
+			}
+			
+		}while(opcionMenuCompra!=0);	
+		
+
+	}
+	static void menuRevision() {
+		
+		int opcionMenuCompra = 0;
+		
+		do {
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione el número de la compra");
+			System.out.println("          a revisar                  ");
+			System.out.println("---------------------------------");
+			System.out.println("0) Regresar");
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione una opcion:            ");
+			System.out.println("---------------------------------\n");
+
+			Scanner stdIn = new Scanner(System.in);
+			opcionMenuCompra = stdIn.nextInt();
+/* 			Serializador posicionCompra = new Serializador(opcionMenuCompra,"posicionCompra"); */
+			
+			if (opcionMenuCompra==0) {
+				System.out.println("Regresando...");
+				break; 
+			}
+
+
+			int contadorCompras = (int) new Deserializador("contadorCompras").getObj();
+			ArrayList<Compra> productos = new ArrayList<Compra>();
+			for (int i=1; i<contadorCompras+1;i++) {
+				Compra compra = (Compra) new Deserializador("compra"+i).getObj();
+				productos.add(compra);
+			}
+
+			//Obtener la compra con el numero de compra seleccionado
+			Compra compra = productos.get(opcionMenuCompra-1);
+			if (compra.getRevisado()) {
+				System.out.println("La compra ya ha sido revisada");
+				break;
+			}
+
+			ControlCalidad control = new ControlCalidad(compra);
+			ArrayList<Producto> revision = control.revision(compra);
+			System.out.println("---------------------------------");
+			System.out.println("Revision de la compra " + opcionMenuCompra);
+			System.out.println("---------------------------------");
+			for (Producto p: revision) {
+				System.out.println(p);
+			}
+			System.out.println("---------------------------------");
+			compra.setRevisado(true);
+			Serializador compraSerializado = new Serializador(compra,"compra"+opcionMenuCompra);
+			Serializador revisionSerializado = new Serializador(revision,"revision");
+			Serializador controlSerializado = new Serializador(control,"control");
+			break;
+
+		} while(opcionMenuCompra!=0);	
+
+	}
+
+	static void menuContactar() {
+		int opcionMenuContactar = 0;
+	
+		do {
+			ControlCalidad control = (ControlCalidad) new Deserializador("control").getObj();
+	
+			System.out.println("-------------------------------------");
+			System.out.println("    ¿A quién desea contactar?");
+			System.out.println("-------------------------------------");
+			System.out.println("1) Proveedor");
+			System.out.println("2) Transportista");
+			System.out.println("0) Regresar");
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione una opción: ");
+	
+			Scanner stdIn = new Scanner(System.in);
+			opcionMenuContactar = stdIn.nextInt();
+
+			switch(opcionMenuContactar) {
+				case 0: {
+					System.out.println("Regresando...");
+					break;
+				} case 1: {
+					control.contactar(control.getProveedor());
+					System.out.println("-------------------------------------");
+					System.out.println("    Productos a reponer proveedor"    );
+					System.out.println("-------------------------------------");
+					if (control.getProductosAReponerP() == null || control.getProductosAReponerP().size() == 0) {
+						System.out.println("No hay productos a reponer");
+					} else {
+						for (Producto p : control.getProductosAReponerP()) {
+							System.out.println(p);
+						}
+					}
+					break;
+				} case 2: {
+					control.contactar(control.getTransportista());
+					System.out.println("-------------------------------------");
+					System.out.println("   Productos a reponer transportista ");
+					System.out.println("-------------------------------------");
+					if (control.getProductosAReponerT() == null || control.getProductosAReponerT().size() == 0) {
+						System.out.println("No hay productos a reponer");
+					} else {
+						for (Producto p : control.getProductosAReponerT()) {
+							System.out.println(p);
+						}
+					}
+					break;
+				} default:
+					System.out.println("Opcion fuera de rango");
+					break;
+			}
+			String comprasPorRevisar = (String) new Deserializador("comprasPorRevisar").getObj();
+			// Sustituir un string por otro
+			comprasPorRevisar = comprasPorRevisar.replaceAll(control.getCompra().getTienda().getNombre(), "");
+			Serializador comprasPorRevisarSerializado = new Serializador(comprasPorRevisar,"comprasPorRevisar");
+			Serializador tienda = new Serializador(control.getCompra().getTienda(), "tienda" + control.getCompra().getTienda().getNombre());
+			Serializador controlSerializado2 = new Serializador(control,"control");
+		} while (opcionMenuContactar != 0);
+
+	} 
+
+	static void menuBodegaCl() {
+		int opcionMenuBodegaCl = 0;
+	
+		do {
+			ControlCalidad control = (ControlCalidad) new Deserializador("control").getObj();
+			System.out.println("----------------------------------------");
+			System.out.println("----------------------------------------");
+			System.out.println("    Productos en la bodega asociada     ");
+			System.out.println("              a la compra:              ");
+			System.out.println("----------------------------------------");
+			for (Producto p : control.getCompra().getProveedorSeleccionado().getBodega().getProductosEnBodega()) {
+				System.out.println(p);
+			}
+			System.out.println("----------------------------------------");
+			System.out.println("0) Regresar");
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione una opción: ");
+
+			Scanner stdIn = new Scanner(System.in);
+			opcionMenuBodegaCl = stdIn.nextInt();
+
+			if (opcionMenuBodegaCl == 0) {
+				System.out.println("Regresando...");
+				break;
+			} else {
+				System.out.println("Opcion fuera de rango");
+			}
+
+			Serializador controlSerializado2 = new Serializador(control,"control");
+		} while (opcionMenuBodegaCl != 0);
+
+	} 
+
+	static void menuInforme() {
+		
+		int opcionMenuInforme = 0;
+		
+		do {
+			ControlCalidad control = (ControlCalidad) new Deserializador("control").getObj();
+			Empleado archivista = (Empleado) new Deserializador("archivistaTienda").getObj();
+
+			System.out.println("----------------------------------------");
+			System.out.println("        Generar informe de Compra        ");
+			System.out.println("----------------------------------------");
+			System.out.println(archivista.generarInformeControlCalidad(control, control.getProveedor(), control.getTransportista()));
+			System.out.println("----------------------------------------");
+			System.out.println("----------------------------------------");
+			System.out.println("0) Regresar");
+			System.out.println("---------------------------------");
+			System.out.println("Seleccione una opción: ");
+
+			Scanner stdIn = new Scanner(System.in);
+			opcionMenuInforme = stdIn.nextInt();
+			
+			if (opcionMenuInforme == 0) {
+				System.out.println("Regresando...");
+				break;
+			} else {
+				System.out.println("Opcion fuera de rango");
+			}
+			
+		}while(opcionMenuInforme!=0);
+	}
+
 
 	static public void valoresIniciales() {
 
@@ -659,6 +907,8 @@ public class Main {
 		
 		ArrayList<Producto> productos1= new ArrayList<Producto>();
 		ArrayList<Producto> productos2= new ArrayList<Producto>();
+
+
 		
 		Banco bbva=new Banco("BBVA");
 		Banco bancoAgrario=new Banco("Banco Agrario");
@@ -715,6 +965,9 @@ public class Main {
 		Tienda tiendaLaureles = new Tienda(1000000,bodegaTienda1, contador1, operario );
 		Tienda tiendaPoblado = new Tienda (1200000,bodegaTienda2, contador2);
 		Tienda tiendaEnvigado = new Tienda(1100000,bodegaTienda3, contador3);
+		tiendaLaureles.setNombre("Laureles");
+		tiendaPoblado.setNombre("Poblado");
+		tiendaEnvigado.setNombre("Envigado");
 
 		Credito credito=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),70, Cuota.DOCE));//Necesarios para gestion financiera 
 		Credito credito1=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),100, Cuota.CINCO));

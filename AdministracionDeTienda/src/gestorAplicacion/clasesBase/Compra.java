@@ -21,6 +21,7 @@ public class Compra implements Serializable{
 	
 	static int codigo;	
 	private double costo = 0;
+	private boolean revisado;
 	private Tienda tienda;
 	private ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
 	private Proveedor proveedorSeleccionado;
@@ -90,6 +91,7 @@ public class Compra implements Serializable{
 			ArrayList<Producto> p=null;
 			return p;
 		}
+
 		
 		for (int i = 0; i < pedido.size(); i++) {
 			if(presupuesto -pedido.get(i).getCosto()<=0) {}
@@ -231,6 +233,14 @@ public class Compra implements Serializable{
 	public ArrayList<Producto> getCompraLlego(){
         return compraLlego;
     }
+
+	public boolean getRevisado(){
+		return revisado;
+	}
+
+	public void setRevisado(boolean revisado){
+		this.revisado = revisado;
+	}
 	
 	public ArrayList<Proveedor> getProveedores() {return proveedores;}
 	

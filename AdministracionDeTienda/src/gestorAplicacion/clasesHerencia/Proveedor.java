@@ -78,7 +78,7 @@ public class Proveedor extends Persona{
 	}
 	
 	public  int calificar() {
-		return 0;
+		return 5;
 	}
 
 	public ArrayList<Producto> pDefectuososAReponer(ControlCalidad control) {
