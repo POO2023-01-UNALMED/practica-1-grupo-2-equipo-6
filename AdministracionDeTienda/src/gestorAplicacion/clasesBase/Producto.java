@@ -44,7 +44,7 @@ public class Producto implements Serializable{
 
 
 	public Producto(Tipo tipo, double costo) {
-		
+
 		this.tipo=tipo;
 		this.costo=costo;
 		//Constructor para intervenido
@@ -62,13 +62,10 @@ public class Producto implements Serializable{
 
 	}
 
-	
 
 	public double getPrecio() {
 		return precio;
 	}
-
-
 
 
 	public void setPrecio(double precio) {

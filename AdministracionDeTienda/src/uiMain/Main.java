@@ -40,7 +40,7 @@ public class Main {
 			System.out.println("2) Modulo de compra");
 			System.out.println("3) Control de calidad");
 			System.out.println("4) Logistica de envio");
-			System.out.println("5) Gestion de credito");
+			System.out.println("5) Gestion financiera");
 			System.out.println("0) Salir");
 			System.out.println("---------------------------------");
 			System.out.print("Seleccione una opcion: ");
@@ -646,9 +646,9 @@ public class Main {
 	}
 
 	static void menuControlCalidad() {
-		
+
 		int opcionMenuCompra = 0;
-		
+
 		do {
 
 /* 			Deserializador */
@@ -662,10 +662,10 @@ public class Main {
 			System.out.println("0) Regresar");
 			System.out.println("----------------------------------------");
 			System.out.print("Seleccione una opcion: ");
-			
+
 			Scanner stdIn = new Scanner(System.in);
 			opcionMenuCompra = stdIn.nextInt();
-			
+
 			switch (opcionMenuCompra) {
 				case 0: {
 					System.out.println("Regresando...");
@@ -690,11 +690,11 @@ public class Main {
 						}
 						System.out.println();
 					}
-					menuRevision(); 
+					menuRevision();
 					break;
 				}
 				case 2: {
-					
+
 					menuContactar();
 					break;
 				}
@@ -709,15 +709,15 @@ public class Main {
 				default:
 					System.out.println("Opcion fuera de rango");
 			}
-			
-		}while(opcionMenuCompra!=0);	
-		
+
+		}while(opcionMenuCompra!=0);
+
 
 	}
 	static void menuRevision() {
-		
+
 		int opcionMenuCompra = 0;
-		
+
 		do {
 			System.out.println("---------------------------------");
 			System.out.println("Seleccione el número de la compra");
@@ -731,10 +731,10 @@ public class Main {
 			Scanner stdIn = new Scanner(System.in);
 			opcionMenuCompra = stdIn.nextInt();
 /* 			Serializador posicionCompra = new Serializador(opcionMenuCompra,"posicionCompra"); */
-			
+
 			if (opcionMenuCompra==0) {
 				System.out.println("Regresando...");
-				break; 
+				break;
 			}
 
 
@@ -767,16 +767,16 @@ public class Main {
 			Serializador controlSerializado = new Serializador(control,"control");
 			break;
 
-		} while(opcionMenuCompra!=0);	
+		} while(opcionMenuCompra!=0);
 
 	}
 
 	static void menuContactar() {
 		int opcionMenuContactar = 0;
-	
+
 		do {
 			ControlCalidad control = (ControlCalidad) new Deserializador("control").getObj();
-	
+
 			System.out.println("-------------------------------------");
 			System.out.println("    ¿A quién desea contactar?");
 			System.out.println("-------------------------------------");
@@ -785,7 +785,7 @@ public class Main {
 			System.out.println("0) Regresar");
 			System.out.println("---------------------------------");
 			System.out.println("Seleccione una opción: ");
-	
+
 			Scanner stdIn = new Scanner(System.in);
 			opcionMenuContactar = stdIn.nextInt();
 
@@ -831,11 +831,11 @@ public class Main {
 			Serializador controlSerializado2 = new Serializador(control,"control");
 		} while (opcionMenuContactar != 0);
 
-	} 
+	}
 
 	static void menuBodegaCl() {
 		int opcionMenuBodegaCl = 0;
-	
+
 		do {
 			ControlCalidad control = (ControlCalidad) new Deserializador("control").getObj();
 			System.out.println("----------------------------------------");
@@ -864,12 +864,12 @@ public class Main {
 			Serializador controlSerializado2 = new Serializador(control,"control");
 		} while (opcionMenuBodegaCl != 0);
 
-	} 
+	}
 
 	static void menuInforme() {
-		
+
 		int opcionMenuInforme = 0;
-		
+
 		do {
 			ControlCalidad control = (ControlCalidad) new Deserializador("control").getObj();
 			Empleado archivista = (Empleado) new Deserializador("archivistaTienda").getObj();
@@ -886,14 +886,14 @@ public class Main {
 
 			Scanner stdIn = new Scanner(System.in);
 			opcionMenuInforme = stdIn.nextInt();
-			
+
 			if (opcionMenuInforme == 0) {
 				System.out.println("Regresando...");
 				break;
 			} else {
 				System.out.println("Opcion fuera de rango");
 			}
-			
+
 		}while(opcionMenuInforme!=0);
 	}
 
@@ -903,13 +903,13 @@ public class Main {
 		ArrayList<Producto> productosSocio=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));  add(new Producto(Tipo.PANTALON));}};
 		ArrayList<Producto> productosSocio2=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.CAMISA));}};
 		ArrayList<Producto> productosSocio3=new ArrayList<Producto>() {{add(new Producto(Tipo.PANTALON)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.ABRIGO)); add(new Producto(Tipo.PANTALON));}};
-		
-		
+
+
 		ArrayList<Producto> productos1= new ArrayList<Producto>();
 		ArrayList<Producto> productos2= new ArrayList<Producto>();
 
 
-		
+
 		Banco bbva=new Banco("BBVA");
 		Banco bancoAgrario=new Banco("Banco Agrario");
 		Banco bbbank=new Banco("BBBank");
@@ -918,11 +918,11 @@ public class Main {
 		Empleado contador3=new Empleado("Margarita Sanchez Gutierrez", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.CONTADOR);
 		Empleado operario=new Empleado("Patricia Dagorn", 5 ,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 8000, Cargo.OPERARIO);
 		Empleado archivista=new Empleado("Jose Antonio Rodriguez Vega",4,new CuentaBancaria(50000,Pais.COLOMBIA, bbva), 45621,Cargo.ARCHIVISTA);
-		
+
 		Bodega bodegaTienda1 = new Bodega(50);
 		Bodega bodegaTienda2 = new Bodega(70);
 		Bodega bodegaTienda3 = new Bodega(90);
-		
+
 		Producto camisa = new Producto(Tipo.CAMISA, 40000, 20000);
 		Producto pantalon = new Producto(Tipo.PANTALON, 50000, 25000);
 		Producto abrigo = new Producto(Tipo.ABRIGO, 60000, 30000);
@@ -969,17 +969,17 @@ public class Main {
 		tiendaPoblado.setNombre("Poblado");
 		tiendaEnvigado.setNombre("Envigado");
 
-		Credito credito=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),70, Cuota.DOCE));//Necesarios para gestion financiera 
+		Credito credito=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),70, Cuota.DOCE));//Necesarios para gestion financiera
 		Credito credito1=Tienda.getCuentaTienda().getEntidad().generarCredito(new Credito(Tienda.getCuentaTienda(),100, Cuota.CINCO));
 
 		Tienda.pagarCuotaMensual(PuntajeCredito.MEDIO,credito1);
-	
+
 		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO, credito1);
 		Tienda.pagarCuotaMensual(PuntajeCredito.ALTO,credito1);
 		Tienda.pagarCuotaMensual(PuntajeCredito.MEDIO, credito1);
 		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO,credito1);
-		
-		
+
+
 		Tienda.pagarCuotaMensual(PuntajeCredito.BAJO, credito1);
 		Tienda.pagarTodo(PuntajeCredito.MEDIO, credito1);
 		Tienda.pagarTodo(PuntajeCredito.ALTO, credito1);
@@ -987,17 +987,17 @@ public class Main {
 		Socio exito = new Socio("EXITO",productosSocio, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.COLOMBIA, bbva));
 		Socio falabella =  new Socio("Falabella",productosSocio2, new ArrayList<Venta>() {{}}, new CuentaBancaria(1500000,Pais.VENEZUELA, bbbank));
 		Socio primark = new Socio("PRIMARK",productosSocio3, new ArrayList<Venta>() {{}}, new CuentaBancaria(5000000,Pais.BRASIL, bancoAgrario));;
-		
+
 		Bodega bodegap1 = new Bodega(100);
 		Bodega bodegap2 = new Bodega(100);
 		Bodega bodegap3 = new Bodega(100);
-		
+
 		CuentaBancaria cu = new CuentaBancaria(25000,Pais.COLOMBIA,bbbank);
 
 		Proveedor proveedor1 = new Proveedor("Maria", 0, cu, bodegap1, 20000, 25000, 30000);
 		Proveedor proveedor2 = new Proveedor("Carlo", 0, cu , bodegap2, 20000, 25000, 30000);
 		Proveedor proveedor3 = new Proveedor("Julio", 0, cu, bodegap3, 20000, 25000, 30000);
-		
+
 		Serializador p1 = new Serializador(proveedor1, "proveedor1");
 		Serializador p2 = new Serializador(proveedor2, "proveedor2");
 		Serializador p3 = new Serializador(proveedor3, "proveedor3");
@@ -1009,35 +1009,35 @@ public class Main {
 		transportistasPorDefecto.add(transportista3);
 		transportistasPorDefecto.add(transportista2);
 		transportistasPorDefecto.add(transportista1);
-		
-		
+
+
 		Venta venta1= new Venta(proveedor1, 23456, productos1, null, transportista1);
 		Venta venta2=new Venta(falabella,213198,productos2,null,transportista2);
 		ArrayList<Venta> ventasPorDefecto=new ArrayList<Venta>();
 		ventasPorDefecto.add(venta1);
 		ventasPorDefecto.add(venta2);
 		Serializador ventas=new Serializador(ventasPorDefecto,"ventasPorDefecto");
-		
+
 
 		Serializador socio1 = new Serializador(exito, "exito");
 		Serializador socio2 = new Serializador(falabella, "falabella");
 		Serializador socio3 = new Serializador(primark, "primark");
-		
+
 		Serializador transportista1Serializado = new Serializador(transportista1, "transportista1");
 		Serializador transportista2Serializado = new Serializador(transportista2, "transportista2");
 		Serializador transportista3Serializado = new Serializador(transportista3, "transportista3");
-		
+
 		Serializador transportistas= new Serializador(transportistasPorDefecto,"transportistas");
-		
+
 		Serializador tiendaLaurelesSerializada = new Serializador(tiendaLaureles, "tiendaLaureles");
 		Serializador tiendaPobladoSerializada = new Serializador(tiendaPoblado, "tiendaPoblado");
 		Serializador tiendaEnvigadoSerializada = new Serializador(tiendaEnvigado, "tiendaEnvigado");
 
 		Serializador archivistaTienda=new Serializador(archivista, "archivistaTienda");
-		
+
 		String comprasPorRevisar = "";
 		Serializador c1 = new Serializador(comprasPorRevisar, "comprasPorRevisar");
-		
+
 		int contadorCompras = 0;
 		Serializador contador = new Serializador(contadorCompras, "contadorCompras");
 	}
@@ -1048,7 +1048,7 @@ public class Main {
 			}
 			static int verificar(int n,int o) {
 				do {
-		            
+
 		            o = readOpcion();
 
 		            if (o <= 0 || o> n) {
@@ -1210,7 +1210,7 @@ public class Main {
 
 			}while(o==2);
 	}
-			
+
 			public static void serializarEnvio() {
 				Banco BancoElectronico=new Banco("BancoElectronico");
 				CuentaBancaria cuenta1 = new CuentaBancaria(1000000, Pais.COLOMBIA, BancoElectronico);
@@ -1276,33 +1276,33 @@ public class Main {
 			}
 
 
-		
+
 			static void gestionFinanciera() {
-		
-		
+
+
 				CuentaBancaria fondoDeEmpleados = null;
-				
+
 				Empleado contadorSeleccionado = null;
-				
-				
+
+
 				int opcion=0;
 				Tienda tienda1 =(Tienda) new Deserializador("tiendaPoblado").getObj();
 				Tienda tienda2=(Tienda) new Deserializador("tiendaLaureles").getObj();
 				Tienda tienda3=(Tienda) new Deserializador("tiendaEnvigado").getObj();
 				ArrayList<Empleado> empleados=new ArrayList<Empleado>();
-				
+
 				empleados.addAll(tienda1.getEmpleados());
 				empleados.addAll(tienda2.getEmpleados());
 				empleados.addAll(tienda3.getEmpleados());
-				
+
 				double cantidadSueldos=0.0;
 				for(Empleado e: empleados) {
 					cantidadSueldos+=e.getSueldo();
 				}
-				
+
 				do {
-					
-					
+
+
 					System.out.println("-------------------------------------------");
 					System.out.println("           Seleccione un contador          ");
 					System.out.println("-------------------------------------------");
@@ -1311,9 +1311,9 @@ public class Main {
 					System.out.println("3) "+tienda3.gestionarPago().mostrarInformacion());
 					Scanner stdIn = new Scanner(System.in);
 					opcion = stdIn.nextInt();
-					
-			}while(opcion<=0 || opcion>3);	
-				
+
+			}while(opcion<=0 || opcion>3);
+
 				switch(opcion) {
 					case 1:
 						contadorSeleccionado=tienda1.gestionarPago();
@@ -1324,9 +1324,9 @@ public class Main {
 					case 3:
 						contadorSeleccionado=tienda3.gestionarPago();
 						break;
-						
+
 				}
-				
+
 					Informe reporteFinanciero=contadorSeleccionado.reportarSituacion(Tienda.getCuentaTienda().getEntidad(),Tienda.getCuentaTienda());
 					System.out.println(reporteFinanciero+"\n\n***El siguiente valor no ha sido descontado\ndel presupuesto total de la tienda:\n\n-Cantidad a pagar a los empleados:\n\n$"+cantidadSueldos);
 					System.out.println("-------------------------------------------");
@@ -1335,56 +1335,56 @@ public class Main {
 					System.out.println("-------------------------------------------");
 					System.out.println("\nEn base a la situacion financiera actual ");
 					System.out.println("       la/s soluciones sugeridas son:    \n");
-					
+
 					int i=1;
-					
+
 					if(reporteFinanciero.getSoluciones().contains(SolucionesProblemaFinanciero.PAGAR_DEUDAS) && reporteFinanciero.getCantidadActualDeuda()>=Tienda.getCuentaTienda().getDinero()) {
 						reporteFinanciero.getSoluciones().remove(SolucionesProblemaFinanciero.PAGAR_DEUDAS);
 					}
-					
+
 					for(SolucionesProblemaFinanciero s: reporteFinanciero.getSoluciones()) {
-						
+
 						System.out.println((i++)+s.getDescripcion());
-						
+
 					}
-		
-				
+
+
 				int opcionSolucion=0;
 				do {
-		
+
 					System.out.print("Seleccione una solucion: ");
-					
+
 					Scanner stdIn = new Scanner(System.in);
 					opcionSolucion = stdIn.nextInt();
-					
+
 				}while(opcionSolucion<=0 || opcionSolucion>reporteFinanciero.getSoluciones().size());
-				
+
 				Banco banco=Tienda.getCuentaTienda().getEntidad();
-				
+
 				if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.PAGAR_DEUDAS)) {
-					
+
 					ArrayList<Credito>deudas=new ArrayList<Credito>();
-					
+
 					for(Credito c:Tienda.getCuentaTienda().getEntidad().getHistorialesCrediticios().get(Tienda.getCuentaTienda())) {
 						if(c.getEstadoCredito()==Estado.PENDIENTE)
 						{
 							deudas.add(c);
-						}	
+						}
 					}
-					
+
 					ArrayList<Transferencia>confirmacionesPagos=banco.solucionarProblema(deudas,reporteFinanciero.getPuntajeCrediticioActual());
 					double cantidadPagada=0.0;
-					
+
 					for(Transferencia t: confirmacionesPagos) {
 						cantidadPagada+=t.getCantidad();
-						
+
 					}
 					System.out.println("\nSe ha hecho una transferencia por un va-\nlor de: $"+cantidadPagada+"\n\n");
 					System.out.println(String.format("Presupuesto actual de la tienda:\n$ %f\n\n",Tienda.getCuentaTienda().getDinero()));
 				}
-				
+
 				else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.NONE)) {
-					
+
 					boolean crearFondo=true;
 					try {
 					for(CuentaBancaria c: Tienda.getCuentaTienda().getFondosLigados()){
@@ -1400,21 +1400,21 @@ public class Main {
 					}
 					else {
 						System.out.println("\nSe ha destinado un 5% del presupuesto\nactual para el fondo de empleados");
-						System.out.println(banco.solucionarProblema(fondoDeEmpleados)); 
+						System.out.println(banco.solucionarProblema(fondoDeEmpleados));
 					}
-					
-					
+
+
 				}catch(NullPointerException e){
 					fondoDeEmpleados=banco.solucionarProblema();
 					System.out.println("Se ha creado un fondo de empleados con\nla siguiente informacion: "+fondoDeEmpleados+"\n\nRecuerde que el 10% del salario de\ncada empleado sera destinado a di-\ncho fondo.\n");
 				}
-					
+
 				}
 				else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.PORCENTAJE_VENTAS)) {
-					
-					
+
+
 					CuentaBancaria fondoAuxiliar=null;
-					
+
 					boolean crearFondo=true;
 					//try {
 					for(CuentaBancaria c: Tienda.getCuentaTienda().getFondosLigados()){
@@ -1429,34 +1429,34 @@ public class Main {
 						System.out.println("\n\nSe ha creado un fondo auxiliar al\ncual estaran destinadas las ganan-\ncias acordadas con el banco.\n\nInformacion del fondo: "+fondoAuxiliar+"\nSegun las directrices del banco,\nsu deuda se saldara una vez que\nla cantidad de dinero almacenada\nen dicho fondo supere o iguale\nla deuda actual.\n");
 					}
 					else {
-						double abonoCuentaAuxiliar; 
+						double abonoCuentaAuxiliar;
 						do {
 						System.out.println(String.format("\nUsted ya tiene un fondo auxiliar. Des-\ntine una cantidad inferior a $ %f",Math.min(fondoAuxiliar.getCantidadLimite()-fondoAuxiliar.getDinero(), Tienda.getCuentaTienda().getDinero())));
-		
+
 						Scanner stdIn = new Scanner(System.in);
 						abonoCuentaAuxiliar= stdIn.nextDouble();
 						}while(abonoCuentaAuxiliar<=0 || abonoCuentaAuxiliar>Math.min(fondoAuxiliar.getCantidadLimite()-fondoAuxiliar.getDinero(), Tienda.getCuentaTienda().getDinero()));
-						System.out.println(banco.abonarCuentaAuxiliar(abonoCuentaAuxiliar)); 
+						System.out.println(banco.abonarCuentaAuxiliar(abonoCuentaAuxiliar));
 					}
-						
-				/*	
+
+				/*
 				}catch(NullPointerException e){
 					fondoAuxiliar=banco.solucionarProblema(reporteFinanciero.getCantidadActualDeuda());
 					System.out.println("\n\nSe ha creado un fondo auxiliar al\ncual estaran destinadas las ganan-\ncias acordadas con el banco.\n\nInformacion del fondo: "+fondoAuxiliar+"\nSegun las directrices del banco,\nsu deuda se saldara una vez que\nla cantidad de dinero almacenada\nen dicho fondo supere o iguale\nla deuda actual.\n");
 				}
 					*/
-					
-					
+
+
 				}
 				else if(reporteFinanciero.getSoluciones().get(opcionSolucion-1).equals(SolucionesProblemaFinanciero.SOLICITAR_CREDITO)){
-					
+
 					double opcion1;
 					int opcion2;
 					Cuota cuotaSeleccionada=null;
 					do {
-						
-						
-						
+
+
+
 						System.out.println("Cantidad a solicitar(menor a 50000): ");
 						Scanner stdIn = new Scanner(System.in);
 						opcion1 = stdIn.nextDouble();
@@ -1465,9 +1465,9 @@ public class Main {
 						opcion2=stdIn.nextInt();
 					}
 					while(opcion2<0 || opcion2>4 || opcion1<0 || opcion>50000);
-					
+
 					switch(opcion2) {
-					
+
 						case 1:
 							cuotaSeleccionada=Cuota.TRES;
 							break;
@@ -1482,23 +1482,23 @@ public class Main {
 							break;
 					}
 					banco.generarCredito(new Credito(Tienda.getCuentaTienda(),opcion1,cuotaSeleccionada));
-					
+
 				}
 		
-				
+
 				System.out.println("-------------------------------------------");
 				System.out.println("     MODULO DE PAGO A LOS EMPLEADOS        ");
 				System.out.println("-------------------------------------------");
 				System.out.println("\n                                         ");
-		
-				
+
+
 				ArrayList<Persona> despedidos=new ArrayList<Persona>();
-				
+
 				while(cantidadSueldos>=Tienda.getCuentaTienda().getDinero()) {
 					System.out.println("\nEs necesario despedir a algunos empleados.   ");
 					System.out.println("\n\nSeleccione a aquellos que desea despedir:");
 					Persona p;
-					
+
 				for(Empleado emp: empleados){
 					int despido=0;
 					Scanner stdIn = new Scanner(System.in);
@@ -1507,7 +1507,7 @@ public class Main {
 						System.out.println("1. Despedir\n2. No despedir");
 						despido = stdIn.nextInt();
 					}while(despido<=0 || despido>2);
-					
+
 					if(despido==1) {
 						p=emp;
 						despedidos.add(p);
@@ -1517,28 +1517,28 @@ public class Main {
 						else {
 							System.out.println(((Empleado)p).demandar(Tienda.despedir(emp, fondoDeEmpleados)));
 						}
-						
-						
+
+
 					}
-					
+
 				}
 				empleados.removeAll(despedidos);
 				cantidadSueldos=0;
 				for(Empleado empleado: empleados) {
 					cantidadSueldos+=empleado.getSueldo();
 				}
-				
+
 				//System.out.println("Dinero de la Tienda: "+ Tienda.getCuentaTienda().getDinero());
 				//System.out.println("PAGO: "+cantidadSueldos);
-				
-				
-				}	
-				
+
+
+				}
+
 				if(empleados.size()!=0) {
 					ArrayList<Transferencia>pagosEmpleados=new ArrayList<Transferencia>();
 						System.out.println("\nAhora es posible pagar los sueldos correspon-\ndientes.");
 						pagosEmpleados=Tienda.pagarSueldo(empleados,fondoDeEmpleados);
-		
+
 					for(Transferencia t:pagosEmpleados) {
 						System.out.println("\n"+t+"\n");
 					}
@@ -1547,7 +1547,7 @@ public class Main {
 					System.out.println("\n\nUSTED HA QUEBRADO!");
 					Tienda.declararBancarrota();
 				}
-				
+
 			}
 
 }
