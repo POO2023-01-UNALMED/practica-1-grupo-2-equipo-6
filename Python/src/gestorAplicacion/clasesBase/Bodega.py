@@ -1,9 +1,9 @@
 from typing import List
-from gestorAplicacion.clasesBase import Producto
-from gestorAplicacion.clasesBase import Inventariar
-from gestorAplicacion.clasesBase import Transferencia
-from gestorAplicacion.clasesBase import ControlCalidad
-from gestorAplicacion.clasesBase import Tienda
+from Python.src.gestorAplicacion.clasesBase import Producto
+from Python.src.gestorAplicacion.clasesBase import Inventariar
+from Python.src.gestorAplicacion.clasesBase import Transferencia
+from Python.src.gestorAplicacion.clasesBase import ControlCalidad
+from Python.src.gestorAplicacion.clasesBase import Tienda
 
 class Bodega(Inventariar):
 

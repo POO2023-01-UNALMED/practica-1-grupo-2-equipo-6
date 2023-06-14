@@ -1,8 +1,8 @@
 from enum import Enum
 from typing import List, Dict
-from gestorAplicacion.clasesBase.CuentaBancaria import CuentaBancaria
-from gestorAplicacion.clasesBase.Credito import Credito
-from gestorAplicacion.clasesBase.Transferencia import Transferencia
+from Python.src.gestorAplicacion.clasesBase.CuentaBancaria import CuentaBancaria
+from Python.src.gestorAplicacion.clasesBase.Credito import Credito
+from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
 
 class Banco:
     def __init__(self, nombre: str):

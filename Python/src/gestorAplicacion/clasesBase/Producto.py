@@ -16,12 +16,12 @@ class Producto:
         self.costo = costo
 
 
-    def __eq__(self, p):
-        if isintansce(p, Producto):
-            if self.nombre==p.getNombre():
-                return True
-            else:
-                return False
+    # def __eq__(self, p):
+    #     if isintansce(p, Producto):
+    #         if self.nombre==p.getNombre():
+    #             return True
+    #         else:
+    #             return False
 
 
 
