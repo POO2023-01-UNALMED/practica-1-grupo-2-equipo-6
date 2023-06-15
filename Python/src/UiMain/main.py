@@ -73,10 +73,10 @@ def cambioDescripcion():
     img_j3 = PhotoImage(file="..\\baseDatos\\img_png\\juan3.png")
     img_j4 = PhotoImage(file="..\\baseDatos\\img_png\\juan4.png")
     # Mauricio
-    # img_m1 = PhotoImage(file="C:\\Users\\Gabriel\\PycharmProjects\\AdministracionDeTienda\\baseDatos\\img_png\\mauricio1.png")
-    # img_m2 = PhotoImage(file="C:\\Users\\Gabriel\\PycharmProjects\\AdministracionDeTienda\\baseDatos\\img_png\\mauricio2.png")
-    # img_m3 = PhotoImage(file="C:\\Users\\Gabriel\\PycharmProjects\\AdministracionDeTienda\\baseDatos\\img_png\\mauricio3.png")
-    # img_m4 = PhotoImage(file="C:\\Users\\Gabriel\\PycharmProjects\\AdministracionDeTienda\\baseDatos\\img_png\\mauricio4.png")
+    img_m1 = PhotoImage(file="..\\baseDatos\\img_png\\mauro1.png")
+    img_m2 = PhotoImage(file="..\\baseDatos\\img_png\\mauro2.png")
+    img_m3 = PhotoImage(file="..\\baseDatos\\img_png\\mauro3.png")
+    img_m4 = PhotoImage(file="..\\baseDatos\\img_png\\mauro4.png")
 
     listaDescripciones = ["Mi nombre es Gabriel Serrano, tengo 22 anos y estudio \n" +
                           "ciencias de la computacion, me suelen llamar de muchas\n " +
@@ -96,7 +96,11 @@ def cambioDescripcion():
                           "especialmente el aprendizaje automático. En mis \n" +
                           "tiempos libres leo, escucho música y comparto con\n" +
                           " mi familia y amigos. Tengo dos mascotas que amo. \n" +
-                          "Me gustan también los idiomas."]
+                          "Me gustan también los idiomas.",
+                          "Me llamo Johan Ortega, tengo 21 años, estudio Ingeniería\n" +
+                          "de sistemas e informática. Me gusta comer, ver anime\n" +
+                          "y escuchar música. Subcampeon nacional en taekwondo dos\n" +
+                          "años seguidos y amante de los gatos"]
     listaImagenes = [[img_g1, img_g2, img_g3, img_g4], [img_a1, img_a2, img_a3, img_a4],
                      [img_c1, img_c2, img_c3, img_c4], [img_j1, img_j2, img_j3, img_j4]]
     if controladora.controlDescripcion == 3:
