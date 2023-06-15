@@ -102,8 +102,9 @@ def cambioDescripcion():
                           "y escuchar música. Subcampeon nacional en taekwondo dos\n" +
                           "años seguidos y amante de los gatos"]
     listaImagenes = [[img_g1, img_g2, img_g3, img_g4], [img_a1, img_a2, img_a3, img_a4],
-                     [img_c1, img_c2, img_c3, img_c4], [img_j1, img_j2, img_j3, img_j4]]
-    if controladora.controlDescripcion == 3:
+                     [img_c1, img_c2, img_c3, img_c4], [img_j1, img_j2, img_j3, img_j4],
+                     [img_m1, img_m2,img_m3,img_m4]]
+    if controladora.controlDescripcion == 4:
         controladora.controlDescripcion = 0
     else:
         controladora.controlDescripcion += 1
@@ -117,6 +118,8 @@ def cambioDescripcion():
     img3_descripcion.image = listaImagenes[controladora.controlDescripcion][2]
     img4_descripcion.config(image=listaImagenes[controladora.controlDescripcion][3])
     img4_descripcion.image = listaImagenes[controladora.controlDescripcion][3]
+    img5_descripcion.config(image=listaImagenes[controladora.controlDescripcion][4])
+    img5_descripcion.image = listaImagenes[controladora.controlDescripcion][4]
 
 
 def aplicacion():
