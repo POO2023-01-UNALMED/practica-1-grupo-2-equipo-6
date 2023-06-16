@@ -142,57 +142,42 @@ def seleccionDeFrames(combo):
 
 def gestionAlianzasEstrategicas():
     # Imagenes ventas
+    def vender():
+        pass
 
-    imgv1 = PhotoImage(file="../baseDatos/img_png/f.png")
-    imgv2 = PhotoImage(file="../baseDatos/img_png/Logo_Exito_colombia.png")
-    imgv3 = PhotoImage(file="../baseDatos/img_png/p.png")
+    def historialVentas():
+        pass
 
-    frame1 =  Frame(ventana_menu, height=60, bg="light blue")
-    frame1.pack()
+    global marcoFuncionalidad
+    global marco_socio
+    global Fsocios
+    global cabecera
+    global title
 
-    top = Label(ventana_menu, text="Gestion Alianzas Estratégicas", font=('Helvetica', 15, 'bold'), bg="light blue")
-    top.pack(side="top", fill="x", pady=9)
+    title = StringVar()
+    title.set('Gestion Alianzas Estrategicas')
 
-    frame2 = Frame(ventana_menu, height=500)
-    frame2.pack()
+    marcoFuncionalidad = Frame(ventana_menu, height=500, width=1500, bg="gray", pady=50, padx=50, relief="sunken")
+    marcoFuncionalidad.place(relx=0.75, rely=0.1, relwidth=0.5, anchor='ne')
 
-    etiqueta0 = Label(frame2, text="Para efectuar una venta, seleccione un socio: ", height=3, width=50,
-                      anchor="center", bg="light blue")
+    cabecera = Entry(marcoFuncionalidad,textvariable=title, font=('Helvetica', 11, 'bold'))
+    #cabecera.insert(0, "Default Text")
+    cabecera.pack(side="top", pady=30)
 
-    etiqueta0.grid(row=0, column=0, columnspan=2)
+    marco_socio = Frame(marcoFuncionalidad, width=1000, height=700, relief="sunken", bd=10)
+    marco_socio.pack()
 
-    etiqueta = Label(frame2,
-                     text="\nGrupo Éxito es una empresa\nconglomerado multinacional\ncolombiana. Nació en 1905\ncon la marca Carulla y desde\n1999 forma parte de nuestras\nempresas asociadas.",
-                     compound="top", image=imgv1, height=300, width=200)
-    etiqueta.grid(row=1, column=0, rowspan=10)
+    socios = ['Exito', 'Falabella', 'Primark']
+    criterios = ["Seleccione un socio"]
+    valores = [socios]
+    habilitado = [True]
 
-    etiqueta2 = Label(frame2,
-                      text="\nFalabella es una de las\ncompañías más grandes\ny consolidadas de Amé-\nrica Latina. Desarrolla su\nactividad comercial a tra-\nvés de diferentes áreas de\nnegocio. En el año 1995\nse estableció el contrato\nde sociedad.",
-                      compound="top", image=imgv2, height=300, width=200)
-    etiqueta2.grid(row=1, column=1, rowspan=10)
+    Fsocios = FieldFrame(marco_socio, "Criterio", criterios, "Valor", valores, habilitado, "Vender", vender)
+    Fsocios.pack(side="left")
 
-    etiqueta3 = Label(frame2,
-                      text="\nAsociada desde 1997, Pri-\nmark (Penneys en Irlanda)\n es una cadena irlandesa\nde ropa y complementos\nque pertenece al grupo\nAssociated British Foods.",
-                      compound="top", image=imgv3, height=300, width=200)
-    etiqueta3.grid(row=1, column=2)
+    verHistorial = Button(marcoFuncionalidad, text="Ver historial de ventas", command=historialVentas)
+    verHistorial.pack(side='bottom', pady=50)
 
-    showInfo = Button(frame2, text="Historial de ventas")
-    vender = Button(frame2, text="Vender")
-
-    showInfo2 = Button(frame2, text="Historial de ventas")
-    vender2 = Button(frame2, text="Vender")
-
-    showInfo3 = Button(frame2, text="Historial de ventas")
-    vender3 = Button(frame2, text="Vender")
-
-    showInfo.grid(row=12, column=0, padx=10, pady=15)
-    vender.grid(row=11, column=0, padx=10, pady=15)
-
-    showInfo2.grid(row=12, column=1, padx=10, pady=15)
-    vender2.grid(row=11, column=1, padx=10, pady=15)
-
-    showInfo3.grid(row=12, column=2, padx=10, pady=15)
-    vender3.grid(row=11, column=2, padx=10, pady=15)
 
 
 def moduloCompra():
