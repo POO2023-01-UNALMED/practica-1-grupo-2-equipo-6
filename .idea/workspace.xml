@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b085a64-e0fb-4e3e-8f54-5591715117f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Cliente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/UiMain/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/UiMain/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Persona.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Persona.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Transportista.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Transportista.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Banco.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Banco.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Credito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Credito.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/.project" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.project" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/.project" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/.project" afterDir="false" />
