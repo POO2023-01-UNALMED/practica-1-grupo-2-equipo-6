@@ -1,4 +1,9 @@
+from Python.src.gestorAplicacion.clasesBase import Banco
+from Python.src.gestorAplicacion.clasesBase import CuentaBancaria
+from Python.src.gestorAplicacion.clasesBase.CuentaBancaria import Pais
+
 class Tienda:
+    cuentaTienda = CuentaBancaria(145000,Pais.COLOMBIA,Banco("BANCOLOMBIA"))
 
     def __init__(self, presupuesto, bodega, calle):
         self.presupuesto = presupuesto
@@ -22,3 +27,9 @@ class Tienda:
 
     def setCalle(self, calle):
         self.calle = calle
+
+
+    @classmethod
+    def getCuentaTienda(cls):
+        return Tienda.cuentaTienda
+
