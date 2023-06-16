@@ -1,9 +1,11 @@
-from gestorAplicacion.clasesHerencia import Cliente, CuentaBancaria, Persona, Proveedor, Tienda, Intervenido
-from gestorAplicacion.clasesBase import ControlCalidad, Producto, Transferencia
+from Python.src.gestorAplicacion.clasesBase.Persona import Persona
+from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
+from Python.src.gestorAplicacion.clasesHerencia.Cliente import Cliente
+
 
 class Transportista(Persona):
     def _init_(self, nombre, precioB, precioD, precioC, calificacion, cuenta):
-        super()._init_(nombre, calificacion, cuenta)
+        super().__init__(nombre, calificacion, cuenta)
         self.precioBase = precioB
         self.precioDistancia = precioD
         self.precioCarga = precioC
@@ -62,7 +64,7 @@ class Transportista(Persona):
             precio = 2300
         elif ciudad == Cliente.Ciudades.MEDELLIN:
             precio = 1500
-        elif ciudad == Cliente.Ciudades.PERREIRA:
+        elif ciudad == Cliente.Ciudades.PEREIRA:
             precio = 2300
         else:
             precio = 2000
@@ -82,7 +84,7 @@ class Transportista(Persona):
         transferencia = Transferencia(self.getCuenta(), precio)
         return transferencia
 
-    def calificar(self, ct):
+    def valorCalificacion(self, ct):
         calificacion = self.calificar()
         if self == ct.getTransportista():
             productosExtraviados = ct.getProductosExtraviados()

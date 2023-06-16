@@ -10,7 +10,7 @@ class Persona(ABC):
         self.cuenta = None
     
     @abstractmethod
-    def valorCalificacion(self):
+    def valorCalificacion(self, *args):
         pass
 
     @staticmethod

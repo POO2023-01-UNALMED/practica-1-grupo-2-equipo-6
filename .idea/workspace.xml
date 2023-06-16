@@ -4,7 +4,61 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b085a64-e0fb-4e3e-8f54-5591715117f0" name="Changes" comment="" />
+    <list default="true" id="6b085a64-e0fb-4e3e-8f54-5591715117f0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Cliente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/UiMain/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/UiMain/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Persona.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Persona.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Transportista.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesHerencia/Transportista.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.project" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/.project" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/Deserializador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/Serializador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/TransportistaNacional.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/TransportistaNacional.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/archivistaTienda.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/archivistaTienda.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/compra1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/compra1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/comprasPorRevisar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/comprasPorRevisar.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/contadorCompras.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/contadorCompras.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/exito.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/exito.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/falabella.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/falabella.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/operario0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/operario0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/operario1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/operario1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/operario2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/operario2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/primark.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/primark.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/proveedor1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/proveedor1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/proveedor2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/proveedor2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/proveedor3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/proveedor3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/tiendaEnvigado.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/tiendaEnvigado.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/tiendaLaureles.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/tiendaLaureles.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/tiendaPoblado.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/tiendaPoblado.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/transportista1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/transportista1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/transportista2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/transportista2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/transportista3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/transportista3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/ventasPorDefecto.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/baseDatos/temp/ventasPorDefecto.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Banco.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Bodega.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Compra.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/ControlCalidad.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Credito.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/CuentaBancaria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Informe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Inventariar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/OfertaPorDefecto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Persona.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Producto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Socio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Tienda.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Transferencia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesBase/Venta.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesHerencia/Cliente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesHerencia/Empleado.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesHerencia/Intervenido.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesHerencia/OfertaPreferencial.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesHerencia/Proveedor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/gestorAplicacion/clasesHerencia/Transportista.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AdministracionDeTienda/src/uiMain/Main.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,16 +86,20 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="PyConsoleOptionsProvider">
     <option name="myUseExistingConsole" value="true" />
   </component>
-  <component name="RunManager" selected="Python.main.py">
+  <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\johana calderon\AppData\Local\Programs\Python\Python311\python.exe" />
       <option name="SDK_NAME" value="Python 3.11" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Python/src/UiMain" />
