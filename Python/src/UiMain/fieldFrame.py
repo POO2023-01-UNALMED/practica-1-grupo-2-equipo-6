@@ -9,7 +9,7 @@ class FieldFrame(Frame):
         self.label_valores = Label(self, text=tituloValores)
         self.label_valores.grid(row=0, column=0, padx=0, pady=0)
         self.label_criterio = Label(self, text=criterios)
-        self.label_criterio.grid(row=0, column=0, padx=0, pady=0)
+        #self.label_criterio.grid(row=0, column=0, padx=0, pady=0)
         self.boton = Button(self, text=texto, command=comando)
 
 

@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox, StringVar
 from tkinter import ttk
+from fieldFrame import *
 
 
 class Controladora:
