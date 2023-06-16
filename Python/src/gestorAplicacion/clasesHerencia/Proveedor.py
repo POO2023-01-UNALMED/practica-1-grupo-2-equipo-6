@@ -1,10 +1,12 @@
 from Python.src.gestorAplicacion.clasesBase import Persona
 from random import randint
+import random
+import math
 
 
 class Proveedor(Persona):
-    def __init__(self, nombre, bodega, camisa, pantalon, abrigo, calle):
-        super().__init__(nombre)
+    def __init__(self, nombre, calificacion, cuenta, bodega, camisa, pantalon, abrigo, calle):
+        super().__init__(nombre, calificacion, cuenta)
         self.bodega = bodega
         self.costoCamisa = camisa
         self.costoPantalon = pantalon
@@ -62,6 +64,88 @@ class Proveedor(Persona):
 
         self.bodega.setProductosEnBodega(productosDisponibles)
         self.setDescuento(round(descuentoPantalon + descuentoCamiseta + descuentoAbrigo, 2))
+
+    def calificar(self, c):
+        if self != c.getProveedor():
+            return
+
+        productosAReponer = c.getProductosAReponerP()
+        productosDefectuosos = c.getProductosDefectuosos()
+        if productosAReponer is None:
+            productosAReponer = []
+
+        totalProductos = len(productosDefectuosos)
+        productosReemplazados = 0
+
+        for producto in productosDefectuosos:
+            if producto in productosAReponer:
+                productosReemplazados += 1
+
+        productosFaltantes = len(c.getProdsFaltantesCompra())
+        pedido = len(c.getCompra().getPedido())
+
+        porcentajeDeFaltanntes = productosFaltantes / pedido
+
+        if totalProductos > 0:
+            porcentajeReemplazo = productosReemplazados / totalProductos
+        else:
+            porcentajeReemplazo = 0.0
+
+        calificacion = self.valorCalificacion()
+
+        if productosDefectuosos == [] and productosAReponer == [] and porcentajeDeFaltanntes == 0:
+            self.setCalificacion(calificacion)
+            return
+        elif productosDefectuosos == [] and productosAReponer == [] and porcentajeDeFaltanntes < 0.5:
+            self.setCalificacion(calificacion - 1)
+            return
+        elif productosDefectuosos == [] and productosAReponer == [] and porcentajeDeFaltanntes >= 0.5:
+            self.setCalificacion(calificacion - 2)
+            return
+
+        if productosReemplazados == totalProductos and porcentajeDeFaltanntes == 0:
+            self.setCalificacion(calificacion)
+            return
+        elif productosReemplazados == totalProductos and porcentajeDeFaltanntes < 0.5:
+            self.setCalificacion(calificacion - 1)
+            return
+        elif productosReemplazados == totalProductos and porcentajeDeFaltanntes >= 0.5:
+            self.setCalificacion(calificacion - 2)
+            return
+
+        if porcentajeDeFaltanntes == 0:
+            if porcentajeReemplazo >= 0.8:
+                self.setCalificacion(calificacion - 1)
+            elif porcentajeReemplazo >= 0.6:
+                self.setCalificacion(calificacion - 2)
+            elif porcentajeReemplazo > 0:
+                self.setCalificacion(calificacion - 3)
+            else:
+                self.setCalificacion(calificacion - 4)
+            return
+        elif porcentajeDeFaltanntes < 0.5:
+            if porcentajeReemplazo >= 0.8:
+                self.setCalificacion(calificacion - 2)
+            elif porcentajeReemplazo >= 0.6:
+                self.setCalificacion(calificacion - 3)
+            elif porcentajeReemplazo >= 0:
+                self.setCalificacion(calificacion - 4)
+            return
+        else:
+            if porcentajeReemplazo >= 0.8:
+                self.setCalificacion(calificacion - 3)
+            else:
+                self.setCalificacion(calificacion - 4)
+            return
+            
+    def getCuenta(self):
+        return self.cuenta
+
+    def setCuenta(self, cuenta):
+        self.cuenta = cuenta
+    
+    def valorCalificacion(self):
+        return 5
 
     def setDescuento(self, descuento):
         self.descuento = descuento

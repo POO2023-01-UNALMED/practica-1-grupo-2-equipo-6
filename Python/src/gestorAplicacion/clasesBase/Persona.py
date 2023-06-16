@@ -1,14 +1,16 @@
+from abc import ABC, abstractmethod
 import random
 import pickle
 
 
-class Persona:
-    def __init__(self, nombre, calificacion):
+class Persona(ABC):
+    def __init__(self, nombre, calificacion, cuenta):
         self.calificacion = calificacion
         self.nombre = nombre
         self.cuenta = None
-
-    def calificar(self):
+    
+    @abstractmethod
+    def valorCalificacion(self):
         pass
 
     @staticmethod
@@ -28,22 +30,22 @@ class Persona:
 
         return productos_seleccionados
 
-    def get_cuenta(self):
+    def getCuenta(self):
         return self.cuenta
 
-    def set_cuenta(self, cuenta):
+    def setCuenta(self, cuenta):
         self.cuenta = cuenta
 
-    def get_nombre(self):
+    def getNombre(self):
         return self.nombre
 
-    def set_nombre(self, nombre):
+    def setNombre(self, nombre):
         self.nombre = nombre
 
-    def get_calificacion(self):
+    def getCalificacion(self):
         return self.calificacion
 
-    def set_calificacion(self, calificacion):
+    def setCalificacion(self, calificacion):
         self.calificacion = calificacion
 
     def __str__(self):
