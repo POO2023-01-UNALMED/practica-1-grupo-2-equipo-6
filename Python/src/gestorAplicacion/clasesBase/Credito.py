@@ -2,7 +2,7 @@ from enum import Enum
 from typing import List
 
 class Credito:
-    def _init_(self, cuenta, cantidad, cuotas):
+    def __init__(self, cuenta, cantidad, cuotas):
         self.cantidadCredito = cantidad
         self.acreedor = cuenta.getEntidad()
         self.deudor = cuenta
@@ -51,7 +51,7 @@ class Cuota(Enum):
     CINCO = 5
     TRES = 3
 
-    def _init_(self, cantidadMeses):
+    def __init__(self, cantidadMeses):
         self.cantidadMeses = cantidadMeses
 
     def getCantidadMeses(self):
