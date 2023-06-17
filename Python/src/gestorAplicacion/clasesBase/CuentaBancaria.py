@@ -1,15 +1,15 @@
 import random
 
 
-from Python.src.gestorAplicacion.clasesBase.Credito import Credito
-from Python.src.gestorAplicacion.clasesBase.Tienda import Tienda
+from Credito import Credito
+from Tienda import Tienda
 
 
 from enum import Enum
 
-from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
-from Python.src.gestorAplicacion.clasesHerencia.Empleado import Empleado
-from Python.src.gestorAplicacion.clasesHerencia.Transportista import Transportista
+from Transferencia import Transferencia
+from Empleado import Empleado
+from Transportista import Transportista
 
 
 class CuentaBancaria:
@@ -100,8 +100,8 @@ class CuentaBancaria:
 
     def pagar(self, v):
 
-        from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
-        from Python.src.gestorAplicacion.clasesBase.Tienda import Tienda
+        from Transferencia import Transferencia
+        from Tienda import Tienda
         if self.dinero - v.getTotal() < 0:
             self.entidad.generarCredito(Credito(self, v.getTotal(), Credito.Cuota.DOCE))
         else:

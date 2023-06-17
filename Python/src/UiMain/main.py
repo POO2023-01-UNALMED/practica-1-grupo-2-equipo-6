@@ -100,8 +100,8 @@ def cambioDescripcion():
                           "Me gustan también los idiomas.",
                           "Me llamo Johan Ortega, tengo 21 años, estudio Ingeniería\n" +
                           "de sistemas e informática. Me gusta comer, ver anime\n" +
-                          "y escuchar música. Subcampeon nacional en taekwondo dos\n" +
-                          "años seguidos y amante de los gatos"]
+                          "y escuchar música. Subcampeon nacional en taekwondo\n" +
+                          "dos años seguidos y amante de los gatos"]
     listaImagenes = [[img_g1, img_g2, img_g3, img_g4], [img_a1, img_a2, img_a3, img_a4],
                      [img_c1, img_c2, img_c3, img_c4], [img_j1, img_j2, img_j3, img_j4],
                      [img_m1, img_m2,img_m3,img_m4]]
