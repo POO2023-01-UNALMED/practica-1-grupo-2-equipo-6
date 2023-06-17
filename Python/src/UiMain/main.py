@@ -119,9 +119,7 @@ def cambioDescripcion():
     img3_descripcion.image = listaImagenes[controladora.controlDescripcion][2]
     img4_descripcion.config(image=listaImagenes[controladora.controlDescripcion][3])
     img4_descripcion.image = listaImagenes[controladora.controlDescripcion][3]
-    img5_descripcion.config(image=listaImagenes[controladora.controlDescripcion][4])
-    img5_descripcion.image = listaImagenes[controladora.controlDescripcion][4]
-
+    
 
 def aplicacion():
     messagebox.showinfo("Aplicacion", "Nuestro sistema de gestión de franquicias es una solución integral diseña" +

@@ -1,6 +1,6 @@
-from Python.src.gestorAplicacion.clasesBase import Banco
-from Python.src.gestorAplicacion.clasesBase import CuentaBancaria
-from Python.src.gestorAplicacion.clasesBase.CuentaBancaria import Pais
+from Banco import Banco
+from CuentaBancaria import CuentaBancaria
+from CuentaBancaria import Pais
 
 class Tienda:
     cuentaTienda = CuentaBancaria(145000,Pais.COLOMBIA,Banco("BANCOLOMBIA"))

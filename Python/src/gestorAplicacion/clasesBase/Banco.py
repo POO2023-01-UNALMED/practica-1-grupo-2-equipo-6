@@ -1,10 +1,10 @@
 from enum import Enum
 from typing import List, Dict
-from Python.src.gestorAplicacion.clasesBase.CuentaBancaria import CuentaBancaria
-from Python.src.gestorAplicacion.clasesBase.Credito import Credito
-from Python.src.gestorAplicacion.clasesBase.Tienda import Tienda
-from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia, EstadoPago
-from Python.src.gestorAplicacion.clasesBase.Venta import Venta
+from CuentaBancaria import CuentaBancaria
+from Credito import Credito
+from Tienda import Tienda
+from Transferencia import Transferencia, EstadoPago
+from Venta import Venta
 
 
 class Banco:
