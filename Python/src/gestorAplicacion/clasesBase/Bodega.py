@@ -6,6 +6,8 @@ from Python.src.gestorAplicacion.clasesBase import ControlCalidad
 from Python.src.gestorAplicacion.clasesBase import Tienda
 
 class Bodega(Inventariar):
+    pagos = []
+    resumen_pedido = None
 
 
     def _init_(self, productos: List[Producto]):
@@ -43,7 +45,7 @@ class Bodega(Inventariar):
                 numeroPantalones += 1
         return numeroPantalones
 
-def calcularAbrigos(self, pedido: List[Producto]):
+    def calcularAbrigos(self, pedido: List[Producto]):
         numeroAbrigo = 0
         for producto in pedido:
             if producto.getNombre() == "ABRIGO":
@@ -106,47 +108,53 @@ def calcularAbrigos(self, pedido: List[Producto]):
         return f"Camisetas = {self.calcularCamisas(self.getProductosEnBodega())}\nPantalones = {self.calcularPantalon(self.getProductosEnBodega())}\nAbrigos = {self.calcularAbrigos(self.getProductosEnBodega())}"
 
     @staticmethod
-    def realizarPedido(tiendas, set, cantidad):
-        necesarios = Producto.seleccionarProductos(set, cantidad)
+    def realizar_pedido(tiendas, set_tipo, cantidad):
+
+        from Python.src.gestorAplicacion.clasesBase.Producto import Producto
+        necesarios = Producto.seleccionar_productos(set_tipo, cantidad)
         pedido = []
         for tienda in tiendas:
             if not necesarios:
                 break
             else:
                 bodega = tienda.getBodega()
-                productos = bodega.pedirProductos(necesarios)
+                productos = bodega.pedir_productos(necesarios)
                 pedido.extend(productos)
-                Bodega.gestionarPago(tienda, productos)
-
-        Bodega.crearResumen(necesarios, pedido)
+                Bodega.gestionar_pago(tienda, productos)
+        Bodega.crear_resumen(necesarios, pedido)
         return pedido
 
     @staticmethod
-    def crearResumen(necesarios, pedido):
-        if len(necesarios) == 0:
-            Bodega.setResumenPedido("El pedido se ha completado exitosamente")
+    def crear_resumen(necesarios, pedido):
+        if not necesarios:
+            Bodega.resumen_pedido = "El pedido se ha completado exitosamente"
         else:
-            Bodega.setResumenPedido(f"Por falta de disponibilidad de productos en las tiendas el pedido solo ha podido completar {len(pedido)} de los {len(pedido) + len(necesarios)} necesarios.")
+            completados = len(pedido)
+            total = completados + len(necesarios)
+            Bodega.resumen_pedido = f"Por falta de disponibilidad de productos en las tiendas el pedido solo ha podido completar {completados} de los {total} necesarios."
 
     @staticmethod
-    def gestionarPago(tienda, productos):
-        cantidad = sum(producto.getCosto() for producto in productos)
-        pago = Transferencia(Tienda.getCuentaTienda(), cantidad)
-        pago.setDetalle(f"Id Tienda: {tienda.getId()} VALOR: ${cantidad}")
-        Bodega.getPagos().append(pago)
+    def gestionar_pago(tienda, productos):
+        cantidad = sum(producto.get_costo() for producto in productos)
+        pago = Transferencia(Tienda.cuentaTienda,Tienda.cuentaTienda.getEntidad(),cantidad)
+        pago.setDestinatario(Tienda.cuentaTienda)
+        tienda.presupuesto+=cantidad
+        Bodega.pagos.append(pago)
 
-    def pedirProductos(self, productos):
+    def pedir_productos(self, productos):
         pedido = []
         completado = []
         for producto in productos:
-            for i in range(len(self.productosEnBodega)):
-                if producto.getTipo() == self.productosEnBodega[i].getTipo():
-                    pedido.append(self.productosEnBodega[i])
+            for i in range(len(self.productos_en_bodega)):
+                if producto.get_tipo() == self.productos_en_bodega[i].get_tipo():
+                    pedido.append(self.productos_en_bodega[i])
                     completado.append(producto)
-                    del self.productosEnBodega[i]
+                    del self.productos_en_bodega[i]
                     break
+
         for producto in completado:
             productos.remove(producto)
+
         return pedido
 
     def abastecerBodega(self, c, lista):

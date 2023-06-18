@@ -48,23 +48,25 @@ class Transportista(Persona):
         return " nombre: " + super().getNombre() + "\nprecio del domicilio: " + str(self.precioTotal)
 
     def envioNacional(self, cliente, intervenidos, tipo):
+        from Python.src.gestorAplicacion.clasesHerencia.Cliente import Cliente
+        from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
         ciudad = cliente.getCiudad()
-        precio = 0
-        if ciudad == Cliente.Ciudades.BARRANQUILLA:
+        Ciudades=Cliente.Ciudades
+        if ciudad == Ciudades.BARRANQUILLA:
             precio = 2800
-        elif ciudad == Cliente.Ciudades.BOGOTA:
+        elif ciudad == Ciudades.BOGOTA:
             precio = 2300
-        elif ciudad == Cliente.Ciudades.BUCARAMANGA:
+        elif ciudad == Ciudades.BUCARAMANGA:
             precio = 2900
-        elif ciudad == Cliente.Ciudades.CALI:
+        elif ciudad == Ciudades.CALI:
             precio = 2400
-        elif ciudad == Cliente.Ciudades.CARTAGENA:
+        elif ciudad == Ciudades.CARTAGENA:
             precio = 2700
-        elif ciudad == Cliente.Ciudades.CUCUTA:
+        elif ciudad == Ciudades.CUCUTA:
             precio = 2300
-        elif ciudad == Cliente.Ciudades.MEDELLIN:
+        elif ciudad == Ciudades.MEDELLIN:
             precio = 1500
-        elif ciudad == Cliente.Ciudades.PEREIRA:
+        elif ciudad == Ciudades.PEREIRA:
             precio = 2300
         else:
             precio = 2000
@@ -72,16 +74,19 @@ class Transportista(Persona):
         tamañoPaquete = len(intervenidos)
         precio += tamañoPaquete * 1000
 
-        if tipo == Cliente.TipoEnvio.PRIORITARIO:
+        Tipo=Cliente.Tipo
+        if tipo == Tipo.PRIORITARIO:
             precio += 15000
-        elif tipo == Cliente.TipoEnvio.LIBRE:
+        elif tipo == Tipo.LIBRE:
             precio -= 15000
 
         precio -= precio * cliente.getDescuento()
+
         if precio < 0:
             precio = 0
 
-        transferencia = Transferencia(self.getCuenta(), precio)
+        transferencia = Transferencia(cliente.get_cuenta(),cliente.get_cuenta().getEntidad(),precio)
+        transferencia.setDestinatario(self.get_cuenta())
         return transferencia
 
     def valorCalificacion(self, ct):

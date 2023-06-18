@@ -62,6 +62,36 @@ class Transferencia:
 
     def setDestinatario(self, destinatario):
         self.destinatario = destinatario
+    def gestionPago(self,remitente,cantidad):
+        self.remitente=remitente
+        self.cantidad=cantidad
+
+
+    @staticmethod
+    def pagoEnvio(costo, cliente, pagoTransporte):
+        total = 0
+        from Python.src.gestorAplicacion.clasesBase.Bodega import Bodega
+        pagosPedido = Bodega.get_pagos()
+
+        for pago in pagosPedido:
+            total += pago.getCantidad()
+
+        ganancia = (costo - total) / (len(pagosPedido)+1)
+        cuenta = cliente.getCuenta()
+        transferencias = []
+
+        for pago in pagosPedido:
+            pago.setRemitente(cuenta)
+            pago.setCantidad(pago.getCantidad() + ganancia)
+            pago.realizarTransferencia()
+            transferencias.append(pago)
+
+
+        pagoTransporte.realizarTransferencia()
+        transferencias.append(pagoTransporte)
+
+
+        return transferencias
 
 
 class EstadoPago:

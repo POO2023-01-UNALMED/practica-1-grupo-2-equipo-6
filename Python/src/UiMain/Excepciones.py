@@ -65,6 +65,12 @@ class ErrorNoContacted(ErrorProcesoInvalido):
     def __init__(self):
         super().__init__()
         self.message += ' Verifique que haya realizado el contacto solicitado.'
+class ErrorPedido(ErrorProcesoInvalido):
+    def __init__(self):
+        super().__init__()
+        self.message+="El pedido no ha podido completar ningun producto,\n se le recomienda hacer los procesos de compra y calidad para tener disponibilidad"
+
+
 
 '''
 #Ejemplo manejo de excepciones

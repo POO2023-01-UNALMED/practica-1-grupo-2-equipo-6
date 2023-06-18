@@ -1,5 +1,10 @@
 import pickle
-from Bodega import SETS
+
+class SETS(Enum):
+	ONLY =1
+	TU = 2
+	COMPLETO = 3
+
 
 class Producto:
     class Tipo:
@@ -50,46 +55,27 @@ class Producto:
         return "\nTipo: "+self.nombre+"\nPrecio: "+self.precio;
 
 
-    def seleccionarProductos(self):
+	@staticmethod
+	def seleccionar_productos(set, cantidad):
+		productos = []
+		if set == SETS.ONLY:
+			for _ in range(cantidad):
+				productos.append(Producto(Producto.Tipo.CAMISA))
+		elif set == SETS.TU:
+			for _ in range(cantidad):
+				productos.append(Producto(Producto.Tipo.CAMISA))
+				productos.append(Producto(Producto.Tipo.PANTALON))
+		elif set == SETS.COMPLETO:
+			for _ in range(cantidad):
+				productos.append(Producto(Producto.Tipo.CAMISA))
+				productos.append(Producto(Producto.Tipo.PANTALON))
+				productos.append(Producto(Producto.Tipo.ABRIGO))
+		return productos
 
-
-    	public static ArrayList<Producto> seleccionarProductos(SETS set,int cantidad) {
-			ArrayList<Producto> productos=new ArrayList<Producto>();
-			switch(set) {
-			case ONLY:
-				for(int i=0;i<cantidad;i++) {
-					productos.add(new Producto(Tipo.CAMISA));
-
-			}
-			break;
-			case TU:
-				for(int i=0;i<cantidad;i++) {
-					productos.add(new Producto(Tipo.CAMISA));
-					productos.add(new Producto(Tipo.PANTALON));
-
-			}
-			break;
-			case COMPLETO:
-				for(int i=0;i<cantidad;i++) {
-					productos.add(new Producto(Tipo.CAMISA));
-					productos.add(new Producto(Tipo.PANTALON));
-					productos.add(new Producto(Tipo.ABRIGO));
-
-
-			}
-			break;
-
-			}
-			return productos;
-		}
-
-		public static ArrayList<Producto> clasificar(ArrayList<Producto> productos, Tipo tipo){
-			ArrayList<Producto> clasificados=new ArrayList<Producto>();
-			for(int i=0;i<productos.size();i++) {
-				Tipo tipado=productos.get(i).getTipo();
-				if(tipado==tipo) {
-					clasificados.add(productos.get(i));
-				}
-			}
-			return clasificados;
-		}
+	@staticmethod
+	def clasificar(productos, tipo):
+		clasificados = []
+		for producto in productos:
+			if producto.tipo == tipo:
+				clasificados.append(producto)
+		return clasificados
