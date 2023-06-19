@@ -1,14 +1,14 @@
-from gestorAplicacion.clasesBase import OfertaPorDefecto, Producto, Inventariar
+from gestorAplicacion.clasesBase import OfertaPorDefecto, Producto
 
 class OfertaPreferencial(OfertaPorDefecto):
     def _init_(self, productosOferta):
-        super()._init_(productosOferta)
+        super().__init__(productosOferta)
 
     def establecerOferta(self, productos):
         productosOferta = []
-        abrigos = Inventariar.calcularAbrigos(productos)
-        camisas = Inventariar.calcularCamisas(productos)
-        pantalones = Inventariar.calcularPantalon(productos)
+        abrigos = self.calcularAbrigos(productos)
+        camisas = self.calcularCamisas(productos)
+        pantalones = self.calcularPantalon(productos)
         i = 0
 
         if camisas >= abrigos and camisas >= pantalones:
