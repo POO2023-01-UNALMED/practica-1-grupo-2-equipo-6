@@ -65,6 +65,24 @@ class Proveedor(Persona):
         self.bodega.setProductosEnBodega(productosDisponibles)
         self.setDescuento(round(descuentoPantalon + descuentoCamiseta + descuentoAbrigo, 2))
 
+    def pDefectuososAReponer(self, control):
+        productosSeleccionados = []
+        indicesSeleccionados = set()
+        listaProductos = control.getProductosDefectuosos()
+
+        cantidadProductos = len(listaProductos)
+        cantidadSeleccionada = random.randint(0, cantidadProductos)
+
+        while cantidadSeleccionada > 0:
+            indiceAleatorio = random.randint(0, cantidadProductos - 1)
+            if indiceAleatorio not in indicesSeleccionados:
+                productoSeleccionado = listaProductos[indiceAleatorio]
+                productosSeleccionados.append(productoSeleccionado)
+                indicesSeleccionados.add(indiceAleatorio)
+                cantidadSeleccionada -= 1
+        return productosSeleccionados
+
+
     def calificar(self, c):
         if self != c.getProveedor():
             return
