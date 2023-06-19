@@ -108,6 +108,7 @@ descripcion_In.pack(side="top", fill="x", padx=80, pady=(10,0))
 frame_bar = Frame(ventana, height=60, bg="light blue", highlightthickness=3, highlightbackground="black")
 frame_bar.pack(padx=80, pady=(50,0), fill="x")
 
+
 # Crear una instancia de la clase FieldFrame
 compras = ["Informe 1","Informe 2", "Informe 3", "Informe 4"]
 sets =[]

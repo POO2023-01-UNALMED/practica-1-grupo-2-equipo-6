@@ -1,9 +1,10 @@
 import pickle
+from enum import Enum
 
 class SETS(Enum):
-	ONLY =1
-	TU = 2
-	COMPLETO = 3
+    ONLY =1
+    TU = 2
+    COMPLETO = 3
 
 
 class Producto:
@@ -46,32 +47,28 @@ class Producto:
     def __str__(self):
         return "\nTipo: "+self.nombre+"\nPrecio: "+self.precio;
 
+    @staticmethod
+    def seleccionarProductos(set, cantidad):
+        productos = []
+        if set == SETS.ONLY:
+            for _ in range(cantidad):
+                productos.append(Producto(Tipo.CAMISA))
+        elif set == SETS.TU:
+            for _ in range(cantidad):
+                productos.append(Producto(Tipo.CAMISA))
+                productos.append(Producto(Tipo.PANTALON))
+        elif set == SETS.COMPLETO:
+            for _ in range(cantidad):
+                productos.append(Producto(Tipo.CAMISA))
+                productos.append(Producto(Tipo.PANTALON))
+                productos.append(Producto(Tipo.ABRIGO))
+        return productos
 
-<<<<<<< Updated upstream
-	@staticmethod
-	def seleccionar_productos(set, cantidad):
-		productos = []
-		if set == SETS.ONLY:
-			for _ in range(cantidad):
-				productos.append(Producto(Producto.Tipo.CAMISA))
-		elif set == SETS.TU:
-			for _ in range(cantidad):
-				productos.append(Producto(Producto.Tipo.CAMISA))
-				productos.append(Producto(Producto.Tipo.PANTALON))
-		elif set == SETS.COMPLETO:
-			for _ in range(cantidad):
-				productos.append(Producto(Producto.Tipo.CAMISA))
-				productos.append(Producto(Producto.Tipo.PANTALON))
-				productos.append(Producto(Producto.Tipo.ABRIGO))
-		return productos
+    @staticmethod
+    def clasificar(productos, tipo):
+        clasificados = []
+        for producto in productos:
+            if producto.tipo == tipo:
+                clasificados.append(producto)
+        return clasificados
 
-	@staticmethod
-	def clasificar(productos, tipo):
-		clasificados = []
-		for producto in productos:
-			if producto.tipo == tipo:
-				clasificados.append(producto)
-		return clasificados
-=======
-
->>>>>>> Stashed changes
