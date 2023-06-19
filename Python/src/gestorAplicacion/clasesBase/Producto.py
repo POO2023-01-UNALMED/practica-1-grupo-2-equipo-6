@@ -12,9 +12,6 @@ class Producto:
         PANTALON = 50000
         ABRIGO = 60000
 
-        def __init__(self, precioEstandar):
-            self.precioEstandar = precioEstandar
-
     def __init__(self, tipo, precio=None, costo=None):
         self.nombre = tipo.name
         self.precio = tipo.precioEstandar if precio is None else precio
@@ -27,11 +24,6 @@ class Producto:
     #             return True
     #         else:
     #             return False
-
-
-
-
-
 
     def getNombre(self)->str:
         return self.nombre
@@ -55,6 +47,7 @@ class Producto:
         return "\nTipo: "+self.nombre+"\nPrecio: "+self.precio;
 
 
+<<<<<<< Updated upstream
 	@staticmethod
 	def seleccionar_productos(set, cantidad):
 		productos = []
@@ -79,3 +72,6 @@ class Producto:
 			if producto.tipo == tipo:
 				clasificados.append(producto)
 		return clasificados
+=======
+
+>>>>>>> Stashed changes
