@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import Enum
-from Python.src.clasesBase.ControlCalidad import ControlCalidad
+from src.clasesBase.ControlCalidad import ControlCalidad
 
 class Informe:
 
@@ -8,8 +8,7 @@ class Informe:
     informesControl=[]
     informes=0
 
-    def __init__(self, tipoInforme, ventaEfectuada = None, contable=None, puntajeCrediticioActual = None
-    controlC = None, ControlCalidad):
+    def __init__(self, tipoInforme, ventaEfectuada = None, contable=None, puntajeCrediticioActual = None, controlC = None):
         Informe.informes += 1
         self.contable = contable
         self.tipoInforme = tipoInforme
@@ -20,7 +19,7 @@ class Informe:
         self.cantidadActualDeuda = 0.0
         self.ventaEfectuada = ventaEfectuada
         self.puntajeCrediticioActual = puntajeCrediticio
-        self.controlC = ControlCalidad
+        self.controlC = controlC
 
     class TipoInforme(Enum):
         INFORME_VENTAS = "IVE"
