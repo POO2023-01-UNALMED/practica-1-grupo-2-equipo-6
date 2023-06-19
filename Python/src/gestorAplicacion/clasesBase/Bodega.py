@@ -10,7 +10,7 @@ class Bodega():
     resumen_pedido = None
 
 
-    def _init_(self, productos):
+    def __init__(self, productos):
         self.stopBodega = len(productos)
         self.productosEnBodega = productos
         self.resumenPedido = None

@@ -5,8 +5,8 @@ from Informe import *
 class ControlCalidad:
     def __init__(self, compra):
         self.compra = compra
-        self.proveedor = compra.getProveedorSeleccionado()
-        self.transportista = compra.getTransportistaSeleccionado()
+        self.proveedor = compra.getProveedor()
+        self.transportista = compra.getTransportista()
         self.productosDefectuosos = []
         self.productosExtraviados = []
         self.productosAReponerP = []

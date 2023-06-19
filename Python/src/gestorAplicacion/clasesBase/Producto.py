@@ -8,13 +8,13 @@ class SETS(Enum):
 
 
 class Producto:
-    class Tipo:
+    class Tipo(Enum):
         CAMISA = 40000
         PANTALON = 50000
         ABRIGO = 60000
 
     def __init__(self, tipo, precio=None, costo=None):
-        self.nombre = tipo.name
+        self.nombre = tipo
         self.precio = tipo.precioEstandar if precio is None else precio
         self.costo = costo
 
