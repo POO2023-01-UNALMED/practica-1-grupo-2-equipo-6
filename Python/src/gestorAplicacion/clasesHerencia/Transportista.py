@@ -41,7 +41,7 @@ class Transportista(Persona):
     def setPrecioTotal(self, p):
         self.precioTotal = p
 
-    def calificar(self):
+    def valorCalificacion(self):
         return 5
 
     def _str_(self):
@@ -89,18 +89,25 @@ class Transportista(Persona):
         transferencia.setDestinatario(self.get_cuenta())
         return transferencia
 
-    def valorCalificacion(self, ct):
-        calificacion = self.calificar()
+    def calificar(self, ct):
+        calificacion = self.valorCalificacion()
         if self == ct.getTransportista():
             productosExtraviados = ct.getProductosExtraviados()
-            productosAReponerT = ct.getProductosAReponerT() if ct.getProductosAReponerT() else []
+            productosAReponerT = ct.getProductosAReponerT()
+            if productosAReponerT is None:
+                productosAReponerT = []
 
-            if not productosExtraviados and not productosAReponerT:
+            if (not productosExtraviados or productosExtraviados is None) and not productosAReponerT:
                 self.setCalificacion(calificacion)
                 return
 
-            totalProductos = len(productosExtraviados)
-            productosReemplazados = sum(1 for p in productosExtraviados if p in productosAReponerT)
+            totalProductos = 0
+            productosReemplazados = 0
+
+            for p in productosExtraviados:
+                totalProductos += 1
+                if p in productosAReponerT:
+                    productosReemplazados += 1
 
             if productosReemplazados == totalProductos:
                 self.setCalificacion(calificacion)
