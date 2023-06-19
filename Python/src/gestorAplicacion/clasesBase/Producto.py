@@ -45,23 +45,23 @@ class Producto:
         self.costo=costo
 
     def __str__(self):
-        return "\nTipo: "+self.nombre+"\nPrecio: "+self.precio;
+        return "\nTipo: "+ str(self.nombre) +"\nPrecio: "+ str(self.precio)
 
     @staticmethod
     def seleccionarProductos(set, cantidad):
         productos = []
         if set == SETS.ONLY:
             for _ in range(cantidad):
-                productos.append(Producto(Tipo.CAMISA))
+                productos.append(Producto(Producto.Tipo.CAMISA))
         elif set == SETS.TU:
             for _ in range(cantidad):
-                productos.append(Producto(Tipo.CAMISA))
-                productos.append(Producto(Tipo.PANTALON))
+                productos.append(Producto(Producto.Tipo.CAMISA))
+                productos.append(Producto(Producto.Tipo.PANTALON))
         elif set == SETS.COMPLETO:
             for _ in range(cantidad):
-                productos.append(Producto(Tipo.CAMISA))
-                productos.append(Producto(Tipo.PANTALON))
-                productos.append(Producto(Tipo.ABRIGO))
+                productos.append(Producto(Producto.Tipo.CAMISA))
+                productos.append(Producto(Producto.Tipo.PANTALON))
+                productos.append(Producto(Producto.Tipo.ABRIGO))
         return productos
 
     @staticmethod

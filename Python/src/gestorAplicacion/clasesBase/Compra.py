@@ -92,7 +92,7 @@ class Compra:
     
     def generarProductosExtraviados(self):
         productosSeleccionados = []
-        listaProductos = self.proveedor.getBodega().getProductosEnBodega()
+        listaProductos = self.getProveedor().getBodega().getProductosEnBodega()
         random.seed()
 
         cantidadProductos = len(listaProductos)

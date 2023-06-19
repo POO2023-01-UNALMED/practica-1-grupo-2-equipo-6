@@ -58,7 +58,7 @@ class Informe:
         return cls.informesVentas
 
     def __str__(self):
-        if self.tipoInforme == TipoInforme.INFORME_VENTAS:
+        if self.tipoInforme == Informe.TipoInforme.INFORME_VENTAS:
             nota = "Notas:"
             if Venta.get_porcentaje_banco() != 0:
                 nota += "\nLa tienda tiene una deuda no saldada\n" \

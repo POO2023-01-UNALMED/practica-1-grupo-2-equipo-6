@@ -4,12 +4,13 @@ from Deserializador import *
 from Serializador import *
 from Persona import *
 from Producto import *
+from Informe import Informe
 
 
 class Empleado(Persona):
     
-    def __init__(self,nombre,calificacion,hd,ht,cargo,sueldo):
-        super().__init__(nombre,calificacion)
+    def __init__(self,nombre,calificacion, cuenta, hd,ht,cargo,sueldo):
+        super().__init__(nombre,calificacion, cuenta)
         self.horas_disponibles = hd
         self.horas_trabajadas = ht
         self.cargo = cargo
@@ -22,6 +23,8 @@ class Empleado(Persona):
 
     class CARGOS(Enum):
         OPERARIO = 1
+        ARCHIVISTA = 2
+
 
     def calificar(self):
         if self.cargo == Empleado.CARGOS.OPERARIO:
@@ -35,6 +38,9 @@ class Empleado(Persona):
                     calificacion = 5
                 self.horas_trabajadas = 0
                 self.calificacion = calificacion
+    
+    def valorCalificacion(self):
+        return 5
 
     @staticmethod
     def seleccionar_empleados(cargo, camisas, pantalones, abrigos):
@@ -101,6 +107,23 @@ class Empleado(Persona):
         Soper=Serializador(operarios,"operarios")
 
         return operarios
+
+    def generarInformeControlCalidad(self, c, p, t):
+        if self.cargo == self.CARGOS.ARCHIVISTA:
+            if c.getProveedor() == p and c.getTransportista() == t:
+                if c.getContactarP() and not c.getContactarT():
+                    p.calificar(c)
+                    return Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c)
+                elif not c.getContactarP() and c.getContactarT():
+                    t.calificar(c)
+                    return Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c)
+                elif c.getContactarP() and c.getContactarT():
+                    p.calificar(c)
+                    t.calificar(c)
+                    return Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c)
+                else:
+                    return Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c)
+        return None
 
     def get_sueldo(self):
         return self.sueldo

@@ -25,7 +25,7 @@ class ControlCalidad:
             productosExtraviados = c.getProductosExtraviados()
             productosRevision = []
             #prodsFaltantesCompra = ControlCalidad.listaSinLista(c.getPedido(), c.getProveedorSeleccionado().getBodega().getProductos())
-            prodsFaltantesCompra = ControlCalidad.listaSinLista(c.getPedido(), c.getProductos())
+            prodsFaltantesCompra = ControlCalidad.listaSinLista(c.getPedido(), c.getProveedor().getBodega().getProductosEnBodega())
             self.prodsFaltantesCompra = prodsFaltantesCompra
             self.productosDefectuosos = productosDefectuosos
             self.productosExtraviados = productosExtraviados
@@ -47,15 +47,15 @@ class ControlCalidad:
         contadores2 = {}
 
         for producto1 in lista1:
-            clave = producto1.getNombre() + "-" + str(producto1.getPrecio())
+            clave = str(producto1.getNombre()) + "-" + str(producto1.getPrecio())
             contadores1[clave] = contadores1.get(clave, 0) + 1
 
         for producto2 in lista2:
-            clave = producto2.getNombre() + "-" + str(producto2.getPrecio())
+            clave = str(producto2.getNombre()) + "-" + str(producto2.getPrecio())
             contadores2[clave] = contadores2.get(clave, 0) + 1
 
         for producto1 in lista1:
-            clave = producto1.getNombre() + "-" + str(producto1.getPrecio())
+            clave = str(producto1.getNombre()) + "-" + str(producto1.getPrecio())
             if clave not in contadores2 or contadores2[clave] <= 0:
                 compraSinDefectuosos.append(producto1)
             else:
