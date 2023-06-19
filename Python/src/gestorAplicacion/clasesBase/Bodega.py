@@ -179,14 +179,13 @@ class Bodega(Inventariar):
     def getResumenPedido():
         return Bodega.resumenPedido
 
-    @staticmethod
+
     def setResumenPedido(resumenPedido):
         Bodega.resumenPedido = resumenPedido
 
-    @staticmethod
-    def getPagos():
-        return Bodega.pagos
 
-    @staticmethod
-    def setPagos(pagos):
-        Bodega.pagos = pagos
+    def getPagos(self):
+        return self.pagos
+
+    def setPagos(self,pagos):
+        self.pagos = pagos
