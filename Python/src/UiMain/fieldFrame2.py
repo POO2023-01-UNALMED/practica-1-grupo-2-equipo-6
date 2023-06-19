@@ -101,13 +101,12 @@ ventana = Tk()
 ventana.geometry("1000x620")
 ventana.title("Control de calidad")
 ventana.config(bg="light blue")
-'''titulo = Label(ventana,text="Bievenido al apartado de archivos", font=("Arial Bold", 16, "bold"), bg="light blue")
+titulo = Label(ventana,text="Bievenido al apartado de archivos", font=("Arial Bold", 16, "bold"), bg="light blue")
 titulo.pack(side="top", fill="x", padx=80, pady=(30, 0))
 descripcion_In = Label(ventana, text="En este apartado, se genera el informe de calidad con el fin de saber detalladamente\n cada uno de los procesos ejecutados en el departamento de  Control de Calidad", font=("Arial", 12), bg="light blue")
 descripcion_In.pack(side="top", fill="x", padx=80, pady=(10,0))
 frame_bar = Frame(ventana, height=60, bg="light blue", highlightthickness=3, highlightbackground="black")
 frame_bar.pack(padx=80, pady=(50,0), fill="x")
-'''
 
 # Crear una instancia de la clase FieldFrame
 compras = ["Informe 1","Informe 2", "Informe 3", "Informe 4"]
