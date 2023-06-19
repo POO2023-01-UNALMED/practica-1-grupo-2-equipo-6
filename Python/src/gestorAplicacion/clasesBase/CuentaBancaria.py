@@ -1,14 +1,14 @@
 import random
 
 
-from src.gestorAplicacion.clasesBase.Credito import *
-from src.gestorAplicacion.clasesBase.Credito import *
+from Credito import *
+from Credito import *
 
 
 from enum import Enum
 
-from src.gestorAplicacion.clasesBase.Transferencia import Transferencia
-from src.gestorAplicacion.clasesHerencia.Empleado import Empleado
+from Transferencia import *
+from clasesHerencia.empleado import *
 #from src.gestorAplicacion.clasesHerencia.Empleado import Transportista
 
 
