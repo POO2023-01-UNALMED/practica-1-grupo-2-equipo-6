@@ -109,3 +109,6 @@ class Compra:
 
     def setTransportista(self, transportista):
         self.transportista = transportista
+
+
+p = Producto(Tipo.CAMISA)
