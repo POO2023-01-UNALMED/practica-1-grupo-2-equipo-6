@@ -1,4 +1,5 @@
-from gestorAplicacion.clasesBase import OfertaPorDefecto, Producto
+from OfertaPorDefecto import *
+from Producto import *
 
 class OfertaPreferencial(OfertaPorDefecto):
     def _init_(self, productosOferta):

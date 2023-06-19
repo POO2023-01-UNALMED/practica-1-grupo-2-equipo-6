@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b085a64-e0fb-4e3e-8f54-5591715117f0" name="Changes" comment="" />
+    <list default="true" id="6b085a64-e0fb-4e3e-8f54-5591715117f0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/UiMain/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/UiMain/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Banco.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Banco.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Bodega.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Bodega.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Cliente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Compra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Compra.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/ControlCalidad.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/ControlCalidad.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/CuentaBancaria.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/CuentaBancaria.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Informe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Informe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Intervenido.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Intervenido.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Inventariar.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Inventariar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/OfertaPorDefecto.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/OfertaPorDefecto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/OfertaPreferencial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/OfertaPreferencial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Proveedor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Proveedor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Tienda.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Tienda.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transportista.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transportista.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/empleado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Empleado.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

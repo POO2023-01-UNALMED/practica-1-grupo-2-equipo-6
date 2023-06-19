@@ -1,10 +1,10 @@
 from enum import Enum
 from typing import List, Dict
-from src.gestorAplicacion.clasesBase.CuentaBancaria import CuentaBancaria
-from src.gestorAplicacion.clasesBase.Credito import Credito
+from CuentaBancaria import *
+from Credito import *
 #from src.gestorAplicacion.clasesBase.Tienda import Tienda
-from src.gestorAplicacion.clasesBase.Transferencia import Transferencia, EstadoPago
-from src.gestorAplicacion.clasesBase.Venta import Venta
+from Transferencia import *
+from Venta import *
 
 
 class Banco:

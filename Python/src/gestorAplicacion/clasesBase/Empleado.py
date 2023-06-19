@@ -1,9 +1,9 @@
 from enum import Enum
 
-from src.baseDatos.Deserializador import Deserializador
-from src.baseDatos.Serializador import Serializador
-from src.gestorAplicacion.clasesBase.Persona import Persona
-from src.gestorAplicacion.clasesBase.Producto import Producto
+from Deserializador import *
+from Serializador import *
+from Persona import *
+from Producto import *
 
 
 class Empleado(Persona):

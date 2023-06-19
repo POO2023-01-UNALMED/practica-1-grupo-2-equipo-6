@@ -1,9 +1,9 @@
 from typing import List
-from src.gestorAplicacion.clasesBase.Producto import Producto
-from src.gestorAplicacion.clasesBase import Inventariar
-from src.gestorAplicacion.clasesBase import Transferencia
-from src.gestorAplicacion.clasesBase import ControlCalidad
-from src.gestorAplicacion.clasesBase.Tienda import Tienda
+from Producto import *
+from Inventariar import *
+from Transferencia import *
+from ControlCalidad import *
+from Tienda import *
 
 class Bodega():
     pagos = []

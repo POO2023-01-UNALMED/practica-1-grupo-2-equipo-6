@@ -1,9 +1,8 @@
-from src.gestorAplicacion.clasesBase.Banco import *
-from src.gestorAplicacion.clasesBase.CuentaBancaria import *
-Pais=CuentaBancaria.Pais
+from Banco import *
+from CuentaBancaria import *
 
 class Tienda:
-    cuentaTienda = CuentaBancaria(145000,Pais.COLOMBIA,Banco("BANCOLOMBIA"))
+    cuentaTienda = CuentaBancaria(145000,CuentaBancaria.Pais.COLOMBIA,Banco("BANCOLOMBIA"))
 
     def __init__(self, presupuesto, bodega, calle):
         self.presupuesto = presupuesto

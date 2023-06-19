@@ -1,5 +1,5 @@
 import math
-from Python.src.gestorAplicacion.clasesBase.Producto import Producto
+from Producto import *
 import random
 
 class Compra:

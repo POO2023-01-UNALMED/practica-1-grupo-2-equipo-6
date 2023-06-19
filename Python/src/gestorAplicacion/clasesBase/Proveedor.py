@@ -1,4 +1,4 @@
-from Python.src.gestorAplicacion.clasesBase import Persona
+from Persona import *
 from random import randint
 import random
 import math

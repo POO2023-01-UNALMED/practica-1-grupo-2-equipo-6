@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import Enum
-from src.clasesBase.ControlCalidad import ControlCalidad
+from ControlCalidad import *
 
 class Informe:
 

@@ -8,7 +8,7 @@ from Credito import *
 from enum import Enum
 
 from Transferencia import *
-from empleado import *
+from Empleado import *
 #from src.gestorAplicacion.clasesHerencia.Empleado import Transportista
 
 

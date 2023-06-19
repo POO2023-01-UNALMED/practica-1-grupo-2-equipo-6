@@ -1,11 +1,11 @@
 from typing import List
 import random
-from Python.src.gestorAplicacion.clasesBase.Producto import Producto
+from Producto import *
 
 
 class Socio:
-    def __init__(self, nombre: str, productosContrato: List[Producto], renovacionesContratos: List[Venta],
-                 cuenta: CuentaBancaria):
+    def __init__(self, nombre, productosContrato, renovacionesContratos,
+                 cuenta):
         self.productosContrato = productosContrato
         self.nombre = nombre
         self.renovacionesContratos = renovacionesContratos
@@ -13,7 +13,7 @@ class Socio:
         cuenta.getEntidad().getHistorialesCrediticios()[cuenta] = []
         cuenta.setPropietario(self)
 
-    def registrarVenta(self, oferta: OfertaPorDefecto) -> Venta:
+    def registrarVenta(self, oferta) :
         v = Venta(self)
         valorEntero = random.randint(0, 11)
         v.setProductosVenta(self.productosContrato)

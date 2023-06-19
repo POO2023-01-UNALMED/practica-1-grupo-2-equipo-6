@@ -1,6 +1,6 @@
-from src.gestorAplicacion.clasesHerencia.Proveedor import Proveedor
-from src.gestorAplicacion.clasesHerencia.Transportista import Transportista
-from src.gestorAplicacion.clasesBase.Informe import Informe
+from Proveedor import *
+from Transportista import *
+from Informe import *
 
 class ControlCalidad:
     def __init__(self, compra):

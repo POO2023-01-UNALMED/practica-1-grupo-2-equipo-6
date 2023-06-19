@@ -1,6 +1,6 @@
-from Python.src.gestorAplicacion.clasesBase.Persona import Persona
-from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
-from Python.src.gestorAplicacion.clasesHerencia.Cliente import Cliente
+from Persona import *
+from Transferencia import *
+from Cliente import *
 
 
 class Transportista(Persona):

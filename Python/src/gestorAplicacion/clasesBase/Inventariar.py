@@ -1,5 +1,5 @@
 from typing import List
-from src.gestorAplicacion.clasesBase import Producto
+from Producto import *
 
 class Inventariar:
     minCamisas = 1
@@ -7,7 +7,7 @@ class Inventariar:
     minPantalon = 1
 
     @staticmethod
-    def calcularCamisas(productos: List[Producto]) -> int:
+    def calcularCamisas(productos) -> int:
         numCamisas = 0
         for p in productos:
             if p.getNombre() == "CAMISA":
@@ -15,7 +15,7 @@ class Inventariar:
         return numCamisas
 
     @staticmethod
-    def calcularAbrigos(productos: List[Producto]) -> int:
+    def calcularAbrigos(productos) -> int:
         numAbrigos = 0
         for p in productos:
             if p.getNombre() == "ABRIGO":
@@ -23,7 +23,7 @@ class Inventariar:
         return numAbrigos
 
     @staticmethod
-    def calcularPantalon(productos: List[Producto]) -> int:
+    def calcularPantalon(productos) -> int:
         numPantalon = 0
         for p in productos:
             if p.getNombre() == "PANTALON":

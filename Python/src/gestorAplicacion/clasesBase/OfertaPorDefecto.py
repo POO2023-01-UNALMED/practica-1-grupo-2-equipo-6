@@ -1,5 +1,6 @@
 from typing import List
-from Producto.Producto import Tipo
+from Producto import *
+from Inventariar import *
 
 
 class OfertaPorDefecto(Inventariar):

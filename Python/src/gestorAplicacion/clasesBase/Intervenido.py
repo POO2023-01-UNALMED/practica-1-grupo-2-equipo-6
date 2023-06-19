@@ -1,6 +1,6 @@
 from enum import Enum
 import random
-from src.gestorAplicacion.clasesBase.Producto import Producto
+from Producto import *
 Tipo=Producto.Tipo
 
 
