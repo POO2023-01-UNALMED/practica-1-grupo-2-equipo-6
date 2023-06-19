@@ -11,7 +11,7 @@ class Compra:
         self.transportista = None
         self.productosExtraviados = []
         self.revisado = []
-
+        self.compraLlego = []
 
     def hacerPedido(self, tienda):
         numCamisetas = int(tienda.getBodega().calcularCamisas(tienda.getBodega().getProductosEnBodega()))
@@ -125,6 +125,18 @@ class Compra:
         self.compraLlego = lista3
         return lista3
     
+    def getCompraLlego(self):
+        return self.compraLlego
+    
+    def setCompraLlego(self, compraLlego):
+        self.compraLlego = compraLlego
+
+    def getRevisado(self):
+        return self.revisado
+
+    def setRevisado(self, revisado):
+        self.revisado = revisado
+
     def getProductosExtraviados(self):
         return self.productosExtraviados
 

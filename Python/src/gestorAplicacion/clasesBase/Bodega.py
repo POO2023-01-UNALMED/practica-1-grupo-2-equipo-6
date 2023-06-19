@@ -158,14 +158,14 @@ class Bodega():
         return pedido
 
     def abastecerBodega(self, c, lista):
-        if (not self.productosEnBodega and ControlCalidad.listaSinLista(c.getCompra().getCompraLlego(), c.getProductosDefectuosos())):
+        if (len(self.productosEnBodega) == 0 or self.productosEnBodega is None) and ControlCalidad.listaSinLista(c.getCompra().getCompraLlego(), c.getProductosDefectuosos()) is not None:
             self.setProductos(ControlCalidad.listaSinLista(c.getCompra().getCompraLlego(), c.getProductosDefectuosos()))
-            if lista:
-                self.abastecerBodega(lista)
-        elif lista:
-            self.abastecerBodega(lista)
+            if lista is not None:
+                self.abastecerBodega2(lista)
+        elif lista is not None:
+            self.abastecerBodega2(lista)
 
-    def abastecerBodega(self, lista):
+    def abastecerBodega2(self, lista):
         for producto in lista:
             self.addProducto(producto)
 
