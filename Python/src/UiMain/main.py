@@ -323,19 +323,9 @@ def gestionAlianzasEstrategicas():
     def historialVentas():
         verHistorial.destroy()
         marco_socio.pack_forget()
-        titulo = Label(marcoFuncionalidad, text="Bienvenido al apartado de archivos", font=("Arial Bold", 16, "bold"),
-                       bg="gray")
-        titulo.pack(side="top", fill="x", padx=50, pady=(30, 0))
-        descripcion_In = Label(marcoFuncionalidad,
-                               text="En este apartado, se genera el informe ventas con el fin de saber detalladamente\n cada uno de los procesos ejecutados y las partes relacionadas.",
-                               font=("Arial", 12), bg="gray")
-        descripcion_In.pack(side="top", fill="x", padx=50, pady=(10, 0))
-        frame_bar = Frame(marcoFuncionalidad, height=10, bg="gray", highlightthickness=3, highlightbackground="black")
-        frame_bar.pack(padx=10, pady=(10, 0), fill="x")
 
-        # Crear una instancia de la clase FieldFrame
-        informes = []
-        sets = []
+
+
         '''
         archivista = #Deserializar un archivista
         contador = #Deserializar un contador
@@ -358,12 +348,8 @@ def gestionAlianzasEstrategicas():
         sets=['i1', 'i2', 'i3']
         valores = [sets]
 
-        field_frame_2 = FieldFrame2(frame_bar, "Criterio", criterios, "Valor", valores, habilitado)
+        field_frame_2 = FieldFrame2(marcoFuncionalidad, "Criterio", criterios, "Valor", valores, habilitado,'')
         field_frame_2.pack()
-
-        field_frame_2.cambiarPadB2(0, 5, 5)
-        field_frame_2.cambiarPadB2(0, 0, 5)
-
         field_frame_2.agregarTexto("INSERTE INFORME")
 
 
