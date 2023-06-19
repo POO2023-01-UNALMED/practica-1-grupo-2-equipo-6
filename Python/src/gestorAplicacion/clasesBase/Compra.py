@@ -1,5 +1,6 @@
+import math
 from Python.src.gestorAplicacion.clasesBase.Producto import Producto
-
+import random
 
 class Compra:
 
@@ -8,6 +9,9 @@ class Compra:
         self.pedido = []
         self.proveedor = None
         self.transportista = None
+        self.productosExtraviados = []
+        self.revisado = []
+
 
     def hacerPedido(self, tienda):
         numCamisetas = int(tienda.getBodega().calcularCamisas(tienda.getBodega().getProductosEnBodega()))
@@ -22,19 +26,19 @@ class Compra:
             if numCamisetas <= numAbrigos and numCamisetas <= numPantalones:
                 numProductos += 1
                 numCamisetas += 1
-                producto1 = Producto("CAMISA", 40000, 20000)
+                producto1 = Producto(Producto.Tipo.CAMISA, 40000, 20000)
                 self.pedido += [producto1]
 
             elif numPantalones <= numAbrigos and numPantalones <= numCamisetas:
                 numProductos += 1
                 numPantalones += 1
-                producto2 = Producto("PANTALON", 50000, 25000)
+                producto2 = Producto(Producto.Tipo.PANTALON, 50000, 25000)
                 self.pedido += [producto2]
 
             else:
                 numProductos += 1
                 numAbrigos += 1
-                producto3 = Producto("ABRIGO", 60000, 30000)
+                producto3 = Producto(Producto.Tipo.ABRIGO, 60000, 30000)
                 self.pedido += [producto3]
 
         # Se sale del metodo si la capacidad de la bodega no es suficiente
@@ -85,6 +89,44 @@ class Compra:
                 transportistaRecomendado = transportista
         self.setTransportista(transportistaRecomendado)
         return transportistaRecomendado
+    
+    def generarProductosExtraviados(self):
+        productosSeleccionados = []
+        listaProductos = self.proveedor.getBodega().getProductosEnBodega()
+        random.seed()
+
+        cantidadProductos = len(listaProductos)
+        maxCantidadSeleccionada = int(math.ceil(cantidadProductos * 0.6))
+
+        cantidadSeleccionada = random.randint(0, maxCantidadSeleccionada + 1)
+
+        indicesSeleccionados = set()
+
+        while cantidadSeleccionada > 0:
+            indiceAleatorio = random.randint(0, cantidadProductos - 1)
+            if indiceAleatorio not in indicesSeleccionados:
+                productoSeleccionado = listaProductos[indiceAleatorio]
+                productosSeleccionados.append(productoSeleccionado)
+                indicesSeleccionados.add(indiceAleatorio)
+                cantidadSeleccionada -= 1
+
+        self.productosExtraviados = productosSeleccionados
+        return productosSeleccionados
+    
+    def generarCompraLlego(self):
+        lista1 = self.proveedor.getBodega().getProductosEnBodega()
+        lista2 = self.productosExtraviados
+        lista3 = []
+
+        for producto in lista1:
+            if producto not in lista2:
+                lista3.append(producto)
+
+        self.compraLlego = lista3
+        return lista3
+    
+    def getProductosExtraviados(self):
+        return self.productosExtraviados
 
     def getTienda(self):
         return self.tienda
@@ -111,4 +153,4 @@ class Compra:
         self.transportista = transportista
 
 
-p = Producto(Tipo.CAMISA)
+

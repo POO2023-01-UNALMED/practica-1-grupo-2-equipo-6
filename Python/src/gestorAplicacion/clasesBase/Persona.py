@@ -14,8 +14,8 @@ class Persona(ABC):
         pass
 
     @staticmethod
-    def generar_productos(lista_productos):
-        productos_seleccionados = []
+    def generarProductos(lista_productos):
+        productosSeleccionados = []
         indices_seleccionados = set()
         cantidad_productos = len(lista_productos)
         cantidad_seleccionada = random.randint(0, cantidad_productos)
@@ -24,11 +24,11 @@ class Persona(ABC):
             indice_aleatorio = random.randint(0, cantidad_productos - 1)
             if indice_aleatorio not in indices_seleccionados:
                 producto_seleccionado = lista_productos[indice_aleatorio]
-                productos_seleccionados.append(producto_seleccionado)
+                productosSeleccionados.append(producto_seleccionado)
                 indices_seleccionados.add(indice_aleatorio)
                 cantidad_seleccionada -= 1
 
-        return productos_seleccionados
+        return productosSeleccionados
 
     def getCuenta(self):
         return self.cuenta
