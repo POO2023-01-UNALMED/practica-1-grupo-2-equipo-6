@@ -1,13 +1,20 @@
 from tkinter import *
+import tkinter as tk
 from tkinter import messagebox, StringVar
+from tkinter import messagebox as MessageBox
 from tkinter import ttk
 from fieldFrame import *
+from fieldFrame2 import *
+from Excepciones import *
+#from Python.src.gestorAplicacion.clasesBase.Informe import Informe
 
 
 class Controladora:
     controlDescripcion = 0
     controlPresentacion = 0
     ventana = None
+
+
 
 
 def Salir():
@@ -119,7 +126,7 @@ def cambioDescripcion():
     img3_descripcion.image = listaImagenes[controladora.controlDescripcion][2]
     img4_descripcion.config(image=listaImagenes[controladora.controlDescripcion][3])
     img4_descripcion.image = listaImagenes[controladora.controlDescripcion][3]
-    
+
 
 def aplicacion():
     messagebox.showinfo("Aplicacion", "Nuestro sistema de gestión de franquicias es una solución integral diseña" +
@@ -141,41 +148,287 @@ def seleccionDeFrames(combo):
 
 def gestionAlianzasEstrategicas():
     # Imagenes ventas
+
     def vender():
-        pass
+        global frameSubbtones
+        global Fproductos
+        global confirmar
+        try:
+            eleccionUsuario = Fsocios.obtenerValores()
+            socioSeleccionado = eleccionUsuario['Seleccione un socio']
+
+
+            Fsocios.pack_forget()
+            verHistorial.grid_forget()
+
+
+
+            '''
+            socioSeleccionado
+            socios = [] #Deserializar socios
+            for s in socios:
+                if(s.getNombre==eleccionUsuario):
+                    socioSeleccionado = s
+
+            productosSocio = socioSeleccionado.getProductosContrato()
+            transportistas = #Deserializar transportistas
+
+            '''
+
+            productosSocio = ['Producto1', 'Producto2', 'Producto3']
+            transportistas = ['T1', 'T2', 'T3']
+
+            '''
+            i1 = Inventariar.calcularCamisas(productosSocio)
+            i2 = Inventariar.calcularAbrigos(productosSocio)
+            i3 = Inventariar.calcularPantalon(productosSocio)
+
+            criterios = ['Camisas[{}]'.formato(i1), 'Pantalones[{}]'.format(i2), 'Abrigos[i3]'.format(i3), 'Seleccione un transportista']
+            '''
+
+
+            criterios = ['Camisas[1]', 'Pantalones[2]', 'Abrigos[3]', 'Seleccione un transportista']
+
+            if(socioSeleccionado == ''):
+                raise ErrorDatosIncompletos('Socio seleccionado')
+
+
+
+
+
+
+            p1=StringVar()
+            p2=StringVar()
+            p3=StringVar()
+
+            valores = [Entry(textvariable=p1),Entry(textvariable=p2),Entry(textvariable=p3), transportistas]
+            habilitado = []
+            for p in productosSocio:
+                habilitado.append(False)
+            habilitado.append(True)
+            Fproductos = FieldFrame(marco_socio, "Productos", criterios, "Precio", valores, habilitado, "Sugerir Oferta", sugerirOferta)
+            Fproductos.pack(pady=100)
+
+            confirmar = Button(frameSubbtones, text="Realizar venta",command=lambda: confirmarVenta(1))
+            confirmar.grid(row=0, column=0, pady=5)
+                #side=BOTTOM, pady=5, anchor="e"
+
+        except ErrorDatosIncompletos:
+                MessageBox.showwarning("Error", ErrorDatosIncompletos('Socio seleccionado').mostrarMensaje())
+
+
+
+    def sugerirOferta():
+        global Fproductos
+        global oferta
+        global porcentaje
+        global ofertaDos
+
+
+        '''
+        ofertas [][] = Tienda.sugerirOferta(socioSeleccionado)
+        oferta1 = oferta [0]
+        oferta2 = oferta[1]
+
+        i1 = Inventariar.calcularCamisas(oferta1)
+        i2 = Inventariar.calcularAbrigos(oferta1)
+        i3 = Inventariar.calcularPantalon(oferta1)
+
+        i4 = Inventariar.calcularCamisas(oferta2)
+        i5 = Inventariar.calcularAbrigos(oferta2)
+        i6 = Inventariar.calcularPantalon(oferta2)
+
+        criteriosO1 = ['Camisas[{}]'.formato(i1), 'Abrigos[{}]'.format(i2), 'Pantalones[i3]'.format(i3)]
+        criteriosO2 = ['Camisas[{}]'.formato(i3), 'Abrigos[{}]'.format(i4), 'Pantalones[i3]'.format(i6)]
+        '''
+
+
+        Fproductos.pack_forget()
+        verHistorial.grid_forget()
+        confirmar.grid_forget()
+
+
+
+        criterios0 = ['Descuento por camisa', 'Descuento por abrigo', 'Descuento por pantalón']
+        habilitado = [True, True, True]
+        porcentaje = FieldFrame(marco_socio, "Ingrese el porcentaje que desea descontar\n(numeros entre 0.0 y 50.0)", criterios0, "Valor", [0.0, 0.0, 0.0], habilitado, "Calcular", calcular)
+
+
+        porcentaje.pack(side='top', expand=True, fill='both')
+
+        oferta1 = ['producto1', 'producto2', 'producto3']
+
+        criterios = ['Camisa', 'Pantalón', 'Abrigo']
+        habilitado = [True, True, True]
+
+        #"Criterio", criterios, "Valor"
+
+        oferta = FieldFrame(marco_socio, 'Producto', criterios, 'Precio\npor unidad', [0,1,2], habilitado,"Realizar venta",lambda: confirmarVenta(1))
+        oferta.pack(side='left', expand=True, fill='both')
+
+
+        #Para la segunda oferta
+        oferta2 = ['producto1', 'producto2', 'producto3']
+        ofertaDos = FieldFrame(marco_socio, 'Producto', criterios, "Precio\npor unidad", [1,2,3], habilitado,"Cancelar oferta", cancelar)
+        ofertaDos.pack(side='right', expand=True, fill='both')
+
+        #side=BOTTOM, pady=5, anchor="w"
+
+
+
+
+
+    def confirmarVenta(num):
+
+        '''
+        siOferta = ''
+        venta = transportistaSeleccionado.entregaEspecial(productosVenta)
+
+        if (venta == null):
+
+            MessageBox.showwarning("Error", ErrorProductosInsuficientes().mostrarMensaje())
+
+        elif venta.getProductosOferta != null:
+            siOferta = ' y los productos ofertados '
+
+        MessageBox.showinfo("Confirmacion de venta", 'El socio ha confirmado la compra de los productos del contrato' + siOferta)
+
+        marco_socio.pack_forget()
+
+        '''
+
+
+        MessageBox.showinfo("Confirmacion de venta", 'El socio ha confirmado la compra de los productos del contrato')
+        marco_socio.pack_forget()
+
+        historialVentas()
+
+
+    def cancelar():
+        porcentaje.pack_forget()
+        oferta.pack_forget()
+        ofertaDos.pack_forget()
+        vender()
+
+
+
+
+
+
+    def seleccionOferta(oferta):
+        print('Hola')
+
+
 
     def historialVentas():
+        verHistorial.destroy()
+        marco_socio.pack_forget()
+        titulo = Label(marcoFuncionalidad, text="Bienvenido al apartado de archivos", font=("Arial Bold", 16, "bold"),
+                       bg="gray")
+        titulo.pack(side="top", fill="x", padx=50, pady=(30, 0))
+        descripcion_In = Label(marcoFuncionalidad,
+                               text="En este apartado, se genera el informe ventas con el fin de saber detalladamente\n cada uno de los procesos ejecutados y las partes relacionadas.",
+                               font=("Arial", 12), bg="gray")
+        descripcion_In.pack(side="top", fill="x", padx=50, pady=(10, 0))
+        frame_bar = Frame(marcoFuncionalidad, height=10, bg="gray", highlightthickness=3, highlightbackground="black")
+        frame_bar.pack(padx=10, pady=(10, 0), fill="x")
+
+        # Crear una instancia de la clase FieldFrame
+        informes = []
+        sets = []
+        '''
+        archivista = #Deserializar un archivista
+        contador = #Deserializar un contador
+
+        informeVenta = archivista.generarInformeVentas()
+
+
+        for informe in Informe.getInformesVentas():
+            informes.append(informe.getCodigo())
+            sets.append(informe)
+        criterios = ["Informes ventas"]
+
+        habilitado = [True]
+
+        El valor por defecto del frame de visualización será el último informe
+        '''
+        criterios = ["Informes ventas"]
+        informes = ['producto1', 'producto2', 'producto3']
+        habilitado = [True]
+        sets=['i1', 'i2', 'i3']
+        valores = [sets]
+
+        field_frame_2 = FieldFrame2(frame_bar, "Criterio", criterios, "Valor", valores, habilitado)
+        field_frame_2.pack()
+
+        field_frame_2.cambiarPadB2(0, 5, 5)
+        field_frame_2.cambiarPadB2(0, 0, 5)
+
+        field_frame_2.agregarTexto("INSERTE INFORME")
+
+
+
+    def calcular():
         pass
+
+
 
     global marcoFuncionalidad
     global marco_socio
     global Fsocios
     global cabecera
-    global title
 
-    title = StringVar()
-    title.set('Gestion Alianzas Estrategicas')
+    global Fproductos
+    global oferta
+    global oferta2
+    global frameSubbtones
+    global listaO1
+    global listaO2
+    global imagen
 
-    marcoFuncionalidad = Frame(ventana_menu, height=500, width=1500, bg="gray", pady=50, padx=50, relief="sunken")
-    marcoFuncionalidad.place(relx=0.75, rely=0.1, relwidth=0.5, anchor='ne')
 
-    cabecera = Entry(marcoFuncionalidad,textvariable=title, font=('Helvetica', 11, 'bold'))
+
+
+
+
+    marcoFuncionalidad = Frame(ventana_menu, height=2000, width=1500, bg="gray", pady=10, padx=50, relief="sunken")
+    marcoFuncionalidad.place(relx=0.5, rely=0.5, anchor='center')
+
+    cabecera = Entry(marcoFuncionalidad,background="gray", font=('Helvetica', 11, 'bold'), width=50)
+    cabecera.insert(0, 'Gestion Alianzas Estrategicas')
+    cabecera.configure( justify='center', state='disabled')
     #cabecera.insert(0, "Default Text")
-    cabecera.pack(side="top", pady=30)
+    cabecera.pack( pady=10)
 
-    marco_socio = Frame(marcoFuncionalidad, width=1000, height=700, relief="sunken", bd=10)
-    marco_socio.pack()
 
+    marco_socio = Frame(marcoFuncionalidad, width=1000, height=500, relief="sunken", bd=10)
+    marco_socio.pack(fill='both', expand=True)
     socios = ['Exito', 'Falabella', 'Primark']
     criterios = ["Seleccione un socio"]
     valores = [socios]
     habilitado = [True]
 
     Fsocios = FieldFrame(marco_socio, "Criterio", criterios, "Valor", valores, habilitado, "Vender", vender)
-    Fsocios.pack(side="left")
+    Fsocios.pack(pady=110)
 
-    verHistorial = Button(marcoFuncionalidad, text="Ver historial de ventas", command=historialVentas)
-    verHistorial.pack(side='bottom', pady=50)
+    frameSubbtones=Frame(marcoFuncionalidad,bg='gray')
+    frameSubbtones.pack()
+
+    verHistorial = Button(frameSubbtones, text="Ver historial de ventas", command=historialVentas)
+    verHistorial.grid( row=0, column=0, pady=11)
+    #side='bottom', pady=10
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -205,7 +458,7 @@ def moduloCompra():
     combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo))
 
     print(1)
-    
+
 def logisticaEnvio():
     def ConsultaPedido():
         empezar.forget()
