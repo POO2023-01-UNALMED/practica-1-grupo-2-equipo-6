@@ -1,10 +1,10 @@
 from enum import Enum
 from typing import List, Dict
-from CuentaBancaria import CuentaBancaria
-from Credito import Credito
-from Tienda import Tienda
-from Transferencia import Transferencia, EstadoPago
-from Venta import Venta
+from Python.src.gestorAplicacion.clasesBase.CuentaBancaria import CuentaBancaria
+from Python.src.gestorAplicacion.clasesBase.Credito import Credito
+from Python.src.gestorAplicacion.clasesBase.Tienda import Tienda
+from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia, EstadoPago
+from Python.src.gestorAplicacion.clasesBase.Venta import Venta
 
 
 class Banco:
@@ -49,7 +49,7 @@ class Banco:
             self.historialesCrediticios[credito.getDeudor()].append(credito)
         except KeyError:
             self.historialesCrediticios[credito.getDeudor()] = [credito]
-    
+
         return credito
 
 
@@ -155,10 +155,3 @@ class Banco:
 
     def solucionarProblema(self) -> CuentaBancaria:
         return CuentaBancaria(0, CuentaBancaria.Pais.COLOMBIA, self, Tienda.getCuentaTienda().getDinero())
-
-
-
-
-
-
-
