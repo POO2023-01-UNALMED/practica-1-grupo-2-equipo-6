@@ -95,7 +95,7 @@ class FieldFrame2(Frame):
 
 
 
-
+'''
 # Crear la ventana principal
 ventana = Tk()
 ventana.geometry("1000x620")
@@ -128,3 +128,4 @@ field_frame_2.agregarTexto('Quiero volver a tierras ninas, llévenme a un blando
 
 
 ventana.mainloop()
+'''
