@@ -1,4 +1,4 @@
-from Python.src.gestorAplicacion.clasesBase import Producto
+from Python.src.gestorAplicacion.clasesBase.Producto import Producto
 
 
 class Compra:
