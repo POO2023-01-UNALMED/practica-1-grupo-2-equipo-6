@@ -1,10 +1,10 @@
 from enum import Enum
 import random
 
-from Python.src.baseDatos.Deserializador import Deserializador
-from Python.src.baseDatos.Serializador import Serializador
-from Python.src.gestorAplicacion.clasesBase.Persona import Persona
-from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
+from src.baseDatos.Deserializador import Deserializador
+from src.baseDatos.Serializador import Serializador
+from src.gestorAplicacion.clasesBase.Persona import Persona
+from src.gestorAplicacion.clasesBase.Transferencia import Transferencia
 
 
 class Cliente(Persona):

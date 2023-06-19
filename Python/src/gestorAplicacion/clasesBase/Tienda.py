@@ -1,6 +1,6 @@
-from Banco import Banco
-from CuentaBancaria import CuentaBancaria
-from CuentaBancaria import Pais
+from src.gestorAplicacion.clasesBase.Banco import *
+from src.gestorAplicacion.clasesBase.CuentaBancaria import *
+Pais=CuentaBancaria.Pais
 
 class Tienda:
     cuentaTienda = CuentaBancaria(145000,Pais.COLOMBIA,Banco("BANCOLOMBIA"))

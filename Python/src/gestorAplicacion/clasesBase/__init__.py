@@ -1,5 +1,5 @@
 
-from Python.src.gestorAplicacion.clasesBase.Persona import Persona
+"""from Python.src.gestorAplicacion.clasesBase.Persona import Persona
 
 from Python.src.baseDatos.Serializador import Serializador
 from Python.src.baseDatos.Deserializador import Deserializador
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     #
     # compraDeserializada = Deserializador("compra").getObjeto()
     #
-    # print(compraDeserializada.getPedido()[0].getTipo())
+    # print(compraDeserializada.getPedido()[0].getTipo())"""
 
 
 

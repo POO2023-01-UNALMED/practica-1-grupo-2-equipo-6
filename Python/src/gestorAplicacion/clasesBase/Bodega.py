@@ -1,16 +1,16 @@
 from typing import List
-from Python.src.gestorAplicacion.clasesBase import Producto
-from Python.src.gestorAplicacion.clasesBase import Inventariar
-from Python.src.gestorAplicacion.clasesBase import Transferencia
-from Python.src.gestorAplicacion.clasesBase import ControlCalidad
-from Python.src.gestorAplicacion.clasesBase import Tienda
+from src.gestorAplicacion.clasesBase.Producto import Producto
+from src.gestorAplicacion.clasesBase import Inventariar
+from src.gestorAplicacion.clasesBase import Transferencia
+from src.gestorAplicacion.clasesBase import ControlCalidad
+from src.gestorAplicacion.clasesBase.Tienda import Tienda
 
-class Bodega(Inventariar):
+class Bodega():
     pagos = []
     resumen_pedido = None
 
 
-    def _init_(self, productos: List[Producto]):
+    def _init_(self, productos):
         self.stopBodega = len(productos)
         self.productosEnBodega = productos
         self.resumenPedido = None
@@ -110,7 +110,7 @@ class Bodega(Inventariar):
     @staticmethod
     def realizar_pedido(tiendas, set_tipo, cantidad):
 
-        from Python.src.gestorAplicacion.clasesBase.Producto import Producto
+        from src.gestorAplicacion.clasesBase.Producto import Producto
         necesarios = Producto.seleccionar_productos(set_tipo, cantidad)
         pedido = []
         for tienda in tiendas:

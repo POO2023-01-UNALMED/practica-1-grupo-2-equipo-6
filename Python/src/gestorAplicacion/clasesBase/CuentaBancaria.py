@@ -1,15 +1,15 @@
 import random
 
 
-from Credito import Credito
-from Tienda import Tienda
+from src.gestorAplicacion.clasesBase.Credito import *
+from src.gestorAplicacion.clasesBase.Credito import *
 
 
 from enum import Enum
 
-from Transferencia import Transferencia
-from Empleado import Empleado
-from Transportista import Transportista
+from src.gestorAplicacion.clasesBase.Transferencia import Transferencia
+from src.gestorAplicacion.clasesHerencia.Empleado import Empleado
+#from src.gestorAplicacion.clasesHerencia.Empleado import Transportista
 
 
 class CuentaBancaria:

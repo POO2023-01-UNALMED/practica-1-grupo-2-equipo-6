@@ -1,5 +1,5 @@
 from typing import List
-from Python.src.gestorAplicacion.clasesBase import Producto
+from src.gestorAplicacion.clasesBase import Producto
 
 class Inventariar:
     minCamisas = 1

@@ -6,7 +6,7 @@ from tkinter import ttk
 from fieldFrame import *
 from fieldFrame2 import *
 from Excepciones import *
-#from Python.src.gestorAplicacion.clasesBase.Informe import Informe
+from src.gestorAplicacion.clasesBase.Informe import Informe
 
 
 class Controladora:
