@@ -1,8 +1,11 @@
 from typing import List
-import random, Producto
+import random
+from Python.src.gestorAplicacion.clasesBase.Producto import Producto
+
 
 class Socio:
-    def __init__(self, nombre: str, productosContrato: List[Producto], renovacionesContratos: List[Venta], cuenta: CuentaBancaria):
+    def __init__(self, nombre: str, productosContrato: List[Producto], renovacionesContratos: List[Venta],
+                 cuenta: CuentaBancaria):
         self.productosContrato = productosContrato
         self.nombre = nombre
         self.renovacionesContratos = renovacionesContratos
@@ -25,29 +28,28 @@ class Socio:
         self.renovacionesContratos.append(v)
         return v
 
-def getProductosContrato(self):
-    return self.productosContrato
+    def getProductosContrato(self):
+        return self.productosContrato
 
-def setProductosContrato(self, productosContrato):
-    self.productosContrato = productosContrato
+    def setProductosContrato(self, productosContrato):
+        self.productosContrato = productosContrato
 
-def getNombre(self):
-    return self.nombre
+    def getNombre(self):
+        return self.nombre
 
-def setNombre(self, nombre):
-    self.nombre = nombre
+    def setNombre(self, nombre):
+        self.nombre = nombre
 
-def getRenovacionesContratos(self):
-    return self.renovacionesContratos
+    def getRenovacionesContratos(self):
+        return self.renovacionesContratos
 
-def setRenovacionesContratos(self, renovacionesContratos):
-    self.renovacionesContratos = renovacionesContratos
+    def setRenovacionesContratos(self, renovacionesContratos):
+        self.renovacionesContratos = renovacionesContratos
 
-def getCuentaSocio(self):
-    return self.cuentaSocio
+    def getCuentaSocio(self):
+        return self.cuentaSocio
 
-def __str__(self):
-    s = ""
-    for p in self.productosContrato:
-        s += "\n" + str(p) + "\n"
-    return "Nombre del socio: {}\n\nProductos a vender: {}".format(self.nombre, s)
+    def __str__(self):
+        return "Nombre del socio: " + self.nombre
+
+
