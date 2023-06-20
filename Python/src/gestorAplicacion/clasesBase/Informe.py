@@ -18,7 +18,7 @@ class Informe:
         self.soluciones = []
         self.cantidadActualDeuda = 0.0
         self.ventaEfectuada = ventaEfectuada
-        self.puntajeCrediticioActual = Venta.puntajeCrediticio
+        #self.puntajeCrediticioActual = Venta.puntajeCrediticio
         self.controlC = controlC
 
     class TipoInforme(Enum):
@@ -77,12 +77,12 @@ class Informe:
             report = []
             report.append(f"\nCodigo: {self.codigo}\n")
             report.append(f"Tipo de informe: {self.getTipoInforme()}\n")
-            report.append(f"Fecha: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')}\n")
+            #report.append(f"Fecha: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')}\n")
             report.append("Pedido original:\n")
             for p in self.controlC.getCompra().getPedido():
                 report.append(f"{p.getNombre()} {p.getPrecio()}\n")
             report.append("\nProductos comprados:\n")
-            for p in self.controlC.getCompra().getProductos():
+            for p in self.controlC.getCompra().getProveedor().getBodega().getProductosEnBodega():
                 report.append(f"{p.getNombre()} {p.getPrecio()}\n")
             report.append("\nRevisión:\n")
             if not self.controlC.getRevision():

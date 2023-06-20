@@ -20,7 +20,7 @@ class FieldFrame2(Frame):
         # Crear el frame izquierdo con el FieldFrame existente y los dos botones
 
         self.frame_izquierdo = Frame(self)
-        self.field_frame = FieldFrame(self.frame_izquierdo, tituloCriterios, criterios, tituloValores, valores, habilitado, 'Ver', lambda: self.mostrarEleccion)
+        self.field_frame = FieldFrame(self.frame_izquierdo, tituloCriterios, criterios, tituloValores, valores, habilitado, 'Ver', lambda: self.mostrarEleccion (informe))
         self.field_frame.pack(side='top')
 
         #self.frame_botones = Frame(self.frame_izquierdo)

@@ -14,6 +14,7 @@ from CuentaBancaria import *
 Pais=CuentaBancaria.Pais
 from Cliente import *
 
+from ControlCalidad import *
 
 from Socio import *
 from Serializador import *
@@ -210,8 +211,54 @@ def Compras():
     compra1 = Compra(tienda1,pro1,tra1)
     compra2 = Compra(tienda2,pro2,tra2)
     compra3 = Compra(tienda3,pro3,tra3)
-    compras =[compra1,compra2,compra3]
+    compra4 = Compra(tienda1,pro3,tra2)
+    compras =[compra1,compra2,compra3,compra4]
     Serializador(compras,"compras")
+
+def Informes():
+    tiendasDeserializadas = Deserializador("tiendas").getObjeto()
+    tienda1 = tiendasDeserializadas[0]
+    tienda2 = tiendasDeserializadas[1]
+    tienda3 = tiendasDeserializadas[2]
+    proveedores = Deserializador("proveedores").getObjeto()
+    pro1 = proveedores[0]
+    pro2 = proveedores[1]
+    pro3 = proveedores[2]
+    transportistas = Deserializador("transportistas").getObjeto()
+    tra1 = transportistas[0]
+    tra2 = transportistas[1]
+    tra3 = transportistas[2]
+
+    compra1 = Compra(tienda1,pro1,tra1)
+    compra2 = Compra(tienda2,pro2,tra2)
+    compra3 = Compra(tienda3,pro3,tra3)
+    compra4 = Compra(tienda1,pro3,tra2)
+    compras =[compra1,compra2,compra3,compra4]
+    control1 = ControlCalidad(compra1)
+    control2 = ControlCalidad(compra2)
+    control3 = ControlCalidad(compra3)
+    control4 = ControlCalidad(compra4)
+    empleado1 = Empleado("Daniel",5, None, None,None, Empleado.CARGOS.ARCHIVISTA, 200000)
+    control1.revisar(compra1)
+    control2.revisar(compra2)
+    control3.revisar(compra3)
+    control4.revisar(compra4)
+    control1.contactar(control1.getProveedor())
+    control2.contactar(control2.getProveedor())
+    control3.contactar(control3.getProveedor())
+    control4.contactar(control4.getProveedor())
+    control1.contactar(control1.getTransportista())
+    control2.contactar(control2.getTransportista())
+    control3.contactar(control3.getTransportista())
+    control4.contactar(control4.getTransportista())
+    informe1 = empleado1.generarInformeControlCalidad(control1, control1.getProveedor(), control1.getTransportista())
+    informe2 = empleado1.generarInformeControlCalidad(control2, control2.getProveedor(), control2.getTransportista())
+    informe3 = empleado1.generarInformeControlCalidad(control3, control3.getProveedor(), control3.getTransportista())
+    informe4 = empleado1.generarInformeControlCalidad(control4, control4.getProveedor(), control4.getTransportista())
+    informes = [informe1, informe2, informe3, informe4]
+    infor = Serializador(informes, "informes")
+    pck = Serializador(empleado1, "archivista")
+
 
 
 
@@ -226,6 +273,7 @@ serializarEnvio()
 Financiero()
 Socios()
 Compras()
+Informes()
 
 
 
