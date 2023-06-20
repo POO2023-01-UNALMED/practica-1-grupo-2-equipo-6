@@ -79,13 +79,7 @@ def tiendas():
     tiendas=[tiendaEnvigado,tiendaPoblado,tiendaLaureles]
 
     Serializador(tiendas,"tiendas")
-def Socios():
-    banco1 = Banco('Bancolombia')
-    socio1 = Socio('Exito', [camisa, pantalon, abrigo], [], CuentaBancaria(123123, CuentaBancaria.Pais.COLOMBIA, banco1))
-    socio2 = Socio('Falabella', [camisa, pantalon, abrigo, camisa], [], CuentaBancaria(123123, CuentaBancaria.Pais.VENEZUELA, banco1))
-    socio3 = Socio('Primark', [camisa, camisa, pantalon, abrigo], [], CuentaBancaria(12312,CuentaBancaria.Pais.COLOMBIA, banco1))
-    socios = [socio1, socio2, socio3]
-    Serializador(socios, 'Socios')
+
 
 def serializarEnvio():
     BancoElectronico = Banco("BancoElectronico")
@@ -113,6 +107,8 @@ def serializarEnvio():
     cuenta8 = CuentaBancaria(8000000, Pais.COLOMBIA, BancoElectronico)
     cuenta9 = CuentaBancaria(9000000, Pais.BRASIL, BancoElectronico)
     cuenta10 = CuentaBancaria(10000000, Pais.DINAMARCA, BancoElectronico)
+    cuenta11 = CuentaBancaria(10000000, Pais.DINAMARCA, BancoElectronico)
+    cuenta12 = CuentaBancaria(10000000, Pais.DINAMARCA, BancoElectronico)
 
     Ciudades=Cliente.Ciudades
     c1 = Cliente("Juan Perez", 2, Ciudades.BOGOTA, cuenta1)
@@ -126,6 +122,10 @@ def serializarEnvio():
     c9 = Cliente("Luisa Fernandez", 4, Ciudades.BOGOTA, cuenta9)
     c10 = Cliente("Mario Ramirez", 2, Ciudades.MEDELLIN, cuenta10)
 
+    contador = Empleado("Margarita Sanchez Gutierrez", 5, cuenta11, 8 ,8, 8000, CARGOS.CONTADOR)
+    archivista = Empleado("Jose Antonio Rodriguez Vega", 4, cuenta12,8, 8, 45621, CARGOS.ARCHIVISTA)
+    Serializador(contador, 'contador0')
+    Serializador(archivista, 'archivista0')
     clientes=[c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
     Serializador(clientes,"clientes")
 
@@ -135,6 +135,10 @@ def serializarEnvio():
     Serializador(transportista,"TransportistaNacional")
 
 def Financiero():
+    global transportista1
+    global transportista2
+    global transportista3
+
     credito = Tienda.getCuentaTienda().getEntidad().generarCredito(Credito(Tienda.getCuentaTienda(), 70, Cuota.DOCE))
     credito1 = Tienda.getCuentaTienda().getEntidad().generarCredito(Credito(Tienda.getCuentaTienda(), 100, Cuota.CINCO))
     #Tienda.pagarCuotaMensual(Banco.PuntajeCredito.MEDIO, credito1)
@@ -148,24 +152,44 @@ def Financiero():
     bbbank = Banco("BBBank")
     cu = CuentaBancaria(25000, CuentaBancaria.Pais.COLOMBIA, bbbank)
 
-    transportista1 = Transportista("julian", 1000, 500, 16, 2, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
-    transportista2 = Transportista("Maria", 2000, 400, 15, 5, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
-    transportista3 = Transportista("Andrea", 3000, 300, 10, 3,CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
+    transportista1 = Transportista("Maria", 1000, 500, 16, 2, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
+    transportista2 = Transportista("Carlos", 2000, 400, 15, 5, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
+    transportista3 = Transportista("Rosa", 3000, 300, 10, 3,CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
+
+
+
+
+
     bodegap1 = Bodega([], 100)
     bodegap2 = Bodega([], 100)
     bodegap3 = Bodega([], 100)
 
-    proveedor1 = Proveedor("Miguel", 0, cu, bodegap1, 20000, 25000, 30000, 100)
-    proveedor2 = Proveedor("Carla", 0, cu, bodegap2, 20000, 25000, 30000,123)
-    proveedor3 = Proveedor("Isa", 0, cu, bodegap3, 20000, 25000, 30000,125)
+    proveedor1 = Proveedor("Maria", 0, cu, bodegap1, 20000, 25000, 30000, 100)
+    proveedor2 = Proveedor("Carlo", 0, cu, bodegap2, 20000, 25000, 30000,123)
+    proveedor3 = Proveedor("Julio", 0, cu, bodegap3, 20000, 25000, 30000,125)
 
-    proveedores = [proveedor1, proveedor2, proveedor3]
+    proveedores = [proveedor2, proveedor1, proveedor3]
 
     transportistas = [transportista1, transportista2, transportista3]
     Serializador(transportistas, "transportistas")
     Serializador(proveedores, 'proveedores')
 
 
+def Socios():
+
+    banco1 = Banco('Bancolombia')
+    socio1 = Socio('Exito', [camisa, pantalon, abrigo], [], CuentaBancaria(123123, CuentaBancaria.Pais.COLOMBIA, banco1))
+    socio2 = Socio('Falabella', [camisa, pantalon, abrigo, camisa], [], CuentaBancaria(123123, CuentaBancaria.Pais.VENEZUELA, banco1))
+    socio3 = Socio('Primark', [camisa, camisa, pantalon, abrigo], [], CuentaBancaria(12312,CuentaBancaria.Pais.COLOMBIA,banco1))
+    socios = [socio1, socio2, socio3]
+
+    v1 = Venta(socio1, [camisa, camisa, camisa,  abrigo], transportista1)
+    v2 = Venta(socio2, [camisa, camisa, camisa, camisa, camisa, pantalon], transportista2)
+    v3 = Venta(socio3, [abrigo, abrigo, abrigo, camisa, pantalon, pantalon, pantalon, pantalon, pantalon, pantalon], transportista3)
+    ventasPorDefecto = [v1, v2, v3]
+    Serializador(socios, 'Socios')
+    Serializador(ventasPorDefecto, 'ventasPorDefecto')
+    
 def Compras():
     tiendasDeserializadas = Deserializador("tiendas").getObjeto()
     tienda1 = tiendasDeserializadas[0]
