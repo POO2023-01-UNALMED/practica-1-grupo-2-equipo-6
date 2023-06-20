@@ -680,85 +680,101 @@ def moduloCompra():
                          textvariable=valor_defecto)
     combo.place(x=200, y=120)
     combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo, mensaje_descripcion))
+
+
 def logisticaEnvio():
     ventana_menu = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
-    ventana_menu.place(x=0, y=0)
+    ventana_menu.place(x=0, y=0, relx=0.5, rely=0.5, anchor="center")
+
     def ConsultaPedido():
         empezar.forget()
         titulo.config(text="Realizar Pedido")
-        descripcion.config(text="Para realizar el pedido, es necesario que escojas un SET y una CANTIDAD.Los sets son combinaciones de prendas que se pueden pedir en combo.La cantidad establecerá cuántos combos son necesarios.")
+        descripcion.config(
+            text="Para realizar el pedido, es necesario que escojas un SET y una CANTIDAD.Los sets son combinaciones de prendas que se pueden pedir en combo.La cantidad establecerá cuántos combos son necesarios.")
 
         global marco_pedido1
-        marco_pedido1= Frame(ventanaEnvio, width=800, height=300,relief="solid",bd=5)
+        marco_pedido1 = Frame(ventanaEnvio, width=800, height=300, relief="solid", bd=5)
         marco_pedido1.pack()
-        sets= ["ONLY", "TU", "COMPLETO"]
-        cantidades=[1,2,3,4,5]
-        nombres = ["SET","CANTIDAD"]
-        valores = [sets,cantidades]
-        habilitado = [True,True]
+        sets = ["ONLY", "TU", "COMPLETO"]
+        cantidades = [1, 2, 3, 4, 5]
+        nombres = ["SET", "CANTIDAD"]
+        valores = [sets, cantidades]
+        habilitado = [True, True]
         global Fset
-        Fset = FieldFrame(marco_pedido1, "Criterios",nombres, "Pedido", valores, habilitado,"Realizar Pedido",realizarPedido)
+        Fset = FieldFrame(marco_pedido1, "Criterios", nombres, "Pedido", valores, habilitado, "Realizar Pedido",
+                          realizarPedido)
         Fset.pack(side="bottom")
         global label
-        label=Label(ventanaEnvio, text="Los sets disponibles son:\n- ONLY: compuesto por una camisa.\n- TU: compuesto por una camisa y un pantalón.\n- COMPLETO: compuesto por una camisa, un abrigo y un pantalón", font=("Verdana", 13, "bold"),relief="flat",bg="white" ,wraplength=450)
-        label.pack(pady=7,padx=10)
-
-
+        label = Label(ventanaEnvio,
+                      text="Los sets disponibles son:\n- ONLY: compuesto por una camisa.\n- TU: compuesto por una camisa y un pantalón.\n- COMPLETO: compuesto por una camisa, un abrigo y un pantalón",
+                      font=("Verdana", 13, "bold"), relief="flat", bg="white", wraplength=450)
+        label.pack(pady=7, padx=10)
 
     def realizarPedido():
 
         pedido = Fset.obtenerValores()
-
-        if any(not valor for valor in pedido.values()):
-            messagebox.showwarning("Error", ErrorDatosIncompletos('SET', 'CANTIDAD').mostrarMensaje())
-            raise ErrorDatosIncompletos('SET', 'CANTIDAD')
+        try:
+            if any(not valor for valor in pedido.values()):
+                messagebox.showwarning("Error", ErrorDatosIncompletos('SET', 'CANTIDAD').mostrarMensaje())
+                raise ErrorDatosIncompletos('SET', 'CANTIDAD')
+        except ErrorDatosIncompletos:
+            return
 
         marco_pedido1.forget()
         label.forget()
         titulo.config(text="Estado del pedido")
-        descripcion.config(text="Hay tres posibles casos para el pedido: el ideal es que tu pedido se haya completado exitosamente, lo que significa que todos los productos necesarios fueron extraídos de las tiendas. También puede ocurrir que no se haya podido completar todo el pedido, pero sí algunos productos. Por último, existe la opción de que no se haya podido completar ninguno de los productos.")
+        descripcion.config(
+            text="Hay tres posibles casos para el pedido: el ideal es que tu pedido se haya completado exitosamente, lo que significa que todos los productos necesarios fueron extraídos de las tiendas. También puede ocurrir que no se haya podido completar todo el pedido, pero sí algunos productos. Por último, existe la opción de que no se haya podido completar ninguno de los productos.")
 
-        pedidoSet=str(pedido["SET"])
-        cantidad=int(pedido["CANTIDAD"])
-        set=""
+        pedidoSet = str(pedido["SET"])
+        cantidad = int(pedido["CANTIDAD"])
+        set = ""
         for item in SETS:
             if item.name == pedidoSet:
-                set= item
+                set = item
         global tiendas
-        tiendas=Deserializador("tiendas").getObjeto()
+        tiendas = Deserializador("tiendas").getObjeto()
+
         # Primera interacción
         global productos
         productos = Bodega.realizar_pedido(tiendas, set, cantidad)
         global marco_pedido2
-        marco_pedido2 = Frame(ventanaEnvio, width=800, height=300,relief="ridge",bd=5)
-        resumenpedido=Label(marco_pedido2,text=Bodega.getResumenPedido(), wraplength=200)
-        if Bodega.getResumenPedido()!="El pedido se ha completado exitosamente":
-            descripcion.config(text="Su pedido no se pudo completar todos los productos necesarios sin embargo puede continuar el proceso de envio con los productos disponibles o realizar los procesos de compra y control de calidad para tener disponibilidad de productos")
-            if Bodega.getResumenPedido().split()[15]=="0" and Bodega.getResumenPedido()!="":
-                descripcion.config(text="No es posible continuar con el proceso de envio si no hay productos disponibles, es necesario que ejecute los procesos de compra y control de calidad para abastecer las tiendas y tener disponibilidad")
-                messagebox.showwarning("Error", ErrorPedido().mostrarMensaje())
-                raise ErrorDatosIncompletos()
+        marco_pedido2 = Frame(ventanaEnvio, width=800, height=300, relief="ridge", bd=5)
+        resumenpedido = Label(marco_pedido2, text=Bodega.getResumenPedido(), wraplength=200)
         resumenpedido.pack()
         marco_pedido2.pack()
-        continuar=Button(marco_pedido2,text="Continuar",command=consultaColeccion)
+        if Bodega.getResumenPedido() != "El pedido se ha completado exitosamente":
+            descripcion.config(
+                text="Su pedido no se pudo completar todos los productos necesarios sin embargo puede continuar el proceso de envio con los productos disponibles o realizar los procesos de compra y control de calidad para tener disponibilidad de productos")
+            try:
+                if Bodega.getResumenPedido().split()[15] == "0" and Bodega.getResumenPedido() != "":
+                    descripcion.config(
+                        text="No es posible continuar con el proceso de envio si no hay productos disponibles, es necesario que ejecute los procesos de compra y control de calidad para abastecer las tiendas y tener disponibilidad")
+                    messagebox.showwarning("Error", ErrorPedido().mostrarMensaje())
+                    raise ErrorDatosIncompletos()
+            except ErrorDatosIncompletos:
+                return
+
+        continuar = Button(marco_pedido2, text="Continuar", command=consultaColeccion)
         continuar.pack()
-
-
 
     def consultaColeccion():
         marco_pedido2.forget()
         titulo.config(text="Coleccion")
-        descripcion.config(text="La colección que escojas determinará el proceso de intervención de los productos seleccionados. Esto incluye el color, corte y estampado, además del precio final que tendrán los productos intervenidos.")
+        descripcion.config(
+            text="La colección que escojas determinará el proceso de intervención de los productos seleccionados. Esto incluye el color, corte y estampado, además del precio final que tendrán los productos intervenidos.")
         global marco_coleccion1
-        marco_coleccion1= Frame(ventanaEnvio, width=800, height=300,relief="solid",bd=5)
+        marco_coleccion1 = Frame(ventanaEnvio, width=800, height=300, relief="solid", bd=5)
         marco_coleccion1.pack()
-        colecciones= ["NATURALEZA", "GEOMETRIA", "INDUSTRIAL"]
+        colecciones = ["NATURALEZA", "GEOMETRIA", "INDUSTRIAL"]
         criterios = ["COLECCION"]
         valores = [colecciones]
         habilitado = [True]
         global Fcoleccion
-        Fcoleccion = FieldFrame(marco_coleccion1, "Colecciones", criterios, "Coleccion", valores, habilitado,"Intervenir productos",intervenir)
+        Fcoleccion = FieldFrame(marco_coleccion1, "Colecciones", criterios, "Coleccion", valores, habilitado,
+                                "Intervenir productos", intervenir)
         Fcoleccion.pack()
+
     def caracteristicas():
         string = ""
         for i in intervenidos:
@@ -783,150 +799,158 @@ def logisticaEnvio():
         ventana_emergente.mainloop()
 
     def intervenir():
-        colec=Fcoleccion.obtenerValores()
-        if any(not valor for valor in colec.values()):
-            messagebox.showwarning("Error", ErrorDatosIncompletos('COLECCION').mostrarMensaje())
-            raise ErrorDatosIncompletos('COLECCION')
+        colec = Fcoleccion.obtenerValores()
+        try:
+            if any(not valor for valor in colec.values()):
+                messagebox.showwarning("Error", ErrorDatosIncompletos('COLECCION').mostrarMensaje())
+                raise ErrorDatosIncompletos('COLECCION')
+        except ErrorDatosIncompletos:
+            return
         marco_coleccion1.forget()
-        descripcion.config(text="El proceso de intervención se ha realizado exitosamente. A continuación, se le presentará la paleta de la colección escogida. Haga clic en cualquiera de los colores para ver las características de los productos intervenidos."
-                           )
-        colecSet=str(colec["COLECCION"])
-        coleccion=""
-        Colecciones=Intervenido.Colecciones
+        descripcion.config(
+            text="El proceso de intervención se ha realizado exitosamente. A continuación, se le presentará la paleta de la colección escogida. Haga clic en cualquiera de los colores para ver las características de los productos intervenidos."
+            )
+        colecSet = str(colec["COLECCION"])
+        coleccion = ""
+        Colecciones = Intervenido.Colecciones
         for item in Colecciones:
             if item.name == colecSet:
-                coleccion= item
+                coleccion = item
         titulo.config(text=coleccion.name)
         # Segunda interacción
         global intervenidos
         intervenidos = Intervenido.intervenir(productos, coleccion)
-        colores=Intervenido.colores(coleccion)
+        colores = Intervenido.colores(coleccion)
         global marco_coleccion2
-        marco_coleccion2 = Frame(ventanaEnvio, width=800, height=300,relief="sunken",bd=10)
-        resumenpedido=Label(marco_coleccion2,text="Paleta de colores\n", wraplength=200)
+        marco_coleccion2 = Frame(ventanaEnvio, width=800, height=300, relief="sunken", bd=10)
+        resumenpedido = Label(marco_coleccion2, text="Paleta de colores\n", wraplength=200)
         resumenpedido.pack()
-        paleta=Frame(marco_coleccion2,width=300, height=200)
+        paleta = Frame(marco_coleccion2, width=300, height=200)
         for i, color in enumerate(colores):
-            boton = Button(paleta, bg=color, width=10, height=2,command=caracteristicas)
+            boton = Button(paleta, bg=color, width=10, height=2, command=caracteristicas)
             boton.grid(row=i // 3, column=i % 3, padx=10, pady=10)
         paleta.pack()
         marco_coleccion2.pack()
-        continuar=Button(marco_coleccion2,text="Continuar",command=buscarClientes)
+        continuar = Button(marco_coleccion2, text="Continuar", command=buscarClientes)
         continuar.pack()
-
 
     def buscarClientes():
         marco_coleccion2.forget()
         titulo.config(text="Datos de envio")
-        descripcion.config(text="Para poder procesar el envío, es fundamental que especifique el destinatario al que se dirigirá. Por favor, elija uno de los clientes registrados en nuestra base de datos para completar esta información.")
+        descripcion.config(
+            text="Para poder procesar el envío, es fundamental que especifique el destinatario al que se dirigirá. Por favor, elija uno de los clientes registrados en nuestra base de datos para completar esta información.")
         global marco_envio1
         marco_envio1 = Frame(ventanaEnvio, width=800, height=300, relief="solid", bd=5)
         marco_envio1.pack()
         global clientes
-        clientes=Deserializador("clientes").getObjeto()
-        Vclientes=[Deserializador("clientes").getObjeto()]
+        clientes = Deserializador("clientes").getObjeto()
+        Vclientes = [Deserializador("clientes").getObjeto()]
         criterios = ["Usuario"]
         habilitado = [True]
         global Fclientes
-        Fclientes = FieldFrame(marco_envio1, "Criterio", criterios, "Usuario", Vclientes, habilitado, "Buscar Cliente",consultaEnvio )
+        Fclientes = FieldFrame(marco_envio1, "Criterio", criterios, "Usuario", Vclientes, habilitado, "Buscar Cliente",
+                               consultaEnvio)
         Fclientes.pack()
-
-
-
-
-
 
     def consultaEnvio():
 
-        dicC=Fclientes.obtenerValores()
-        if any(not valor for valor in dicC.values()):
-            messagebox.showwarning("Error", ErrorDatosIncompletos('USUARIO').mostrarMensaje())
-            raise ErrorDatosIncompletos('USUARIO')
+        dicC = Fclientes.obtenerValores()
+        try:
+            if any(not valor for valor in dicC.values()):
+                messagebox.showwarning("Error", ErrorDatosIncompletos('USUARIO').mostrarMensaje())
+                raise ErrorDatosIncompletos('USUARIO')
+        except ErrorDatosIncompletos:
+            return
         usuario = dicC["Usuario"]
         global cliente
-        cliente=""
+        cliente = ""
         for c in clientes:
-            if usuario==c.__str__():
-                cliente=c
-        string="Los datos actuales del usuario escogido indican una calificacion de "+str(cliente.getCalificacion())+" puntos,la ciudad registrada es "+cliente.getCiudad().name+". Por favor confirme o cambie el destino del envio.Además seleccione el tipo de envio."
+            if usuario == c.__str__():
+                cliente = c
+        string = "Los datos actuales del usuario escogido indican una calificacion de " + str(
+            cliente.getCalificacion()) + " puntos,la ciudad registrada es " + cliente.getCiudad().name + ". Por favor confirme o cambie el destino del envio.Además seleccione el tipo de envio."
         marco_envio1.forget()
         titulo.config(text=usuario)
         descripcion.config(text=string)
         global marco_envio2
-        marco_envio2= Frame(ventanaEnvio, width=800, height=300,relief="solid",bd=5)
+        marco_envio2 = Frame(ventanaEnvio, width=800, height=300, relief="solid", bd=5)
         marco_envio2.pack()
-        ciudades=[ciudad.name for ciudad in Cliente.Ciudades]
+        ciudades = [ciudad.name for ciudad in Cliente.Ciudades]
 
-        tipos=["NORMAL","PRIORITARIO","LIBRE"]
-        criterios = ["Ciudades disponibles","Tipo de Envio"]
-        valores =[ciudades,tipos]
-        habilitado = [True,True]
+        tipos = ["NORMAL", "PRIORITARIO", "LIBRE"]
+        criterios = ["Ciudades disponibles", "Tipo de Envio"]
+        valores = [ciudades, tipos]
+        habilitado = [True, True]
         global Fenvio
-        Fenvio = FieldFrame(marco_envio2, "Criterio", criterios, "Valor", valores, habilitado,"Realizar Envio",enviar)
+        Fenvio = FieldFrame(marco_envio2, "Criterio", criterios, "Valor", valores, habilitado, "Realizar Envio", enviar)
         Fenvio.pack()
         global label
-        label=Label(ventanaEnvio, text="Los envios prioritarios tienen un sobrecargo de 15.000 y demoran 5 dias habiles Los envios libres tienen un descuento de 15.000 y demoran 30 dias habiles. Los envios normales variaran su costo y dias habiles dependiendo de la ciudad.", font=("Verdana", 13, "bold"),relief="flat",bg="white" ,wraplength=450)
-        label.pack(pady=7,padx=10)
+        label = Label(ventanaEnvio,
+                      text="Los envios prioritarios tienen un sobrecargo de 15.000 y demoran 5 dias habiles Los envios libres tienen un descuento de 15.000 y demoran 30 dias habiles. Los envios normales variaran su costo y dias habiles dependiendo de la ciudad.",
+                      font=("Verdana", 13, "bold"), relief="flat", bg="white", wraplength=450)
+        label.pack(pady=7, padx=10)
 
     def enviar():
-        Senvio=Fenvio.obtenerValores()
-        if any(not valor for valor in Senvio.values()):
-            messagebox.showwarning("Error", ErrorDatosIncompletos('Ciudades disponibles','Tipo Envio').mostrarMensaje())
-            raise ErrorDatosIncompletos('Ciudades disponibles','Tipo Envio')
+        Senvio = Fenvio.obtenerValores()
+        try:
+            if any(not valor for valor in Senvio.values()):
+                messagebox.showwarning("Error",
+                                       ErrorDatosIncompletos('Ciudades disponibles', 'Tipo Envio').mostrarMensaje())
+                raise ErrorDatosIncompletos('Ciudades disponibles', 'Tipo Envio')
+        except ErrorDatosIncompletos:
+            return
 
         marco_envio2.forget()
         label.forget()
-        Sciudad=Senvio["Ciudades disponibles"]
-        Stipo=Senvio["Tipo de Envio"]
-        ciudad=""
-        tipo=""
+        Sciudad = Senvio["Ciudades disponibles"]
+        Stipo = Senvio["Tipo de Envio"]
+        ciudad = ""
+        tipo = ""
         for item in Cliente.Ciudades:
             if item.name == Sciudad:
-                ciudad=item
+                ciudad = item
                 break
         for item in Cliente.Tipo:
             if item.name == Stipo:
-                tipo=item
+                tipo = item
                 break
 
         titulo.config(text="Proceso de Logistica de envio finalizado")
-        descripcion.config(text="El proceso de envío ha sido finalizado. A continuación, se mostrará en pantalla la factura del pedido y la confirmación del envío una vez se hayan procesado todas las transferencias necesarias."
-                           )
+        descripcion.config(
+            text="El proceso de envío ha sido finalizado. A continuación, se mostrará en pantalla la factura del pedido y la confirmación del envío una vez se hayan procesado todas las transferencias necesarias."
+            )
         # Tercera interacción
         cliente.setCiudad(ciudad)
         cliente.enviar(intervenidos, tipo)
-        pck=Serializador(clientes,"clientes")
-        pck=Serializador(tiendas,"tiendas")
+        pck = Serializador(clientes, "clientes")
+        pck = Serializador(tiendas, "tiendas")
 
         global marco_envio3
-        marco_envio3= Frame(ventanaEnvio, width=800, height=300,relief="sunken",bd=10)
-        resumenPago=Label(marco_envio3, text=cliente.getResumenDePago(), font=("Arial", 10),wraplength=800)
+        marco_envio3 = Frame(ventanaEnvio, width=800, height=300, relief="sunken", bd=10)
+        resumenPago = Label(marco_envio3, text=cliente.getResumenDePago(), font=("Arial", 10), wraplength=800)
         resumenPago.pack(pady=10)
-        confirmacion=Label(marco_envio3,text=cliente.getConfirmacion(),font=("Arial", 10),wraplength=200)
+        confirmacion = Label(marco_envio3, text=cliente.getConfirmacion(), font=("Arial", 10), wraplength=200)
         confirmacion.pack(pady=10)
         marco_envio3.pack()
 
-
-
-
-    ventanaEnvio=Frame(ventana_menu,bg="#AB91C1",width=600,height=500,relief="ridge",bd=10)
+    ventanaEnvio = Frame(ventana_menu, bg="#AB91C1", width=600, height=500, relief="ridge", bd=10)
     ventanaEnvio.place(relx=0.5, rely=0.5, anchor="center")
     ventanaEnvio.pack_propagate(False)
 
+    titulo = Label(ventanaEnvio, text="Logistica de Envio ", font=("Arial", 16, "bold"), relief="raised", bg="#FFA532")
 
-    titulo=Label(ventanaEnvio, text="Logistica de Envio ", font=("Arial", 16, "bold"),relief="raised",bg="#FFA532" )
+    titulo.pack(side="top", pady=10)
 
-    titulo.pack(side="top",pady=10)
+    frame_descripcion = Frame(ventanaEnvio, bg="white", relief="groove", bd=5, width=500, height=105)
 
-    frame_descripcion=Frame(ventanaEnvio,bg="white",relief="groove",bd=5,width=500,height=105)
-
-    descripcion=Label(frame_descripcion, text= "Bienvenido a la funcionalidad Logística de Envío. En esta sección, podrás realizar un pedido de los productos que necesitas, gestionar su intervención según la colección a la que pertenezcan y, finalmente, llevar a cabo las transferencias correspondientes para confirmar el envío de los productos."
-                      , font=("Verdana", 10),wraplength=450,bg="white")
+    descripcion = Label(frame_descripcion,
+                        text="Bienvenido a la funcionalidad Logística de Envío. En esta sección, podrás realizar un pedido de los productos que necesitas, gestionar su intervención según la colección a la que pertenezcan y, finalmente, llevar a cabo las transferencias correspondientes para confirmar el envío de los productos."
+                        , font=("Verdana", 10), wraplength=450, bg="white")
     descripcion.pack()
     frame_descripcion.pack(pady=20)
     frame_descripcion.pack_propagate(False)
 
-    empezar=Button(ventanaEnvio,text="Empezar proceso",command=ConsultaPedido)
+    empezar = Button(ventanaEnvio, text="Empezar proceso", command=ConsultaPedido)
     empezar.pack(pady=50)
 
 def controlCalidad():
