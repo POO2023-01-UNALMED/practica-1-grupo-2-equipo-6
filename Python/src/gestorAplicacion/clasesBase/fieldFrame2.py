@@ -1,6 +1,7 @@
 from tkinter import *
 from fieldFrame import FieldFrame
 from tkinter.ttk import Scrollbar
+from src.gestorAplicacion.clasesBase import Tienda
 
 class FieldFrame2(Frame):
     def __init__(self, master, tituloCriterios, criterios, tituloValores, valores, habilitado, tipo):

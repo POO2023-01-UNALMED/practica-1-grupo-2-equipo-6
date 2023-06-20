@@ -6,6 +6,7 @@ from tkinter import ttk
 from fieldFrame import *
 from fieldFrame2 import *
 from Excepciones import *
+from src.gestorAplicacion.clasesBase import Persona
 
 
 
