@@ -609,12 +609,10 @@ def logisticaEnvio():
     def realizarPedido():
 
         pedido = Fset.obtenerValores()
-        try:
-            if any(not valor for valor in pedido.values()):
-                raise ErrorDatosIncompletos('SET', 'CANTIDAD')
-        except ErrorDatosIncompletos:
-                messagebox.showwarning("Error", ErrorDatosIncompletos('SET', 'CANTIDAD').mostrarMensaje())
-                ConsultaPedido()
+
+        if any(not valor for valor in pedido.values()):
+            messagebox.showwarning("Error", ErrorDatosIncompletos('SET', 'CANTIDAD').mostrarMensaje())
+            raise ErrorDatosIncompletos('SET', 'CANTIDAD')
 
         marco_pedido1.forget()
         label.forget()
