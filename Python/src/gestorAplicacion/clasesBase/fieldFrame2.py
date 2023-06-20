@@ -1,7 +1,6 @@
 from tkinter import *
 from fieldFrame import FieldFrame
 from tkinter.ttk import Scrollbar
-from fieldFrame2 import FieldFrame2
 
 class FieldFrame2(Frame):
     def __init__(self, master, tituloCriterios, criterios, tituloValores, valores, habilitado, tipo):
@@ -74,7 +73,7 @@ class FieldFrame2(Frame):
 
     def mostrarEleccion(self):
         seleccion = self.field_frame.combobox.get()
-        text_widget.agregarTexto(seleccion)
+        self.text_widget.agregarTexto(seleccion)
 
     def getFrameIzquierdo(self):
         return self.frame_izquierdo
