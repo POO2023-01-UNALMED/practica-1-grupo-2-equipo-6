@@ -70,7 +70,7 @@ class Transferencia:
     @staticmethod
     def pagoEnvio(costo, cliente, pagoTransporte):
         total = 0
-        from Python.src.gestorAplicacion.clasesBase.Bodega import Bodega
+        from Bodega import Bodega
         pagosPedido = Bodega.get_pagos()
 
         for pago in pagosPedido:

@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import Enum
-from ControlCalidad import *
-
+from ControlCalidad import ControlCalidad
+from Venta import Venta
 class Informe:
 
     informesVentas=[]
@@ -18,7 +18,7 @@ class Informe:
         self.soluciones = []
         self.cantidadActualDeuda = 0.0
         self.ventaEfectuada = ventaEfectuada
-        self.puntajeCrediticioActual = puntajeCrediticio
+        self.puntajeCrediticioActual = Venta.puntajeCrediticio
         self.controlC = controlC
 
     class TipoInforme(Enum):

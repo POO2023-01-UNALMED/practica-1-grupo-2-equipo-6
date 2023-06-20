@@ -1,6 +1,5 @@
-from Proveedor import *
-from Transportista import *
-from Informe import *
+from Proveedor import Proveedor
+from Transportista import Transportista
 
 class ControlCalidad:
     def __init__(self, compra):
@@ -115,6 +114,7 @@ class ControlCalidad:
             return None
 
     def generarInforme(self, proveedor, transportista):
+        from Informe import Informe
         if self.proveedor == proveedor and self.transportista == transportista:
             proveedor.calificar(self)
             transportista.calificar(self)

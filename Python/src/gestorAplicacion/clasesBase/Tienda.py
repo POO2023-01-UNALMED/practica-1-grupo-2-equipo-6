@@ -1,7 +1,7 @@
-from Banco import *
-from CuentaBancaria import *
+from CuentaBancaria import CuentaBancaria
 
 class Tienda:
+    from Banco import Banco
     cuentaTienda = CuentaBancaria(145000,CuentaBancaria.Pais.COLOMBIA,Banco("BANCOLOMBIA"))
 
     def __init__(self, presupuesto, bodega, calle):
@@ -30,5 +30,5 @@ class Tienda:
 
     @classmethod
     def getCuentaTienda(cls):
-        return Tienda.cuentaTienda
+        return cls.cuentaTienda
 

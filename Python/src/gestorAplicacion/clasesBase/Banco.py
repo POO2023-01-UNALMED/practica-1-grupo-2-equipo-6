@@ -1,10 +1,9 @@
 from enum import Enum
 from typing import List, Dict
-from CuentaBancaria import *
-from Credito import *
-#from src.gestorAplicacion.clasesBase.Tienda import Tienda
-from Transferencia import *
-from Venta import *
+from CuentaBancaria import CuentaBancaria
+from Credito import Credito
+from Transferencia import Transferencia
+from Venta import Venta
 
 
 class Banco:
@@ -22,21 +21,6 @@ class Banco:
 
         def setDescripcion(self, descripcion):
             self.descripcion = descripcion
-
-    class PuntajeCredito(Enum):
-        BAJO = 16.347
-        MEDIO = 10.53
-        ALTO = 4.216
-
-        def __init__(self, tasaDeInteres):
-            self.tasaDeInteres = tasaDeInteres
-
-        def getTasaDeInteres(self):
-            return self.tasaDeInteres
-
-        def setTasaDeInteres(self, tasaDeInteres):
-            self.tasaDeInteres = tasaDeInteres
-
 
     def __init__(self, nombre: str):
         self.nombre = nombre
@@ -86,7 +70,7 @@ class Banco:
         self.nombre = nombre
 
 
-    def darPuntajeCrediticio(self, cuenta: CuentaBancaria) -> PuntajeCredito:
+    def darPuntajeCrediticio(self, cuenta: CuentaBancaria) -> Venta.PuntajeCredito:
         puntuacion = -180
         proporcionRetrasos = 0.0
         AmortizacionFaltante = 0
@@ -101,7 +85,7 @@ class Banco:
 
             for t in self.historialDePagos[cuenta]:
                 cantidadDePagos += 1
-                if t.getPuntualidadPago() == EstadoPago.RETRASADO:
+                if t.getPuntualidadPago() == Transferencia.EstadoPago.RETRASADO:
                     cantidadRetrasos += 1
 
             proporcionRetrasos = cantidadRetrasos / cantidadDePagos
@@ -131,7 +115,8 @@ class Banco:
 
 
 
-    def solucionarProblema(self, deudas: List[Credito], puntaje: PuntajeCredito) -> List[Transferencia]:
+    def solucionarProblema(self, deudas: List[Credito], puntaje: Venta.PuntajeCredito) -> List[Transferencia]:
+            from Tienda import Tienda
             pagosDeudas = []
             for credito in deudas:
                 Tienda.pagarTodo(puntaje, credito)
@@ -139,11 +124,13 @@ class Banco:
             return pagosDeudas
 
     def solucionarProblema(self, cantidadDeuda: float) -> CuentaBancaria:
+            from Tienda import Tienda
             Venta.setPorcentajeBanco(0.2)
             fondoAuxiliar = CuentaBancaria(0, CuentaBancaria.Pais.COLOMBIA, self, cantidadDeuda, Tienda.getCuentaTienda())
             return fondoAuxiliar
 
     def abonarCuentaAuxiliar(self, abono: float) -> Transferencia:
+            from Tienda import Tienda
             fondoAuxiliar = None
             for cuenta in self.cuentas:
                 if isinstance(cuenta.getPropietario(), Banco) and cuenta.getDinero() + abono < cuenta.getCantidadLimite():
@@ -151,7 +138,23 @@ class Banco:
             return Transferencia(Tienda.getCuentaTienda(), fondoAuxiliar, abono)
 
     def solucionarProblema(self, c: CuentaBancaria) -> Transferencia:
+        from Tienda import Tienda
         return Transferencia(Tienda.getCuentaTienda(), c, Tienda.getCuentaTienda().getDinero() * 0.05)
 
     def solucionarProblema(self) -> CuentaBancaria:
+        from Tienda import Tienda
         return CuentaBancaria(0, CuentaBancaria.Pais.COLOMBIA, self, Tienda.getCuentaTienda().getDinero())
+
+    class PuntajeCredito(Enum):
+        BAJO = 16.347
+        MEDIO = 10.53
+        ALTO = 4.216
+
+        def __init__(self, tasaDeInteres):
+            self.tasaDeInteres = tasaDeInteres
+
+        def getTasaDeInteres(self):
+            return self.tasaDeInteres
+
+        def setTasaDeInteres(self, tasaDeInteres):
+            self.tasaDeInteres = tasaDeInteres

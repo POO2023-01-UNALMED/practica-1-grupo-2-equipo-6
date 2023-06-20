@@ -1,9 +1,9 @@
 from typing import List
-from Producto import *
-from Inventariar import *
-from Transferencia import *
-from ControlCalidad import *
-from Tienda import *
+from Producto import Producto
+from Inventariar import Inventariar
+from Transferencia import Transferencia
+from ControlCalidad import ControlCalidad
+from Tienda import Tienda
 
 class Bodega():
     pagos = []
@@ -110,7 +110,7 @@ class Bodega():
     @staticmethod
     def realizar_pedido(tiendas, set_tipo, cantidad):
 
-        from src.gestorAplicacion.clasesBase.Producto import Producto
+        from Producto import Producto
         necesarios = Producto.seleccionar_productos(set_tipo, cantidad)
         pedido = []
         for tienda in tiendas:
