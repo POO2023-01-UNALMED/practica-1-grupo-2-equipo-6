@@ -118,6 +118,13 @@ class Empleado(Persona):
                     return Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c)
         return None
 
+    def generarReporteVentas(v, contador):
+        if cargo == Cargo.ARCHIVISTA:
+            t = contador.pagarContratistasPorVenta(v)
+            Venta.asignarPorcentajeBanco(v)
+            return Informe(v, contador, t)
+        return None
+
     def get_sueldo(self):
         return self.sueldo
 
@@ -144,3 +151,18 @@ class Empleado(Persona):
 
     def __lt__(self, other):
         return self.calificacion < other.calificacion
+
+    def pagarContratistasPorVenta(v):
+        t = None
+        if cargo == Cargo.CONTADOR:
+            if isinstance(v.comprador, Socio):
+                # Pay 10% of the sale to the delivery person
+                t = Tienda.getCuentaTienda().pagarDependientes(v.repartidor, 0.1 * v.total)
+            else:
+                t = Tienda.getCuentaTienda().pagarDependientes(v.repartidor)
+
+            v.ganancias = v.total - t.cantidad
+
+            return t
+        else:
+            return None
