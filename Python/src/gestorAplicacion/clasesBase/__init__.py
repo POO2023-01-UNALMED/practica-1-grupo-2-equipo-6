@@ -176,6 +176,9 @@ def Financiero():
 
 
 def Socios():
+    global transportista1
+    global transportista2
+    global transportista3
 
     banco1 = Banco('Bancolombia')
     socio1 = Socio('Exito', [camisa, pantalon, abrigo], [], CuentaBancaria(123123, CuentaBancaria.Pais.COLOMBIA, banco1))
@@ -217,10 +220,11 @@ def Compras():
 
 
 
-serializarEnvio()
+
 tiendas()
-Socios()
+serializarEnvio()
 Financiero()
+Socios()
 Compras()
 
 
