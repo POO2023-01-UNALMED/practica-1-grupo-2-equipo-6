@@ -8,7 +8,7 @@ class Informe:
     informesControl=[]
     informes=0
 
-    def __init__(self, tipoInforme, ventaEfectuada = None, contable=None, puntajeCrediticioActual = None, controlC = None):
+    def __init__(self, tipoInforme, controlC, ventaEfectuada = None, contable=None, puntajeCrediticioActual = None):
         Informe.informes += 1
         self.contable = contable
         self.tipoInforme = tipoInforme

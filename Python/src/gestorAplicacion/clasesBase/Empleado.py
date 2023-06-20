@@ -122,7 +122,7 @@ class Empleado(Persona):
         if self.cargo == self.CARGOS.ARCHIVISTA:
             t = contador.pagarContratistasPorVenta(v)
             Venta.asignarPorcentajeBanco(v)
-            return Informe(Informe.TipoInforme.INFORME_VENTAS, v, contador, t)
+            return Informe(tipoInforme=Informe.TipoInforme.INFORME_VENTAS, ventaEfectuada=venta, contable = contador)
         return None
 
     def get_sueldo(self):

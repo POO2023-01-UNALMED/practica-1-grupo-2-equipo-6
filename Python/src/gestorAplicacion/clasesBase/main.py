@@ -495,7 +495,7 @@ def gestionAlianzasEstrategicas():
                 productosVenta = resultadosOfertas[0]
             else:
                 productosVenta = resultadosOfertas[1]
-            print(productosVenta)
+
 
             i1 = Inventariar.calcularCamisas(oferta1)
             i2 = Inventariar.calcularAbrigos(oferta1)
@@ -569,8 +569,6 @@ def gestionAlianzasEstrategicas():
         ofertaDos.pack_forget()
         vender()
 
-    def seleccionOferta(oferta):
-        print('Hola')
 
     def historialVentas():
 
