@@ -6,7 +6,7 @@ from tkinter import ttk
 from fieldFrame import *
 from fieldFrame2 import *
 from Excepciones import *
-from Persona import Persona
+from Persona import *
 
 
 
@@ -55,37 +55,37 @@ def cambioImgPresentacion():
         controladora.controlPresentacion += 1
 
     nueva_imagen = PhotoImage(
-        file="..\\baseDatos\\img_png\\presentacion" + str(controladora.controlPresentacion) + ".png")
+        file="presentacion" + str(controladora.controlPresentacion) + ".png")
     img_presentacion.config(image=nueva_imagen)
     img_presentacion.image = nueva_imagen
 
 
 def cambioDescripcion():
     # gabriel
-    img_g1 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel1.png")
-    img_g2 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel2.png")
-    img_g3 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel3.png")
-    img_g4 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel4.png")
+    img_g1 = PhotoImage(file="gabriel1.png")
+    img_g2 = PhotoImage(file="gabriel2.png")
+    img_g3 = PhotoImage(file="gabriel3.png")
+    img_g4 = PhotoImage(file="gabriel4.png")
     # aleja
-    img_a1 = PhotoImage(file="..\\baseDatos\\img_png\\aleja1.png")
-    img_a2 = PhotoImage(file="..\\baseDatos\\img_png\\aleja2.png")
-    img_a3 = PhotoImage(file="..\\baseDatos\\img_png\\aleja3.png")
-    img_a4 = PhotoImage(file="..\\baseDatos\\img_png\\aleja4.png")
+    img_a1 = PhotoImage(file="aleja1.png")
+    img_a2 = PhotoImage(file="aleja2.png")
+    img_a3 = PhotoImage(file="aleja3.png")
+    img_a4 = PhotoImage(file="aleja4.png")
     # Carmen
-    img_c1 = PhotoImage(file="..\\baseDatos\\img_png\\carmen1.png")
-    img_c2 = PhotoImage(file="..\\baseDatos\\img_png\\carmen2.png")
-    img_c3 = PhotoImage(file="..\\baseDatos\\img_png\\carmen3.png")
-    img_c4 = PhotoImage(file="..\\baseDatos\\img_png\\carmen4.png")
+    img_c1 = PhotoImage(file="carmen1.png")
+    img_c2 = PhotoImage(file="carmen2.png")
+    img_c3 = PhotoImage(file="carmen3.png")
+    img_c4 = PhotoImage(file="carmen4.png")
     # Juan
-    img_j1 = PhotoImage(file="..\\baseDatos\\img_png\\juan1.png")
-    img_j2 = PhotoImage(file="..\\baseDatos\\img_png\\juan2.png")
-    img_j3 = PhotoImage(file="..\\baseDatos\\img_png\\juan3.png")
-    img_j4 = PhotoImage(file="..\\baseDatos\\img_png\\juan4.png")
+    img_j1 = PhotoImage(file="juan1.png")
+    img_j2 = PhotoImage(file="juan2.png")
+    img_j3 = PhotoImage(file="juan3.png")
+    img_j4 = PhotoImage(file="juan4.png")
     # Mauricio
-    img_m1 = PhotoImage(file="..\\baseDatos\\img_png\\mauro1.png")
-    img_m2 = PhotoImage(file="..\\baseDatos\\img_png\\mauro2.png")
-    img_m3 = PhotoImage(file="..\\baseDatos\\img_png\\mauro3.png")
-    img_m4 = PhotoImage(file="..\\baseDatos\\img_png\\mauro4.png")
+    img_m1 = PhotoImage(file="mauro1.png")
+    img_m2 = PhotoImage(file="mauro2.png")
+    img_m3 = PhotoImage(file="mauro3.png")
+    img_m4 = PhotoImage(file="mauro4.png")
 
     listaDescripciones = ["Mi nombre es Gabriel Serrano, tengo 22 anos y estudio \n" +
                           "ciencias de la computacion, me suelen llamar de muchas\n " +
@@ -746,7 +746,7 @@ mensaje_bienvenida.place(x=0, y=30)
 frame_boton = Frame(ventana_inicio, width=460, height=430, relief="sunken", bd=10)
 frame_boton.place(x=30, y=160)
 
-img = PhotoImage(file="..\\baseDatos\\img_png\\presentacion0.png")
+img = PhotoImage(file="presentacion0.png")
 img_presentacion = Label(frame_boton, image=img)
 img_presentacion.place(x=18, y=0)
 
@@ -775,10 +775,10 @@ descripcion_integrante.place(x=0, y=0)
 frame_img_descripcion = Frame(ventana_inicio, width=500, height=250, relief="sunken", bd=10)
 frame_img_descripcion.place(x=530, y=160)
 
-img1 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel1.png")
-img2 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel2.png")
-img3 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel3.png")
-img4 = PhotoImage(file="..\\baseDatos\\img_png\\gabriel4.png")
+img1 = PhotoImage(file="gabriel1.png")
+img2 = PhotoImage(file="gabriel2.png")
+img3 = PhotoImage(file="gabriel3.png")
+img4 = PhotoImage(file="gabriel4.png")
 
 img1_descripcion = Label(frame_img_descripcion, image=img1)
 img1_descripcion.grid(row=0, column=0, padx=1, pady=1)

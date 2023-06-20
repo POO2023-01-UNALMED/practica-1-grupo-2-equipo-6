@@ -15,7 +15,7 @@ class Producto:
 
     def __init__(self, tipo, precio=None, costo=None):
         self.nombre = tipo
-        self.precio = tipo.precioEstandar if precio is None else precio
+        self.precio = tipo.value
         self.costo = costo
 
 
