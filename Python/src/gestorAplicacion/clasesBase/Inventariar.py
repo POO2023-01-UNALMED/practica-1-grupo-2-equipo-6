@@ -10,7 +10,7 @@ class Inventariar:
     def calcularCamisas(productos) -> int:
         numCamisas = 0
         for p in productos:
-            if p.getNombre() == "CAMISA":
+            if p.getNombre() == Producto.Tipo.CAMISA:
                 numCamisas += 1
         return numCamisas
 
@@ -18,7 +18,7 @@ class Inventariar:
     def calcularAbrigos(productos) -> int:
         numAbrigos = 0
         for p in productos:
-            if p.getNombre() == "ABRIGO":
+            if p.getNombre() == Producto.Tipo.ABRIGO:
                 numAbrigos += 1
         return numAbrigos
 
@@ -26,6 +26,6 @@ class Inventariar:
     def calcularPantalon(productos) -> int:
         numPantalon = 0
         for p in productos:
-            if p.getNombre() == "PANTALON":
+            if p.getNombre() == Producto.Tipo.PANTALON:
                 numPantalon += 1
         return numPantalon

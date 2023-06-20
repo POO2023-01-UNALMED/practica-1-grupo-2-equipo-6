@@ -52,10 +52,10 @@ class Banco:
     def setHistorialesCrediticios(self, historialesCrediticios):
         self.historialesCrediticios = historialesCrediticios
 
-    def getCuentas(self) -> List[CuentaBancaria]:
+    def getCuentas(self) :
         return self.cuentas
 
-    def setCuentas(self, cuentas: List[CuentaBancaria]):
+    def setCuentas(self, cuentas):
         self.cuentas = cuentas
 
     def getHistorialDePagos(self) :
@@ -64,7 +64,7 @@ class Banco:
     def setHistorialDePagos(self, historialDePagos):
         self.historialDePagos = historialDePagos
 
-    def autorizarCuenta(self, IBAN: str):
+    def autorizarCuenta(self, IBAN):
         try:
             for c in self.cuentas:
                 if c.getIBAN() == IBAN:
@@ -79,7 +79,7 @@ class Banco:
         self.nombre = nombre
 
 
-    def darPuntajeCrediticio(self, cuenta: CuentaBancaria) :
+    def darPuntajeCrediticio(self, cuenta) :
         puntuacion = -180
         proporcionRetrasos = 0.0
         AmortizacionFaltante = 0
@@ -138,7 +138,7 @@ class Banco:
             fondoAuxiliar = CuentaBancaria(0, CuentaBancaria.Pais.COLOMBIA, self, cantidadDeuda, Tienda.getCuentaTienda())
             return fondoAuxiliar
 
-    def abonarCuentaAuxiliar(self, abono: float) -> Transferencia:
+    def abonarCuentaAuxiliar(self, abono: float):
             from Tienda import Tienda
             fondoAuxiliar = None
             for cuenta in self.cuentas:
@@ -146,11 +146,11 @@ class Banco:
                     fondoAuxiliar = cuenta
             return Transferencia(Tienda.getCuentaTienda(), fondoAuxiliar, abono)
 
-    def solucionarProblema(self, c: CuentaBancaria) -> Transferencia:
+    def solucionarProblema(self, c):
         from Tienda import Tienda
         return Transferencia(Tienda.getCuentaTienda(), c, Tienda.getCuentaTienda().getDinero() * 0.05)
 
-    def solucionarProblema(self) -> CuentaBancaria:
+    def solucionarProblema(self):
         from Tienda import Tienda
         return CuentaBancaria(0, CuentaBancaria.Pais.COLOMBIA, self, Tienda.getCuentaTienda().getDinero())
 

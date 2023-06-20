@@ -7,6 +7,7 @@ from Credito import Credito
 
 from enum import Enum
 
+from Banco import *
 from Transferencia import Transferencia
 from Empleado import Empleado
 from Transportista import Transportista
