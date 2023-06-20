@@ -26,16 +26,15 @@ class FieldFrame2(Frame):
         #self.frame_botones = Frame(self.frame_izquierdo)
         self.field_frame.getBoton().configure(width=21)
         #boton1 = Button(self.frame_botones, text='Ver', command=lambda: self.agregarTexto(self.getValue(criterio)))
-        boton2 = Button(self.frame_izquierdo, text='Volver al menú principal', command=self.acabar)
+
         #boton1.grid(row=2, column=0, padx=5, pady=5)
         #boton2.grid(row=3, column=0, padx=5, pady=5)
         #boton1.config(width=10)
-        boton2.pack()
-        boton2.config(width=21)
+
         #self.frame_botones.pack(side='bottom')
         self.frame_izquierdo.pack(side='left')
         #self.boton1 = boton1
-        self.boton2 = boton2
+
 
         # Crear el ScrollBar en el frame derecho
         frame_derecho = Frame(self)
@@ -77,8 +76,6 @@ class FieldFrame2(Frame):
     def ver(self, informe):
         self.agregarTexto(informe)
 
-    def getBoton(self):
-        return self.boton2
     
     def mostrarEleccion(self):
         seleccion = self.field_frame.combobox.get()

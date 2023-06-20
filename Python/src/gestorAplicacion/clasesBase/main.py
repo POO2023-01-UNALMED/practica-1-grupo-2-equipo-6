@@ -465,6 +465,22 @@ def gestionAlianzasEstrategicas():
         except ErrorDatosIncompletos:
             MessageBox.showwarning("Error", ErrorDatosIncompletos('Socio seleccionado').mostrarMensaje())
 
+    def calcular():
+        global porcentaje
+        global porcentajes
+        porcentajes = porcentaje.obtenerValores()
+
+        try:
+            m = 1
+            for i in porcentajes.values():
+                o = float(i)
+                # print(i)
+                if o < 0 or o > 50:
+                    raise ErrorDatosIncorrectos()
+            porcentaje.setValores([1, 2, 1])
+
+        except Exception:
+            MessageBox.showwarning("Error", ErrorDatosIncorrectos().mostrarMensaje())
     def sugerirOferta():
 
         global Fproductos
@@ -533,26 +549,15 @@ def gestionAlianzasEstrategicas():
         except ErrorDatosIncompletos:
             MessageBox.showwarning("Error", ErrorDatosIncompletos('Transportista seleccionado').mostrarMensaje())
 
-    def calcular():
-        global porcentaje
-        global porcentajes
-        porcentajes= porcentaje.obtenerValores()
 
-        try:
-            m = 1
-            for i in porcentajes.values():
-                o = float(i)
-                # print(i)
-                if o < 0 or o > 50:
-                    raise ErrorDatosIncorrectos()
-            porcentaje.setValores([1, 2, 1])
-
-        except Exception:
-            MessageBox.showwarning("Error", ErrorDatosIncorrectos().mostrarMensaje())
 
     def confirmarVenta():
+        global transportistaSeleccionado
+        global socioSeleccionado
 
         siOferta = ''
+
+
 
         venta = transportistaSeleccionado.entregaEspecial(productosVenta)
 
