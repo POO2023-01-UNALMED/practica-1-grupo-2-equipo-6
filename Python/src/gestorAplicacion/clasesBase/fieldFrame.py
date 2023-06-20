@@ -12,6 +12,8 @@ class FieldFrame(Frame):
         #self.label_criterio.grid(row=0, column=0, padx=0, pady=0)
         self.boton = Button(self, text=texto, command=comando)
         self.combobox = Combobox(self, state='readonly', font=("Arial", 12))
+        self.criterios = criterios
+        self.valores=valores
 
         # Crear etiquetas de título para las columnas "Criterio" y "Valor"
         label_criterios = Label(self, text=tituloCriterios)
@@ -68,6 +70,12 @@ class FieldFrame(Frame):
     def getBoton(self):
         return self.boton
 
+    def setValores(self, valores):
+        m=0
+        for i in self.criterios:
+            self.entries[i] = valores[m]
+            m+=1
+
     def getValue(self, criterio):
         if criterio in self.entries:
             return self.entries[criterio].get()
@@ -86,6 +94,8 @@ class FieldFrame(Frame):
                 valor = None
             valores[criterio] = valor
         return valores
+
+
     
     def mostrarEleccion(self):
         seleccion = self.combobox.get()

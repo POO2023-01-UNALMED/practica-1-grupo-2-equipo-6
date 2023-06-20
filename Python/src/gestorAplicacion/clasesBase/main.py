@@ -447,7 +447,7 @@ def gestionAlianzasEstrategicas():
             Fsocios.pack_forget()
             verHistorial.grid_forget()
 
-            valores = ['123', '123', '123', transportistas]
+            valores = [Producto.Tipo.CAMISA.value, Producto.Tipo.PANTALON.value, Producto.Tipo.ABRIGO.value, transportistas]
 
             habilitado = [False, False, False, True]
 
@@ -466,9 +466,11 @@ def gestionAlianzasEstrategicas():
             MessageBox.showwarning("Error", ErrorDatosIncompletos('Socio seleccionado').mostrarMensaje())
 
     def sugerirOferta():
+
         global Fproductos
         global oferta
         global porcentaje
+        global porcentajes
         global ofertaDos
         global transportistaSeleccionado
         global socioSeleccionado
@@ -483,9 +485,9 @@ def gestionAlianzasEstrategicas():
             vecto = Deserializador('ventasPorDefecto').getObjeto()
 
             resultadosOfertas = Tienda.sugerirOferta(vecto, socioSeleccionado)
-            oferta1 = resultadosOfertas[0].getProductosOferta()
-            oferta2 = resultadosOfertas[1].getProductosOferta()
-            '''
+            oferta1 = (resultadosOfertas[0]).getProductosOferta()
+            oferta2 = (resultadosOfertas[1]).getProductosOferta()
+
             i1 = Inventariar.calcularCamisas(oferta1)
             i2 = Inventariar.calcularAbrigos(oferta1)
             i3 = Inventariar.calcularPantalon(oferta1)
@@ -494,9 +496,9 @@ def gestionAlianzasEstrategicas():
             i5 = Inventariar.calcularAbrigos(oferta2)
             i6 = Inventariar.calcularPantalon(oferta2)
 
-            criteriosO1 = ['Camisas[{}]'.formato(i1), 'Abrigos[{}]'.format(i2), 'Pantalones[i3]'.format(i3)]
-            criteriosO2 = ['Camisas[{}]'.formato(i3), 'Abrigos[{}]'.format(i4), 'Pantalones[i3]'.format(i6)]
-            '''
+
+
+
 
             Fproductos.pack_forget()
             verHistorial.grid_forget()
@@ -504,30 +506,49 @@ def gestionAlianzasEstrategicas():
 
             criterios0 = ['Descuento por camisa', 'Descuento por abrigo', 'Descuento por pantalón']
             habilitado = [True, True, True]
-            porcentaje = FieldFrame(marco_socio,
-                                    "Ingrese el porcentaje que desea descontar\n(numeros entre 0.0 y 50.0)", criterios0,
-                                    "Valor", [0.0, 0.0, 0.0], habilitado, "Calcular", calcular)
+            porcentaje = FieldFrame(marco_socio,"Ingrese el porcentaje que desea descontar\n(numeros entre 0.0 y 50.0)", criterios0,"Valor", [0.0, 0.0, 0.0], habilitado, "Calcular", calcular)
 
             porcentaje.pack(side='top', expand=True, fill='both')
 
-            criterios = ['Camisa', 'Pantalón', 'Abrigo']
+
             habilitado = [True, True, True]
+            habilitado1 = [False, False, False]
 
             # "Criterio", criterios, "Valor"
-
-            oferta = FieldFrame(marco_socio, 'Producto', criterios, 'Precio\npor unidad', [0, 1, 2], habilitado,
+            criterios1 = ['Camisas[{a}]'.format(a=i1), 'Abrigos[{b}]'.format(b=i2),
+                           'Pantalones[{c}]'.format(c=i3)]  # Oferta Frecuencia Ventas
+            oferta = FieldFrame(marco_socio, 'Producto', criterios1, 'Precio\npor unidad', [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value], habilitado1,
                                 "Realizar venta", lambda: confirmarVenta(1))
             oferta.pack(side='left', expand=True, fill='both')
 
+            criterios2 = ['Camisas[{d}]'.format(d=i4), 'Abrigos[{e}]'.format(e=i4),
+                           'Pantalones[{f}]'.format(f=i6)]  # Oferta Preferencial
             # Para la segunda oferta
-            oferta2 = ['producto1', 'producto2', 'producto3']
-            ofertaDos = FieldFrame(marco_socio, 'Producto', criterios, "Precio\npor unidad", [1, 2, 3], habilitado,
+
+            ofertaDos = FieldFrame(marco_socio, 'Producto', criterios2, "Precio\npor unidad", [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value], habilitado1,
                                    "Cancelar oferta", cancelar)
             ofertaDos.pack(side='right', expand=True, fill='both')
 
             # side=BOTTOM, pady=5, anchor="w"
         except ErrorDatosIncompletos:
             MessageBox.showwarning("Error", ErrorDatosIncompletos('Transportista seleccionado').mostrarMensaje())
+
+    def calcular():
+        global porcentaje
+        global porcentajes
+        porcentajes= porcentaje.obtenerValores()
+
+        try:
+            m = 1
+            for i in porcentajes.values():
+                o = float(i)
+                # print(i)
+                if o < 0 or o > 50:
+                    raise ErrorDatosIncorrectos()
+            porcentaje.setValores([1, 2, 1])
+
+        except Exception:
+            MessageBox.showwarning("Error", ErrorDatosIncorrectos().mostrarMensaje())
 
     def confirmarVenta():
 
@@ -591,8 +612,12 @@ def gestionAlianzasEstrategicas():
         field_frame_2.pack()
         field_frame_2.agregarTexto("INSERTE INFORME")
 
-    def calcular():
-        pass
+
+
+
+
+
+
 
     global marcoFuncionalidad
     global marco_socio
