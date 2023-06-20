@@ -582,7 +582,10 @@ def moduloCompra():
     combo.place(x=200, y=120)
     combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo, mensaje_descripcion))
 def logisticaEnvio():
-    ventana_menu=controladora.ventana
+    ventana_menu = Frame(controladora.ventana, width=1000, height=600, bd=5, bg="light blue")
+    ventana_menu.place(x=0, y=0)
+
+
     def ConsultaPedido():
         empezar.forget()
         titulo.config(text="Realizar Pedido")
