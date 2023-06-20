@@ -1,9 +1,18 @@
 from enum import Enum
 from typing import List, Dict
-from CuentaBancaria import CuentaBancaria
-from Credito import Credito
-from Transferencia import Transferencia
+
+from CuentaBancaria import *
+from Credito import *
+from Transferencia import *
 from Venta import Venta
+
+from CuentaBancaria import *
+from Credito import *
+#from src.gestorAplicacion.clasesBase.Tienda import Tienda
+from Transferencia import *
+from Venta import *
+from Producto import *
+
 
 
 class Banco:
@@ -24,9 +33,9 @@ class Banco:
 
     def __init__(self, nombre: str):
         self.nombre = nombre
-        self.historialesCrediticios = {}  # type: Dict[CuentaBancaria, List[Credito]]
-        self.cuentas = []  # type: List[CuentaBancaria]
-        self.historialDePagos = {}  # type: Dict[CuentaBancaria, List[Transferencia]]
+        self.historialesCrediticios = {}
+        self.cuentas = []
+        self.historialDePagos = {}
 
     def generarCredito(self, credito: Credito) -> Credito:
         try:
@@ -37,10 +46,10 @@ class Banco:
         return credito
 
 
-    def getHistorialesCrediticios(self) -> Dict[CuentaBancaria, List[Credito]]:
+    def getHistorialesCrediticios(self):
         return self.historialesCrediticios
 
-    def setHistorialesCrediticios(self, historialesCrediticios: Dict[CuentaBancaria, List[Credito]]):
+    def setHistorialesCrediticios(self, historialesCrediticios):
         self.historialesCrediticios = historialesCrediticios
 
     def getCuentas(self) -> List[CuentaBancaria]:
@@ -49,13 +58,13 @@ class Banco:
     def setCuentas(self, cuentas: List[CuentaBancaria]):
         self.cuentas = cuentas
 
-    def getHistorialDePagos(self) -> Dict[CuentaBancaria, List[Transferencia]]:
+    def getHistorialDePagos(self) :
         return self.historialDePagos
 
-    def setHistorialDePagos(self, historialDePagos: Dict[CuentaBancaria, List[Transferencia]]):
+    def setHistorialDePagos(self, historialDePagos):
         self.historialDePagos = historialDePagos
 
-    def autorizarCuenta(self, IBAN: str) -> 'Banco':
+    def autorizarCuenta(self, IBAN: str):
         try:
             for c in self.cuentas:
                 if c.getIBAN() == IBAN:
@@ -70,7 +79,7 @@ class Banco:
         self.nombre = nombre
 
 
-    def darPuntajeCrediticio(self, cuenta: CuentaBancaria) -> Venta.PuntajeCredito:
+    def darPuntajeCrediticio(self, cuenta: CuentaBancaria) :
         puntuacion = -180
         proporcionRetrasos = 0.0
         AmortizacionFaltante = 0
@@ -115,7 +124,7 @@ class Banco:
 
 
 
-    def solucionarProblema(self, deudas: List[Credito], puntaje: Venta.PuntajeCredito) -> List[Transferencia]:
+    def solucionarProblema(self, deudas, puntaje):
             from Tienda import Tienda
             pagosDeudas = []
             for credito in deudas:
@@ -123,7 +132,7 @@ class Banco:
                 pagosDeudas.extend(credito.getCuotasPagadas())
             return pagosDeudas
 
-    def solucionarProblema(self, cantidadDeuda: float) -> CuentaBancaria:
+    def solucionarProblema(self, cantidadDeuda: float):
             from Tienda import Tienda
             Venta.setPorcentajeBanco(0.2)
             fondoAuxiliar = CuentaBancaria(0, CuentaBancaria.Pais.COLOMBIA, self, cantidadDeuda, Tienda.getCuentaTienda())
