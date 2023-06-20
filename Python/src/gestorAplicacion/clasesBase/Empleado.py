@@ -119,7 +119,7 @@ class Empleado(Persona):
         return None
 
     def generarReporteVentas(v, contador):
-        if cargo == Cargo.ARCHIVISTA:
+        if cargo == CARGOS.ARCHIVISTA:
             t = contador.pagarContratistasPorVenta(v)
             Venta.asignarPorcentajeBanco(v)
             return Informe(v, contador, t)
