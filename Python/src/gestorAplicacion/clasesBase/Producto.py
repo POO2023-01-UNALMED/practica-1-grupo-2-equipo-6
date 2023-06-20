@@ -18,6 +18,8 @@ class Producto:
         self.precio = tipo.value
         self.costo = costo
 
+    def get_tipo(self):
+        return self.nombre.name
 
     # def __eq__(self, p):
     #     if isintansce(p, Producto):

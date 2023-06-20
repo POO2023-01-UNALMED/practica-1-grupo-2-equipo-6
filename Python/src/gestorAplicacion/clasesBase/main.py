@@ -7,6 +7,11 @@ from fieldFrame import *
 from fieldFrame2 import *
 from Excepciones import *
 from Persona import *
+from Bodega import *
+from Cliente import *
+from Deserializador import *
+from Serializador import *
+from Intervenido import *
 
 
 
@@ -83,7 +88,7 @@ def ingresar():
         menu_procesos.add_command(label="Gestion de alianzas estrategicas", command=gestionAlianzasEstrategicas)
         menu_procesos.add_command(label="Modulo de compra", command=moduloCompra)
         menu_procesos.add_command(label="Control de calidad")
-        menu_procesos.add_command(label="Logistica de envios")
+        menu_procesos.add_command(label="Logistica de envios",command=logisticaEnvio)
         menu_procesos.add_command(label="Gestion de creditos")
 
         # Menu ayuda
@@ -576,7 +581,8 @@ def moduloCompra():
                          textvariable=valor_defecto)
     combo.place(x=200, y=120)
     combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo, mensaje_descripcion))
-'''def logisticaEnvio():
+def logisticaEnvio():
+    ventana_menu=controladora.ventana
     def ConsultaPedido():
         empezar.forget()
         titulo.config(text="Realizar Pedido")
@@ -624,13 +630,13 @@ def moduloCompra():
         productos = Bodega.realizar_pedido(tiendas, set, cantidad)
         global marco_pedido2
         marco_pedido2 = Frame(ventanaEnvio, width=800, height=300,relief="ridge",bd=5)
-        resumenpedido=Label(marco_pedido2,text=Bodega.get_resumen_pedido(), wraplength=200)
-        if Bodega.get_resumen_pedido()!="El pedido se ha completado exitosamente":
-            descripcion.config(text="Su pedido no se pudo completar todos los productos necesarios sin embargo puede continuar el proceso de envio con los productos disponibles o realizar los procesos de compra y control de calidad para tener disponibilidad de productos")
-            if Bodega.get_resumen_pedido().split()[15]=="0":
+        resumenpedido=Label(marco_pedido2,text=Bodega.getResumenPedido(), wraplength=200)
+        if Bodega.getResumenPedido()!="El pedido se ha completado exitosamente":
+           # descripcion.config(text="Su pedido no se pudo completar todos los productos necesarios sin embargo puede continuar el proceso de envio con los productos disponibles o realizar los procesos de compra y control de calidad para tener disponibilidad de productos")
+            """if Bodega.getResumenPedido().split()[15]=="0" and Bodega.getResumenPedido()!="":
                 descripcion.config(text="No es posible continuar con el proceso de envio si no hay productos disponibles, es necesario que ejecute los procesos de compra y control de calidad para abastecer las tiendas y tener disponibilidad")
                 messagebox.showwarning("Error", ErrorPedido().mostrarMensaje())
-                raise ErrorDatosIncompletos()
+                raise ErrorDatosIncompletos()"""
         resumenpedido.pack()
         marco_pedido2.pack()
         continuar=Button(marco_pedido2,text="Continuar",command=consultaColeccion)
@@ -704,40 +710,44 @@ def moduloCompra():
             boton.grid(row=i // 3, column=i % 3, padx=10, pady=10)
         paleta.pack()
         marco_coleccion2.pack()
-        continuar=Button(marco_coleccion2,text="Continuar",command=buscarCliente)
+        continuar=Button(marco_coleccion2,text="Continuar",command=buscarClientes)
         continuar.pack()
 
 
-
-    def buscarCliente():
+    def buscarClientes():
         marco_coleccion2.forget()
         titulo.config(text="Datos de envio")
-        descripcion.config(text="Para poder procesar el envío, es fundamental que especifique el destinatario al que se dirigirá. Por favor, elija uno de los clientes registrados en nuestra base de datos para completar esta información."
-                           )
+        descripcion.config(text="Para poder procesar el envío, es fundamental que especifique el destinatario al que se dirigirá. Por favor, elija uno de los clientes registrados en nuestra base de datos para completar esta información.")
         global marco_envio1
-        marco_envio1= Frame(ventanaEnvio, width=800, height=300,relief="solid",bd=5)
+        marco_envio1 = Frame(ventanaEnvio, width=800, height=300, relief="solid", bd=5)
         marco_envio1.pack()
         global clientes
         clientes=Deserializador("clientes").getObjeto()
+        Vclientes=[Deserializador("clientes").getObjeto()]
         criterios = ["Usuario"]
-        valores = [clientes]
         habilitado = [True]
         global Fclientes
-        Fclientes = FieldFrame(marco_envio1, "Criterio", criterios, "Clientes", valores, habilitado,"Buscar cliente",consultaEnvio)
-        Fclientes.pack(side="left")
+        Fclientes = FieldFrame(marco_envio1, "Criterio", criterios, "Usuario", Vclientes, habilitado, "Buscar Cliente",consultaEnvio )
+        Fclientes.pack()
+
+
+
+
 
 
     def consultaEnvio():
+
         dicC=Fclientes.obtenerValores()
         if any(not valor for valor in dicC.values()):
             messagebox.showwarning("Error", ErrorDatosIncompletos('USUARIO').mostrarMensaje())
             raise ErrorDatosIncompletos('USUARIO')
         usuario = dicC["Usuario"]
         global cliente
+        cliente=""
         for c in clientes:
             if usuario==c.__str__():
                 cliente=c
-        string="Los datos actuales del usuario escogido indican una calificacion de "+str(cliente.get_calificacion())+" puntos,la ciudad registrada es "+cliente.getCiudad().name+". Por favor confirme o cambie el destino del envio.Además seleccione el tipo de envio."
+        string="Los datos actuales del usuario escogido indican una calificacion de "+str(cliente.getCalificacion())+" puntos,la ciudad registrada es "+cliente.getCiudad().name+". Por favor confirme o cambie el destino del envio.Además seleccione el tipo de envio."
         marco_envio1.forget()
         titulo.config(text=usuario)
         descripcion.config(text=string)
@@ -775,7 +785,7 @@ def moduloCompra():
                 break
         for item in Cliente.Tipo:
             if item.name == Stipo:
-                item=item
+                tipo=item
                 break
 
         titulo.config(text="Proceso de Logistica de envio finalizado")
@@ -796,29 +806,7 @@ def moduloCompra():
         marco_envio3.pack()
 
 
-    for widget in ventana_menu.winfo_children():
-        widget.destroy()
-    menu_bar = Menu(ventana_menu)
-    ventana_menu.config(menu=menu_bar)
 
-    #menu archivo
-    menu_archivo = Menu(menu_bar, tearoff=0)
-
-    menu_bar.add_cascade(label="Archivo", menu=menu_archivo)
-    menu_archivo.add_command(label="Aplicacion",command=aplicacion)
-    menu_archivo.add_command(label="Salir", command= salirMenu)
-
-    #menu Procesos
-    menu_procesos = Menu(menu_bar,tearoff=0)
-    menu_bar.add_cascade(label="Procesos y Consultas",menu=menu_procesos)
-    menu_procesos.add_command(label="Gestion de alianzas estrategicas")
-    menu_procesos.add_command(label="Modulo de compra")
-    menu_procesos.add_command(label="Control de calidad")
-    menu_procesos.add_command(label="Logistica de envios",command=logisticaEnvio)
-    menu_procesos.add_command(label="Gestion de creditos")
-
-    #Menu ayuda
-    menu_bar.add_command(label="Ayuda",command=ayuda)
 
     ventanaEnvio=Frame(ventana_menu,bg="#AB91C1",width=600,height=500,relief="ridge",bd=10)
     ventanaEnvio.place(relx=0.5, rely=0.5, anchor="center")
@@ -839,7 +827,6 @@ def moduloCompra():
 
     empezar=Button(ventanaEnvio,text="Empezar proceso",command=ConsultaPedido)
     empezar.pack(pady=50)
-'''
 
 # ventana Inicio
 ventana_inicio = Tk()
@@ -919,7 +906,7 @@ img3_descripcion = Label(frame_img_descripcion, image=img3)
 img3_descripcion.grid(row=1, column=0, padx=1, pady=1)
 img4_descripcion = Label(frame_img_descripcion, image=img4)
 img4_descripcion.grid(row=1, column=1, padx=1, pady=1)
-'''
+
 # ventana2
 ventana_menu = Tk()
 ventana_menu.title("Sistema de administracion")
@@ -946,12 +933,12 @@ menu_bar.add_cascade(label="Procesos y Consultas", menu=menu_procesos)
 menu_procesos.add_command(label="Gestion de alianzas estrategicas", command=None)
 menu_procesos.add_command(label="Modulo de compra", command=moduloCompra)
 menu_procesos.add_command(label="Control de calidad")
-menu_procesos.add_command(label="Logistica de envios")
+menu_procesos.add_command(label="Logistica de envios",command=logisticaEnvio)
 menu_procesos.add_command(label="Gestion de creditos")
 
 # Menu ayuda
 menu_bar.add_command(label="Ayuda", command=ayuda)
-'''
+
 # manejo de eventos
 img_presentacion.bind("<Enter>", lambda event: cambioImgPresentacion())
 descripcion_integrante.bind("<Button-1>", lambda event: cambioDescripcion())

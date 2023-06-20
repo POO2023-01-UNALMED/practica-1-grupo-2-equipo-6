@@ -7,14 +7,12 @@ from Tienda import Tienda
 
 class Bodega(Inventariar):
     pagos = []
-    resumen_pedido = None
+    resumenPedido = ""
 
 
     def __init__(self, productos,stop):
         self.stopBodega = stop
         self.productosEnBodega = productos
-        self.resumenPedido = None
-        self.pagos = []
 
     def calcularNumeroProductos(self):
         return len(self.productosEnBodega)
@@ -110,8 +108,7 @@ class Bodega(Inventariar):
     @staticmethod
     def realizar_pedido(tiendas, set_tipo, cantidad):
 
-        from Producto import Producto
-        necesarios = Producto.seleccionar_productos(set_tipo, cantidad)
+        necesarios = Producto.seleccionarProductos(set_tipo, cantidad)
         pedido = []
         for tienda in tiendas:
             if not necesarios:
@@ -127,11 +124,11 @@ class Bodega(Inventariar):
     @staticmethod
     def crear_resumen(necesarios, pedido):
         if not necesarios:
-            Bodega.resumen_pedido = "El pedido se ha completado exitosamente"
+            Bodega.resumenPedido = "El pedido se ha completado exitosamente"
         else:
             completados = len(pedido)
             total = completados + len(necesarios)
-            Bodega.resumen_pedido = f"Por falta de disponibilidad de productos en las tiendas el pedido solo ha podido completar {completados} de los {total} necesarios."
+            Bodega.resumenPedido = f"Por falta de disponibilidad de productos en las tiendas el pedido solo ha podido completar {completados} de los {total} necesarios."
 
     @staticmethod
     def gestionar_pago(tienda, productos):
@@ -145,11 +142,11 @@ class Bodega(Inventariar):
         pedido = []
         completado = []
         for producto in productos:
-            for i in range(len(self.productos_en_bodega)):
-                if producto.get_tipo() == self.productos_en_bodega[i].get_tipo():
-                    pedido.append(self.productos_en_bodega[i])
+            for i in range(len(self.productosEnBodega)):
+                if producto.get_tipo() == self.productosEnBodega[i].get_tipo:
+                    pedido.append(self.productosEnBodega[i])
                     completado.append(producto)
-                    del self.productos_en_bodega[i]
+                    del self.productosEnBodega[i]
                     break
 
         for producto in completado:

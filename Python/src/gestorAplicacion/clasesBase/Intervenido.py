@@ -2,6 +2,7 @@ from enum import Enum
 import random
 from Producto import *
 Tipo=Producto.Tipo
+from Empleado import *
 
 
     
@@ -106,7 +107,6 @@ class Intervenido(Producto):
         camisas = Producto.clasificar(productos, Tipo.CAMISA)
         pantalones = Producto.clasificar(productos, Tipo.PANTALON)
         abrigos = Producto.clasificar(productos, Tipo.ABRIGO)
-        from Python.src.gestorAplicacion.clasesHerencia.Empleado import Empleado
         CARGOS=Empleado.CARGOS
         operarios = Empleado.seleccionar_empleados(CARGOS.OPERARIO, camisas, pantalones, abrigos)
         paleta_de_colores = Intervenido.paleta_de_colores(coleccion)

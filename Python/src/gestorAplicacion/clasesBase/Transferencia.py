@@ -70,13 +70,16 @@ class Transferencia:
     def gestionPago(self,remitente,cantidad):
         self.remitente=remitente
         self.cantidad=cantidad
-
+    def getCantidad(self):
+        return self.cantidad
+    def setCantidad(self,cantidad):
+        return self.cantidad
 
     @staticmethod
     def pagoEnvio(costo, cliente, pagoTransporte):
         total = 0
         from Bodega import Bodega
-        pagosPedido = Bodega.get_pagos()
+        pagosPedido = Bodega.pagos
 
         for pago in pagosPedido:
             total += pago.getCantidad()

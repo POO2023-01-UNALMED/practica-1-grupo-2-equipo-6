@@ -7,7 +7,7 @@ class Persona(ABC):
     def __init__(self, nombre, calificacion, cuenta):
         self.calificacion = calificacion
         self.nombre = nombre
-        self.cuenta = None
+        self.cuenta = cuenta
     
     @abstractmethod
     def valorCalificacion(self, *args):

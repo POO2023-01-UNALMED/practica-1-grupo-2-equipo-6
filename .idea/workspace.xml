@@ -8,13 +8,19 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Bodega.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Bodega.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Cliente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Credito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Credito.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Proveedor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Proveedor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Tienda.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Tienda.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Intervenido.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Intervenido.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Persona.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Persona.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Producto.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Producto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socios.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socios.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transferencia.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transferencia.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transportista.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transportista.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/TransportistaNacional.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/TransportistaNacional.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/clientes.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/clientes.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/operarios.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/operarios.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/proveedores.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/proveedores.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/tiendas.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/tiendas.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/transportistas.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/transportistas.pkl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +51,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/johana calderon/OneDrive/Documentos/GitHub/practica-1-grupo-2-equipo-6/Python/src/gestorAplicacion/clasesBase",
+    "last_opened_file_path": "C:/Users/DELL/Documents/GitHub/practica-1-grupo-2-equipo-6/Python/src/gestorAplicacion/clasesBase",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
@@ -54,6 +60,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL\Documents\GitHub\practica-1-grupo-2-equipo-6\Python\src\gestorAplicacion\clasesBase" />
       <recent name="C:\Users\johana calderon\OneDrive\Documentos\GitHub\practica-1-grupo-2-equipo-6\Python\src\gestorAplicacion\clasesBase" />
     </key>
   </component>
@@ -163,47 +170,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="practica-1-grupo-2-equipo-6" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="C:\Users\johana calderon\AppData\Local\Programs\Python\Python311\python.exe" />
-      <option name="SDK_NAME" value="Python 3.11" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Python/src/UiMain" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python/src/UiMain/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main.py" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="C:\Users\johana calderon\AppData\Local\Programs\Python\Python311\python.exe" />
-      <option name="SDK_NAME" value="Python 3.11" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Python/src/UiMain" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python/src/UiMain/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.main.py" />
       <item itemvalue="Python.__init__" />
       <item itemvalue="Python.__init__ (1)" />
       <item itemvalue="Python.__init__ (2)" />
@@ -212,11 +179,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.__init__" />
         <item itemvalue="Python.__init__ (4)" />
         <item itemvalue="Python.__init__ (3)" />
         <item itemvalue="Python.__init__ (2)" />
         <item itemvalue="Python.__init__ (1)" />
-        <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
   </component>

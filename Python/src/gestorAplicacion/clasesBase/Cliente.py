@@ -5,6 +5,7 @@ from Deserializador import *
 from Serializador import *
 from Persona import *
 from Transferencia import *
+from Transportista import *
 
 
 class Cliente(Persona):
@@ -32,39 +33,38 @@ class Cliente(Persona):
         self.confirmacion = "El envío no ha sido confirmado."
         self.resumenDePago = ""
 
-
     
 
     def puntuar(self, intervenidos):
-        calificacion = self.get_calificacion() + int(len(intervenidos) * 0.1)
+        calificacion = self.getCalificacion() + int(len(intervenidos) * 0.1)
         if calificacion > 5:
             calificacion = 5
-        self.set_calificacion(calificacion)
-        self.calificar()
+        self.setCalificacion(calificacion)
+        self.valorCalificacion()
 
     def valorCalificacion(self):
-        if self.get_calificacion() == 5:
+        if self.getCalificacion() == 5:
             self.descuento += 0.05
         else:
-            self.descuento += self.get_calificacion() * 0.01
+            self.descuento += self.getCalificacion() * 0.01
 
     def ResumenDePago(self, pagoTransporte, costo, tipo):
         self.resumenDePago = f"El precio de los productos intervenidos es de ${costo} pesos.\n" \
-                             f"El valor de este envío de tipo {tipo} a la ciudad {self.ciudad.name} es de ${pagoTransporte.getCantidad()} pesos.\n" \
-                             f"El descuento por cliente preferencial para {self.get_nombre()} es del {self.descuento * 100}%\n" \
+                             f"El valor de este envío de tipo {tipo.name} a la ciudad {self.ciudad.name} es de ${pagoTransporte.getCantidad()} pesos.\n" \
+                             f"El descuento por cliente preferencial para {self.getNombre()} es del {self.descuento * 100}%\n" \
                              f"*el cual ya fue aplicado en el valor de envío.\n" \
                              f"El total a pagar es de ${costo + pagoTransporte.getCantidad()} pesos"
 
     def confirmar(self, tipo):
-        diasHabiles = {
-            self.Tipo.LIBRE: 30,
-            self.Tipo.NORMAL: self.ciudad.value,
-            self.Tipo.PRIORITARIO: 5
-        }
-        self.confirmacion = f"El envío ha sido confirmado llegará en un periodo de {diasHabiles.get(tipo, 10)} días hábiles."
+        Tipo = Cliente.Tipo
+        if tipo == Tipo.NORMAL:
+            diasHabiles = self.getCiudad().value
+        else:
+            diasHabiles = tipo.value
+        self.confirmacion = f"El envío ha sido confirmado llegará en un periodo de {diasHabiles} días hábiles."
 
     def __str__(self):
-        return f"{self.get_nombre()} id: {self.id}"
+        return f"{self.getNombre()} id: {self.id}"
 
     def asignarIdAleatorio(self):
         idAleatorio = random.randint(1000, 9999)

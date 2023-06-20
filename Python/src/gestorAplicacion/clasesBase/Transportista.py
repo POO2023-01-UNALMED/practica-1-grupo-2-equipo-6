@@ -48,8 +48,7 @@ class Transportista(Persona):
         return " nombre: " + super().getNombre() + "\nprecio del domicilio: " + str(self.precioTotal)
 
     def envioNacional(self, cliente, intervenidos, tipo):
-        from Python.src.gestorAplicacion.clasesHerencia.Cliente import Cliente
-        from Python.src.gestorAplicacion.clasesBase.Transferencia import Transferencia
+
         ciudad = cliente.getCiudad()
         Ciudades=Cliente.Ciudades
         if ciudad == Ciudades.BARRANQUILLA:
@@ -85,8 +84,8 @@ class Transportista(Persona):
         if precio < 0:
             precio = 0
 
-        transferencia = Transferencia(cliente.get_cuenta(),cliente.get_cuenta().getEntidad(),precio)
-        transferencia.setDestinatario(self.get_cuenta())
+        transferencia = Transferencia(cliente.getCuenta(),cliente.getCuenta().getEntidad(),precio)
+        transferencia.setDestinatario(self.getCuenta())
         return transferencia
 
     def calificar(self, ct):
