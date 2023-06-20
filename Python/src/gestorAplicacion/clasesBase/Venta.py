@@ -4,11 +4,11 @@ import pickle
 class Venta:
     porcentajeBanco = 0
 
-    def __init__(self, comprador, productosOfertados = None, repartidor = None):
+    def __init__(self, comprador, productosOferta = None, repartidor = None):
         self.productosVenta = []
         self.total = 0
         self.comprador = comprador
-        self.productosOfertados = productosOfertados
+        self.productosOferta = productosOferta
         self.ganancias = 0
         self.repartidor = repartidor
 
@@ -40,11 +40,11 @@ class Venta:
     def setComprador(self, comprador):
         self.comprador = comprador
 
-    def getProductosOfertados(self):
-        return self.productos_ofertados
+    def getProductosOferta(self):
+        return self.productosOferta
 
-    def setProductosOfertados(self, productosOfertados):
-        self.productosOfertados = productosOfertados
+    def setProductosOferta(self, productosOferta):
+        self.productosOferta = productosOferta
 
     def getGanancias(self):
         return self.ganancias

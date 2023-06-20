@@ -1,6 +1,7 @@
 from Persona import *
 from Transferencia import *
 from Cliente import *
+from Venta import *
 
 
 class Transportista(Persona):

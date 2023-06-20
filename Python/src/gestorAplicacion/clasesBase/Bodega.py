@@ -83,9 +83,9 @@ class Bodega(Inventariar):
         contadorPantalon = self.calcularPantalon(productosRetirar)
         contadorCamisas = self.calcularCamisas(productosRetirar)
 
-        if (self.calcularCamisas() - contadorCamisas >= self.getMinCamisas() and
-            self.calcularAbrigos() - contadorAbrigo >= self.getMinAbrigo() and
-            self.calcularPantalon() - contadorPantalon >= self.getMinPantalon()):
+        if (Inventariar.calcularCamisas(self.productosEnBodega) - contadorCamisas >= self.getMinCamisas() and
+            Inventariar.calcularAbrigos(self.productosEnBodega) - contadorAbrigo >= self.getMinAbrigo() and
+            Inventariar.calcularPantalon(self.productosEnBodega) - contadorPantalon >= self.getMinPantalon()):
             self.retirarProductos(productosRetirar)
             return True
         else:

@@ -46,8 +46,17 @@ class OfertaPorDefecto(Inventariar):
     def setProductosOferta(self, productosOferta):
         self.productosOferta=productosOferta
 
+    def getTotal(self):
+        return self.total
+
+    def setTotal(self, total):
+        self.total=total
     def __lt__(self, otra):
-        return self.total < otra.total
+        if(self.total < otra.getTotal()):
+            return True
+        else:
+            return False
+
 
     def __str__(self):
         return f"OfertaPorDefecto: productos={self.productosOferta}, total={self.total}"

@@ -386,10 +386,6 @@ def seleccionDeFrames(combo, mensaje):
                 lista.insert("end", f"Costo compra: {compra.calcularCosto()}")
                 lista.insert("end","")
 
-
-
-
-
             Controladora.setFrameMensaje(f)
             Controladora.frame_mensaje.place(x=200, y=200)
 
@@ -445,7 +441,7 @@ def gestionAlianzasEstrategicas():
                          "Seleccione un transportista"]
 
             Fsocios.pack_forget()
-            verHistorial.grid_forget()
+
 
             valores = [Producto.Tipo.CAMISA.value, Producto.Tipo.PANTALON.value, Producto.Tipo.ABRIGO.value, transportistas]
 
@@ -465,31 +461,22 @@ def gestionAlianzasEstrategicas():
         except ErrorDatosIncompletos:
             MessageBox.showwarning("Error", ErrorDatosIncompletos('Socio seleccionado').mostrarMensaje())
 
-    def calcular():
-        global porcentaje
-        global porcentajes
-        porcentajes = porcentaje.obtenerValores()
 
-        try:
-            m = 1
-            for i in porcentajes.values():
-                o = float(i)
-                # print(i)
-                if o < 0 or o > 50:
-                    raise ErrorDatosIncorrectos()
-            porcentaje.setValores([1, 2, 1])
-
-        except Exception:
-            MessageBox.showwarning("Error", ErrorDatosIncorrectos().mostrarMensaje())
     def sugerirOferta():
 
         global Fproductos
         global oferta
-        global porcentaje
-        global porcentajes
+        global productosVenta
         global ofertaDos
+        global oferta1
+        global oferta2
         global transportistaSeleccionado
         global socioSeleccionado
+        global transportistas
+
+        transportistas = Deserializador('transportistas').getObjeto()
+        productosVenta= []
+
 
         try:
             for t in transportistas:
@@ -504,6 +491,12 @@ def gestionAlianzasEstrategicas():
             oferta1 = (resultadosOfertas[0]).getProductosOferta()
             oferta2 = (resultadosOfertas[1]).getProductosOferta()
 
+            if (resultadosOfertas[0].__lt__(resultadosOfertas[1])):
+                productosVenta = resultadosOfertas[0]
+            else:
+                productosVenta = resultadosOfertas[1]
+            print(productosVenta)
+
             i1 = Inventariar.calcularCamisas(oferta1)
             i2 = Inventariar.calcularAbrigos(oferta1)
             i3 = Inventariar.calcularPantalon(oferta1)
@@ -513,37 +506,24 @@ def gestionAlianzasEstrategicas():
             i6 = Inventariar.calcularPantalon(oferta2)
 
 
-
-
-
             Fproductos.pack_forget()
-            verHistorial.grid_forget()
             confirmar.grid_forget()
 
-            criterios0 = ['Descuento por camisa', 'Descuento por abrigo', 'Descuento por pantalón']
-            habilitado = [True, True, True]
-            porcentaje = FieldFrame(marco_socio,"Ingrese el porcentaje que desea descontar\n(numeros entre 0.0 y 50.0)", criterios0,"Valor", [0.0, 0.0, 0.0], habilitado, "Calcular", calcular)
-
-            porcentaje.pack(side='top', expand=True, fill='both')
-
-
-            habilitado = [True, True, True]
-            habilitado1 = [False, False, False]
+            habilitado1 = [False, False, False, False]
 
             # "Criterio", criterios, "Valor"
-            criterios1 = ['Camisas[{a}]'.format(a=i1), 'Abrigos[{b}]'.format(b=i2),
-                           'Pantalones[{c}]'.format(c=i3)]  # Oferta Frecuencia Ventas
-            oferta = FieldFrame(marco_socio, 'Producto', criterios1, 'Precio\npor unidad', [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value], habilitado1,
-                                "Realizar venta", lambda: confirmarVenta(1))
+            criterios1 = ['Camisas[{a}]'.format(a=i1), 'Abrigos[{b}]'.format(b=i2),'Pantalones[{c}]'.format(c=i3), 'Total']  # Oferta Frecuencia Ventas
+            oferta = FieldFrame(marco_socio, 'Producto', criterios1, 'Precio\npor unidad', [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value, resultadosOfertas[0].getTotal()], habilitado1,
+                                "Realizar venta", confirmarVenta)
             oferta.pack(side='left', expand=True, fill='both')
 
-            criterios2 = ['Camisas[{d}]'.format(d=i4), 'Abrigos[{e}]'.format(e=i4),
-                           'Pantalones[{f}]'.format(f=i6)]  # Oferta Preferencial
+            criterios2 = ['Camisas[{d}]'.format(d=i4), 'Abrigos[{e}]'.format(e=i4),'Pantalones[{f}]'.format(f=i6), 'Total']  # Oferta Preferencial
             # Para la segunda oferta
 
-            ofertaDos = FieldFrame(marco_socio, 'Producto', criterios2, "Precio\npor unidad", [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value], habilitado1,
-                                   "Cancelar oferta", cancelar)
+            ofertaDos = FieldFrame(marco_socio, 'Producto', criterios2, "Precio\npor unidad", [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value, resultadosOfertas[1].getTotal()], habilitado1,"Cancelar oferta", cancelar)
             ofertaDos.pack(side='right', expand=True, fill='both')
+
+
 
             # side=BOTTOM, pady=5, anchor="w"
         except ErrorDatosIncompletos:
@@ -554,31 +534,37 @@ def gestionAlianzasEstrategicas():
     def confirmarVenta():
         global transportistaSeleccionado
         global socioSeleccionado
+        global oferta1
+        global oferta2
+        global productosVenta
+        global tiendas
+        global venta
+
+        tiendas = Deserializador('tiendas').getObjeto()
 
         siOferta = ''
 
+        try:
+            venta = transportistaSeleccionado.entregaEspecial(productosVenta, socioSeleccionado, tiendas)
+            if (venta == None):
+
+                MessageBox.showwarning("Error", ErrorProductosInsuficientes().mostrarMensaje())
+                siOferta = 'unicamente'
+            elif venta.getProductosOferta() != None:
+                siOferta = ' y los productos ofertados '
+
+            MessageBox.showinfo("Confirmacion de venta",
+                                'El socio ha confirmado la compra de los productos del contrato' + siOferta)
+            marco_socio.pack_forget()
+
+            historialVentas()
+
+        except NameError:
+            MessageBox.showwarning("Error", ErrorDatosIncompletos('Transportista seleccionado').mostrarMensaje())
 
 
-        venta = transportistaSeleccionado.entregaEspecial(productosVenta)
-
-        if (venta == None):
-
-            MessageBox.showwarning("Error", ErrorProductosInsuficientes().mostrarMensaje())
-            siOferta = 'unicamente'
-        elif venta.getProductosOferta != None:
-            siOferta = ' y los productos ofertados '
-
-        MessageBox.showinfo("Confirmacion de venta",
-                            'El socio ha confirmado la compra de los productos del contrato' + siOferta)
-        marco_socio.pack_forget()
-
-        contador = Deserializar('contador0').getObjeto()
-        archivista = Deserializar('archivista0').getoObjeto()
-
-        historialVentas()
 
     def cancelar():
-        porcentaje.pack_forget()
         oferta.pack_forget()
         ofertaDos.pack_forget()
         vender()
@@ -587,14 +573,16 @@ def gestionAlianzasEstrategicas():
         print('Hola')
 
     def historialVentas():
-        verHistorial.destroy()
+
+        global venta
         marco_socio.pack_forget()
 
-        '''
-        archivista = #Deserializar un archivista
-        contador = #Deserializar un contador
 
-        informeVenta = archivista.generarInformeVentas()
+        contador = Deserializador('contador0').getObjeto()
+        archivista = Deserializador('archivista0').getObjeto()
+
+
+        informeVenta = archivista.generarReporteVentas(venta,contador)
 
 
         for informe in Informe.getInformesVentas():
@@ -605,12 +593,8 @@ def gestionAlianzasEstrategicas():
 
         habilitado = [True]
 
-        El valor por defecto del frame de visualización será el último informe
-        '''
-        criterios = ["Informes ventas"]
-        informes = ['producto1', 'producto2', 'producto3']
-        habilitado = [True]
-        sets = ['i1', 'i2', 'i3']
+
+        sets = Informe.getInformesVentas()
         valores = [sets]
 
         field_frame_2 = FieldFrame2(marcoFuncionalidad, "Criterio", criterios, "Valor", valores, habilitado, '')
@@ -662,8 +646,7 @@ def gestionAlianzasEstrategicas():
     frameSubbtones = Frame(marcoFuncionalidad, bg='gray')
     frameSubbtones.pack()
 
-    verHistorial = Button(frameSubbtones, text="Ver historial de ventas", command=historialVentas)
-    verHistorial.grid(row=0, column=0, pady=11)
+
     # side='bottom', pady=10
 def moduloCompra():
     # Nombre funcionalidad

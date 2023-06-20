@@ -8,7 +8,7 @@ from Credito import Credito
 from enum import Enum
 
 from Banco import *
-from Transferencia import Transferencia
+from Transferencia import *
 from Empleado import Empleado
 from Transportista import Transportista
 
@@ -104,10 +104,10 @@ class CuentaBancaria:
         from Transferencia import Transferencia
         from Tienda import Tienda
         if self.dinero - v.getTotal() < 0:
-            self.entidad.generarCredito(Credito(self, v.getTotal(), Credito.Cuota.DOCE))
+            self.entidad.generarCredito(Credito(self, v.getTotal(), Cuota.DOCE))
         else:
             self.dinero -= v.getTotal()
-        t = Transferencia.Transferencia(self, Tienda.getCuentaTienda(), v.getTotal())
+        t = Transferencia(self, Tienda.getCuentaTienda(), v.getTotal())
         self.transferencias.append(t)
 
     '''def pagar(self, t, *pagosAdicionales):

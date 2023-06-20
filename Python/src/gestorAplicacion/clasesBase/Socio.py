@@ -1,6 +1,7 @@
 from typing import List
 import random
 from Producto import *
+from Venta import *
 
 
 class Socio:
@@ -17,7 +18,7 @@ class Socio:
         valorEntero = random.randint(0, 11)
         v.setProductosVenta(self.productosContrato)
         if valorEntero <= 5:
-            v.setProductosOfertados(oferta)
+            v.setProductosOferta(oferta)
             v.setTotal(oferta.getTotal())
             if valorEntero == 5:
                 self.productosContrato.extend(oferta.getProductosOferta())

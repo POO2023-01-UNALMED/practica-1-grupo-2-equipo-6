@@ -118,11 +118,11 @@ class Empleado(Persona):
                     return Informe(Informe.TipoInforme.INFORME_CONTROL_CALIDAD, c)
         return None
 
-    def generarReporteVentas(v, contador):
-        if cargo == CARGOS.ARCHIVISTA:
+    def generarReporteVentas(self, v, contador):
+        if self.cargo == self.CARGOS.ARCHIVISTA:
             t = contador.pagarContratistasPorVenta(v)
             Venta.asignarPorcentajeBanco(v)
-            return Informe(v, contador, t)
+            return Informe(Informe.TipoInforme.INFORME_VENTAS, v, contador, t)
         return None
 
     def get_sueldo(self):
