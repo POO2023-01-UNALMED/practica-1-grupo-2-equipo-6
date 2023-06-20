@@ -33,7 +33,7 @@ class FieldFrame(Frame):
 
             # Campo de entrada o lista desplegable para el valor correspondiente
             valor = valores[i] if valores else None
-            habilitar = habilitado[i] if habilitado else True
+            habilitar = habilitado[i] if habilitado else False
 
             if isinstance(valor, list):
                 # Si el valor es una lista, crear una lista desplegable
@@ -47,9 +47,12 @@ class FieldFrame(Frame):
                 self.entries[criterio] = combobox
             else:
                 # Si el valor es normal, crear una casilla de entrada
+
+                entry_valor = Entry(self, state='normal')
                 entry_valor.insert(0, valor)
-                entry_valor = Entry(self, state='normal' if habilitar else 'disabled')
                 # Insertar el valor inicial si está presente
+                if not habilitar:
+                    entry_valor.config(state='readonly')
                 entry_valor.grid(row=i+1, column=1, padx=10, pady=5)
 
                 # Guardar la referencia a la casilla de entrada en el diccionario
