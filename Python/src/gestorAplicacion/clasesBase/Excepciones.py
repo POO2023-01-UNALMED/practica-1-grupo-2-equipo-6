@@ -23,7 +23,6 @@ class ErrorProcesoInvalido(ErrorAplicacion):
     def __init__(self, message="\nNo es posible llevar a cabo este proceso."):
         super().__init__()
         self.message += message
-
 #Subclases de ErrorDatos
 class ErrorDatosIncompletos(ErrorDatos):
     def __init__(self, *datosVacios):
@@ -35,13 +34,10 @@ class ErrorDatosIncompletos(ErrorDatos):
         super().__init__()
         self.message += mensaje
 
-
 class ErrorDatosIncorrectos(ErrorDatos):
     def __init__(self):
         super().__init__()
         self.message += '\nEl formato de los datos ingresados no es correcto'
-
-
 class ErrorFondosInsuficientes(ErrorDatos):
     def __init__(self):
         super().__init__()

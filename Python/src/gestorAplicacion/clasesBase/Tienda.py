@@ -2,6 +2,8 @@ from CuentaBancaria import CuentaBancaria
 import random
 from Transferencia import *
 from Credito import *
+from OfertaPorDefecto import *
+from OfertaPreferencial import *
 class Tienda:
     from Banco import Banco
     cuentaTienda = CuentaBancaria(145000,CuentaBancaria.Pais.COLOMBIA,Banco("BANCOLOMBIA"))
@@ -48,6 +50,25 @@ class Tienda:
         if credito.getEstadoCredito() != Estado.CANCELADO:
 
             credito.getCuotasPagadas().append(Transferencia(Tienda.getCuentaTienda(), puntajeCrediticio, credito, puntualidadPago, True))
+
+    @classmethod
+    def sugerirOferta(cls, ventasPorDefecto, socio):
+        productosVendidos = []
+        for v in ventasPorDefecto:
+            productosVendidos.extend(v.getProductosVenta())
+
+        ofertaPorFrecuenciaVentas = OfertaPorDefecto(productosVendidos)
+        ofertaPorPreferencias = OfertaPreferencial(socio.getProductosContrato())
+
+        ofertasPropuestas = [ofertaPorFrecuenciaVentas,ofertaPorPreferencias]
+
+        return ofertasPropuestas
+
+    #ofertas_propuestas.sort(
+    #key=lambda x: x.valor_total)
+
+
+
 '''  def pagarTodo(puntajeCrediticio,credito):
 		numero=random.uniform(0.0, 10.0)
 		puntualidadPago;
