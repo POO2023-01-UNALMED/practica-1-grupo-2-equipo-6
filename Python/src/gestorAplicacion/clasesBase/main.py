@@ -522,12 +522,12 @@ def gestionAlianzasEstrategicas():
     global listaO2
     global imagen
 
+    f = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
+    f.place(x=0, y=0)
 
 
 
-
-
-    marcoFuncionalidad = Frame(controladora.ventana, height=2000, width=1500, bg="gray", pady=10, padx=50, relief="sunken")
+    marcoFuncionalidad = Frame(f, height=2000, width=1500, bg="gray", pady=10, padx=50, relief="sunken")
     marcoFuncionalidad.place(relx=0.5, rely=0.5, anchor='center')
 
     cabecera = Entry(marcoFuncionalidad,background="gray", font=('Helvetica', 11, 'bold'), width=50)

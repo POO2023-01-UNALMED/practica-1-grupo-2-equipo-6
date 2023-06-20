@@ -70,7 +70,20 @@ class ErrorPedido(ErrorProcesoInvalido):
         super().__init__()
         self.message+="El pedido no ha podido completar ningun producto,\n se le recomienda hacer los procesos de compra y calidad para tener disponibilidad"
 
+class ErrorCompras(ErrorProcesoInvalido):
+    def __init__(self):
+        super().__init__()
+        self.message+="No se ha efectuado ninguna compra, \n se recomienda comprar antes de realizar el proceso de calidad"
 
+class ErrorCompraRevisada(ErrorProcesoInvalido):
+    def __init__(self):
+        super().__init__()
+        self.message += ' Esta compra ya fue revisada, por favor seleccione otra.'
+
+class ErrorRevision(ErrorProcesoInvalido):
+    def __init__(self):
+        super().__init__()
+        self.message+="No se ha revisado ninguna compra, \n se recomienda revisar alguna compra antes de realizar el proceso de calidad"
 
 '''
 #Ejemplo manejo de excepciones
