@@ -16,7 +16,7 @@ class Intervenido(Producto):
     
 
     def __init__(self, producto,coleccion):
-        super().__init__(producto.get_tipo(),producto.get_costo())
+        super().__init__(producto.nombre,producto.getCosto())
         self.coleccion = coleccion
         self.color = ""
         self.corte = ""

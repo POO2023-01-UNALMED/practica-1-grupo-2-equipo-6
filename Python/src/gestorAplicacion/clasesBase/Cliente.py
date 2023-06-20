@@ -20,9 +20,9 @@ class Cliente(Persona):
         CUCUTA = 21
 
     class Tipo(Enum):
-        PRIORITARIO = "PRIORITARIO"
-        NORMAL = "NORMAL"
-        LIBRE = "LIBRE"
+        PRIORITARIO = 5
+        NORMAL = 0
+        LIBRE = 30
 
     def __init__(self, nombre, calificacion, ciudad, cuenta):
         super().__init__(nombre, calificacion,cuenta)

@@ -632,11 +632,11 @@ def logisticaEnvio():
         marco_pedido2 = Frame(ventanaEnvio, width=800, height=300,relief="ridge",bd=5)
         resumenpedido=Label(marco_pedido2,text=Bodega.getResumenPedido(), wraplength=200)
         if Bodega.getResumenPedido()!="El pedido se ha completado exitosamente":
-           # descripcion.config(text="Su pedido no se pudo completar todos los productos necesarios sin embargo puede continuar el proceso de envio con los productos disponibles o realizar los procesos de compra y control de calidad para tener disponibilidad de productos")
-            """if Bodega.getResumenPedido().split()[15]=="0" and Bodega.getResumenPedido()!="":
+            descripcion.config(text="Su pedido no se pudo completar todos los productos necesarios sin embargo puede continuar el proceso de envio con los productos disponibles o realizar los procesos de compra y control de calidad para tener disponibilidad de productos")
+            if Bodega.getResumenPedido().split()[15]=="0" and Bodega.getResumenPedido()!="":
                 descripcion.config(text="No es posible continuar con el proceso de envio si no hay productos disponibles, es necesario que ejecute los procesos de compra y control de calidad para abastecer las tiendas y tener disponibilidad")
                 messagebox.showwarning("Error", ErrorPedido().mostrarMensaje())
-                raise ErrorDatosIncompletos()"""
+                raise ErrorDatosIncompletos()
         resumenpedido.pack()
         marco_pedido2.pack()
         continuar=Button(marco_pedido2,text="Continuar",command=consultaColeccion)

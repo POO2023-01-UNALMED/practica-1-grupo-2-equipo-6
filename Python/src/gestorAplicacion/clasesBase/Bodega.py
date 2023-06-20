@@ -132,7 +132,10 @@ class Bodega(Inventariar):
 
     @staticmethod
     def gestionar_pago(tienda, productos):
-        cantidad = sum(producto.get_costo() for producto in productos)
+        cantidad=0
+        for p in productos:
+            cantidad+=p.getCosto()
+
         pago = Transferencia(Tienda.cuentaTienda,Tienda.cuentaTienda.getEntidad(),cantidad)
         pago.setDestinatario(Tienda.cuentaTienda)
         tienda.presupuesto+=cantidad
@@ -143,7 +146,7 @@ class Bodega(Inventariar):
         completado = []
         for producto in productos:
             for i in range(len(self.productosEnBodega)):
-                if producto.get_tipo() == self.productosEnBodega[i].get_tipo:
+                if producto.get_tipo() == self.productosEnBodega[i].get_tipo():
                     pedido.append(self.productosEnBodega[i])
                     completado.append(producto)
                     del self.productosEnBodega[i]

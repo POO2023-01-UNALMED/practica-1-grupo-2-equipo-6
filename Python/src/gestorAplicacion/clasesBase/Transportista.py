@@ -74,18 +74,21 @@ class Transportista(Persona):
         precio += tamañoPaquete * 1000
 
         Tipo=Cliente.Tipo
+
         if tipo == Tipo.PRIORITARIO:
             precio += 15000
         elif tipo == Tipo.LIBRE:
             precio -= 15000
-
         precio -= precio * cliente.getDescuento()
 
         if precio < 0:
-            precio = 0
+            precio = 2000
 
         transferencia = Transferencia(cliente.getCuenta(),cliente.getCuenta().getEntidad(),precio)
         transferencia.setDestinatario(self.getCuenta())
+
+        transferencia.cantidad=precio
+
         return transferencia
 
     def calificar(self, ct):

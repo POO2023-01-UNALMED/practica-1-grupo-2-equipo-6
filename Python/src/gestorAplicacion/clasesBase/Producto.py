@@ -13,7 +13,7 @@ class Producto:
         PANTALON = 50000
         ABRIGO = 60000
 
-    def __init__(self, tipo, precio=None, costo=None):
+    def __init__(self, tipo, precio=None, costo=0):
         self.nombre = tipo
         self.precio = tipo.value
         self.costo = costo
@@ -70,7 +70,7 @@ class Producto:
     def clasificar(productos, tipo):
         clasificados = []
         for producto in productos:
-            if producto.tipo == tipo:
+            if producto.nombre == tipo:
                 clasificados.append(producto)
         return clasificados
 
