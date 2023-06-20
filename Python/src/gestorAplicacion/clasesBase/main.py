@@ -422,11 +422,6 @@ def gestionAlianzasEstrategicas():
 
             Fsocios.pack_forget()
 
-<<<<<<< Updated upstream
-
-            valores = [Producto.Tipo.CAMISA.value, Producto.Tipo.PANTALON.value, Producto.Tipo.ABRIGO.value, transportistas]
-=======
->>>>>>> Stashed changes
 
 
             '''
@@ -485,18 +480,6 @@ def gestionAlianzasEstrategicas():
         global oferta
         global productosVenta
         global ofertaDos
-<<<<<<< Updated upstream
-        global oferta1
-        global oferta2
-        global transportistaSeleccionado
-        global socioSeleccionado
-        global transportistas
-
-        transportistas = Deserializador('transportistas').getObjeto()
-        productosVenta= []
-
-=======
->>>>>>> Stashed changes
 
 
         '''
@@ -504,68 +487,14 @@ def gestionAlianzasEstrategicas():
         oferta1 = oferta [0]
         oferta2 = oferta[1]
 
-<<<<<<< Updated upstream
-            resultadosOfertas = Tienda.sugerirOferta(vecto, socioSeleccionado)
-            oferta1 = (resultadosOfertas[0]).getProductosOferta()
-            oferta2 = (resultadosOfertas[1]).getProductosOferta()
-
-            if (resultadosOfertas[0].__lt__(resultadosOfertas[1])):
-                productosVenta = resultadosOfertas[0]
-            else:
-                productosVenta = resultadosOfertas[1]
-
-
-            i1 = Inventariar.calcularCamisas(oferta1)
-            i2 = Inventariar.calcularAbrigos(oferta1)
-            i3 = Inventariar.calcularPantalon(oferta1)
-=======
         i1 = Inventariar.calcularCamisas(oferta1)
         i2 = Inventariar.calcularAbrigos(oferta1)
         i3 = Inventariar.calcularPantalon(oferta1)
->>>>>>> Stashed changes
 
         i4 = Inventariar.calcularCamisas(oferta2)
         i5 = Inventariar.calcularAbrigos(oferta2)
         i6 = Inventariar.calcularPantalon(oferta2)
 
-<<<<<<< Updated upstream
-
-            Fproductos.pack_forget()
-            confirmar.grid_forget()
-
-            habilitado1 = [False, False, False, False]
-
-            # "Criterio", criterios, "Valor"
-            criterios1 = ['Camisas[{a}]'.format(a=i1), 'Abrigos[{b}]'.format(b=i2),'Pantalones[{c}]'.format(c=i3), 'Total']  # Oferta Frecuencia Ventas
-            oferta = FieldFrame(marco_socio, 'Producto', criterios1, 'Precio\npor unidad', [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value, resultadosOfertas[0].getTotal()], habilitado1,
-                                "Realizar venta", confirmarVenta)
-            oferta.pack(side='left', expand=True, fill='both')
-
-            criterios2 = ['Camisas[{d}]'.format(d=i4), 'Abrigos[{e}]'.format(e=i4),'Pantalones[{f}]'.format(f=i6), 'Total']  # Oferta Preferencial
-            # Para la segunda oferta
-
-            ofertaDos = FieldFrame(marco_socio, 'Producto', criterios2, "Precio\npor unidad", [Producto.Tipo.CAMISA.value, Producto.Tipo.ABRIGO.value, Producto.Tipo.PANTALON.value, resultadosOfertas[1].getTotal()], habilitado1,"Cancelar oferta", cancelar)
-            ofertaDos.pack(side='right', expand=True, fill='both')
-
-
-
-            # side=BOTTOM, pady=5, anchor="w"
-        except ErrorDatosIncompletos:
-            MessageBox.showwarning("Error", ErrorDatosIncompletos('Transportista seleccionado').mostrarMensaje())
-
-
-
-    def confirmarVenta():
-        global transportistaSeleccionado
-        global socioSeleccionado
-        global oferta1
-        global oferta2
-        global productosVenta
-        global tiendas
-        global venta
-
-        tiendas = Deserializador('tiendas').getObjeto()
-=======
         criteriosO1 = ['Camisas[{}]'.formato(i1), 'Abrigos[{}]'.format(i2), 'Pantalones[i3]'.format(i3)]
         criteriosO2 = ['Camisas[{}]'.formato(i3), 'Abrigos[{}]'.format(i4), 'Pantalones[i3]'.format(i6)]
         '''
@@ -588,7 +517,6 @@ def gestionAlianzasEstrategicas():
 
         criterios = ['Camisa', 'Pantalón', 'Abrigo']
         habilitado = [True, True, True]
->>>>>>> Stashed changes
 
         #"Criterio", criterios, "Valor"
 
@@ -611,28 +539,6 @@ def gestionAlianzasEstrategicas():
 
         
         siOferta = ''
-<<<<<<< Updated upstream
-
-        try:
-            venta = transportistaSeleccionado.entregaEspecial(productosVenta, socioSeleccionado, tiendas)
-            if (venta == None):
-
-                MessageBox.showwarning("Error", ErrorProductosInsuficientes().mostrarMensaje())
-                siOferta = 'unicamente'
-            elif venta.getProductosOferta() != None:
-                siOferta = ' y los productos ofertados '
-
-            MessageBox.showinfo("Confirmacion de venta",
-                                'El socio ha confirmado la compra de los productos del contrato' + siOferta)
-            marco_socio.pack_forget()
-
-            historialVentas()
-
-        except NameError:
-            MessageBox.showwarning("Error", ErrorDatosIncompletos('Transportista seleccionado').mostrarMensaje())
-
-
-=======
         venta = transportistaSeleccionado.entregaEspecial(productosVenta)
 
         if (venta == null):
@@ -647,7 +553,6 @@ def gestionAlianzasEstrategicas():
         marco_socio.pack_forget()
 
         historialVentas()
->>>>>>> Stashed changes
 
 
     def cancelar():
@@ -655,14 +560,11 @@ def gestionAlianzasEstrategicas():
         ofertaDos.pack_forget()
         vender()
 
-<<<<<<< Updated upstream
-=======
 
 
 
     def seleccionOferta(oferta):
         print('Hola')
->>>>>>> Stashed changes
 
 
 
@@ -671,14 +573,11 @@ def gestionAlianzasEstrategicas():
         global venta
         marco_socio.pack_forget()
 
-<<<<<<< Updated upstream
-=======
 
 
         '''
         archivista = #Deserializar un archivista
         contador = #Deserializar un contador
->>>>>>> Stashed changes
 
         contador = Deserializador('contador0').getObjeto()
         archivista = Deserializador('archivista0').getObjeto()
@@ -695,17 +594,12 @@ def gestionAlianzasEstrategicas():
 
         habilitado = [True]
 
-<<<<<<< Updated upstream
-
-        sets = Informe.getInformesVentas()
-=======
         El valor por defecto del frame de visualización será el último informe
         '''
         criterios = ["Informes ventas"]
         informes = ['producto1', 'producto2', 'producto3']
         habilitado = [True]
         sets=['i1', 'i2', 'i3']
->>>>>>> Stashed changes
         valores = [sets]
 
         field_frame_2 = FieldFrame2(marcoFuncionalidad, "Criterio", criterios, "Valor", valores, habilitado,'')
@@ -714,15 +608,8 @@ def gestionAlianzasEstrategicas():
 
 
 
-<<<<<<< Updated upstream
-
-
-
-
-=======
     def calcular():
         pass
->>>>>>> Stashed changes
 
 
 
@@ -767,15 +654,10 @@ def gestionAlianzasEstrategicas():
     frameSubbtones=Frame(marcoFuncionalidad,bg='gray')
     frameSubbtones.pack()
 
-<<<<<<< Updated upstream
-
-    # side='bottom', pady=10
-=======
     verHistorial = Button(frameSubbtones, text="Ver historial de ventas", command=historialVentas)
     verHistorial.grid( row=0, column=0, pady=11)
     #side='bottom', pady=10
 
->>>>>>> Stashed changes
 def moduloCompra():
     # Nombre funcionalidad
     f = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
