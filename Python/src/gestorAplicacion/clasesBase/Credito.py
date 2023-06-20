@@ -43,6 +43,8 @@ class Credito:
 
     def setCuotasPagadas(self, cuotasPagadas):
         self.cuotasPagadas = cuotasPagadas
+    def getEstadoCredito(self):
+        return self.estadoCredito
 
 
 class Cuota(Enum):

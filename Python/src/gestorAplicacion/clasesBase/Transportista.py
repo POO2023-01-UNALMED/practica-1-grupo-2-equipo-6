@@ -4,13 +4,12 @@ from Cliente import *
 
 
 class Transportista(Persona):
-    def __init__(self, nombre, calificacion, cuenta, precioB, precioD, precioC, bodega):
+    def __init__(self, nombre, calificacion, cuenta, precioB, precioD, precioC):
         super().__init__(nombre, calificacion, cuenta)
         self.precioBase = precioB
         self.precioDistancia = precioD
         self.precioCarga = precioC
         self.precioTotal = 0
-        self.bodega = bodega
 
     @staticmethod
     def mejorTransportista(transportistasPorDefecto):

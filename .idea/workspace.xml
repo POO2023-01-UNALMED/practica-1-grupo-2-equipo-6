@@ -5,40 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b085a64-e0fb-4e3e-8f54-5591715117f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Logo_Exito_colombia.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/aleja1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/aleja2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/aleja3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/aleja4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/carmen1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/carmen2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/carmen3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/carmen4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/gabriel1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/gabriel2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/gabriel3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/gabriel4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/juan1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/juan2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/juan3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/juan4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/mauro1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/mauro2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/mauro3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/mauro4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/p.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/presentacion0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/presentacion1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/presentacion2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/presentacion3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/presentacion4.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Deserializador.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Deserializador.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Producto.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Producto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Serializador.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Serializador.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Bodega.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Bodega.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Cliente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Credito.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Credito.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Proveedor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Proveedor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Socio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Tienda.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Tienda.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transferencia.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transferencia.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transportista.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/Transportista.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/clasesBase/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

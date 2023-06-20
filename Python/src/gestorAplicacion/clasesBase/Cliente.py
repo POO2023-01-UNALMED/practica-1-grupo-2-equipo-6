@@ -24,13 +24,14 @@ class Cliente(Persona):
         LIBRE = "LIBRE"
 
     def __init__(self, nombre, calificacion, ciudad, cuenta):
-        super().__init__(nombre, calificacion)
+        super().__init__(nombre, calificacion,cuenta)
         self.ciudad = ciudad
         self.cuenta = cuenta
         self.descuento = 0.0
         self.id = self.asignarIdAleatorio()
         self.confirmacion = "El envío no ha sido confirmado."
         self.resumenDePago = ""
+
 
     
 
@@ -41,7 +42,7 @@ class Cliente(Persona):
         self.set_calificacion(calificacion)
         self.calificar()
 
-    def calificar(self):
+    def valorCalificacion(self):
         if self.get_calificacion() == 5:
             self.descuento += 0.05
         else:

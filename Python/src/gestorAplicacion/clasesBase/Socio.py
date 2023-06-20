@@ -4,8 +4,7 @@ from Producto import *
 
 
 class Socio:
-    def __init__(self, nombre, productosContrato, renovacionesContratos,
-                 cuenta):
+    def __init__(self, nombre, productosContrato, renovacionesContratos,cuenta):
         self.productosContrato = productosContrato
         self.nombre = nombre
         self.renovacionesContratos = renovacionesContratos

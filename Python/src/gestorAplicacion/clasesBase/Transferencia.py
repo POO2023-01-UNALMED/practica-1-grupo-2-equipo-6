@@ -1,5 +1,8 @@
 class Transferencia:
-    def __init__(self, cuenta, banco, cantidad):
+    def __init__(self, cuenta, puntajeCrediticio = None, puntualidadPago=None, pagarSoloMes=True, cantidad =0, banco=None):
+
+
+
         self.cantidad = cantidad
         self.remitente = cuenta
         self.destinatario = banco
@@ -14,6 +17,8 @@ class Transferencia:
             banco.historialDePagos[cuenta].append(self)
         except KeyError:
             banco.historialDePagos[cuenta] = [self]
+        except AttributeError:
+            None
 
         cuenta.transferencias.append(self)
 

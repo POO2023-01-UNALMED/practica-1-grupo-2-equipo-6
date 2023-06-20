@@ -5,13 +5,13 @@ from Transferencia import Transferencia
 from ControlCalidad import ControlCalidad
 from Tienda import Tienda
 
-class Bodega():
+class Bodega(Inventariar):
     pagos = []
     resumen_pedido = None
 
 
-    def __init__(self, productos):
-        self.stopBodega = len(productos)
+    def __init__(self, productos,stop):
+        self.stopBodega = stop
         self.productosEnBodega = productos
         self.resumenPedido = None
         self.pagos = []

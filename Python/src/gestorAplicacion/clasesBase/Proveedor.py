@@ -33,12 +33,12 @@ class Proveedor(Persona):
             if aleatorio != 3:
                 productosDisponibles += [producto]
 
-                if producto.getTipo() == "CAMISA":
+                if producto.getNombre() == "CAMISA":
                     numeroCamisetas += 1
                     if aleatorio == 4 or aleatorio == 5:
                         descuentoCamiseta += producto.getCosto()*0.20
 
-                elif producto.getTipo() == "PANTALON":
+                elif producto.getNombre() == "PANTALON":
                     numeroPantalon += 1
                     if aleatorio == 4 or aleatorio == 5:
                         descuentoPantalon += producto.getCosto() * 0.20
@@ -51,10 +51,10 @@ class Proveedor(Persona):
         #Se le asigna el precio a cada producto en funcion del costo
 
         for producto1 in productosDisponibles:
-            if producto1.getTipo() == "CAMISA":
+            if producto1.getNombre() == "CAMISA":
                 producto1.setCosto(round(self.costoCamisa - descuentoCamiseta / numeroCamisetas, 2))
 
-            elif producto1.getTipo() == "PANTALON":
+            elif producto1.getNombre() == "PANTALON":
                 producto1.setCosto(round(self.costoPantalon - descuentoPantalon / numeroPantalon,2))
 
             else:
