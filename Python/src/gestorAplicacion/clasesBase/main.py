@@ -10,9 +10,12 @@ from Persona import *
 from Bodega import *
 from Cliente import *
 from Compra import *
+from Proveedor import *
+from Transportista import *
 from Deserializador import *
 from Serializador import *
 from Intervenido import *
+
 
 
 
@@ -954,34 +957,17 @@ def logisticaEnvio():
     empezar.pack(pady=50)
 
 def controlCalidad():
-    def menus():
-        menu_bar = Menu(ventana_menu)
-        controladora.ventana.config(menu=menu_bar)
-        menu_archivo = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label="Archivo", menu=menu_archivo)
-        menu_archivo.add_command(label="Aplicacion", command=aplicacion)
-        menu_archivo.add_command(label="Salir", command=salirMenu)
-        menu_procesos = Menu(menu_bar, tearoff=0)
-        menu_bar.add_cascade(label="Procesos y Consultas", menu=menu_procesos)
-        menu_procesos.add_command(label="Gestion de alianzas estrategicas")
-        menu_procesos.add_command(label="Modulo de compra")
-        menu_procesos.add_command(label="Control de calidad", command=controlCalidad)
-        menu_procesos.add_command(label="Logistica de envios")
-        menu_procesos.add_command(label="Gestion de creditos")
-        menu_bar.add_command(label="Ayuda", command=ayuda)
-
     def administradorVentanas():
         opcion = field_frame.obtenerValores()['Opciones']
-        contador = Deserializador("contadorCompras").getObjeto()
-        compras = []
-        for i in range(contador):
-            compras.append(Deserializador("compra " + str(i + 1)).getObjeto())
-        control = Deserializador("control").getObjeto()
-        compraRevisada = False
-        for compra in compras:
-            if compra.getRevisado() == True:
-                compraRevisada = True
-
+        #contador = Deserializador("contadorCompras").getObjeto()
+        #compras = []
+        #for i in range(contador):
+        #    compras.append(Deserializador("compra " + str(i + 1)).getObjeto())
+        #control = Deserializador("control").getObjeto()
+        #compraRevisada = False
+        #for compra in compras:
+        #    if compra.getRevisado() == True:
+        #        compraRevisada = True
         try:
             try:
                 if opcion == "Realizar revisión":
@@ -1014,119 +1000,112 @@ def controlCalidad():
     def ventanaRevision():
         def capturarOpcion():
             try:
-                opcion = field_frame_re.mostrarEleccion() 
+                opcion = field_frame_re.obtenerValores()['Compras'] 
                 for i in range(len(compras)):
                     if str(opcion) == "Compra " + str(i + 1):
                         indice = i
                 if not opcion:
                     raise ErrorDatosIncompletos("Compras")
                 try:
-                    if compras[indice].getRevisado():
-                        raise ErrorCompraRevisada()
+                    #if compras[indice].getRevisado():
+                    #    raise ErrorCompraRevisada()
                     
-                    control = ControlCalidad(compras[indice])
-                    control.revisar(compras[indice])
-                    compras[indice].setRevisado(True)
-                    Serializador(compras[indice], "compra " + str(indice + 1))
+                    #control = ControlCalidad(compras[indice])
+                    #control.revisar(compras[indice])
+                    #compras[indice].setRevisado(True)
+                    #Serializador(compras[indice], "compra " + str(indice + 1))
 
-                    frameInicioRevision.forget()
-                    frameInicio = Frame(controladora.ventana, background="light blue")
-                    frameInicio.pack(fill="both")
-                    procesoR = Label(frameInicio, text="Revisión", font=("Arial Bold", 16, "bold"), bg="light blue")
-                    procesoR.pack(side="top", fill="x", padx=80, pady=(30, 0))
-                    descripcion_r = Label(frameInicio, text="A continuación, se le presenta la revisión de la compra seleccionada.", font=("Arial", 12), bg="light blue")
-                    descripcion_r.pack(side="top", fill="x", padx=80, pady=20)
-                    frameScrollR = Frame(frameInicio, background="white", height=60)
-                    frameScrollR.pack(padx=50, pady=10, fill="x")
-                    frameScrollR.config(highlightbackground="black", highlightthickness=3)
-                    scroll = Scrollbar(frameScrollR)
+                    field_frame_re.forget()
+                    ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")   
+                    ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+                    frameI= Frame(ventana, width=1000, height=60, bg="light blue")
+                    frameI.place(x=95, y=20)
+                    proceso = Label(frameI, text="Revisión", font=("Arial Bold", 14, "bold"), bg="light blue")
+                    proceso.pack()
+                    descripcion_proceso = Label(frameI, text="A continuación se presenta la bodega con los productos repuestos \n y los productos que no fueron detectados como defectuosos ni extraviados ", font=("Arial", 12), bg="light blue")
+                    descripcion_proceso.pack( fill= 'both', expand=True)
+                    scroll = Scrollbar(frameI)
                     scroll.pack(side="right", fill="y")
-                    text_widget = Text(frameScrollR, yscrollcommand=scroll.set, width=100, height=20)
+                    text_widget = Text(frameI, yscrollcommand=scroll.set, width=100, height=20)
                     text_widget.pack(side="left", fill="both")
                     scroll.config(command=text_widget.yview)
-
-
+                    
                     text_widget.insert("end", "La revisión de la " + "Compra " + str(indice + 1) + " es: \n")
-                    boton = Button(frameInicio, text="Continuar", command=ventanaContactar, font=("Arial", 12), highlightthickness=3, highlightbackground="black")
-                    boton.pack(side="bottom", pady=10)
-                    for producto in control.getRevision():
-                        text_widget.insert("end", str(producto) + "\n")
-                    text_widget.config(state="disabled")
-                    pck = Serializador(control, "control")
+                    boton = Button(ventana, text="Continuar", command=ventanaContactar, font=("Arial", 12), highlightthickness=3, highlightbackground="black")
+                    boton.place(x =450, y=450)
+                    #for producto in control.getRevision():
+                    #    text_widget.insert("end", str(producto) + "\n")
+                    #text_widget.config(state="disabled")
+                    #pck = Serializador(control, "control")
                 except ErrorCompraRevisada as e:
                     messagebox.showerror("Error", e.message)
 
             except ErrorDatosIncompletos as e:
-                messagebox.showerror("Error", e.message)
+                messagebox.showerror("Error", e.message) 
 
-        for widget in controladora.ventana.winfo_children():
-            widget.destroy()
-         
-        menus()
-
-        frameInicioRevision = Frame(controladora.ventana, background="light blue")
-        frameInicioRevision.pack(fill="both")
-        controladora.ventana.title("Revisión")
-        procesoR = Label(frameInicioRevision, text="Revisión", font=("Arial Bold", 16, "bold"), bg="light blue")
-        procesoR.pack(side="top", fill="x", padx=80, pady=(30, 0))
-        descripcion_r = Label(frameInicioRevision, text="En este apartado se revisan las compras con el fin de detectar productos \n defectuosos, así como los extraviados.", font=("Arial", 12), bg="light blue")
-        descripcion_r.pack(side="top", fill="x", padx=80, pady=(15,0))
-        frame_re = Frame(frameInicioRevision, height=60, bg="light blue")
-        frame_re.pack(padx=80, pady=10, fill="x")
-        opcionesRe = Label(frame_re, text="Por favor despliegue el menú correspondiente a Compras para visualizar las compras.", font=("Arial", 12, "bold"), background="light blue")
-        opcionesRe.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-
-
-        compras = []
-        contador = Deserializador("contadorCompras").getObjeto()
-        for i in range(contador):
-            compras.append(Deserializador("compra " + str(i+1)).getObjeto())
+        ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
+        ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+        frameI= Frame(ventana, width=1000, height=100, bg="light blue")
+        frameI.place(x=190, y=100)
+        procesoR = Label(frameI, text="Revisión", font=("Arial Bold", 16, "bold"), bg="light blue")
+        procesoR.pack()
+        descripcion_r = Label(frameI, text="En este apartado se revisan las compras con el fin de detectar productos \n defectuosos, así como los extraviados.", font=("Arial", 12), bg="light blue")
+        descripcion_r.pack(fill="both", expand = True)
+        global compras
+        compras = ['compra 1', 'compra 2', 'compra 3']
+        #contador = Deserializador("contadorCompras").getObjeto()
+        #for i in range(contador):
+        #    compras.append(Deserializador("compra " + str(i+1)).getObjeto())
 
 
         sets = []
+        
         for i in range(len(compras)):
             sets.append("Compra " + str(i+1))
         criterios = ["Compras"]
         valores = [sets]
         habilitado = [True]
-        frame_FF2 = Frame(frameInicioRevision, height=60, bg="light blue")
-        frame_FF2.pack(padx=80, pady=(2,0), fill="x")
-        field_frame_re = FieldFrame2(frame_FF2, None, criterios, "Valor", valores, habilitado, None, "Realizar revisión", None, None)
-        field_frame_re.pack(padx=1, pady=1)
-        field_frame_re.config(highlightbackground="black", highlightthickness=3)
-        field_frame_re.getBoton1().destroy()
-        field_frame_re.cambiarWidthBoton2(15)
-        field_frame_re.cambiarPadB2(15,0,5)
-        field_frame_re.getBoton2().config(command=capturarOpcion, font=("Arial", 12), highlightthickness=3, highlightbackground="black")
+        ventana.place_forget()
+
+        
+        global field_frame_re
+
+        field_frame_re = FieldFrame2(controladora.ventana, None, criterios, "Valor", valores, habilitado, "Revisión de la compra asociada:")
+        field_frame_re.titulo.config(text="Revisión de la compra asociada:")
+        field_frame_re.descripcion_In.config(text="En este apartado se revisan las compras con el fin de detectar productos \n defectuosos, así como los extraviados.")
+        field_frame_re.boton2.config(text="Continuar", command=capturarOpcion)
+        field_frame_re.field_frame.getBoton().destroy()
+    
+
+        #field_frame_re.pack(padx=1, pady=1)
+        #field_frame_re.config(highlightbackground="black", highlightthickness=3)
+        
+        
         cont = 0
 
 
         for compra in compras:
             cont += 1
-            field_frame_re.actualizarTextoScrollbar("Compra " + str(cont) + ": \n")
-            for producto in compra.getProductos():
-                field_frame_re.actualizarTextoScrollbar(str(producto))
-            field_frame_re.actualizarTextoScrollbar("\n")
-        field_frame_re.getTextWidget().config(state="disabled")
+            s = 'Compra ' + str(cont) + " \n"
+            field_frame_re.agregarTexto(s, False)
+            #for producto in compra.getProductos():
+            #    field_frame_re.actualizarTextoScrollbar(str(producto))
 
     def ventanaContactar():
+        control = "control"
         def capturarOpcion():
             def contacT():
-                for widget in controladora.ventana.winfo_children():
-                    widget.destroy()
+                field_frame_c.forget()
+                ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
+                ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+                frameI= Frame(ventana, width=1000, height=100, bg="light blue")
+                frameI.place(x=60, y=20)
 
-                menus()
-                control = Deserializador("control").getObjeto()
-                control.contactar(control.getTransportista())
-                frameContactar.forget()
-                frameOpcionContactarT = Frame(controladora.ventana, bg="light blue")
-                frameOpcionContactarT.pack(fill="both")
-
-                procesoR = Label(frameOpcionContactarT, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
+                procesoR = Label(frameI, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
                 procesoR.pack(side="top", fill="x", padx=80, pady=(30, 0))
-                descripcion_r = Label(frameOpcionContactarT, text="A continuación se le presentan los productos extraviados que el transportista repuso.", font=("Arial", 12), bg="light blue")
+                descripcion_r = Label(frameI, text="A continuación se le presentan los productos extraviados que el transportista repuso.", font=("Arial", 12), bg="light blue")
                 descripcion_r.pack(side="top", fill="x", padx=80, pady=(15,0))
-                frameScrollR = Frame(frameOpcionContactarT, background="white", height=60)
+                frameScrollR = Frame(frameI, background="white", height=60)
                 frameScrollR.pack(padx=50, pady=10, fill="x")
                 frameScrollR.config(highlightbackground="black", highlightthickness=3)
                 scroll = Scrollbar(frameScrollR)
@@ -1134,34 +1113,30 @@ def controlCalidad():
                 text_widget = Text(frameScrollR, yscrollcommand=scroll.set, width=100, height=20)
                 text_widget.pack(side="left", fill="both")
                 scroll.config(command=text_widget.yview)
-                if control.getProductosAReponerT() == []:
+                #if control.getProductosAReponerT() == []:
+                if control == "control":
                     text_widget.insert("end", "El transportista no ha repuesto productos")
                     text_widget.config(state="disabled")
                 else:
                     text_widget.insert("end", "Productos repuestos por el transportista: \n")
-                    for producto in control.getProductosAReponerT():
-                        text_widget.insert("end", str(producto))
-                    text_widget.config(state="disabled")
-                boton1 = Button(frameOpcionContactarT, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
+                    #for producto in control.getProductosAReponerT():
+                    #    text_widget.insert("end", str(producto))
+                    #text_widget.config(state="disabled")
+                boton1 = Button(frameI, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
                 boton1.pack(pady=10)
-                pck = Serializador(control, "control")
+                #pck = Serializador(control, "control")
             def contacP():
-                for widget in controladora.ventana.winfo_children():
-                    widget.destroy()
+                field_frame_c.forget()
+                ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
+                ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+                frameI= Frame(ventana, width=1000, height=100, bg="light blue")
+                frameI.place(x=60, y=20)
 
-                menus()
-                control = Deserializador("control").getObjeto()
-
-                control.contactarProveedor(control.getProveedor())
-                frameContactar.forget()
-                frameOpcionContactarP = Frame(controladora.ventana, bg="light blue")
-                frameOpcionContactarP.pack(fill="both")
-
-                procesoR = Label(frameOpcionContactarP, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
+                procesoR = Label(frameI, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
                 procesoR.pack(side="top", fill="x", padx=80, pady=(30, 0))
-                descripcion_r = Label(frameOpcionContactarP, text="A continuación se le presentan los productos defectusos que el proveedor repuso.", font=("Arial", 12), bg="light blue")
+                descripcion_r = Label(frameI, text="A continuación se le presentan los productos defectusos que el proveedor repuso.", font=("Arial", 12), bg="light blue")
                 descripcion_r.pack(side="top", fill="x", padx=80, pady=(15,0))
-                frameScrollR = Frame(frameOpcionContactarP, background="white", height=60)
+                frameScrollR = Frame(frameI, background="white", height=60)
                 frameScrollR.pack(padx=50, pady=10, fill="x")
                 frameScrollR.config(highlightbackground="black", highlightthickness=3)
                 scroll = Scrollbar(frameScrollR)
@@ -1170,32 +1145,33 @@ def controlCalidad():
                 text_widget.pack(side="left", fill="both")
                 scroll.config(command=text_widget.yview)
 
-                if control.getProductosAReponerP() == []:
+                #if control.getProductosAReponerP() == []:
+                if control == "control":
                     text_widget.insert("end", "El proveedor no ha repuesto productos")
                     text_widget.config(state="disabled")
                 else:
                     text_widget.insert("end", "Productos repuestos por el proveedor: \n")
-                    for producto in control.getProductosAReponerP():
-                        text_widget.insert("end", str(producto))
-                    text_widget.config(state="disabled")
-                boton1 = Button(frameOpcionContactarP, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
+                    #for producto in control.getProductosAReponerP():
+                    #    text_widget.insert("end", str(producto))
+                    #text_widget.config(state="disabled")
+                boton1 = Button(frameI, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
                 boton1.pack(pady=10)
-                pck = Serializador(control, "control")
+                #pck = Serializador(control, "control")
             try:
-                opcion = field_frame_c.mostrarEleccion()
+                opcion = field_frame_c.obtenerValores()
                 if not opcion:
                     raise ErrorDatosIncompletos("Contactar")
                 if opcion == "Proveedor":
-                    control = Deserializador("control").getObjeto()
-                    control.contactarProveedor(control.getProveedor())
-                    frameContactar.forget()
-                    frameOpcionContactar = Frame(controladora.ventana, bg="light blue")
-                    frameOpcionContactar.pack(fill="both")
-                    procesoR = Label(frameOpcionContactar, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
+                    field_frame_re.forget()
+                    ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")   
+                    ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+                    frameI= Frame(ventana, width=1000, height=60, bg="light blue")
+                    frameI.place(x=60, y=20)
+                    procesoR = Label(frameI, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
                     procesoR.pack(side="top", fill="x", padx=80, pady=(30, 0))
-                    descripcion_r = Label(frameOpcionContactar, text="A continuación se le presentan los productos defectusos que el proveedor repuso.", font=("Arial", 12), bg="light blue")
+                    descripcion_r = Label(frameI, text="A continuación se le presentan los productos defectusos que el proveedor repuso.", font=("Arial", 12), bg="light blue")
                     descripcion_r.pack(side="top", fill="x", padx=80, pady=(15,0))
-                    frameScrollR = Frame(frameOpcionContactar, background="white", height=60)
+                    frameScrollR = Frame(frameI, background="white", height=60)
                     frameScrollR.pack(padx=50, pady=10, fill="x")
                     frameScrollR.config(highlightbackground="black", highlightthickness=3)
                     scroll = Scrollbar(frameScrollR)
@@ -1203,38 +1179,40 @@ def controlCalidad():
                     text_widget = Text(frameScrollR, yscrollcommand=scroll.set, width=100, height=20)
                     text_widget.pack(side="left", fill="both")
                     scroll.config(command=text_widget.yview)
-                    if control.getProductosAReponerP() == []:
+                    #if control.getProductosAReponerP() == []:
+                    if control == "control":
                         text_widget.insert("end", "El proveedor no ha repuesto productos")
                         text_widget.config(state="disabled")
                     else:
                         text_widget.insert("end", "Productos repuestos por el proveedor: \n")
-                        for producto in control.getProductosAReponerP():
-                            text_widget.insert("end", str(producto))
-                        text_widget.config(state="disabled")
-                    if control.getContactarT() == False:
-                        frameBotones = Frame(frameOpcionContactar, bg="light blue")
+                        #for producto in control.getProductosAReponerP():
+                        #    text_widget.insert("end", str(producto))
+                        #text_widget.config(state="disabled")
+                    #if control.getContactarT() == False:
+                    if control == "control":
+                        frameBotones = Frame(frameI, bg="light blue")
                         frameBotones.pack(pady=10)
-
+                    
                         boton1 = Button(frameBotones, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
                         boton1.pack(side="left", padx=10)
-
+                    
                         boton2 = Button(frameBotones, text="Contactar al transportista", font=("Arial", 12), command= contacT)
                         boton2.pack(side="left", padx=10)
                     else:
-                        boton1 = Button(frameOpcionContactar, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
+                        boton1 = Button(frameI, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
                         boton1.pack(pady=10)
-                    pck = Serializador(control, "control")
+                    #pck = Serializador(control, "control")
                 else:
-                    control = Deserializador("control").getObjeto()
-                    control.contactarTransportista(control.getTransportista())
-                    frameContactar.forget()
-                    frameOpcionContactar = Frame(controladora.ventana, bg="light blue")
-                    frameOpcionContactar.pack(fill="both")
-                    procesoR = Label(frameOpcionContactar, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
+                    field_frame_re.forget()
+                    ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")   
+                    ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+                    frameI= Frame(ventana, width=1000, height=60, bg="light blue")
+                    frameI.place(x=60, y=20)
+                    procesoR = Label(frameI, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
                     procesoR.pack(side="top", fill="x", padx=80, pady=(30, 0))
-                    descripcion_r = Label(frameOpcionContactar, text="A continuación se le presentan los productos extraviados que el transportista repuso.", font=("Arial", 12), bg="light blue")
+                    descripcion_r = Label(frameI, text="A continuación se le presentan los productos extraviados que el transportista repuso.", font=("Arial", 12), bg="light blue")
                     descripcion_r.pack(side="top", fill="x", padx=80, pady=(15,0))
-                    frameScrollR = Frame(frameOpcionContactar, background="white", height=60)
+                    frameScrollR = Frame(frameI, background="white", height=60)
                     frameScrollR.pack(padx=50, pady=10, fill="x")
                     frameScrollR.config(highlightbackground="black", highlightthickness=3)
                     scroll = Scrollbar(frameScrollR)
@@ -1242,16 +1220,18 @@ def controlCalidad():
                     text_widget = Text(frameScrollR, yscrollcommand=scroll.set, width=100, height=20)
                     text_widget.pack(side="left", fill="both")
                     scroll.config(command=text_widget.yview)
-                    if control.getProductosAReponerT() == []:
+                    #if control.getProductosAReponerT() == []:
+                    if control == "control":
                         text_widget.insert("end", "El transportista no ha repuesto productos")
                         text_widget.config(state="disabled")
                     else:
                         text_widget.insert("end", "Productos repuestos por el transportista: \n")
-                        for producto in control.getProductosAReponerT():
-                            text_widget.insert("end", str(producto))
-                        text_widget.config(state="disabled")
-                    if control.getContactarP() == False:
-                        frameBotones = Frame(frameOpcionContactar, bg="light blue")
+                        #for producto in control.getProductosAReponerT():
+                        #    text_widget.insert("end", str(producto))
+                        #text_widget.config(state="disabled")
+                    #if control.getContactarP() == False:
+                    if control == "control":
+                        frameBotones = Frame(frameI, bg="light blue")
                         frameBotones.pack(pady=10)
 
                         boton1 = Button(frameBotones, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
@@ -1260,29 +1240,24 @@ def controlCalidad():
                         boton2 = Button(frameBotones, text="Contactar al proveedor", font=("Arial", 12), command = contacP)
                         boton2.pack(side="left", padx=10)
                     else:
-                        boton1 = Button(frameOpcionContactar, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
+                        boton1 = Button(frameI, text="Continuar", font=("Arial", 12), command=ventanaConsultarB)
                         boton1.pack(pady=10)
-                    pck = Serializador(control, "control")
+                    #pck = Serializador(control, "control")
             except ErrorDatosIncompletos as e:
                 messagebox.showerror("Error", e.message)
             
 
-        for widget in controladora.ventana.winfo_children():
-            widget.destroy()         
-         
-        menus()
-
-
-        frameContactar = Frame(controladora.ventana, background="light blue")
-        frameContactar.pack(fill="both")
-
-        controladora.ventana.title("Contactar al proveedor/transportista")
-        procesoC = Label(frameContactar, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
+        field_frame_re.forget()
+        ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")   
+        ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+        frameI= Frame(ventana, width=1000, height=60, bg="light blue")
+        frameI.place(x=25, y=20)
+        procesoC = Label(frameI, text="Contactar al proveedor/transportista", font=("Arial Bold", 16, "bold"), bg="light blue")
         procesoC.pack(side="top", fill="x", padx=80, pady=(30, 0))
 
-        descripcion_c = Label(frameContactar, text="En este apartado, se establece contacto con el proveedor y/o transportista \n para facilitar la devolución de productos defectuosos y resolver situaciones de extravío.", font=("Arial", 12), bg="light blue")
+        descripcion_c = Label(frameI, text="En este apartado, se establece contacto con el proveedor y/o transportista \n para facilitar la devolución de productos defectuosos y resolver situaciones de extravío.", font=("Arial", 12), bg="light blue")
         descripcion_c.pack(side="top", fill="x", padx=80, pady=20)
-        frame_c = Frame(frameContactar, height=60, bg="light blue")
+        frame_c = Frame(frameI, height=60, bg="light blue")
         frame_c.pack(padx=80, pady=10, fill="x")
         opcionesRe = Label(frame_c, text="Por favor despliegue el menú correspondiente a Contactar para visualizar  al proveedor y transportista.", font=("Arial", 12, "bold"), background="light blue")
         opcionesRe.grid(row=0, column=0, padx=10, pady=10, sticky="w")
@@ -1295,7 +1270,7 @@ def controlCalidad():
         criterios = ["Contactar"]
         valores = [sets]
         habilitado = [True]
-        field_frame_c = FieldFrame(frameContactar, "Criterio", criterios, "Valor", valores, habilitado, "Contactar", None)
+        field_frame_c = FieldFrame(frameI, "Criterio", criterios, "Valor", valores, habilitado, "Contactar", None)
         field_frame_c.config(highlightthickness=3, highlightbackground="black")
         field_frame_c.getLabelCriterios().config(font=("Arial", 12, "bold"), padx=30, pady=10)
         field_frame_c.getLabelValores().config(font=("Arial", 12, "bold"), padx=30, pady=10)
@@ -1305,25 +1280,17 @@ def controlCalidad():
         field_frame_c.getBoton().config(font=("Arial", 12), command=capturarOpcion)
 
     def ventanaConsultarB():
-        control = Deserializador("control").getObjeto()
-        for widget in controladora.ventana.winfo_children():
-            widget.destroy()
-        
-        menus()
-
-
-        frameConsultar = Frame(controladora.ventana, background="light blue")
-        frameConsultar.pack(fill="both")
-
-        controladora.ventana.title("Consultar bodega")
-        procesoC = Label(frameConsultar, text="Consultar bodega", font=("Arial Bold", 16, "bold"), bg="light blue")
-        procesoC.pack(side="top", fill="x", padx=80, pady=(30, 0))
-
-        frameOpcionContactar = Frame(controladora.ventana, bg="light blue")
-        frameOpcionContactar.pack(fill="both")
-        descripcion_r = Label(frameOpcionContactar, text="A continuación se presenta la bodega con los productos repuestos \n y los productos que no fueron detectados como defectuosos ni extraviados", font=("Arial", 12), bg="light blue")
-        descripcion_r.pack(side="top", fill="x", padx=80, pady=(15,0))
-        frameScrollR = Frame(frameOpcionContactar, background="white", height=60)
+    
+        field_frame_re.forget()
+        ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")   
+        ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+        frameI= Frame(ventana, width=1000, height=60, bg="light blue")
+        frameI.place(x=25, y=20)
+        proceso = Label(frameI, text="Consultar Bodega", font=("Arial Bold", 14, "bold"), bg="light blue")
+        proceso.pack()
+        descripcion_proceso = Label(frameI, text="A continuación, se le presenta la revisión de la compra seleccionada. ", font=("Arial", 12), bg="light blue")
+        descripcion_proceso.pack( fill= 'both', expand=True)
+        frameScrollR = Frame(frameI, background="white", height=60)
         frameScrollR.pack(padx=80, pady=10, fill="x")
         frameScrollR.config(highlightthickness=3, highlightbackground="black")
         scroll = Scrollbar(frameScrollR)
@@ -1333,21 +1300,24 @@ def controlCalidad():
         scroll.config(command=text_widget.yview)
 
         text_widget.insert(END, "Bodega: \n")
-        if control.getCompra().getTienda().getBodega().getProductosEnBodega() == []:
-            text_widget.insert(END, "No hay productos en bodega\n")
-        else:
-            for producto in control.getCompra().getTienda().getBodega().getProductosEnBodega():
-                text_widget.insert(END, str(producto) + "\n")
-        text_widget.config(state=DISABLED)
+        #if control.getCompra().getTienda().getBodega().getProductosEnBodega() == []:
+        #    text_widget.insert(END, "No hay productos en bodega\n")
+        #else:
+        #    for producto in control.getCompra().getTienda().getBodega().getProductosEnBodega():
+        #        text_widget.insert(END, str(producto) + "\n")
+        #text_widget.config(state=DISABLED)
 
-        boton = Button(frameOpcionContactar, text="Continuar", font=("Arial", 12), command = ventanaInforme)
+        boton = Button(frameI, text="Continuar", font=("Arial", 12), command = ventanaInforme)
         boton.pack(padx=80, pady=10)
     
     def ventanaInforme():
-        control = Deserializador("control").getObjeto()
+        def hola():
+            print("hola")
+        def nohola():
+            print("nohola")
         def capturarOpcion():
             try:
-                opcion = ffInforme.mostrarEleccion()
+                opcion = field_frame.obtenerValores()["Informes"]
                 if not opcion:
                     raise ErrorDatosIncompletos("Por favor seleccione un informe")
                 #else:   
@@ -1356,25 +1326,13 @@ def controlCalidad():
             except ErrorDatosIncompletos as e:
                 messagebox.showerror("Error", e.message)
 
-        for widget in controladora.ventana.winfo_children():
-            widget.destroy()
-        
-        menus()
-        frameInforme = Frame(controladora.ventana, background="light blue")
-        frameInforme.pack(fill="both")
+    
 
-        controladora.ventana.title("Informe")
-        procesoC = Label(frameInforme, text="Informe", font=("Arial Bold", 16, "bold"), bg="light blue")
-        procesoC.pack(side="top", fill="x", padx=80, pady=(30, 0))
-
-        descripcion_proceso = Label(frameInforme, text="En este apartado se revisarán a profundidad todos los detalles con respecto a la revisión ", font=("Arial", 12), bg="light blue")
-        descripcion_proceso.pack(side="top", fill="x", padx=80, pady=(15,0))
-        frameInforme1 = Frame(frameInforme, background="light blue", height=60)
-        frameInforme1.pack(padx=80, pady=10, fill="x")
-
-        opcionesRe = Label(frameInforme1, text="Por favor despliegue el menú correspondiente a Compras para visualizar las compras.", font=("Arial", 12, "bold"), background="light blue")
-        opcionesRe.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-
+        field_frame_re.place_forget()
+        ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")   
+        ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+        frameI= Frame(ventana, width=1000, height=60, bg="light blue")
+        frameI.place(x=95, y=5)
         informes = ["Informe 1", "Informe 2", "Informe 3"]
         sets = []
         for informe in informes:
@@ -1383,66 +1341,18 @@ def controlCalidad():
         valores = [sets]
         habilitado = [True]
 
-        framerrI = Frame(frameInforme, background="light blue", height=60)
-        framerrI.pack(padx=80, pady=(2,0), fill="x")
-
-        ffInforme = FieldFrame2(framerrI, None, criterios, "Valor", valores, habilitado, "Consultar", "Archivar", capturarOpcion, None)
-        ffInforme.pack(padx=1, pady=1)
-        ffInforme.config(highlightthickness=3, highlightbackground="black")
-        ffInforme.getBoton1().config(font=("Arial", 12))
-        ffInforme.getBoton2().config(font=("Arial", 12))
-        ffInforme.actualizarTextoScrollbar("Informe de la compra")
-        infor = empleado1.generarInformeControlCalidad(control, control.getProveedor(), control.getTransportista())
-        ffInforme.actualizarTextoScrollbar(infor)
-        pck = Serializador(infor, "informe 1")
-
-
-  
-
-
-
-    "Ventana Master es ventana-menu"
-    for widget in controladora.ventana.winfo_children():
-        widget.destroy()
-
-    menu_bar = Menu(controladora.ventana)
-    controladora.ventana.config(menu=menu_bar)
-
-    # menu archivo
-    menu_archivo = Menu(menu_bar, tearoff=0)
-
-    menu_bar.add_cascade(label="Archivo", menu=menu_archivo)
-    menu_archivo.add_command(label="Aplicacion", command=aplicacion)
-    menu_archivo.add_command(label="Salir", command=salirMenu)
-
-    # menu Procesos
-    menu_procesos = Menu(menu_bar, tearoff=0)
-
-    menu_bar.add_cascade(label="Procesos y Consultas", menu=menu_procesos)
-    menu_procesos.add_command(label="Gestion de alianzas estrategicas")
-    menu_procesos.add_command(label="Modulo de compra")
-    menu_procesos.add_command(label="Control de calidad", command=controlCalidad)
-    menu_procesos.add_command(label="Logistica de envios")
-    menu_procesos.add_command(label="Gestion de creditos")
-
-    # Menu ayuda
-    menu_bar.add_command(label="Ayuda", command=ayuda)
+        ffInforme = FieldFrame2(frameI, None, criterios, "Valor", valores, habilitado, " ")
+        ffInforme.config(pady=0)
     
-    controladora.ventana.title("Control de calidad")
-    frameInicio = Frame(controladora.ventana, background="light blue")
-    frameInicio.pack(fill="both")
-    proceso = Label(frameInicio, text="Control de calidad", font=("Arial Bold", 16, "bold"), bg="light blue")
-    proceso.pack(side="top", fill="x", padx=80, pady=(30, 0))
-
-    descripcion_proceso = Label(frameInicio, text="Permite a los gerentes mantener altos estándares de calidad en todas \n las ubicaciones. Al monitorear y mejorar constantemente la calidad, \nse mejora la satisfacción del cliente, se protege la reputación de la \nfranquicia y se impulsa el éxito general del negocio.", font=("Arial", 12), bg="light blue")
-    descripcion_proceso.pack(side="top", fill="x", padx=80, pady=20)
-    frame_bar = Frame(frameInicio, height=60, bg="light blue")
-    frame_bar.pack(padx=80, pady=10, fill="x")
-
-    opciones = Label(frame_bar, text="A continuación se le presentan las opciones a ejecutar del módulo de Control de Calidad. ", font=("Arial", 12, "bold"), background="light blue")
-    opciones.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-    instrucciones = Label(frame_bar, text="Seleccione la opcion a ejecutar:", font=("Arial", 12, "bold"), background="light blue")
-    instrucciones.grid(row = 0, column=0, padx=10, pady=(60,0), sticky="w")
+    #controladora.ventana.title("Control de calidad")
+    ventana = Frame(controladora.ventana, width=1000, height=620, bg="light blue")   
+    ventana.place(x=0,y=0,relx=0.5, rely=0.5, anchor='center')
+    frameI= Frame(ventana, width=1000, height=100, bg="light blue")
+    frameI.place(x=190, y=100)
+    proceso = Label(frameI, text="Control de calidad", font=("Arial Bold", 16, "bold"), bg="light blue")
+    proceso.pack()
+    descripcion_proceso = Label(frameI, text="Permite a los gerentes mantener altos estándares de calidad en todas \n las ubicaciones. Al monitorear y mejorar constantemente la calidad, \nse mejora la satisfacción del cliente, se protege la reputación de la \nfranquicia y se impulsa el éxito general del negocio.\nA continuación se le presentan las opciones a ejecutar del módulo de Control de Calidad. ", font=("Arial", 12), bg="light blue")
+    descripcion_proceso.pack( fill= 'both', expand=True)
     compras = ["Realizar revisión","Contactar al proveedor/transportista", "Consultar bodega", "Informe de calidad"]
     sets = []
     for compra in compras:
@@ -1451,17 +1361,10 @@ def controlCalidad():
     valores = [sets]
     habilitado = [True]
 
-    frame_field_frame = Frame(frameInicio)
-    frame_field_frame.pack(padx=10, pady=20)
-
-    field_frame = FieldFrame(frame_field_frame, "Criterio", criterios, "Valor", valores, habilitado, "Seleccionar", None)
-    field_frame.config(highlightthickness=3,highlightbackground="black")
-    field_frame.getLabelCriterios().config(font=("Arial", 12, "bold"), padx=30, pady=10)
-    field_frame.getLabelValores().config(font=("Arial", 12, "bold"), padx=30, pady=10)
-    field_frame.getLabelCriterio().config(font=("Arial", 12), padx=30, pady=20)
-    field_frame.getBoton().config(font=("Arial", 12))
-    field_frame.getBoton()["command"] = administradorVentanas
-    field_frame.pack()
+    field_frame = FieldFrame(frameI, "Criterio", criterios, "Valor", valores, habilitado, "Seleccionar", administradorVentanas)
+    field_frame.config(relief="sunken", bd= 5, highlightbackground="black")
+    field_frame.config(relief="sunken", height=20, width=50)
+    field_frame.pack(padx=5, pady=30)
 
 # ventana Inicio
 ventana_inicio = Tk()

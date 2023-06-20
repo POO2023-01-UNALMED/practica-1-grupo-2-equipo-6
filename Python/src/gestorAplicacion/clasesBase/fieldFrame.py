@@ -5,13 +5,13 @@ class FieldFrame(Frame):
     def __init__(self, ventana, tituloCriterios, criterios, tituloValores, valores, habilitado, texto, comando):
         super().__init__(ventana)
         self.label_criterios = Label(self, text=tituloCriterios)
-        self.label_criterios.grid(row=0, column=0, padx=0, pady=0)
+        #self.label_criterios.grid(row=0, column=0, padx=0, pady=0)
         self.label_valores = Label(self, text=tituloValores)
-        self.label_valores.grid(row=0, column=0, padx=0, pady=0)
+        #self.label_valores.grid(row=0, column=0, padx=0, pady=0)
         self.label_criterio = Label(self, text=criterios)
         #self.label_criterio.grid(row=0, column=0, padx=0, pady=0)
         self.boton = Button(self, text=texto, command=comando)
-
+        self.combobox = Combobox(self, state='readonly', font=("Arial", 12))
 
         # Crear etiquetas de título para las columnas "Criterio" y "Valor"
         label_criterios = Label(self, text=tituloCriterios)
@@ -37,7 +37,9 @@ class FieldFrame(Frame):
 
             if isinstance(valor, list):
                 # Si el valor es una lista, crear una lista desplegable
-                combobox = Combobox(self, state='readonly')
+                combobox = Combobox(self, state='readonly', font=("Arial", 12))
+                self.combobox = combobox
+
                 combobox['values'] = valor
                 combobox.grid(row=i+1, column=1, padx=10, pady=5)
 
@@ -80,6 +82,10 @@ class FieldFrame(Frame):
                 valor = None
             valores[criterio] = valor
         return valores
+    
+    def mostrarEleccion(self):
+        seleccion = self.combobox.get()
+        return seleccion
     
     def getLabelCriterios(self):
         return self.label_criterios

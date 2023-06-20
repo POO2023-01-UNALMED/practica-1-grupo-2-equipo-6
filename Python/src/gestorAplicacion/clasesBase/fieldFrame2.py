@@ -49,19 +49,25 @@ class FieldFrame2(Frame):
         frame_derecho.pack()
 
 
-
-
-    def agregarTexto(self, texto):
+    def agregarTexto(self, texto, insertar=False):
         # Habilitar el widget para poder modificar su contenido
         self.text_widget.configure(state='normal')
-
-        # Borrar el contenido existente
-        self.text_widget.delete('1.0', 'end')
-
-        # Insertar el nuevo texto
-        self.text_widget.insert('1.0', texto)
+        
+        if insertar==False:
+            self.text_widget.delete('1.0', 'end')
+       # Insertar el nuevo texto
+        self.text_widget.insert('end', texto) 
 
         # Deshabilitar el widget nuevamente
+        self.text_widget.configure(state='disabled')
+
+
+    def actualizarTextoScrollbar(self, texto):
+        self.text_widget.configure(state='normal')
+        # Insertar el nuevo texto
+        self.text_widget.insert(END, texto)
+        # Hacer scroll hasta la última posición visible
+        self.text_widget.see(END)
         self.text_widget.configure(state='disabled')
 
     def acabar(self):
@@ -92,40 +98,3 @@ class FieldFrame2(Frame):
 
     def getLabelCriterio(self):
         return self.field_frame.getLabelCriterio()
-
-
-
-'''
-# Crear la ventana principal
-ventana = Tk()
-ventana.geometry("1000x620")
-ventana.title("Control de calidad")
-ventana.config(bg="light blue")
-titulo = Label(ventana,text="Bievenido al apartado de archivos", font=("Arial Bold", 16, "bold"), bg="light blue")
-titulo.pack(side="top", fill="x", padx=80, pady=(30, 0))
-descripcion_In = Label(ventana, text="En este apartado, se genera el informe de calidad con el fin de saber detalladamente\n cada uno de los procesos ejecutados en el departamento de  Control de Calidad", font=("Arial", 12), bg="light blue")
-descripcion_In.pack(side="top", fill="x", padx=80, pady=(10,0))
-frame_bar = Frame(ventana, height=60, bg="light blue", highlightthickness=3, highlightbackground="black")
-frame_bar.pack(padx=80, pady=(50,0), fill="x")
-
-
-# Crear una instancia de la clase FieldFrame
-compras = ["Informe 1","Informe 2", "Informe 3", "Informe 4"]
-sets =[]
-for compra in compras:
-    sets.append(compra)
-criterios = ["Informes ventas"]
-valores = [sets]
-habilitado = [True]
-
-field_frame_2 = FieldFrame2(ventana, "Criterio", criterios, "Valor", valores, habilitado,'')
-field_frame_2.pack()
-
-
-field_frame_2.agregarTexto('Quiero volver a tierras ninas, llévenme a un blando país de aguas. En grandes pastos envejezca y haga al río fábula y fábula.Tenga una fuente por mi madre y en la siesta salga a buscarla, y en jarras baje de una peña un agua dulce, aguda y áspera. Me venza y pare los alientos el agua acérrima y helada. ¡Rompa mi vaso y al beberla me vuelva ninas las entranas!\n\n El Decreto de Guerra a Muerte fue una declaración hecha por el general Simón Bolívar el 15 de junio de 1813 en la ciudad venezolana de Trujillo durante el desarrollo de la Campaña Admirable. La declaración viene precedida meses antes por el Convenio de Cartagena de Antonio Nicolás Briceño. Este decreto significaba que los españoles y canarios que no participasen activamente en favor de la independencia venezolana se les daría la muerte, mientras que a los que lo hicieran "se les invita a vivir entre nosotros pacíficamente"1​. Por otro lado, los americanos serían perdonados, incluso si cooperaban con las autoridades españolas. Además, añadía el objetivo de comprometer de forma irreversible a los individuos con la revolución.')
-
-
-
-
-ventana.mainloop()
-'''
