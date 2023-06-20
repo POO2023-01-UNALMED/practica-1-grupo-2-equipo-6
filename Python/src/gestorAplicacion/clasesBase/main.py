@@ -11,10 +11,31 @@ from Persona import *
 
 
 class Controladora:
+
     controlDescripcion = 0
     controlPresentacion = 0
     ventana = None
+    frame = None
+    frame_mensaje = None
 
+    @classmethod
+    def setFrame(cls, frame):
+
+        cls.frame = frame
+        # if cls.frame_mensaje != None:
+        #     # f = Frame(ventana_menu, width=1000, height=620, bg="light blue")
+        #     # f.place(x=0,y=260)
+        #     cls.frame_mensaje.config(bg="light blue")
+        #     cls.frame_mensaje.pack_forget()
+
+    @classmethod
+    def setFrameMensaje(cls, frame):
+
+        if cls.frame_mensaje != None:
+
+            cls.frame_mensaje = frame
+        else:
+            cls.frame_mensaje = frame
 
 
 
@@ -24,19 +45,55 @@ def Salir():
 
 
 def salirMenu():
-    ventana_menu.withdraw()
+    controladora.ventana.destroy()
+    controladora.ventana = None
+    controladora.setFrame(None)
     ventana_inicio.deiconify()
 
 
 def ingresar():
+
     if entrada.get() == "123":
-        ventana_menu.deiconify()
+        # ventana_menu.deiconify()
         ventana_inicio.withdraw()
+
+        # ventana2
+        ventana_menu = Tk()
+        ventana_menu.title("Sistema de administracion")
+        ventana_menu.geometry("1000x620")
+        ventana_menu.config(bg="light blue")
+        # ventana_menu.withdraw()
+
+        # menu
+
+        menu_bar = Menu(ventana_menu)
+        ventana_menu.config(menu=menu_bar)
+
+        # menu archivo
+        menu_archivo = Menu(menu_bar, tearoff=0)
+
+        menu_bar.add_cascade(label="Archivo", menu=menu_archivo)
+        menu_archivo.add_command(label="Aplicacion", command=aplicacion)
+        menu_archivo.add_command(label="Salir", command=salirMenu)
+
+        # menu Procesos
+        menu_procesos = Menu(menu_bar, tearoff=0)
+
+        menu_bar.add_cascade(label="Procesos y Consultas", menu=menu_procesos)
+        menu_procesos.add_command(label="Gestion de alianzas estrategicas", command=gestionAlianzasEstrategicas)
+        menu_procesos.add_command(label="Modulo de compra", command=moduloCompra)
+        menu_procesos.add_command(label="Control de calidad")
+        menu_procesos.add_command(label="Logistica de envios")
+        menu_procesos.add_command(label="Gestion de creditos")
+
+        # Menu ayuda
+        menu_bar.add_command(label="Ayuda", command=ayuda)
+
+        controladora.ventana = ventana_menu
 
 
     else:
         messagebox.showerror("Error", "clave incorrecta")
-
 
 def infoSistema():
     mensaje_bienvenida.config(text="Nuestro sistema de gestión de franquicias es una solución integral diseña-\n" +
@@ -59,6 +116,61 @@ def cambioImgPresentacion():
     img_presentacion.config(image=nueva_imagen)
     img_presentacion.image = nueva_imagen
 
+def mostrarBodega():
+
+    f = Frame(controladora.ventana, width=620, height=350, bd=5)
+
+    lista = Listbox(f, width=97,height=20)
+    lista.grid(row=0, column=0)
+
+    barra = Scrollbar(f,orient="vertical", command=lista.yview())
+    barra.grid(row=0, column=1, sticky="NSW")
+
+    lista.configure(yscrollcommand=barra.set)
+    lista.insert('end',"a")
+    lista.insert('end', "b")
+    lista.insert('end', "c")
+    lista.insert('end', "d")
+    lista.insert('end', "e")
+    lista.insert('end', "f")
+    lista.insert('end', "g")
+    lista.insert('end', "h")
+    lista.insert('end', "i")
+    lista.insert('end', "j")
+    lista.insert('end', "k")
+    lista.insert('end', "l")
+    lista.insert('end', "m")
+    lista.insert('end', "sssa")
+    lista.insert('end', "sssa")
+    lista.insert('end', "sssa")
+    lista.insert('end', "sssa")
+    lista.insert('end', "sssa")
+    lista.insert('end',"a")
+    lista.insert('end', "b")
+    lista.insert('end', "c")
+    lista.insert('end', "d")
+    lista.insert('end', "e")
+    lista.insert('end', "f")
+    lista.insert('end', "g")
+    lista.insert('end', "h")
+    lista.insert('end', "i")
+    lista.insert('end', "j")
+    lista.insert('end', "k")
+    lista.insert('end', "l")
+    lista.insert('end', "m")
+
+    Controladora.setFrameMensaje(f)
+    Controladora.frame_mensaje.place(x=200, y=200)
+
+
+def mostrarCompra():
+    Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
+    Controladora.frame_mensaje.place(x=200, y=200)
+
+
+def mostrarHistorial():
+    Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
+    Controladora.frame_mensaje.place(x=200, y=200)
 
 def cambioDescripcion():
     # gabriel
@@ -143,8 +255,53 @@ def ayuda():
                         "Autores:\n-JUAN FERNANDO CASTAÑO DURAN\n-CARMEN JOHANA CALDERON CHONA\n-JOHAN MAURICIO ORTEGA IPUCHIMA\n-MARIA ALEJANDRA ECHAVARRIA CORREA\n-GABRIEL ANTONIO SERRANO PINEDA")
 
 
-def seleccionDeFrames(combo):
-    print(combo.get())
+
+def seleccionDeFrames(combo, mensaje):
+
+    frame_ini = Frame(controladora.ventana, width=1000, height=600, bd=5, bg="light blue")
+    frame_ini.place(x=0,y=200)
+
+    if combo.get() == "Realizar compra":
+        if Controladora.frame != None:
+            # Controladora.frame.pack_forget()
+            n = FieldFrame(frame_ini, "Criterios", ["tienda:", "proveedor:", "Transportista"], "Valor",
+                                      ["tienda Laureles", "Gabriel", "julian"], [True, True, True], "continuar",
+                                      mostrarCompra)
+            Controladora.setFrame(n)
+
+        else:
+            Controladora.setFrame(FieldFrame(frame_ini, "Criterios", ["tienda:", "proveedor:", "Transportista"], "Valor", [["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"], ["Miguel", "Carla", "Isa"], ["julian", "Maria", "Andrea"]], [True,True,True], "continuar", mostrarCompra))
+        mensaje.config(text="Seleciona un tienda, un transportista y un proveedor para realizar tu compra")
+        # controladora.frame.lift()
+        controladora.frame.place(x=350, y=0)
+
+    elif combo.get() == "Consultar bodegas":
+        if Controladora.frame != None:
+            # Controladora.frame.pack_forget()
+            controladora.setFrame(FieldFrame(frame_ini, "Criterios", "tienda:", "Valor", ["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"], [True],
+                                      "continuar", mostrarBodega))
+
+        else:
+            controladora.setFrame(
+                FieldFrame(frame_ini, "Criterios", ["tienda:"], "Valor", ["tienda Laureles"], [True],
+                                      "continuar", mostrarBodega))
+        mensaje.config(text="Seleciona una tienda para consultar su bodega")
+        # controladora.frame.lift()
+        controladora.frame.place(x=390, y=0)
+
+    else:
+        if Controladora.frame != None:
+            # Controladora.frame.pack_forget()
+            controladora.setFrame(
+                FieldFrame(frame_ini, "Criterios", ["tienda:"], "Valor", ["tienda Laureles"], [True],
+                                      "continuar", mostrarHistorial))
+
+        else:
+            controladora.setFrame(FieldFrame(frame_ini,"Criterios", ["tienda:"], "Valor" ,["tienda Laureles"], [True], "continuar", mostrarHistorial))
+        mensaje.config(text="Seleciona un tienda para ver el historial de compra")
+        # controladora.frame.lift()
+        controladora.frame.place(x=390, y=0)
+
 
 
 def gestionAlianzasEstrategicas():
@@ -174,28 +331,22 @@ def gestionAlianzasEstrategicas():
             productosSocio = socioSeleccionado.getProductosContrato()
             transportistas = #Deserializar transportistas
 
-            '''
+            
 
             productosSocio = ['Producto1', 'Producto2', 'Producto3']
             transportistas = ['T1', 'T2', 'T3']
 
-            '''
+            
             i1 = Inventariar.calcularCamisas(productosSocio)
             i2 = Inventariar.calcularAbrigos(productosSocio)
             i3 = Inventariar.calcularPantalon(productosSocio)
 
             criterios = ['Camisas[{}]'.formato(i1), 'Pantalones[{}]'.format(i2), 'Abrigos[i3]'.format(i3), 'Seleccione un transportista']
             '''
-
-
             criterios = ['Camisas[1]', 'Pantalones[2]', 'Abrigos[3]', 'Seleccione un transportista']
 
             if(socioSeleccionado == ''):
                 raise ErrorDatosIncompletos('Socio seleccionado')
-
-
-
-
 
 
             p1=StringVar()
@@ -281,7 +432,7 @@ def gestionAlianzasEstrategicas():
 
     def confirmarVenta(num):
 
-        '''
+        
         siOferta = ''
         venta = transportistaSeleccionado.entregaEspecial(productosVenta)
 
@@ -291,12 +442,6 @@ def gestionAlianzasEstrategicas():
 
         elif venta.getProductosOferta != null:
             siOferta = ' y los productos ofertados '
-
-        MessageBox.showinfo("Confirmacion de venta", 'El socio ha confirmado la compra de los productos del contrato' + siOferta)
-
-        marco_socio.pack_forget()
-
-        '''
 
 
         MessageBox.showinfo("Confirmacion de venta", 'El socio ha confirmado la compra de los productos del contrato')
@@ -310,8 +455,6 @@ def gestionAlianzasEstrategicas():
         oferta.pack_forget()
         ofertaDos.pack_forget()
         vender()
-
-
 
 
 
@@ -337,6 +480,7 @@ def gestionAlianzasEstrategicas():
         for informe in Informe.getInformesVentas():
             informes.append(informe.getCodigo())
             sets.append(informe)
+        
         criterios = ["Informes ventas"]
 
         habilitado = [True]
@@ -378,7 +522,7 @@ def gestionAlianzasEstrategicas():
 
 
 
-    marcoFuncionalidad = Frame(ventana_menu, height=2000, width=1500, bg="gray", pady=10, padx=50, relief="sunken")
+    marcoFuncionalidad = Frame(controladora.ventana, height=2000, width=1500, bg="gray", pady=10, padx=50, relief="sunken")
     marcoFuncionalidad.place(relx=0.5, rely=0.5, anchor='center')
 
     cabecera = Entry(marcoFuncionalidad,background="gray", font=('Helvetica', 11, 'bold'), width=50)
@@ -405,48 +549,34 @@ def gestionAlianzasEstrategicas():
     verHistorial.grid( row=0, column=0, pady=11)
     #side='bottom', pady=10
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def moduloCompra():
     # Nombre funcionalidad
-    frame_1 = Frame(ventana_menu, width=400, height=50, relief="sunken", bd=5)
+    f = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
+    f.place(x=0, y=0)
+    frame_1 = Frame(f, width=400, height=50, relief="sunken", bd=5)
     frame_1.place(x=380, y=20)
     mensaje_compra = Label(frame_1, text="Modulo de Compra", font=("arial", 20))
     mensaje_compra.pack()
 
     # descripcion de funcionalidad
-    frame_2 = Frame(ventana_menu, width=600, height=150, relief="sunken", bd=5)
+    frame_2 = Frame(f, width=620, height=30, relief="sunken", bd=5)
     frame_2.place(x=200, y=80)
     mensaje_descripcion = Label(frame_2,
                                 text="Selecione el proceso que desea realizar, luego introduzca la informacion solicitada en los campos correspondientes")
-    mensaje_descripcion.pack()
+    mensaje_descripcion.place(x=0, y=0)
 
     # acciones
-    frame_3 = Frame(ventana_menu, width=600, height=400, relief="sunken", bd=5)
-    frame_3.place(x=200, y=120)
+    # frame_3 = Frame(ventana_menu,width=600, height=400,relief="sunken",bd=5)
+    # frame_3.place(x=200,y=120)
 
     valor_defecto = StringVar(value="Selecione...")
 
-    combo = ttk.Combobox(frame_3, values=["Consultar bodegas", "Realizar compra", "Historial de compras"],
+    combo = ttk.Combobox(controladora.ventana,
+                         values=["Consultar bodegas", "Realizar compra", "Historial de compras", "Seleccione..."],
                          textvariable=valor_defecto)
-    combo.pack()
-    combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo))
-
-    print(1)
-
-def logisticaEnvio():
+    combo.place(x=200, y=120)
+    combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo, mensaje_descripcion))
+'''def logisticaEnvio():
     def ConsultaPedido():
         empezar.forget()
         titulo.config(text="Realizar Pedido")
@@ -709,6 +839,7 @@ def logisticaEnvio():
 
     empezar=Button(ventanaEnvio,text="Empezar proceso",command=ConsultaPedido)
     empezar.pack(pady=50)
+'''
 
 # ventana Inicio
 ventana_inicio = Tk()
@@ -788,7 +919,7 @@ img3_descripcion = Label(frame_img_descripcion, image=img3)
 img3_descripcion.grid(row=1, column=0, padx=1, pady=1)
 img4_descripcion = Label(frame_img_descripcion, image=img4)
 img4_descripcion.grid(row=1, column=1, padx=1, pady=1)
-
+'''
 # ventana2
 ventana_menu = Tk()
 ventana_menu.title("Sistema de administracion")
@@ -812,7 +943,7 @@ menu_archivo.add_command(label="Salir", command=salirMenu)
 menu_procesos = Menu(menu_bar, tearoff=0)
 
 menu_bar.add_cascade(label="Procesos y Consultas", menu=menu_procesos)
-menu_procesos.add_command(label="Gestion de alianzas estrategicas", command=gestionAlianzasEstrategicas)
+menu_procesos.add_command(label="Gestion de alianzas estrategicas", command=None)
 menu_procesos.add_command(label="Modulo de compra", command=moduloCompra)
 menu_procesos.add_command(label="Control de calidad")
 menu_procesos.add_command(label="Logistica de envios")
@@ -820,7 +951,7 @@ menu_procesos.add_command(label="Gestion de creditos")
 
 # Menu ayuda
 menu_bar.add_command(label="Ayuda", command=ayuda)
-
+'''
 # manejo de eventos
 img_presentacion.bind("<Enter>", lambda event: cambioImgPresentacion())
 descripcion_integrante.bind("<Button-1>", lambda event: cambioDescripcion())
