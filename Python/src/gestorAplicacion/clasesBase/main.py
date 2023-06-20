@@ -583,7 +583,7 @@ def moduloCompra():
     combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo, mensaje_descripcion))
 def logisticaEnvio():
     ventana_menu = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
-    ventana_menu.place(x=0, y=0)
+    ventana_menu.place(x=0, y=0,relx=0.5, rely=0.5, anchor="center")
     def ConsultaPedido():
         empezar.forget()
         titulo.config(text="Realizar Pedido")
@@ -613,6 +613,7 @@ def logisticaEnvio():
         if any(not valor for valor in pedido.values()):
             messagebox.showwarning("Error", ErrorDatosIncompletos('SET', 'CANTIDAD').mostrarMensaje())
             raise ErrorDatosIncompletos('SET', 'CANTIDAD')
+
 
         marco_pedido1.forget()
         label.forget()
