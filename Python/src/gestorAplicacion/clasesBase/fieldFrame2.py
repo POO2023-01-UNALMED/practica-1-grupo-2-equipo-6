@@ -7,6 +7,7 @@ class FieldFrame2(Frame):
         super().__init__(master)
         self.pack( pady=70, anchor='s')
         self.config(relief=SUNKEN, bd=10)
+        self.boton2 = None
 
 
         self.titulo = Label(self,text="Bienvenido al apartado de archivos", font=("Arial Bold", 16, "bold"))
@@ -76,7 +77,9 @@ class FieldFrame2(Frame):
     def ver(self, informe):
         self.agregarTexto(informe)
 
-
+    def getBoton(self):
+        return self.boton2
+    
     def mostrarEleccion(self):
         seleccion = self.field_frame.combobox.get()
         self.text_widget.agregarTexto(seleccion)

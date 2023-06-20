@@ -15,7 +15,7 @@ class Compra:
         self.proveedor = proveedor
         self.transportista = transportista
         self.productosExtraviados = []
-        self.revisado = []
+        self.revisado = False
         self.compraLlego = []
         self.costo = 0
         self.hacerPedido(tienda)
