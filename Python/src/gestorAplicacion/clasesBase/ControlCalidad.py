@@ -11,6 +11,7 @@ class ControlCalidad:
         self.productosAReponerP = []
         self.productosAReponerT = []
         self.revision = []
+        self.revisadoCompra = False
         self.prodsFaltantesCompra = []
         self.contactarP = False
         self.contactarT = False
@@ -64,6 +65,10 @@ class ControlCalidad:
             return []
 
         return compraSinDefectuosos
+    
+    def saberSiRevisado(self, c):
+        if c.getRevisado() == True:
+            self.revisadoCompra = True
     
     def contactar(self, persona):
         if isinstance(persona, Transportista):
