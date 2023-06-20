@@ -37,7 +37,7 @@ class Banco:
         self.cuentas = []
         self.historialDePagos = {}
 
-    def generarCredito(self, credito: Credito) -> Credito:
+    def generarCredito(self, credito):
         try:
             self.historialesCrediticios[credito.getDeudor()].append(credito)
         except KeyError:
