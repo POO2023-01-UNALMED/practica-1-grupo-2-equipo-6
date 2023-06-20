@@ -8,23 +8,17 @@ from Informe import Informe
 
 
 class Empleado(Persona):
-    
-    def __init__(self,nombre,calificacion, cuenta, hd,ht,cargo,sueldo):
-        super().__init__(nombre,calificacion, cuenta)
+    class CARGOS(Enum):
+        OPERARIO = 1
+        ARCHIVISTA = 2
+        CONTADOR = 3
+
+    def __init__(self, nombre, calificacion, cuenta, hd, ht, cargo, sueldo):
+        super().__init__(nombre, calificacion, cuenta)
         self.horas_disponibles = hd
         self.horas_trabajadas = ht
         self.cargo = cargo
         self.sueldo = sueldo
-        
-    
-    
-   
-        
-
-    class CARGOS(Enum):
-        OPERARIO = 1
-        ARCHIVISTA = 2
-
 
     def calificar(self):
         if self.cargo == Empleado.CARGOS.OPERARIO:
@@ -38,13 +32,13 @@ class Empleado(Persona):
                     calificacion = 5
                 self.horas_trabajadas = 0
                 self.calificacion = calificacion
-    
+
     def valorCalificacion(self):
         return 5
 
     @staticmethod
     def seleccionar_empleados(cargo, camisas, pantalones, abrigos):
-        Disponibles=Deserializador("operarios").getObjeto()
+        Disponibles = Deserializador("operarios").getObjeto()
         import pickle
         operarios = []
         Disponibles.sort()
@@ -52,7 +46,7 @@ class Empleado(Persona):
         Cpantalones = 0
         Cabrigos = 0
         Operario = Disponibles[0]
-       
+
         operarios.append(Operario)
 
         for i1 in range(len(camisas)):
@@ -97,14 +91,13 @@ class Empleado(Persona):
 
         for operario in operarios:
             operario.calificar()
-            
-        
-        empleados=[]
+
+        empleados = []
         for o in Disponibles:
             empleados.append(o)
         for o in operarios:
             empleados.append(o)
-        Soper=Serializador(operarios,"operarios")
+        Soper = Serializador(operarios, "operarios")
 
         return operarios
 

@@ -189,7 +189,7 @@ def Socios():
     ventasPorDefecto = [v1, v2, v3]
     Serializador(socios, 'Socios')
     Serializador(ventasPorDefecto, 'ventasPorDefecto')
-    
+
 def Compras():
     tiendasDeserializadas = Deserializador("tiendas").getObjeto()
     tienda1 = tiendasDeserializadas[0]

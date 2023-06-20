@@ -47,8 +47,9 @@ class FieldFrame(Frame):
                 self.entries[criterio] = combobox
             else:
                 # Si el valor es normal, crear una casilla de entrada
+                entry_valor.insert(0, valor)
                 entry_valor = Entry(self, state='normal' if habilitar else 'disabled')
-                entry_valor.insert(0, valor)  # Insertar el valor inicial si está presente
+                # Insertar el valor inicial si está presente
                 entry_valor.grid(row=i+1, column=1, padx=10, pady=5)
 
                 # Guardar la referencia a la casilla de entrada en el diccionario

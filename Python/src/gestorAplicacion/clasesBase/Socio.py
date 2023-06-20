@@ -12,7 +12,7 @@ class Socio:
         cuenta.getEntidad().getHistorialesCrediticios()[cuenta] = []
         cuenta.setPropietario(self)
 
-    def registrarVenta(self, oferta) :
+    def registrarVenta(self, oferta):
         v = Venta(self)
         valorEntero = random.randint(0, 11)
         v.setProductosVenta(self.productosContrato)
@@ -50,5 +50,3 @@ class Socio:
 
     def __str__(self):
         return "Nombre del socio: " + self.nombre
-
-

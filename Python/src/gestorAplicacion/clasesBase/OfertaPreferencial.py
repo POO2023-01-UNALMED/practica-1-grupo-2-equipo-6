@@ -14,19 +14,19 @@ class OfertaPreferencial(OfertaPorDefecto):
 
         if camisas >= abrigos and camisas >= pantalones:
             while i < 3:
-                productosOferta.append(Producto(Tipo.CAMISA, 0.8 * Tipo.CAMISA.getPrecioEstandar(), 15000))
+                productosOferta.append(Producto(Producto.Tipo.CAMISA, 0.8 * Producto.Tipo.CAMISA.value, 15000))
                 i += 1
 
             return productosOferta
         elif abrigos >= pantalones and abrigos >= camisas:
             while i < 3:
-                productosOferta.append(Producto(Tipo.ABRIGO, 0.8 * Tipo.ABRIGO.getPrecioEstandar(), 15000))
+                productosOferta.append(Producto(Producto.Tipo.ABRIGO, 0.8 * Producto.Tipo.ABRIGO.value, 15000))
                 i += 1
 
             return productosOferta
         else:
             while i < 3:
-                productosOferta.append(Producto(Tipo.PANTALON, 0.8 * Tipo.PANTALON.getPrecioEstandar(), 15000))
+                productosOferta.append(Producto(Producto.Tipo.PANTALON, 0.8 * Producto.Tipo.PANTALON.value, 15000))
                 i += 1
 
             return productosOferta
