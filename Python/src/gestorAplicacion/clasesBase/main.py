@@ -9,6 +9,7 @@ from Excepciones import *
 from Persona import *
 from Bodega import *
 from Cliente import *
+from Compra import *
 from Deserializador import *
 from Serializador import *
 from Intervenido import *
@@ -122,60 +123,114 @@ def cambioImgPresentacion():
     img_presentacion.image = nueva_imagen
 
 def mostrarBodega():
+    try:
 
-    f = Frame(controladora.ventana, width=620, height=350, bd=5)
 
-    lista = Listbox(f, width=97,height=20)
-    lista.grid(row=0, column=0)
+        tiendas = Deserializador("tiendas").getObjeto()
+        variableD = controladora.frame.obtenerValores()
+        opcion = variableD["tienda:"]
 
-    barra = Scrollbar(f,orient="vertical", command=lista.yview())
-    barra.grid(row=0, column=1, sticky="NSW")
+        if opcion == "Tienda Laureles":
+            Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
+            Controladora.frame_mensaje.place(x=200, y=200)
+            la = Label(Controladora.frame_mensaje, text= f"Tienda Laureles\nPresupuesto:{tiendas[0].getPresupuesto()} \n{tiendas[0].getBodega()}")
+            la.place(x=240,y=50)
+        elif opcion == "Tienda Poblado":
+            Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
+            Controladora.frame_mensaje.place(x=200, y=200)
+            la = Label(Controladora.frame_mensaje,
+                       text=f"Tienda Poblado\nPresupuesto:{tiendas[1].getPresupuesto()} \n{tiendas[1].getBodega()}")
+            la.place(x=240, y=50)
 
-    lista.configure(yscrollcommand=barra.set)
-    lista.insert('end',"a")
-    lista.insert('end', "b")
-    lista.insert('end', "c")
-    lista.insert('end', "d")
-    lista.insert('end', "e")
-    lista.insert('end', "f")
-    lista.insert('end', "g")
-    lista.insert('end', "h")
-    lista.insert('end', "i")
-    lista.insert('end', "j")
-    lista.insert('end', "k")
-    lista.insert('end', "l")
-    lista.insert('end', "m")
-    lista.insert('end', "sssa")
-    lista.insert('end', "sssa")
-    lista.insert('end', "sssa")
-    lista.insert('end', "sssa")
-    lista.insert('end', "sssa")
-    lista.insert('end',"a")
-    lista.insert('end', "b")
-    lista.insert('end', "c")
-    lista.insert('end', "d")
-    lista.insert('end', "e")
-    lista.insert('end', "f")
-    lista.insert('end', "g")
-    lista.insert('end', "h")
-    lista.insert('end', "i")
-    lista.insert('end', "j")
-    lista.insert('end', "k")
-    lista.insert('end', "l")
-    lista.insert('end', "m")
+        elif opcion == "Tienda Envigado":
+            Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
+            Controladora.frame_mensaje.place(x=200, y=200)
+            la = Label(Controladora.frame_mensaje,
+                       text=f"Tienda Envigado\nPresupuesto:{tiendas[2].getPresupuesto()} \n{tiendas[2].getBodega()}")
+            la.place(x=240, y=50)
+        else:
+            raise ErrorDatosIncompletos('')
 
-    Controladora.setFrameMensaje(f)
-    Controladora.frame_mensaje.place(x=200, y=200)
+    except ErrorDatosIncompletos:
+        MessageBox.showwarning("Error",ErrorDatosIncompletos('Tienda').mostrarMensaje())
 
 
 def mostrarCompra():
-    Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
-    Controladora.frame_mensaje.place(x=200, y=200)
+
+    t = None
+    p = None
+    tr = None
+    con = 0
+    try:
+        tiendas = Deserializador("tiendas").getObjeto()
+        dtiendas = controladora.frame.obtenerValores()
+        opcion1 = dtiendas["tienda:"]
 
 
-def mostrarHistorial():
-    Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
-    Controladora.frame_mensaje.place(x=200, y=200)
+
+
+        if opcion1 == "Tienda Laureles":
+            t = tiendas[0]
+        elif opcion1 == "Tienda Poblado":
+            t = tiendas[1]
+        elif opcion1 == "Tienda Envigado":
+            t = tiendas[2]
+        else:
+            con+=1
+            raise ErrorDatosIncompletos()
+    except ErrorDatosIncompletos:
+        MessageBox.showwarning("Error", ErrorDatosIncompletos('Tienda').mostrarMensaje())
+
+    try:
+        proveedo = Deserializador("proveedores").getObjeto()
+        dProvee = controladora.frame.obtenerValores()
+        opcion2 = dProvee["proveedor:"]
+
+        if opcion2 == "Miguel":
+            p = proveedo[0]
+        elif opcion2 == "Carla":
+            p = proveedo[1]
+        elif opcion2 == "Isa":
+            p = proveedo[2]
+        else:
+            con += 1
+            raise ErrorDatosIncompletos()
+    except ErrorDatosIncompletos:
+        MessageBox.showwarning("Error", ErrorDatosIncompletos('Proveedor').mostrarMensaje())
+
+    try:
+
+        trans = Deserializador("transportistas").getObjeto()
+        dtrans = controladora.frame.obtenerValores()
+        opcion3 = dtrans["Transportista"]
+
+        if opcion3 == "julian":
+            tr = trans[0]
+        elif opcion3 == "Maria":
+            tr = trans[1]
+        elif opcion3 == "Andrea":
+            tr = trans[2]
+        else:
+            con += 1
+            raise ErrorDatosIncompletos()
+    except ErrorDatosIncompletos:
+        MessageBox.showwarning("Error", ErrorDatosIncompletos('Transportista').mostrarMensaje())
+
+    if con == 0:
+        Controladora.setFrameMensaje(Frame(controladora.ventana, width=620, height=350, bd=5))
+        Controladora.frame_mensaje.place(x=200, y=200)
+        compra = Compra(t,p,tr)
+        compras = Deserializador("compras").getObjeto()
+
+
+        la = Label(Controladora.frame_mensaje,
+                   text=f"{compra}\nCosto: {compra.calcularCosto()}")
+        la.place(x=240, y=50)
+
+        compras+=[compra]
+        Serializador(compras,"compras")
+
+
 
 def cambioDescripcion():
     # gabriel
@@ -262,50 +317,94 @@ def ayuda():
 
 
 def seleccionDeFrames(combo, mensaje):
+    global n
+    try:
 
-    frame_ini = Frame(controladora.ventana, width=1000, height=600, bd=5, bg="light blue")
-    frame_ini.place(x=0,y=200)
+        if combo.get() == "Realizar compra":
+            frame_ini = Frame(controladora.ventana, width=1000, height=600, bd=5, bg="light blue")
+            frame_ini.place(x=0, y=200)
 
-    if combo.get() == "Realizar compra":
-        if Controladora.frame != None:
-            # Controladora.frame.pack_forget()
-            n = FieldFrame(frame_ini, "Criterios", ["tienda:", "proveedor:", "Transportista"], "Valor",
-                                      ["tienda Laureles", "Gabriel", "julian"], [True, True, True], "continuar",
-                                      mostrarCompra)
-            Controladora.setFrame(n)
+            if Controladora.frame != None:
+                # Controladora.frame.pack_forget()
+                n = FieldFrame(frame_ini, "Criterios", ["tienda:", "proveedor:", "Transportista"], "Valor", [["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"], ["Miguel", "Carla", "Isa"], ["julian", "Maria", "Andrea"]], [True, True, True], "continuar",
+                                          mostrarCompra)
+                Controladora.setFrame(n)
+
+            else:
+                Controladora.setFrame(FieldFrame(frame_ini, "Criterios", ["tienda:", "proveedor:", "Transportista"], "Valor", [["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"], ["Miguel", "Carla", "Isa"], ["julian", "Maria", "Andrea"]], [True,True,True], "continuar", mostrarCompra))
+            mensaje.config(text="Seleciona un tienda, un transportista y un proveedor para realizar tu compra")
+            # controladora.frame.lift()
+            controladora.frame.place(x=350, y=0)
+
+        elif combo.get() == "Consultar bodegas":
+            frame_ini = Frame(controladora.ventana, width=1000, height=600, bd=5, bg="light blue")
+            frame_ini.place(x=0, y=200)
+
+            if Controladora.frame != None:
+                # Controladora.frame.pack_forget()
+                controladora.setFrame(FieldFrame(frame_ini, "Criterios", ["tienda:"], "Valor", [["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"]], [True],
+                                          "continuar", mostrarBodega))
+
+            else:
+                controladora.setFrame(
+                    FieldFrame(frame_ini, "Criterios", ["tienda:"], "Valor", [["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"]], [True],
+                                          "continuar", mostrarBodega))
+            mensaje.config(text="Seleciona una tienda para consultar su bodega")
+            # controladora.frame.lift()
+            controladora.frame.place(x=390, y=0)
+
+        elif combo.get() == "Historial de compras":
+            frame_ini = Frame(controladora.ventana, width=1000, height=600, bd=5, bg="light blue")
+            frame_ini.place(x=0, y=200)
+
+            comprasD = Deserializador("compras").getObjeto()
+            f = Frame(controladora.ventana, width=620, height=350, bd=5)
+
+            lista = Listbox(f, width=97, height=20)
+            lista.grid(row=0, column=0)
+
+            barra = Scrollbar(f, orient="vertical", command=lista.yview())
+            barra.grid(row=0, column=1, sticky="NSW")
+
+            lista.configure(yscrollcommand=barra.set)
+            n=0
+            for compra in comprasD:
+                n+=1
+
+                lista.insert("end", f'Codigo de compra: {n}')
+                lista.insert("end",f'Proveedor: {compra.proveedor}')
+                lista.insert("end", f'Transportista: {compra.transportista}')
+                lista.insert("end", f'Productos Comprados:')
+                lista.insert("end", f'Camisas: {compra.proveedor.bodega.calcularCamisas(compra.proveedor.bodega.productosEnBodega)}')
+                lista.insert("end",f'Pantalones: {compra.proveedor.bodega.calcularPantalon(compra.proveedor.bodega.productosEnBodega)}')
+                lista.insert("end",f'Abrigos: {compra.proveedor.bodega.calcularAbrigos(compra.proveedor.bodega.productosEnBodega)}')
+                lista.insert("end", f"Costo compra: {compra.calcularCosto()}")
+                lista.insert("end","")
+
+
+
+
+
+            Controladora.setFrameMensaje(f)
+            Controladora.frame_mensaje.place(x=200, y=200)
+
+            # if Controladora.frame != None:
+            #     # Controladora.frame.pack_forget()
+            #     controladora.setFrame(
+            #         FieldFrame(frame_ini, "Criterios", ["tienda:"], "Valor", [["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"]], [True],
+            #                               "continuar", mostrarHistorial))
+            #
+            # else:
+            #     controladora.setFrame(FieldFrame(frame_ini,"Criterios", ["tienda:"], "Valor" ,[["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"]], [True], "continuar", mostrarHistorial))
+            # mensaje.config(text="Seleciona un tienda para ver el historial de compra")
+            # # controladora.frame.lift()
+            # controladora.frame.place(x=390, y=0)
 
         else:
-            Controladora.setFrame(FieldFrame(frame_ini, "Criterios", ["tienda:", "proveedor:", "Transportista"], "Valor", [["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"], ["Miguel", "Carla", "Isa"], ["julian", "Maria", "Andrea"]], [True,True,True], "continuar", mostrarCompra))
-        mensaje.config(text="Seleciona un tienda, un transportista y un proveedor para realizar tu compra")
-        # controladora.frame.lift()
-        controladora.frame.place(x=350, y=0)
+            raise ErrorDatosIncompletos('')
+    except ErrorDatosIncompletos:
+        MessageBox.showwarning("Error", ErrorDatosIncompletos('Error').mostrarMensaje())
 
-    elif combo.get() == "Consultar bodegas":
-        if Controladora.frame != None:
-            # Controladora.frame.pack_forget()
-            controladora.setFrame(FieldFrame(frame_ini, "Criterios", "tienda:", "Valor", ["Tienda Laureles", "Tienda Poblado", "Tienda Envigado"], [True],
-                                      "continuar", mostrarBodega))
-
-        else:
-            controladora.setFrame(
-                FieldFrame(frame_ini, "Criterios", ["tienda:"], "Valor", ["tienda Laureles"], [True],
-                                      "continuar", mostrarBodega))
-        mensaje.config(text="Seleciona una tienda para consultar su bodega")
-        # controladora.frame.lift()
-        controladora.frame.place(x=390, y=0)
-
-    else:
-        if Controladora.frame != None:
-            # Controladora.frame.pack_forget()
-            controladora.setFrame(
-                FieldFrame(frame_ini, "Criterios", ["tienda:"], "Valor", ["tienda Laureles"], [True],
-                                      "continuar", mostrarHistorial))
-
-        else:
-            controladora.setFrame(FieldFrame(frame_ini,"Criterios", ["tienda:"], "Valor" ,["tienda Laureles"], [True], "continuar", mostrarHistorial))
-        mensaje.config(text="Seleciona un tienda para ver el historial de compra")
-        # controladora.frame.lift()
-        controladora.frame.place(x=390, y=0)
 
 
 
@@ -577,13 +676,13 @@ def moduloCompra():
     valor_defecto = StringVar(value="Selecione...")
 
     combo = ttk.Combobox(controladora.ventana,
-                         values=["Consultar bodegas", "Realizar compra", "Historial de compras", "Seleccione..."],
+                         values=["Consultar bodegas", "Realizar compra", "Historial de compras"],
                          textvariable=valor_defecto)
     combo.place(x=200, y=120)
     combo.bind("<<ComboboxSelected>>", lambda event: seleccionDeFrames(combo, mensaje_descripcion))
 def logisticaEnvio():
     ventana_menu = Frame(controladora.ventana, width=1000, height=620, bg="light blue")
-    ventana_menu.place(x=0, y=0,relx=0.5, rely=0.5, anchor="center")
+    ventana_menu.place(x=0, y=0)
     def ConsultaPedido():
         empezar.forget()
         titulo.config(text="Realizar Pedido")
@@ -613,7 +712,6 @@ def logisticaEnvio():
         if any(not valor for valor in pedido.values()):
             messagebox.showwarning("Error", ErrorDatosIncompletos('SET', 'CANTIDAD').mostrarMensaje())
             raise ErrorDatosIncompletos('SET', 'CANTIDAD')
-
 
         marco_pedido1.forget()
         label.forget()

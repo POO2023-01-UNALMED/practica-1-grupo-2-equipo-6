@@ -1,21 +1,38 @@
 import math
+
+from select import select
+
 from Producto import *
 import random
 
 class Compra:
 
-    def __init__(self, tienda):
+    CODIGO =1
+
+    def __init__(self, tienda, proveedor, transportista):
         self.tienda = tienda
         self.pedido = []
-        self.proveedor = None
-        self.transportista = None
+        self.proveedor = proveedor
+        self.transportista = transportista
         self.productosExtraviados = []
         self.revisado = []
         self.compraLlego = []
+        self.costo = 0
+        self.hacerPedido(tienda)
+        self.recomendarProveedor(self.pedido, self.proveedor)
+        self.recomendarTransportista(tienda,self.proveedor,self.transportista)
+        self.calcularCosto()
+
+
+
+    @classmethod
+    def setCodigo(cls):
+        cls.CODIGO+=1
+
 
     def hacerPedido(self, tienda):
         numCamisetas = int(tienda.getBodega().calcularCamisas(tienda.getBodega().getProductosEnBodega()))
-        numPantalones = int(tienda.getBodega().calcularPantalones(tienda.getBodega().getProductosEnBodega()))
+        numPantalones = int(tienda.getBodega().calcularPantalon(tienda.getBodega().getProductosEnBodega()))
         numAbrigos = int(tienda.getBodega().calcularAbrigos(tienda.getBodega().getProductosEnBodega()))
         numProductos = int(numAbrigos + numPantalones + numCamisetas)
 
@@ -64,31 +81,36 @@ class Compra:
             return False
 
         self.setPedido(pedidoFinal)
-        return pedidoFinal
+        # return pedidoFinal
 
     def recomendarProveedor(self, pedido, proveedores):
         proveedorRecomendado = None
         descuento = 0
 
-        for proveedor in proveedores:
-            proveedor.verificarDisponibilidad(pedido)
-            if proveedor.getDescuento() >= descuento:
-                descuento = proveedor.getDescuento()
-                proveedorRecomendado = proveedor
+        proveedores.verificarDisponibilidad(pedido)
+        # print(pedido)
+        # print(proveedores.getBodega())
+        # for proveedor in proveedores:
+        #     proveedor.verificarDisponibilidad(pedido)
+        #     if proveedor.getDescuento() >= descuento:
+        #         descuento = proveedor.getDescuento()
+        #         proveedorRecomendado = proveedor
 
-        self.setProveedor(proveedorRecomendado)
+        self.setProveedor(proveedores)
         return proveedorRecomendado
 
     def recomendarTransportista(self, tienda, proveedor, transportistas):
         costo = 99999999
         transportistaRecomendado = None
 
-        for transportista in transportistas:
-            if transportista.calcularprecioDeEnvio(proveedor, tienda) <= costo:
-                costo = transportista.calcularprecioDeEnvio(proveedor, tienda)
-                transportistaRecomendado = transportista
-        self.setTransportista(transportistaRecomendado)
-        return transportistaRecomendado
+
+
+        # for transportista in transportistas:
+        #     if transportista.calcularprecioDeEnvio(proveedor, tienda) <= costo:
+        #         costo = transportista.calcularprecioDeEnvio(proveedor, tienda)
+        #         transportistaRecomendado = transportista
+        self.setTransportista(transportistas)
+        # return transportistaRecomendado
     
     def generarProductosExtraviados(self):
         productosSeleccionados = []
@@ -164,5 +186,16 @@ class Compra:
     def setTransportista(self, transportista):
         self.transportista = transportista
 
+    def calcularCosto(self):
+        productos = self.proveedor.bodega.productosEnBodega
+        costo = 0
+
+        for producto in productos:
+            costo = producto.getCosto()
+
+        return costo
+
+    def __str__(self):
+        return f"Proveedor: {self.proveedor.nombre}\nTransportista: {self.transportista.nombre}\nProductos Comprados: \n{self.proveedor.bodega}"
 
 

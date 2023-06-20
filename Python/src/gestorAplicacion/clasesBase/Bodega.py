@@ -29,24 +29,26 @@ class Bodega(Inventariar):
     def calcularPantalon(self):
         return Inventariar.calcularPantalon(self.productosEnBodega)
 
-    def calcularCamisas(self, pedido: List[Producto]):
+    def calcularCamisas(self, pedido):
         numeroCamisetas = 0
         for producto in pedido:
-            if producto.getNombre() == "CAMISA":
+            if producto.getNombre() == Producto.Tipo.CAMISA:
                 numeroCamisetas += 1
         return numeroCamisetas
 
-    def calcularPantalon(self, pedido: List[Producto]):
+    def calcularPantalon(self, pedido):
         numeroPantalones = 0
         for producto in pedido:
-            if producto.getNombre() == "PANTALON":
+            if producto.getNombre() == Producto.Tipo.PANTALON:
                 numeroPantalones += 1
         return numeroPantalones
 
-    def calcularAbrigos(self, pedido: List[Producto]):
+    def calcularAbrigos(self, pedido):
         numeroAbrigo = 0
         for producto in pedido:
-            if producto.getNombre() == "ABRIGO":
+
+            if producto.getNombre() == Producto.Tipo.ABRIGO:
+
                 numeroAbrigo += 1
         return numeroAbrigo
 
@@ -102,7 +104,7 @@ class Bodega(Inventariar):
     def getStopBodega(self):
         return self.stopBodega
 
-    def _str_(self):
+    def __str__(self):
         return f"Camisetas = {self.calcularCamisas(self.getProductosEnBodega())}\nPantalones = {self.calcularPantalon(self.getProductosEnBodega())}\nAbrigos = {self.calcularAbrigos(self.getProductosEnBodega())}"
 
     @staticmethod
@@ -189,3 +191,7 @@ class Bodega(Inventariar):
 
     def setPagos(self,pagos):
         self.pagos = pagos
+
+    # def __str__(self):
+    #     return f"Camisas: {self.calcularCamisas()} \nPantalones: {self.calcularPantalon()}"
+    #

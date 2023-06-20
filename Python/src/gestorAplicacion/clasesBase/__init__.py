@@ -5,7 +5,7 @@ from Proveedor import *
 from Bodega import *
 from Transportista import *
 from Persona import *
-from Compra import *
+from Compra import Compra
 from Transferencia import *
 
 
@@ -148,22 +148,44 @@ def Financiero():
     bbbank = Banco("BBBank")
     cu = CuentaBancaria(25000, CuentaBancaria.Pais.COLOMBIA, bbbank)
 
-    transportista1 = Transportista("Maria", 1000, 500, 16, 2, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
-    transportista2 = Transportista("Carlos", 2000, 400, 15, 5, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
-    transportista3 = Transportista("Rosa", 3000, 300, 10, 3,CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
+    transportista1 = Transportista("julian", 1000, 500, 16, 2, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
+    transportista2 = Transportista("Maria", 2000, 400, 15, 5, CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
+    transportista3 = Transportista("Andrea", 3000, 300, 10, 3,CuentaBancaria(25000, Pais.COLOMBIA, bbbank))
     bodegap1 = Bodega([], 100)
     bodegap2 = Bodega([], 100)
     bodegap3 = Bodega([], 100)
 
-    proveedor1 = Proveedor("Maria", 0, cu, bodegap1, 20000, 25000, 30000, 100)
-    proveedor2 = Proveedor("Carlo", 0, cu, bodegap2, 20000, 25000, 30000,123)
-    proveedor3 = Proveedor("Julio", 0, cu, bodegap3, 20000, 25000, 30000,125)
+    proveedor1 = Proveedor("Miguel", 0, cu, bodegap1, 20000, 25000, 30000, 100)
+    proveedor2 = Proveedor("Carla", 0, cu, bodegap2, 20000, 25000, 30000,123)
+    proveedor3 = Proveedor("Isa", 0, cu, bodegap3, 20000, 25000, 30000,125)
 
-    proveedores = [proveedor2, proveedor1, proveedor3]
+    proveedores = [proveedor1, proveedor2, proveedor3]
 
     transportistas = [transportista1, transportista2, transportista3]
     Serializador(transportistas, "transportistas")
     Serializador(proveedores, 'proveedores')
+
+
+def Compras():
+    tiendasDeserializadas = Deserializador("tiendas").getObjeto()
+    tienda1 = tiendasDeserializadas[0]
+    tienda2 = tiendasDeserializadas[1]
+    tienda3 = tiendasDeserializadas[2]
+    proveedores = Deserializador("proveedores").getObjeto()
+    pro1 = proveedores[0]
+    pro2 = proveedores[1]
+    pro3 = proveedores[2]
+    transportistas = Deserializador("transportistas").getObjeto()
+    tra1 = transportistas[0]
+    tra2 = transportistas[1]
+    tra3 = transportistas[2]
+
+    compra1 = Compra(tienda1,pro1,tra1)
+    compra2 = Compra(tienda2,pro2,tra2)
+    compra3 = Compra(tienda3,pro3,tra3)
+    compras =[compra1,compra2,compra3]
+    Serializador(compras,"compras")
+
 
 
 
@@ -175,5 +197,9 @@ serializarEnvio()
 tiendas()
 Socios()
 Financiero()
+Compras()
 
-tiendasd = Deserializador('tiendas').getObjeto()
+
+
+
+

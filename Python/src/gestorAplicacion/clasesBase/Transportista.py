@@ -32,8 +32,10 @@ class Transportista(Persona):
         return ventaConfirmada
 
     def calcularPrecioTotal(self, provedor, tienda):
+
         costo = self.precioBase + abs(provedor.getCalle() - tienda.getCalle()) * self.precioDistancia + provedor.getBodega().calcularNumeroProductos() * self.precioCarga
-        return costo
+        self.precioTotal = costo
+        # return costo
 
     def getPrecioTotal(self):
         return self.precioTotal

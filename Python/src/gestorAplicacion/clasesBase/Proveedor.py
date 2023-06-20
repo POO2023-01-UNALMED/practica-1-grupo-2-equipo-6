@@ -61,8 +61,14 @@ class Proveedor(Persona):
                 producto1.setCosto(round(self.costoAbrigo - descuentoAbrigo / numeroAbrigo, 2))
 
             producto1.setPrecio(round(producto1.getCosto()*2, 2))
-
+        # print(productosDisponibles)
+        self.bodega.productosEnBodega = productosDisponibles
         self.bodega.setProductosEnBodega(productosDisponibles)
+        self.bodega.setProductos(productosDisponibles)
+        # print(productosDisponibles)
+        # print(self.bodega.productosEnBodega)
+        #
+        # print(self.bodega)
         self.setDescuento(round(descuentoPantalon + descuentoCamiseta + descuentoAbrigo, 2))
 
     def pDefectuososAReponer(self, control):
